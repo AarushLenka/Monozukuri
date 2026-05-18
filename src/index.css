@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Colors — Primary */
+  --color-primary: #b5e9ff;
+  --color-secondary: #f9ccdd;
+  --color-accent: #293ca9;
+
+  /* Colors — Neutrals */
+  --color-neutral-50: #ffffff;
+  --color-neutral-100: #000000;
+  --color-neutral-200: #9e9e9e;
+  --color-neutral-300: #121212;
+  --color-neutral-400: #cbcbcb;
+
+  /* Colors — Text */
+  --color-text: #000000;
+  --color-text-1: #344dbb;
+  --color-text-2: #9e9e9e;
+  --color-text-3: #ffffff;
+  --color-text-4: #59e7ca;
+
+  /* Typography — Families */
+  --font-body: 'PPNeueMontreal', sans-serif;
+  --font-heading: 'BrunoAce', sans-serif;
+  --font-font-2: 'Bitter', sans-serif;
+  --font-font-3: 'NeueHaas', sans-serif;
+
+
+
+  /* Spacing */
+  --spacing-1: 1px;
+  --spacing-23: 23px;
+  --spacing-29: 29px;
+  --spacing-32: 32px;
+  --spacing-41: 41px;
+  --spacing-48: 48px;
+  --spacing-52: 52px;
+  --spacing-56: 56px;
+  --spacing-59: 59px;
+  --spacing-63: 63px;
+  --spacing-65: 65px;
+  --spacing-68: 68px;
+  --spacing-70: 70px;
+  --spacing-72: 72px;
+  --spacing-77: 77px;
+  --spacing-81: 81px;
+  --spacing-95: 95px;
+  --spacing-97: 97px;
+  --spacing-103: 103px;
+  --spacing-105: 105px;
+
+  /* Border Radius */
+  --radius-xs: 2px;
+  --radius-md: 8px;
+  --radius-xl: 20px;
+  --radius-full: 52px;
+
+  /* Original Site Variables */
+  /* — colors — */
+  --color-white: #fff;
+  --color-grey: #9e9e9e;
+  --tw-border-style: solid;
+  --color-black: #000;
+  --color-green: #59e7ca;
+  --color-blue: #344dbb;
+  --color-dark: #121212;
+  --color-dark-grey: #cbcbcb;
+  /* — spacing — */
+  --grid-margin: 20px;
+  /* — typography — */
+  --text-l: 2.02svw;
+  --text-xl-alt: 2.54svw;
+  --text-10: max(10px,.57svw);
+  --font-lab: "NeueHaas";
+  --text-s: .81svw;
+  --text-xxs: .69svw;
+  --text-xl-alt--line-height: .9;
+  --text-m: .92svw;
+  --font-main: "PPNeueMontreal";
+  --text-s--line-height: 1.1;
+  --font-blueprint: "Bitter";
+  --font-cyber: "BrunoAce";
+  --text-xs: .75svw;
+  --text-xs--line-height: 1.1;
+  --text-xxl--line-height: .92;
+  --text-m--line-height: .9;
+  --text-l--line-height: .9;
+  --text-ls--line-height: .9;
+  --text-xl--line-height: .9;
+  --text-xl: 4.62svw;
+  --text-ls: 1.15svw;
+  --text-xxl: 4.62svw;
+  --text-xxs--line-height: .9;
+  /* — shadows — */
+  --tw-drop-shadow-alpha: 100%;
+  /* — other — */
+  --f-light: 300;
+  --f-normal: 400;
+  --f-medium: 500;
+  --f-semi-bold: 600;
+  --f-bold: 700;
+  --f-extra-bold: 800;
+  --grid-gutter: 20px;
+  --tw-gradient-from: rgba(0, 0, 0, 0);
+  --tw-gradient-to: rgba(0, 0, 0, 0);
+  --tw-scale-z: 1;
+  --tw-translate-x: 0;
+  --tw-gradient-via-position: 50%;
+  --tw-scale-x: 1;
+  --tw-translate-z: 0;
+  --tw-gradient-to-position: 100%;
+  --tw-gradient-via: rgba(0, 0, 0, 0);
+  --tw-scale-y: 1;
+  --tw-translate-y: 0;
+  --tw-gradient-from-position: 0%;
+}
