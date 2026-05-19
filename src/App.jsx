@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import RaspberryPiCanvas from './RaspberryPi';
-
 const GridMarker = ({ className }) => (
   <svg
     className={`absolute -translate-x-1/2 -translate-y-1/2 overflow-visible ${className}`}
@@ -139,7 +138,7 @@ export default function App() {
 
         {/* Floating Island Centerpiece */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] pointer-events-auto z-20">
-          <div className="relative w-[600px] h-[450px] flex items-center justify-center pointer-events-auto">
+          <div className="relative w-[600px] h-[650px] flex items-center justify-center pointer-events-auto">
             <RaspberryPiCanvas />
           </div>
         </div>
