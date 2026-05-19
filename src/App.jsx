@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import RaspberryPiCanvas from './RaspberryPi';
+import AnimatedConnector from './components/AnimatedConnector';
 const GridMarker = ({ className }) => (
   <svg
     className={`absolute -translate-x-1/2 -translate-y-1/2 overflow-visible ${className}`}
@@ -96,10 +97,35 @@ export default function App() {
           </h1>
         </div>
 
-        {/* Subtext 1 */}
-        <div className="absolute top-[38%] left-[16%] w-48 text-[9px] uppercase font-mono tracking-widest leading-relaxed">
-          FROM DEEP ROOTS, CREATIVITY DRAWS ITS STRENGTH
+        {/* Subtext 1 (Left) */}
+        <div className="absolute top-[38%] left-[16%] w-48 text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
+          FROM DEEP ROOTS,<br/>CREATIVITY DRAWS ITS<br/>STRENGTH
         </div>
+
+        {/* Subtext 3 (Top Right) */}
+        <div className="absolute top-[18%] left-[58%] w-48 text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
+          WHERE IMAGINATION<br/>BRANCHES INTO A<br/>LANDSCAPE OF<br/>ENDLESS DIVERSITY
+        </div>
+        
+        {/* Animated Connectors */}
+        <AnimatedConnector pts={[
+          { x: 16, y: 44.5 },
+          { x: 26, y: 44.5 },
+          { x: 32, y: 50, jitterY: true },
+          { x: 35, y: 50, jitterX: true, jitterY: true }
+        ]} />
+        <AnimatedConnector pts={[
+          { x: 68, y: 25.5 },
+          { x: 58, y: 25.5 },
+          { x: 45, y: 38, jitterY: true },
+          { x: 40, y: 38, jitterX: true, jitterY: true }
+        ]} />
+        <AnimatedConnector pts={[
+          { x: 82, y: 46 },
+          { x: 75, y: 46 },
+          { x: 65, y: 56, jitterY: true },
+          { x: 60, y: 56, jitterX: true, jitterY: true }
+        ]} />
 
         {/* Core Threads Menu */}
         <div className="absolute bottom-8 left-8 w-64 pointer-events-auto">
