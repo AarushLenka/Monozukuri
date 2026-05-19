@@ -98,33 +98,39 @@ export default function App() {
         </div>
 
         {/* Subtext 1 (Left) */}
-        <div className="absolute top-[38%] left-[16%] w-48 text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
+        <div id="text-deep-roots" className="absolute top-[41%] left-[16%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
           FROM DEEP ROOTS,<br/>CREATIVITY DRAWS ITS<br/>STRENGTH
         </div>
 
         {/* Subtext 3 (Top Right) */}
-        <div className="absolute top-[18%] left-[58%] w-48 text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
+        <div id="text-imagination" className="absolute top-[21%] left-[58%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
           WHERE IMAGINATION<br/>BRANCHES INTO A<br/>LANDSCAPE OF<br/>ENDLESS DIVERSITY
         </div>
         
         {/* Animated Connectors */}
-        <AnimatedConnector pts={[
-          { x: 16, y: 44.5 },
-          { x: 26, y: 44.5 },
-          { x: 32, y: 50, jitterY: true },
-          { x: 35, y: 50, jitterX: true, jitterY: true }
+        <AnimatedConnector startId="text-deep-roots" gap={4} startAlign="left" pts={[
+          { },
+          { useStartRightX: true, useStartY: true },
+          { x: 35, y: 52, jitterY: true },
+          { x: 40, y: 52, jitterX: true, jitterY: true }
         ]} />
-        <AnimatedConnector pts={[
-          { x: 68, y: 25.5 },
-          { x: 58, y: 25.5 },
-          { x: 45, y: 38, jitterY: true },
-          { x: 40, y: 38, jitterX: true, jitterY: true }
+        <AnimatedConnector startId="text-imagination" gap={4} startAlign="right" pts={[
+          { },
+          { useStartLeftX: true, useStartY: true },
+          { x: 45, y: 40, jitterY: true },
+          { x: 40, y: 40, jitterX: true, jitterY: true }
         ]} />
-        <AnimatedConnector pts={[
-          { x: 82, y: 46 },
-          { x: 75, y: 46 },
+        <AnimatedConnector startId="card-monozukuri" gap={0} pts={[
+          { },
+          { x: 75, useStartY: true },
           { x: 65, y: 56, jitterY: true },
           { x: 60, y: 56, jitterX: true, jitterY: true }
+        ]} />
+        <AnimatedConnector startId="text-foundation" gap={4} startAlign="right" pts={[
+          { },
+          { useStartLeftX: true, useStartY: true },
+          { x: 54, y: 78, jitterY: true },
+          { x: 50, y: 72, jitterX: true, jitterY: true }
         ]} />
 
         {/* Core Threads Menu */}
@@ -170,37 +176,79 @@ export default function App() {
         </div>
 
         {/* Subtext 2 (Foundation) */}
-        <div className="absolute bottom-[25%] left-[62%] w-32 text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black">
-          FOUNDATION DESIGNED FOR GROWTH
+        <div id="text-foundation" className="absolute top-[87%] left-[55%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
+          FOUNDATION<br/>DESIGNED FOR<br/>GROWTH
         </div>
 
         {/* Tag Card (MONOZUKURI /25) */}
-        <div className="absolute top-[32%] right-[8%] bg-[#e5e5e5] border border-black p-4 w-64 pointer-events-auto" style={{ clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%)' }}>
-          <div className="flex justify-between items-start font-bold border-b border-black pb-2 mb-3">
-            <span className="tracking-widest">MONOZUKURI</span>
-            <span className="text-[10px]">/25</span>
-          </div>
-          <div className="text-[10px] font-mono tracking-widest leading-relaxed">
-            // MONO (OBJECT/THING)<br />
-            // ZUKURI (MAKING)<br />
-            <br />
-            → THE MAKING OF OBJECTS
+        <div id="card-monozukuri" 
+             className="absolute top-[32%] right-[8%] bg-[#e5e5e5] pointer-events-auto" 
+             style={{ 
+               width: '172px', 
+               height: '114px',
+               clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)' 
+             }}>
+          
+          {/* Broken Outline SVG */}
+          <svg className="absolute -inset-px pointer-events-none overflow-visible" width="174" height="116" viewBox="0 0 174 116">
+             <path d="M 1.5,69 L 1.5,1.5 L 154,1.5 M 172.5,20 L 172.5,102.5 L 160.5,114.5 L 97,114.5 M 77,114.5 L 1.5,114.5 L 1.5,87" 
+                   fill="none" stroke="black" strokeWidth="1" />
+          </svg>
+
+          {/* Content */}
+          <div className="relative z-10 pl-[14px] pt-2 pr-3 pb-3 select-none">
+            {/* Header */}
+            <div>
+               <div className="bg-[#f0f0f0] px-[3px] -ml-[3px] py-[1px]">
+                 <span className="font-bold text-[13px] tracking-wider text-black leading-none block">MONOZUKURI</span>
+               </div>
+               <div
+                 className="font-bold text-[11px] tracking-widest text-black leading-none mt-1.5"
+                 style={{ fontFamily: '"Hiragino Kaku Gothic", "Hiragino Sans", "Yu Gothic", sans-serif' }}
+               >
+                 ものづくり
+               </div>
+            </div>
+
+            {/* Meaning text */}
+            <div className="text-[8px] font-mono tracking-widest leading-[1.25] text-black/90 mt-1.5">
+              MONO (THING)<br />
+              + ZUKURI (MAKING)
+            </div>
+
+            {/* Result */}
+            <div className="text-[8px] font-mono tracking-widest leading-none text-black whitespace-nowrap mt-1.5">
+              THE MAKING OF THINGS
+            </div>
           </div>
         </div>
 
         {/* Info Card (NOT A STUDIO) */}
-        <div className="absolute bottom-8 right-8 bg-white border border-black p-4 w-72 pointer-events-auto" style={{ clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%)' }}>
-          <div className="flex justify-between items-center mb-3">
-            <h3 className="text-[10px] uppercase font-mono font-bold tracking-widest">NOT A STUDIO — JUST ME</h3>
-            <button className="w-3 h-3 border border-black flex items-center justify-center text-[8px]">×</button>
+        <div className="absolute bottom-8 right-8 w-[286px] pointer-events-auto">
+          <div className="relative w-[286px] h-[168px]">
+            <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[10px] uppercase font-mono font-bold tracking-widest leading-none">
+              ME, I GUESS
+            </div>
+            <div
+              className="absolute inset-0 bg-white"
+              style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 28px 100%, 0 calc(100% - 28px))' }}
+            />
+            <svg className="absolute -inset-px pointer-events-none overflow-visible" width="288" height="170" viewBox="0 0 288 170">
+              <path
+                d="M 1.5,48 L 1.5,1.5 L 146,1.5 M 166,1.5 L 286.5,1.5 L 286.5,168.5 L 29.5,168.5 L 1.5,140.5 L 1.5,112 M 1.5,96 L 1.5,64"
+                fill="none"
+                stroke="black"
+                strokeWidth="1"
+              />
+            </svg>
+            <p className="relative z-10 pt-7 px-3 text-[10px] font-mono font-bold leading-[1.02] text-black">
+              I’m Aarush Lenka and I am a final year student at VIT, Vellore. On the side I give talks, workshops, and mentor, as well as writing on design and technology. This site is simply a collection of what I do and share info along the way.
+            </p>
           </div>
-          <p className="text-[10px] font-mono leading-relaxed mb-4">
-            I'm Stella Mühlhaus and I currently work at Meta. On the side I give talks, workshops, and mentor, as well as writing on design and technology. This site is simply a collection of what I do and share info along the way.
-          </p>
-          <div className="flex gap-2 text-[9px] font-mono uppercase tracking-widest">
+          <div className="flex justify-end gap-2 text-[9px] font-mono uppercase tracking-widest mt-4">
             <a href="#" className="border border-black px-2 py-0.5 rounded-full hover:bg-black hover:text-white transition-colors">LINKEDIN</a>
-            <a href="#" className="border border-black px-2 py-0.5 rounded-full hover:bg-black hover:text-white transition-colors">MEDIUM</a>
-            <a href="#" className="border border-black px-2 py-0.5 rounded-full hover:bg-black hover:text-white transition-colors">INSTAGRAM</a>
+            <a href="#" className="border border-black px-2 py-0.5 rounded-full hover:bg-black hover:text-white transition-colors">GITHUB</a>
+            
           </div>
         </div>
 
