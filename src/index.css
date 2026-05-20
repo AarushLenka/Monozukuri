@@ -117,3 +117,62 @@
   --tw-translate-y: 0;
   --tw-gradient-from-position: 0%;
 }
+
+@keyframes thread-hatch-flicker {
+  0% {
+    clip-path: inset(0 86% 0 0);
+  }
+
+  11% {
+    clip-path: inset(0 24% 0 0);
+  }
+
+  19% {
+    clip-path: inset(0 62% 0 0);
+  }
+
+  33% {
+    clip-path: inset(0 8% 0 0);
+  }
+
+  48% {
+    clip-path: inset(0 44% 0 0);
+  }
+
+  57% {
+    clip-path: inset(0 14% 0 0);
+  }
+
+  71% {
+    clip-path: inset(0 68% 0 0);
+  }
+
+  84% {
+    clip-path: inset(0 28% 0 0);
+  }
+
+  100% {
+    clip-path: inset(0 88% 0 0);
+  }
+}
+
+.thread-hatch {
+  animation: thread-hatch-flicker 1.6s cubic-bezier(0.32, 0.08, 0.2, 1) infinite;
+  will-change: clip-path;
+}
+
+@keyframes tesseract-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tesseract-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tesseract-spin 6s linear infinite;
+}

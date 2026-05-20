@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import RaspberryPiCanvas from './RaspberryPi';
 import AnimatedConnector from './components/AnimatedConnector';
+
 const GridMarker = ({ className }) => (
   <svg
     className={`absolute -translate-x-1/2 -translate-y-1/2 overflow-visible ${className}`}
@@ -15,6 +16,148 @@ const GridMarker = ({ className }) => (
     <circle cx="5" cy="5" r="2" fill="white" />
   </svg>
 );
+
+const THREAD_ITEMS = [
+  { id: '01.', tag: 'MICROCONTROLLER', title: 'ESP32', barWidth: 132, animDur: '5s', animDelay: '-0.54s' },
+  { id: '02.', tag: 'VLSI', title: 'VERILOG, PHYSICAL DESIGN, CMOS', barWidth: 160, animDur: '5s', animDelay: '-1.18s' },
+  { id: '03.', tag: 'AI AUTOMATION', title: 'N8N, LANGCHAIN, MCP', barWidth: 106, animDur: '5s', animDelay: '-2.07s' },
+  { id: '04.', tag: 'IOT', title: 'AWS, AZURE, FIREBASE', barWidth: 138, animDur: '5s', animDelay: '-1.46s' },
+  { id: '05.', tag: 'LOREM IPSUM', title: 'DOLOR SIT AMET', barWidth: 116, animDur: '5s', animDelay: '-2.41s' },
+  { id: '06.', tag: 'CONSECTETUR', title: 'ADIPISCING ELIT', barWidth: 126, animDur: '5s', animDelay: '-0.89s' },
+  { id: '07.', tag: 'SED DO', title: 'EIUSMOD TEMPOR', barWidth: 102, animDur: '5s', animDelay: '-1.73s' }
+  
+];
+
+const PIXEL_W = 7;
+const PIXEL_H = 13;
+const PIXEL_COLOR = '#f1f1f1';
+
+function PixelField() {
+  const [pixels, setPixels] = useState(() =>
+    Array.from({ length: PIXEL_W * PIXEL_H }, (_, index) => {
+      const row = Math.floor(index / PIXEL_W);
+      return row > PIXEL_H * 0.58 ? PIXEL_COLOR : null;
+    })
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPixels((current) =>
+        current.map((pixel, index) => {
+          const row = Math.floor(index / PIXEL_W);
+          const lowerBias = row > PIXEL_H * 0.58;
+          const roll = Math.random();
+          if (pixel && roll > (lowerBias ? 0.985 : 0.82)) return null;
+          if (!pixel && roll > (lowerBias ? 0.78 : 0.94)) return PIXEL_COLOR;
+          return pixel;
+        })
+      );
+    }, 220);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div
+      className="grid h-full w-full bg-transparent"
+      style={{
+        gridTemplateColumns: `repeat(${PIXEL_W}, minmax(0, 1fr))`,
+        gridTemplateRows: `repeat(${PIXEL_H}, minmax(0, 1fr))`
+      }}
+    >
+      {pixels.map((pixel, index) => (
+        <div
+          key={index}
+          className="h-full w-full"
+          style={{ backgroundColor: pixel || 'transparent' }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function MovingSlashBar({ width, animDur, animDelay }) {
+  const slashGap = 6;
+  const slashCount = Math.ceil((width + 24) / slashGap);
+
+  return (
+    <div className="relative h-[10px] overflow-hidden" style={{ width }}>
+      <svg
+        className="thread-hatch absolute inset-y-0 -left-[10px] w-[calc(100%+20px)]"
+        viewBox={`0 0 ${width + 20} 10`}
+        preserveAspectRatio="none"
+        style={{
+          animationDuration: animDur,
+          animationDelay: animDelay
+        }}
+      >
+        {Array.from({ length: slashCount }).map((_, index) => {
+          const x = index * slashGap + 1;
+          return (
+            <line
+              key={index}
+              x1={x}
+              y1="9"
+              x2={x + 5}
+              y2="1"
+              stroke="#101010"
+              strokeWidth="2.1"
+              strokeLinecap="square"
+            />
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
+function CoreThreadsPanel() {
+  return (
+    <div className="absolute bottom-8 left-8 w-[322px] pointer-events-auto select-none">
+      <h2 className="mb-[10px] text-[10px] font-mono font-bold uppercase tracking-widest text-black">
+        [ CORE THREADS OF MY WORK ]
+      </h2>
+      <div className="flex gap-[14px]">
+        <div className="relative h-[200px] w-[68px] border border-black/70 bg-transparent">
+          <div className="absolute inset-x-0 top-0 h-[47px] border-b border-black/70">
+            <svg className="absolute inset-0 h-full w-full" viewBox="0 0 68 47" fill="none" preserveAspectRatio="none">
+              <g transform="translate(34 23.5) scale(0.82)">
+                <g className="tesseract-spin" transform="rotate(-18)">
+                  <rect x="-12" y="-12" width="20" height="20" stroke="black" strokeWidth="1.3" />
+                  <rect x="-2" y="-16" width="20" height="20" stroke="black" strokeWidth="1.3" />
+                  <path d="M-12 -12L-2 -16M8 -12L18 -16M-12 8L-2 4M8 8L18 4" stroke="black" strokeWidth="1.3" />
+                  <path d="M-12 -12L-12 8M8 -12L8 8M-2 -16L-2 4M18 -16L18 4" stroke="black" strokeWidth="1.1" />
+                  <path d="M-7 -7H11M-7 -1H11M-7 -7L-7 -1M11 -7L11 -1" stroke="black" strokeWidth="1" />
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div className="absolute inset-x-0 bottom-0 top-[47px]">
+            <PixelField />
+          </div>
+        </div>
+
+        <div className="flex-1 pt-[1px]">
+          {THREAD_ITEMS.map((item, index) => (
+            <div key={item.id} className="mb-[5px] last:mb-0">
+              <div className="mb-[2px] flex items-center gap-[2px]">
+                <div className="bg-white px-[1px] text-[8px] font-mono font-bold uppercase tracking-widest leading-[1.05] text-black whitespace-nowrap">
+                  {item.id}{item.tag ? ` ${item.tag}` : ''}
+                </div>
+                <MovingSlashBar width={item.barWidth} animDur={item.animDur} animDelay={item.animDelay} />
+              </div>
+              <div className="text-[9px] font-mono font-bold uppercase tracking-widest leading-none text-black whitespace-nowrap">
+                {item.title}
+              </div>
+              <div
+                className={`mt-[3px] h-px bg-black/80 ${index === THREAD_ITEMS.length - 1 ? 'ml-[-82px] w-[296px]' : 'w-[214px]'}`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   const [time, setTime] = useState("00:43 AM");
@@ -91,8 +234,8 @@ export default function App() {
         </header>
 
         {/* Big Title */}
-        <div className="absolute top-[10%] left-6 w-[360px] h-[116px] flex flex-col justify-center">
-          <h1 className="text-[54px] leading-[0.85] font-normal tracking-tight text-black" style={{ fontFamily: '"Neue Haas Grotesk Text Pro 55 Roman", "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, sans-serif' }}>
+        <div className="absolute top-[12%] left-6 w-[500px] h-[148px] flex flex-col justify-center">
+          <h1 className="text-[66px] leading-[0.84] font-normal tracking-tight text-black whitespace-nowrap" style={{ fontFamily: '"Neue Haas Grotesk Text Pro 55 Roman", "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, sans-serif' }}>
             REFINEMENT<br />IS ENDLESS.
           </h1>
         </div>
@@ -129,44 +272,11 @@ export default function App() {
         <AnimatedConnector startId="text-foundation" gap={4} startAlign="right" pts={[
           { },
           { useStartLeftX: true, useStartY: true },
-          { x: 54, y: 78, jitterY: true },
-          { x: 50, y: 72, jitterX: true, jitterY: true }
+          { x: 50, y: 78, jitterY: true },
+          { x: 43, y: 72, jitterX: true, jitterY: true }
         ]} />
 
-        {/* Core Threads Menu */}
-        <div className="absolute bottom-8 left-8 w-64 pointer-events-auto">
-          <h2 className="text-[10px] uppercase font-mono font-bold tracking-widest mb-4">[ CORE THREADS OF MY WORK ]</h2>
-          <div className="space-y-0 text-[10px] font-mono tracking-widest uppercase">
-            <div className="flex gap-2 border-b border-black/20 pb-1 pt-2 hover:bg-white/10 cursor-pointer">
-              <span className="w-6">01.</span>
-              <div>
-                <span className="opacity-50">(XR/MR/VR)</span> //////////<br />
-                PERCEPTUAL INTERFACES
-              </div>
-            </div>
-            <div className="flex gap-2 border-b border-black/20 pb-1 pt-2 hover:bg-white/10 cursor-pointer">
-              <span className="w-6">02.</span>
-              <div>
-                //////////<br />
-                EMBODIMENT
-              </div>
-            </div>
-            <div className="flex gap-2 border-b border-black/20 pb-1 pt-2 hover:bg-white/10 cursor-pointer">
-              <span className="w-6">03.</span>
-              <div>
-                //////////<br />
-                IA & AI
-              </div>
-            </div>
-            <div className="flex gap-2 border-b border-black/20 pb-1 pt-2 hover:bg-white/10 cursor-pointer">
-              <span className="w-6">04.</span>
-              <div>
-                //////////<br />
-                SYSTEM AND TOOLS
-              </div>
-            </div>
-          </div>
-        </div>
+        <CoreThreadsPanel />
 
         {/* Floating Island Centerpiece */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] pointer-events-auto z-20">
@@ -241,8 +351,8 @@ export default function App() {
                 strokeWidth="1"
               />
             </svg>
-            <p className="relative z-10 pt-7 px-3 text-[10px] font-mono font-bold leading-[1.02] text-black">
-              I’m Aarush Lenka and I am a final year student at VIT, Vellore. On the side I give talks, workshops, and mentor, as well as writing on design and technology. This site is simply a collection of what I do and share info along the way.
+            <p className="absolute inset-0 z-10 px-4 py-4 text-[9px] font-mono font-bold leading-[1.02] text-black flex items-center">
+              Hi! I’m Aarush Lenka, a final-year ECE undergraduate at VIT Vellore specializing in microcontroller firmware and sensor fusion. Parallel to engineering, I serve on the Advisory Board for ISTE VIT, providing strategic oversight to the creative team following my tenure leading the motion graphics division. I specialize in post-production, dynamic asset creation, and visual storytelling.
             </p>
           </div>
           <div className="flex justify-end gap-2 text-[9px] font-mono uppercase tracking-widest mt-4">
