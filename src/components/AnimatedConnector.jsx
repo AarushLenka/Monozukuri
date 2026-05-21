@@ -18,9 +18,9 @@ export default function AnimatedConnector({ pts, startId, startAlign = 'left', g
     // Snap to a new random position occasionally to create sudden, sporadic movement
     if (t - lastUpdateRef.current > 50 + Math.random() * 300) {
       lastUpdateRef.current = t;
-      setJitter({ 
-        x: (Math.random() - 0.5) * 20, 
-        y: (Math.random() - 0.5) * 20 
+      setJitter({
+        x: (Math.random() - 0.5) * 20,
+        y: (Math.random() - 0.5) * 20
       });
     }
   });
@@ -31,24 +31,30 @@ export default function AnimatedConnector({ pts, startId, startAlign = 'left', g
       const el = document.getElementById(startId);
       if (el) {
         const rect = el.getBoundingClientRect();
+        const scrollX = window.scrollX || window.pageXOffset;
+        const scrollY = window.scrollY || window.pageYOffset;
         setStartPos({
-          x: startAlign === 'right' ? rect.right : rect.left,
-          y: rect.bottom + gap,
-          left: rect.left,
-          right: rect.right
+          x: (startAlign === 'right' ? rect.right : rect.left) + scrollX,
+          y: rect.bottom + gap + scrollY,
+          left: rect.left + scrollX,
+          right: rect.right + scrollX
         });
       }
     };
     // Small delay to ensure layout is complete
     setTimeout(updatePos, 100);
     window.addEventListener('resize', updatePos);
-    return () => window.removeEventListener('resize', updatePos);
+    window.addEventListener('scroll', updatePos);
+    return () => {
+      window.removeEventListener('resize', updatePos);
+      window.removeEventListener('scroll', updatePos);
+    };
   }, [startId, startAlign, gap, windowSize]);
 
   const pixelPoints = pts.map(p => {
     let px = p.x !== undefined ? (p.x / 100) * windowSize.w : (startPos ? startPos.x : 0);
     let py = p.y !== undefined ? (p.y / 100) * windowSize.h : (startPos ? startPos.y : 0);
-    
+
     if (p.useStartX && startPos) px = startPos.x;
     if (p.useStartY && startPos) py = startPos.y;
     if (p.useStartLeftX && startPos) px = startPos.left;
@@ -71,12 +77,12 @@ export default function AnimatedConnector({ pts, startId, startAlign = 'left', g
         <polyline points={pixelPoints.join(' ')} />
       </svg>
       {/* Target Box */}
-      <div 
+      <div
         className="absolute z-30 pointer-events-none flex items-center justify-center border border-black"
-        style={{ 
-          width: '16px', 
+        style={{
+          width: '16px',
           height: '16px',
-          left: `${targetPx}px`, 
+          left: `${targetPx}px`,
           top: `${targetPy}px`,
           transform: 'translate(-50%, -50%)'
         }}
