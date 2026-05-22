@@ -2,7 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF, Center } from '@react-three/drei';
-import gsap from 'gsap';
+import { useOrbitSnapBack } from './hooks/useOrbitSnapBack';
+import { addEdgeLines, setMeshOpacity } from './utils/threeUtils';
 
 function ESPModel({ scrollProgress, ...props }) {
   const { scene } = useGLTF('/esp32.glb');
@@ -10,44 +11,30 @@ function ESPModel({ scrollProgress, ...props }) {
 
   useEffect(() => {
     const meshes = [];
+
     scene.traverse((child) => {
-      if (child.isMesh && child.geometry) {
-        // Save original position
-        if (!child.userData.originalPosition) {
-          child.userData.originalPosition = child.position.clone();
-        }
+      if (!child.isMesh || !child.geometry) return;
 
-        // Clone material to avoid modifying shared cache
-        if (child.material && !child.userData.originalMaterial) {
-          child.userData.originalMaterial = child.material;
-          if (Array.isArray(child.material)) {
-            child.material = child.material.map(mat => mat.clone());
-          } else {
-            child.material = child.material.clone();
-          }
-        }
-
-        // Create feature edges with a 15-degree threshold to avoid dense wireframes
-        let line = child.children.find(c => c.userData.isWireframeOutline);
-        if (!line) {
-          const edges = new THREE.EdgesGeometry(child.geometry, 15);
-          line = new THREE.LineSegments(
-            edges,
-            new THREE.LineBasicMaterial({ color: '#ffffff', transparent: true, opacity: 1 })
-          );
-          line.userData.isWireframeOutline = true;
-          child.add(line);
-        }
-        child.userData.lineSegments = line;
-
-        meshes.push(child);
+      if (!child.userData.originalPosition) {
+        child.userData.originalPosition = child.position.clone();
       }
+
+      // Clone material to avoid modifying shared cache
+      if (child.material && !child.userData.originalMaterial) {
+        child.userData.originalMaterial = child.material;
+        child.material = Array.isArray(child.material)
+          ? child.material.map((mat) => mat.clone())
+          : child.material.clone();
+      }
+
+      meshes.push(child);
     });
 
-    // Sort meshes by their original Z coordinate to create a layered stack order
-    meshes.sort((a, b) => a.userData.originalPosition.z - b.userData.originalPosition.z);
+    // Add edge lines with transparency support for the fade animation
+    addEdgeLines(scene, { transparent: true });
 
-    // Assign sorted index
+    // Sort by original Z to create a layered stack order
+    meshes.sort((a, b) => a.userData.originalPosition.z - b.userData.originalPosition.z);
     meshes.forEach((mesh, index) => {
       mesh.userData.sortedIndex = index;
     });
@@ -59,61 +46,27 @@ function ESPModel({ scrollProgress, ...props }) {
     const meshes = meshesRef.current;
     if (!meshes.length) return;
 
-    // Disassembly spread factor: maximum Z separation when scrollProgress = 0
-    // Spreading out layers along the Z-axis (board thickness axis)
-    const maxSpread = 0.0014; // Adjust spacing as needed
-    const disassembly = 1 - scrollProgress;
-    const spread = maxSpread * disassembly * 0.5;
+    const maxSpread = 0.0017;
+    const spread = maxSpread * (1 - scrollProgress) * 0.5;
+
+    // Solid mesh starts at low opacity and ramps up to fully opaque on scroll
+    const BASE_OPACITY = 0.08;
+    const solidOpacity = BASE_OPACITY + (1 - BASE_OPACITY) * Math.pow(scrollProgress, 3);
 
     meshes.forEach((mesh) => {
       const origPos = mesh.userData.originalPosition;
       const sortedIdx = mesh.userData.sortedIndex;
       const middleIdx = (meshes.length - 1) / 2;
 
-      // Translate along the local Z axis for explosion effect
+      // Explode layers along Z
       mesh.position.z = origPos.z + (sortedIdx - middleIdx) * spread;
 
-      const line = mesh.userData.lineSegments;
+      // Solid mesh always visible, fades from near-transparent to opaque
+      setMeshOpacity(mesh, solidOpacity);
 
-      // Smooth cubic curve transition (no hard jumps)
-      // Keeps the wireframe visible longer and makes the solid model fade-in extremely smooth
-      const solidOpacity = Math.pow(scrollProgress, 3);
+      // Outlines fade out as the solid model fades in
       const wireframeOpacity = 1 - Math.pow(scrollProgress, 3);
-
-      // 1. Smoothly fade solid model
-      if (mesh.material) {
-        if (solidOpacity < 0.001) {
-          if (Array.isArray(mesh.material)) {
-            mesh.material.forEach((mat) => { mat.visible = false; });
-          } else {
-            mesh.material.visible = false;
-          }
-        } else {
-          if (Array.isArray(mesh.material)) {
-            mesh.material.forEach((mat) => {
-              mat.visible = true;
-              if (solidOpacity >= 0.99) {
-                mat.transparent = false;
-                mat.opacity = 1.0;
-              } else {
-                mat.transparent = true;
-                mat.opacity = solidOpacity;
-              }
-            });
-          } else {
-            mesh.material.visible = true;
-            if (solidOpacity >= 0.99) {
-              mesh.material.transparent = false;
-              mesh.material.opacity = 1.0;
-            } else {
-              mesh.material.transparent = true;
-              mesh.material.opacity = solidOpacity;
-            }
-          }
-        }
-      }
-
-      // 2. Smoothly fade wireframe outline
+      const line = mesh.userData.lineSegments;
       if (line) {
         if (wireframeOpacity < 0.01) {
           line.visible = false;
@@ -130,7 +83,7 @@ function ESPModel({ scrollProgress, ...props }) {
 
 export default function ESP32Canvas() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const controlsRef = useRef();
+  const { controlsRef, handleInteractionStart, handleInteractionEnd } = useOrbitSnapBack();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -139,51 +92,15 @@ export default function ESP32Canvas() {
 
       const rect = element.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-
-      // Calculate progress of Section 2 entering/scrolling into viewport
-      // 0: top of Section 2 is at bottom of viewport (just entering)
-      // 1: top of Section 2 reaches top of viewport (fully in view)
-      const totalDist = viewportHeight;
       const distScrolled = viewportHeight - rect.top;
-      const progress = Math.min(Math.max(distScrolled / totalDist, 0), 1);
+      const progress = Math.min(Math.max(distScrolled / viewportHeight, 0), 1);
       setScrollProgress(progress);
     };
 
     window.addEventListener('scroll', handleScroll);
-    // Trigger initially
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleInteractionStart = () => {
-    if (controlsRef.current) {
-      gsap.killTweensOf(controlsRef.current.object.position);
-    }
-  };
-
-  const handleInteractionEnd = () => {
-    if (controlsRef.current) {
-      const camera = controlsRef.current.object;
-
-      // Find spherical coordinates of camera position
-      const spherical = new THREE.Spherical().setFromVector3(camera.position);
-
-      // Find nearest multiple of 2PI for shortest spin back
-      const targetTheta = Math.round(spherical.theta / (Math.PI * 2)) * Math.PI * 2;
-
-      gsap.to(spherical, {
-        radius: 6,
-        phi: Math.PI / 2,
-        theta: targetTheta,
-        duration: 1.5,
-        ease: "power2.inOut",
-        onUpdate: () => {
-          camera.position.setFromSpherical(spherical);
-          controlsRef.current.update();
-        }
-      });
-    }
-  };
 
   return (
     <Canvas
