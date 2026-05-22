@@ -1,8 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF, Center } from '@react-three/drei';
 import { useOrbitSnapBack } from './hooks/useOrbitSnapBack';
+import { useScrollProgress } from './hooks/useScrollProgress';
 import { addEdgeLines, setMeshOpacity } from './utils/threeUtils';
 
 function ESPModel({ scrollProgress, ...props }) {
@@ -82,25 +83,8 @@ function ESPModel({ scrollProgress, ...props }) {
 }
 
 export default function ESP32Canvas() {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const scrollProgress = useScrollProgress('about-section');
   const { controlsRef, handleInteractionStart, handleInteractionEnd } = useOrbitSnapBack();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const element = document.getElementById('about-section');
-      if (!element) return;
-
-      const rect = element.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const distScrolled = viewportHeight - rect.top;
-      const progress = Math.min(Math.max(distScrolled / viewportHeight, 0), 1);
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <Canvas

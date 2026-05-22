@@ -1,8 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls, useGLTF, Center } from '@react-three/drei';
+import React, { useRef, useEffect } from 'react';
+import { Environment, useGLTF, Center } from '@react-three/drei';
 import gsap from 'gsap';
-import { useOrbitSnapBack } from './hooks/useOrbitSnapBack';
+import Canvas3DBase from './components/Canvas3DBase';
 import { addEdgeLines } from './utils/threeUtils';
 
 function RealPiModel(props) {
@@ -15,7 +14,7 @@ function RealPiModel(props) {
   return <primitive object={scene} {...props} />;
 }
 
-function Scene({ onAnimComplete }) {
+function PiScene({ onAnimComplete }) {
   const groupRef = useRef();
 
   useEffect(() => {
@@ -54,38 +53,19 @@ function Scene({ onAnimComplete }) {
 }
 
 export default function RaspberryPiCanvas() {
-  const [autoRotate, setAutoRotate] = useState(false);
-
-  const { controlsRef, handleInteractionStart, handleInteractionEnd } = useOrbitSnapBack(
-    () => setAutoRotate(true)
-  );
-
-  const handleDragStart = () => {
-    handleInteractionStart();
-  };
-
-  const handleDragEnd = () => {
-    setAutoRotate(false);
-    handleInteractionEnd();
-  };
-
   return (
-    <Canvas camera={{ position: [0, 0, 6], fov: 45 }} className="w-full h-full cursor-grab active:cursor-grabbing">
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[10, 10, 5]} intensity={1.5} />
-      <directionalLight position={[-10, -10, -5]} intensity={0.5} />
-      <Scene onAnimComplete={() => setAutoRotate(true)} />
-      <OrbitControls
-        ref={controlsRef}
-        enableZoom={false}
-        enablePan={false}
-        maxPolarAngle={Math.PI / 2}
-        minPolarAngle={0}
-        autoRotate={autoRotate}
-        autoRotateSpeed={7.0}
-        onStart={handleDragStart}
-        onEnd={handleDragEnd}
-      />
-    </Canvas>
+    <Canvas3DBase
+      SceneComponent={PiScene}
+      ambientIntensity={0.6}
+      directionalLights={[
+        { position: [10, 10, 5], intensity: 1.5 },
+        { position: [-10, -10, -5], intensity: 0.5 },
+      ]}
+      orbitProps={{
+        maxPolarAngle: Math.PI / 2,
+        minPolarAngle: 0,
+        autoRotateSpeed: 7.0,
+      }}
+    />
   );
 }
