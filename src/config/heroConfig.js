@@ -20,17 +20,25 @@ export const PIXEL_CONFIG = {
   SPAWN_UPPER: 0.94,
 };
 
+const vPos = ['360px', '720px', '1080px']; // 25%, 50%, 75% of 1440px
+const hPos = [];
+const markers = [];
+
+// Generate horizontal lines every 100px, up to 8000px tall (enough for 10 full-height sections)
+for (let i = 250; i <= 8000; i += 250) {
+  hPos.push(`${i}px`);
+}
+
+for (let v of vPos) {
+  for (let h of hPos) {
+    markers.push({ left: v, top: h });
+  }
+}
+
 export const GRID_CONFIG = {
-  VERTICAL_POSITIONS: ['25%', '50%', '75%'],
-  HORIZONTAL_POSITIONS: ['33.33%', '66.66%'],
-  MARKER_POSITIONS: [
-    { left: '25%', top: '33.33%' },
-    { left: '50%', top: '33.33%' },
-    { left: '75%', top: '33.33%' },
-    { left: '25%', top: '66.66%' },
-    { left: '50%', top: '66.66%' },
-    { left: '75%', top: '66.66%' },
-  ],
+  VERTICAL_POSITIONS: vPos,
+  HORIZONTAL_POSITIONS: hPos,
+  MARKER_POSITIONS: markers,
 };
 
 export const CONNECTOR_CONFIG = [
