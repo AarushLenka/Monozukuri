@@ -1,47 +1,16 @@
-import React, { useRef, useEffect } from 'react';
-import * as THREE from 'three';
+import React from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF, Center } from '@react-three/drei';
 import { useOrbitSnapBack } from './hooks/useOrbitSnapBack';
 import { useScrollProgress } from './hooks/useScrollProgress';
+import { useSceneMeshes } from './hooks/useSceneMeshes';
 import { addEdgeLines, setMeshOpacity } from './utils/threeUtils';
 
 function ESPModel({ scrollProgress, ...props }) {
   const { scene } = useGLTF('/esp32.glb');
-  const meshesRef = useRef([]);
-
-  useEffect(() => {
-    const meshes = [];
-
-    scene.traverse((child) => {
-      if (!child.isMesh || !child.geometry) return;
-
-      if (!child.userData.originalPosition) {
-        child.userData.originalPosition = child.position.clone();
-      }
-
-      // Clone material to avoid modifying shared cache
-      if (child.material && !child.userData.originalMaterial) {
-        child.userData.originalMaterial = child.material;
-        child.material = Array.isArray(child.material)
-          ? child.material.map((mat) => mat.clone())
-          : child.material.clone();
-      }
-
-      meshes.push(child);
-    });
-
-    // Add edge lines with transparency support for the fade animation
+  const meshesRef = useSceneMeshes(scene, () => {
     addEdgeLines(scene, { transparent: true });
-
-    // Sort by original Z to create a layered stack order
-    meshes.sort((a, b) => a.userData.originalPosition.z - b.userData.originalPosition.z);
-    meshes.forEach((mesh, index) => {
-      mesh.userData.sortedIndex = index;
-    });
-
-    meshesRef.current = meshes;
-  }, [scene]);
+  });
 
   useFrame(() => {
     const meshes = meshesRef.current;

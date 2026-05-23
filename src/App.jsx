@@ -5,6 +5,7 @@ import ESP32Canvas from './ESP32';
 import GridMarker from './components/GridMarker';
 import CoreThreadsPanel from './components/CoreThreadsPanel';
 import { CONNECTOR_CONFIG, GRID_CONFIG } from './config/heroConfig';
+import ZigzagPattern from './components/ZigzagPattern';
 
 export default function App() {
   const [time, setTime] = useState('00:43 AM');
@@ -38,7 +39,7 @@ export default function App() {
     if (!wrapperRef.current) return;
     const observer = new ResizeObserver(() => {
       if (wrapperRef.current) {
-        setOuterHeight(wrapperRef.current.offsetHeight * scale);
+        setOuterHeight(Math.ceil(wrapperRef.current.offsetHeight * scale) + 1);
       }
     });
     observer.observe(wrapperRef.current);
@@ -54,12 +55,12 @@ export default function App() {
   }, []);
 
   return (
-    <div className="w-full bg-[#4a4a4a]" style={{ height: outerHeight, overflow: 'hidden' }}>
+    <div className="w-full bg-[#4a4a4a]" style={{ minHeight: '100vh', height: outerHeight !== 'auto' ? Math.max(outerHeight, typeof window !== 'undefined' ? window.innerHeight : 0) : '100vh', overflow: 'hidden' }}>
       
       {/* ═══════ GLOBAL BACKGROUND (Fixed to window, properly scaled) ═══════ */}
       <div 
         className="fixed top-0 left-0 origin-top-left pointer-events-none z-0"
-        style={{ width: '1440px', height: 'var(--logical-vh)', transform: `scale(${scale})` }}
+        style={{ width: '1440px', height: 'calc(100vh / var(--scale))', transform: `scale(${scale})` }}
       >
         <div className="absolute -top-[10%] -left-[10%] w-[600px] h-[600px] bg-red-700/50 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] blur-[100px] mix-blend-screen"></div>
         <div className="absolute top-[20%] right-[10%] w-[500px] h-[700px] bg-gray-500/40 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-[120px] mix-blend-screen"></div>
@@ -205,162 +206,146 @@ export default function App() {
         </div>
 
         {/* ═══════ SECTION 2 — ABOUT / PHILOSOPHY ═══════ */}
-        <section id="about-section" className="relative w-full overflow-hidden py-24 px-16 z-[2]" style={{ minHeight: 'var(--logical-vh)' }}>
+        <div id="about-section" className="relative w-full overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
+          <div className="relative w-full h-full z-10 pointer-events-none">
 
-          {/* Technical Line Art Background Underneath ESP32 */}
-          <div className="absolute top-[-20px] left-[-20px] w-[790px] h-[790px] pointer-events-none z-10 opacity-50 text-white mix-blend-screen">
-            <svg viewBox="0 0 1000 1000" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
-              <defs>
-                <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" stroke="none" />
-                </marker>
-              </defs>
+            {/* Technical Line Art Background Underneath ESP32 */}
+            <div className="absolute top-[-20px] left-[-20px] w-[770px] h-[780px] pointer-events-none z-10 opacity-50 text-white mix-blend-screen">
+              <svg viewBox="0 0 1000 1000" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
+                <defs>
+                  <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" stroke="none" />
+                  </marker>
+                </defs>
 
-              {/* Main Grid Lines */}
-              <line x1="0" y1="400" x2="1000" y2="400" />
-              <line x1="400" y1="0" x2="400" y2="1000" />
-              <line x1="750" y1="0" x2="750" y2="1000" />
-              <line x1="0" y1="750" x2="1000" y2="750" />
+                {/* Main Grid Lines */}
+                <line x1="0" y1="400" x2="1000" y2="400" />
+                <line x1="400" y1="0" x2="400" y2="1000" />
+                <line x1="750" y1="0" x2="750" y2="1000" />
+                <line x1="0" y1="750" x2="1000" y2="750" />
 
-              {/* Angle Lines */}
-              <line x1="400" y1="400" x2="950" y2="150" strokeDasharray="4 4" />
-              <line x1="400" y1="400" x2="100" y2="850" strokeDasharray="2 6" />
+                {/* Angle Lines */}
+                <line x1="400" y1="400" x2="950" y2="150" strokeDasharray="4 4" />
+                <line x1="400" y1="400" x2="100" y2="850" strokeDasharray="2 6" />
 
-              {/* Protractor Circles */}
-              <circle cx="400" cy="400" r="120" />
-              <circle cx="400" cy="400" r="180" />
-              <circle cx="400" cy="400" r="280" />
-              <circle cx="400" cy="400" r="320" strokeDasharray="6 6" />
-              <circle cx="400" cy="400" r="350" />
+                {/* Protractor Circles */}
+                <circle cx="400" cy="400" r="120" />
+                <circle cx="400" cy="400" r="180" />
+                <circle cx="400" cy="400" r="280" />
+                <circle cx="400" cy="400" r="320" strokeDasharray="6 6" />
+                <circle cx="400" cy="400" r="350" />
 
-              {/* Tick Marks & Numbers */}
-              <g className="font-mono text-[10px] uppercase">
-                {Array.from({ length: 72 }).map((_, i) => {
-                  const angle = i * 5;
-                  const isMajor = angle % 15 === 0;
-                  return (
-                    <g key={`tick-${i}`} transform={`rotate(${angle} 400 400)`}>
-                      <line x1="400" y1="120" x2="400" y2={isMajor ? "90" : "110"} />
-                      {isMajor && (
-                        <text x="400" y="75" textAnchor="middle" fill="currentColor" stroke="none">
-                          {angle}
-                        </text>
-                      )}
-                    </g>
-                  );
-                })}
-              </g>
+                {/* Tick Marks & Numbers */}
+                <g className="font-mono text-[10px] uppercase">
+                  {Array.from({ length: 72 }).map((_, i) => {
+                    const angle = i * 5;
+                    const isMajor = angle % 15 === 0;
+                    return (
+                      <g key={`tick-${i}`} transform={`rotate(${angle} 400 400)`}>
+                        <line x1="400" y1="120" x2="400" y2={isMajor ? "90" : "110"} />
+                        {isMajor && (
+                          <text x="400" y="75" textAnchor="middle" fill="currentColor" stroke="none">
+                            {angle}
+                          </text>
+                        )}
+                      </g>
+                    );
+                  })}
+                </g>
 
-              {/* Nodes and Crosshairs */}
-              <g transform="translate(750 250)">
-                <rect x="-12" y="-12" width="24" height="24" fill="none" />
-                <line x1="-6" y1="0" x2="6" y2="0" />
-                <line x1="0" y1="-6" x2="0" y2="6" />
-              </g>
+                {/* Nodes and Crosshairs */}
+                <g transform="translate(750 250)">
+                  <rect x="-12" y="-12" width="24" height="24" fill="none" />
+                  <line x1="-6" y1="0" x2="6" y2="0" />
+                  <line x1="0" y1="-6" x2="0" y2="6" />
+                </g>
 
-              <g transform="translate(900 400)">
-                <rect x="-12" y="-12" width="24" height="24" fill="none" />
-                <rect x="-5" y="-5" width="10" height="10" fill="currentColor" stroke="none" />
-              </g>
+                <g transform="translate(900 400)">
+                  <rect x="-12" y="-12" width="24" height="24" fill="none" />
+                  <rect x="-5" y="-5" width="10" height="10" fill="currentColor" stroke="none" />
+                </g>
 
-              <g transform="translate(250 750)">
-                <circle cx="0" cy="0" r="4" fill="currentColor" stroke="none" />
-              </g>
+                <g transform="translate(250 750)">
+                  <circle cx="0" cy="0" r="4" fill="currentColor" stroke="none" />
+                </g>
 
-              {/* Curved Arrows */}
-              <path d="M 150,600 A 350,350 0 0,0 600,900" strokeDasharray="5 5" markerEnd="url(#arrow)" />
+                {/* Curved Arrows */}
+                <path d="M 150,600 A 350,350 0 0,0 600,900" strokeDasharray="5 5" markerEnd="url(#arrow)" />
 
-              {/* Globe wireframe at bottom left */}
-              <g transform="translate(250 1000)">
-                <path d="M -180 0 A 180 180 0 0 1 180 0" />
-                <path d="M -180 0 A 180 70 0 0 1 180 0" />
-                <path d="M -180 0 A 180 25 0 0 1 180 0" />
-                <line x1="0" y1="0" x2="0" y2="-180" />
-                <line x1="0" y1="0" x2="-100" y2="-150" />
-                <line x1="0" y1="0" x2="100" y2="-150" />
-              </g>
-            </svg>
-          </div>
+                {/* Globe wireframe at bottom left */}
+                <g transform="translate(250 1000)">
+                  <path d="M -180 0 A 180 180 0 0 1 180 0" />
+                  <path d="M -180 0 A 180 70 0 0 1 180 0" />
+                  <path d="M -180 0 A 180 25 0 0 1 180 0" />
+                  <line x1="0" y1="0" x2="0" y2="-180" />
+                  <line x1="0" y1="0" x2="-100" y2="-150" />
+                  <line x1="0" y1="0" x2="100" y2="-150" />
+                </g>
+              </svg>
+            </div>
 
-          {/* ESP32 Model: Top-left */}
-          <div className="absolute top-[20px] left-[2px] w-[540px] h-[620px] bg-transparent overflow-hidden z-20 pointer-events-auto">
-            <ESP32Canvas />
-          </div>
+            {/* ESP32 Model: Top-left */}
+            <div className="absolute top-[20px] left-[2px] w-[540px] h-[620px] bg-transparent overflow-hidden z-20 pointer-events-auto">
+              <ESP32Canvas />
+            </div>
 
-          {/* ESP32 Info Card */}
-          <div className="absolute top-[10%] left-[1%] bg-[#e5e5e5] pointer-events-auto z-30"
-               style={{
-                 width: '220px',
-                 height: '120px',
-                 clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px))'
-               }}>
-            <svg className="absolute -inset-px pointer-events-none overflow-visible" width="222" height="122" viewBox="0 0 222 122">
-              <path d="M 1.5,40 L 1.5,1.5 L 200,1.5 M 220.5,25 L 220.5,106 L 204.5,120.5 L 100,120.5 M 70,120.5 L 16.5,120.5 L 1.5,105.5 L 1.5,75" fill="none" stroke="black" strokeWidth="1" />
-            </svg>
-            <div className="relative z-10 px-3 py-2">
-              <div className="flex justify-between items-start">
-                {/* Zigzag Pattern */}
-                <div className="flex flex-col gap-0 mt-0">
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <React.Fragment key={`top-${i}`}>
-                        <div className="w-[10px] h-[10px] bg-black"></div>
-                        {i < 4 && <div className="w-[10px] h-[10px] bg-transparent"></div>}
-                      </React.Fragment>
-                    ))}
-                  </div>
-                  <div className="flex">
-                    <div className="w-[10px] h-[10px] bg-transparent"></div>
-                    {[...Array(4)].map((_, i) => (
-                      <React.Fragment key={`bot-${i}`}>
-                        <div className="w-[10px] h-[10px] bg-black"></div>
-                        <div className="w-[10px] h-[10px] bg-transparent"></div>
-                      </React.Fragment>
-                    ))}
-                  </div>
+            {/* ESP32 Info Card */}
+            <div className="absolute top-[10%] left-[1%] bg-[#e5e5e5] pointer-events-auto z-30"
+                 style={{
+                   width: '220px',
+                   height: '120px',
+                   clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px))'
+                 }}>
+              <svg className="absolute -inset-px pointer-events-none overflow-visible" width="222" height="122" viewBox="0 0 222 122">
+                <path d="M 1.5,40 L 1.5,1.5 L 200,1.5 M 220.5,25 L 220.5,106 L 204.5,120.5 L 100,120.5 M 70,120.5 L 16.5,120.5 L 1.5,105.5 L 1.5,75" fill="none" stroke="black" strokeWidth="1" />
+              </svg>
+              <div className="relative z-10 px-3 py-2">
+                <div className="flex justify-between items-start">
+                  {/* Zigzag Pattern */}
+                  <ZigzagPattern squareSize={10} gap={10} color="black" />
+                  {/* Spiky Ball */}
+                  <svg viewBox="0 0 100 100" width="20" height="20" className="animate-spiky-spin -mt-0.5">
+                    <polygon points={spikyPoints} fill="black" />
+                  </svg>
                 </div>
-                {/* Spiky Ball */}
-                <svg viewBox="0 0 100 100" width="20" height="20" className="animate-spiky-spin -mt-0.5">
-                  <polygon points={spikyPoints} fill="black" />
-                </svg>
-              </div>
 
-              <div className="w-full h-[1px] bg-black/20 my-[5px]"></div>
+                <div className="w-full h-[1px] bg-black/20 my-[5px]"></div>
 
-              <div className="font-mono text-[9px] font-bold uppercase tracking-widest leading-tight text-black">
-                <p>
-                  ESP32 SITS AT THE center of how I think about
-                </p>
-                <div className="mt-[3px] flex items-center flex-wrap gap-x-1.5 gap-y-0.5">
-                  <span>– Embedded</span>
-                  <span className="border border-black rounded-[6px] px-1.5 py-[1px] leading-none mt-[1px]">Design</span>
-                  <span></span>
+                <div className="font-mono text-[9px] font-bold uppercase tracking-widest leading-tight text-black">
+                  <p>
+                    ESP32 SITS AT THE center of how I think about
+                  </p>
+                  <div className="mt-[3px] flex items-center flex-wrap gap-x-1.5 gap-y-0.5">
+                    <span>– Embedded</span>
+                    <span className="border border-black rounded-[6px] px-1.5 py-[1px] leading-none mt-[1px]">Design</span>
+                    <span></span>
+                  </div>
                 </div>
               </div>
             </div>
+
+            {/* Large Typography Block */}
+            <div className="absolute top-[18%] left-[39%] z-20 max-w-[750px] select-none pointer-events-auto">
+              {/* Floating Robot */}
+              <img src="/robot.png" alt="Robot" className="absolute right-[-17%] bottom-[24%] h-[301px] w-auto object-contain pointer-events-none" />
+
+              <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight">
+                I craft{' '}
+                <svg className="inline-block align-middle mx-0 animate-splat-pulse" width="48" height="48" viewBox="0 0 100 100" fill="#499580">
+                  <polygon points="50.00,0.00 59.06,16.19 75.00,6.70 74.75,25.25 93.30,25.00 83.81,40.94 100.00,50.00 83.81,59.06 93.30,75.00 74.75,74.75 75.00,93.30 59.06,83.81 50.00,100.00 40.94,83.81 25.00,93.30 25.25,74.75 6.70,75.00 16.19,59.06 0.00,50.00 16.19,40.94 6.70,25.00 25.25,25.25 25.00,6.70 40.94,16.19" />
+                </svg>
+                {' '}interactive ecosystems that redefine how we experience the digital world.
+                <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-0 h-[110px] w-auto object-contain -my-4" />
+              </p>
+              <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight mt-3">
+                From generative algorithms to bespoke hardware, my practice <br />
+                <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[70px] w-auto object-contain" />
+                sits at the crossroads of art and engineering.
+              </p>
+            </div>
+
           </div>
-
-          {/* Large Typography Block */}
-          <div className="relative z-20 ml-[39%] mt-[-100px] max-w-[1000px] select-none">
-            {/* Floating Robot */}
-            <img src="/robot.png" alt="Robot" className="absolute right-[-15%] bottom-[24%] h-[301px] w-auto object-contain pointer-events-none" />
-
-            <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight">
-              I craft{' '}
-              <svg className="inline-block align-middle mx-0 animate-splat-pulse" width="48" height="48" viewBox="0 0 100 100" fill="#499580">
-                <polygon points="50.00,0.00 59.06,16.19 75.00,6.70 74.75,25.25 93.30,25.00 83.81,40.94 100.00,50.00 83.81,59.06 93.30,75.00 74.75,74.75 75.00,93.30 59.06,83.81 50.00,100.00 40.94,83.81 25.00,93.30 25.25,74.75 6.70,75.00 16.19,59.06 0.00,50.00 16.19,40.94 6.70,25.00 25.25,25.25 25.00,6.70 40.94,16.19" />
-              </svg>
-              {' '}interactive ecosystems that redefine how we experience the digital world.
-              <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-0 h-[110px] w-auto object-contain -my-4" />
-            </p>
-            <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight mt-3">
-              From generative algorithms to bespoke hardware, my practice <br />
-              <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[70px] w-auto object-contain" />
-              sits at the crossroads of art and engineering.
-            </p>
-          </div>
-
-        </section>
+        </div>
 
       </div>
     </div>
