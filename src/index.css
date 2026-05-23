@@ -176,3 +176,56 @@
   transform-origin: center;
   animation: tesseract-spin 6s linear infinite;
 }
+
+@keyframes splat-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.animate-splat-pulse {
+  animation: splat-pulse 2.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes spiky-spin {
+  0% { 
+    transform: rotate(0deg) scale(1); 
+    animation-timing-function: ease-in;
+  }
+  30% { 
+    transform: rotate(1080deg) scale(1); 
+    animation-timing-function: ease-out;
+  }
+  50% { 
+    transform: rotate(1170deg) scale(1.4); 
+    animation-timing-function: ease-in-out;
+  }
+  70% { 
+    transform: rotate(1215deg) scale(0.8); 
+    animation-timing-function: ease-in-out;
+  }
+  85% {
+    transform: rotate(1260deg) scale(1); 
+    animation-timing-function: linear;
+  }
+  100% { 
+    transform: rotate(1440deg) scale(1); 
+  }
+}
+
+.animate-spiky-spin {
+  animation: spiky-spin 4s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes sigil-pulse {
+  0% { transform: scale(1) translateY(0px); filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2)); opacity: 0.15; }
+  50% { transform: scale(1.03) translateY(2px); filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); opacity: 0.45; }
+  100% { transform: scale(1) translateY(0px); filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2)); opacity: 0.15; }
+}
+
+.animate-sigil-pulse {
+  animation: sigil-pulse 7s ease-in-out infinite;
+  transform-origin: center;
+}
