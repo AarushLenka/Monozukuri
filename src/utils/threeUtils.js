@@ -44,31 +44,29 @@ export function addEdgeLines(scene, { hideSolid = false, transparent = false } =
 }
 
 /**
+ * Applies a function to all materials on a mesh (handles array and single).
+ */
+const applyToMaterials = (mesh, fn) => {
+  if (!mesh.material) return;
+  Array.isArray(mesh.material)
+    ? mesh.material.forEach(fn)
+    : fn(mesh.material);
+};
+
+/**
  * Applies material opacity to a single mesh's material(s).
- * Handles both array and single material cases.
  *
  * @param {THREE.Mesh} mesh
  * @param {number} opacity  0–1
  */
 export function setMeshOpacity(mesh, opacity) {
-  if (!mesh.material) return;
-
-  const apply = (mat) => {
+  applyToMaterials(mesh, (mat) => {
     if (opacity < 0.001) {
       mat.visible = false;
       return;
     }
     mat.visible = true;
-    if (opacity >= 0.99) {
-      mat.transparent = false;
-      mat.opacity = 1.0;
-    } else {
-      mat.transparent = true;
-      mat.opacity = opacity;
-    }
-  };
-
-  Array.isArray(mesh.material)
-    ? mesh.material.forEach(apply)
-    : apply(mesh.material);
+    mat.transparent = opacity < 0.99;
+    mat.opacity = opacity < 0.99 ? opacity : 1.0;
+  });
 }

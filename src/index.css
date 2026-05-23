@@ -12,7 +12,7 @@
   --color-neutral-50: #ffffff;
   --color-neutral-100: #000000;
   --color-neutral-200: #9e9e9e;
-  --color-neutral-300: #121212;
+  --color-neutral-300: #4a4a4a;
   --color-neutral-400: #cbcbcb;
 
   /* Colors — Text */
@@ -66,7 +66,7 @@
   --color-black: #000;
   --color-green: #59e7ca;
   --color-blue: #344dbb;
-  --color-dark: #121212;
+  --color-dark: #4a4a4a;
   --color-dark-grey: #cbcbcb;
   /* — spacing — */
   --grid-margin: 20px;
