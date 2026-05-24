@@ -19,9 +19,9 @@ export default function ZigzagPattern({ squareSize = 10, gap = 10, color = 'blac
           </React.Fragment>
         ))}
       </div>
-      {/* Row 1 — offset by one cell, 4 squares */}
+      {/* Row 1 — offset by one gap, 4 squares */}
       <div className="flex">
-        <div style={{ width: cell, height: squareSize }} />
+        <div style={{ width: squareSize, height: squareSize }} />
         {Array.from({ length: 4 }).map((_, i) => (
           <React.Fragment key={i}>
             <div style={{ width: squareSize, height: squareSize, backgroundColor: color }} />

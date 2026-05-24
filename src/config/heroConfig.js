@@ -9,8 +9,8 @@ export const THREAD_ITEMS = [
 ];
 
 export const PIXEL_CONFIG = {
-  WIDTH: 7,
-  HEIGHT: 13,
+  WIDTH: 6,
+  HEIGHT: 12,
   COLOR: '#f1f1f1',
   UPDATE_INTERVAL: 220,
   LOWER_BIAS: 0.58,
