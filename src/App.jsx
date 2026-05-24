@@ -6,6 +6,14 @@ import GridMarker from './components/GridMarker';
 import CoreThreadsPanel from './components/CoreThreadsPanel';
 import { CONNECTOR_CONFIG, GRID_CONFIG } from './config/heroConfig';
 import ZigzagPattern from './components/ZigzagPattern';
+const PROJECTS_DATA = [
+  { id: '01', title: 'META INTERACTION SDK', desc: 'SOFTWARE FOR XR DEVS', top: '22%', left: '26%', w: '160px', h: '160px', numPos: 'bottom-0 -left-[22px]' },
+  { id: '02', title: 'META HORIZON OS', desc: 'HUMAN INTERFACE GUIDELINE', top: '26%', left: '46%', w: '120px', h: '180px', numPos: 'bottom-0 -left-[22px]' },
+  { id: '03', title: 'META REALITY LABS', desc: 'INPUT & INTERACTION TEAM', top: '22%', left: '68%', w: '200px', h: '120px', numPos: 'bottom-0 -left-[22px]' },
+  { id: '04', title: 'HANDS', desc: 'RESEARCH, EXPLORATIONS AND DESIGN', top: '48%', left: '12%', w: '140px', h: '140px', numPos: 'bottom-0 -left-[22px]' },
+  { id: '05', title: 'AFCA.AG', desc: 'MR & CLOUD COMPUTING SOLUTIONS', top: '55%', left: '32%', w: '150px', h: '150px', numPos: 'bottom-0 -left-[22px]' },
+  { id: '06', title: 'EXTENDING ABILITIES', desc: 'RESTORING ABILITIES', top: '52%', left: '52%', w: '180px', h: '100px', numPos: 'bottom-0 -left-[22px]' },
+];
 
 export default function App() {
   const [time, setTime] = useState('00:43 AM');
@@ -14,7 +22,7 @@ export default function App() {
   const wrapperRef = React.useRef(null);
 
   const spikyPoints = React.useMemo(() => {
-    return Array.from({length: 32}).map((_, i) => {
+    return Array.from({ length: 32 }).map((_, i) => {
       const angle = (i * Math.PI) / 16;
       const radius = i % 2 === 0 ? 50 : 20;
       return `${50 + radius * Math.cos(angle)},${50 + radius * Math.sin(angle)}`;
@@ -56,9 +64,9 @@ export default function App() {
 
   return (
     <div className="w-full bg-[#4a4a4a]" style={{ minHeight: '100vh', height: outerHeight !== 'auto' ? Math.max(outerHeight, typeof window !== 'undefined' ? window.innerHeight : 0) : '100vh', overflow: 'hidden' }}>
-      
+
       {/* ═══════ GLOBAL BACKGROUND (Fixed to window, properly scaled) ═══════ */}
-      <div 
+      <div
         className="fixed top-0 left-0 origin-top-left pointer-events-none z-0"
         style={{ width: '1440px', height: 'calc(100vh / var(--scale))', transform: `scale(${scale})` }}
       >
@@ -72,11 +80,11 @@ export default function App() {
       </div>
 
       {/* ═══════ SCROLLABLE CONTENT ═══════ */}
-      <div 
+      <div
         ref={wrapperRef}
         className="origin-top-left relative z-[2] text-[#111] font-body selection:bg-black selection:text-white"
-        style={{ 
-          width: '1440px', 
+        style={{
+          width: '1440px',
           transform: `scale(${scale})`
         }}
       >
@@ -291,13 +299,13 @@ export default function App() {
 
             {/* ESP32 Info Card */}
             <div className="absolute top-[10%] left-[1%] bg-[#e5e5e5] pointer-events-auto z-30"
-                 style={{
-                   width: '220px',
-                   height: '120px',
-                   clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px))'
-                 }}>
+              style={{
+                width: '220px',
+                height: '120px',
+                clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px))'
+              }}>
               <svg className="absolute -inset-px pointer-events-none overflow-visible" width="222" height="122" viewBox="0 0 222 122">
-                <path d="M 1.5,40 L 1.5,1.5 L 200,1.5 M 220.5,25 L 220.5,106 L 204.5,120.5 L 100,120.5 M 70,120.5 L 16.5,120.5 L 1.5,105.5 L 1.5,75" fill="none" stroke="black" strokeWidth="1" />
+                <path d="M 1.5,40 L 1.5,1.5 L 200,1.5 M 221,25 L 221,106 L 204.5,121 L 100,121 M 70,121 L 16.5,121 L 1.5,105.5 L 1.5,75" fill="none" stroke="black" strokeWidth="1" />
               </svg>
               <div className="relative z-10 px-3 py-2">
                 <div className="flex justify-between items-start">
@@ -325,7 +333,7 @@ export default function App() {
             </div>
 
             {/* Large Typography Block */}
-            <div className="absolute top-[18%] left-[39%] z-20 max-w-[750px] select-none pointer-events-auto">
+            <div className="absolute top-[15%] left-[39%] z-20 max-w-[750px] select-none pointer-events-auto">
               {/* Floating Robot */}
               <img src="/robot.png" alt="Robot" className="absolute right-[-17%] bottom-[24%] h-[301px] w-auto object-contain pointer-events-none" />
 
@@ -342,6 +350,107 @@ export default function App() {
                 <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[70px] w-auto object-contain" />
                 sits at the crossroads of art and engineering.
               </p>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ═══════ SECTION 3 — PROJECTS ═══════ */}
+        <div id="projects-section" className="relative w-full overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
+          <div className="relative w-full h-full z-10 pointer-events-none">
+
+            {/* Header */}
+            <div className="absolute top-[8%] left-0 w-full flex flex-col items-center justify-center pointer-events-auto">
+              <h2 className="text-[72px] font-body leading-none tracking-tight text-black">
+                Some Projects I have worked on
+              </h2>
+            </div>
+
+            {/* Project Images */}
+            {PROJECTS_DATA.map((proj) => (
+              <div
+                key={proj.id}
+                className="absolute pointer-events-auto group cursor-pointer"
+                style={{ top: proj.top, left: proj.left, width: proj.w, height: proj.h }}
+              >
+                {/* Number */}
+                <div className={`absolute font-mono text-[10px] font-bold text-black ${proj.numPos}`}>
+                  {proj.id}.
+                </div>
+                {/* Image Placeholder */}
+                <div className="w-full h-full bg-[#1e1e1e] border border-white/10 flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105 group-hover:bg-[#111]">
+                  <img
+                    src={`https://placehold.co/400x400/222/aaa?text=Project+${proj.id}`}
+                    alt={proj.title}
+                    className="w-full h-full object-cover opacity-80 mix-blend-luminosity"
+                  />
+                </div>
+              </div>
+            ))}
+
+            {/* Project Info Card (Added to the right of project 6) */}
+            {/* Project Info Card (Added to the right of project 6) */}
+            <div className="absolute top-[41%] left-[82%] pointer-events-auto z-30" style={{ width: '220px', height: '120px' }}>
+
+              {/* Pilot Image Overlapping Bottom Left */}
+              <div className="absolute top-[100px] right-[190px] w-60 z-40 pointer-events-auto shadow-2xl bg-white border border-black p-[6px]">
+                {/* Close Button */}
+                <button className="absolute -top-1.5 -right-1.5 w-1 h-1 bg-white border border-black flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer">
+                  <svg width="6" height="6" viewBox="0 0 14 14" fill="none" stroke="black" strokeWidth="2">
+                    <path d="M1 1L13 13M1 13L13 1" />
+                  </svg>
+                </button>
+                <img
+                  src="/pilot.png"
+                  alt="Pilot"
+                  className="w-full h-auto block"
+                />
+              </div>
+
+              {/* Card Container with Clip Path */}
+              <div className="absolute inset-0 bg-[#e5e5e5]"
+                style={{
+                  clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px))'
+                }}>
+                <svg className="absolute -inset-px pointer-events-none overflow-visible" width="222" height="122" viewBox="0 0 222 122">
+                  <path d="M 1.5,40 L 1.5,1.5 L 200,1.5 M 221,25 L 221,106 L 204.5,121 L 100,121 M 70,121 L 16.5,121 L 1.5,105.5 L 1.5,75" fill="none" stroke="black" strokeWidth="1" />
+                </svg>
+                <div className="relative z-10 px-3 py-2">
+                  <div className="flex justify-between items-start">
+                    {/* Zigzag Pattern */}
+                    <ZigzagPattern squareSize={10} gap={10} color="black" />
+                    {/* Spiky Ball */}
+                    <svg viewBox="0 0 100 100" width="20" height="20" className="animate-spiky-spin -mt-0.5">
+                      <polygon points={spikyPoints} fill="black" />
+                    </svg>
+                  </div>
+
+                  <div className="w-full h-[1px] bg-black/20 my-[5px]"></div>
+
+                  <div className="font-mono text-[9px] font-bold uppercase tracking-widest leading-tight text-black text-right flex flex-col items-end">
+                    <p>I like building stuff,</p>
+                    <p>sometimes even though I</p>
+                    <div className="mt-[3px] flex items-center justify-end gap-x-1.5">
+                      <span>don't know</span>
+                      <span className="border border-black rounded-[6px] px-1.5 py-[1px] leading-none mt-[1px]">how to</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            {/* Footer List */}
+            <div className="absolute bottom-[5%] left-0 w-full flex justify-center pointer-events-auto">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-1 w-max">
+                {PROJECTS_DATA.map((proj) => (
+                  <div key={`footer-${proj.id}`} className="font-mono text-[9px] font-bold uppercase tracking-tighter text-white/80 flex items-center">
+                    <span>{proj.id}. {proj.title}</span>
+                    <span className="text-white/50 mx-1">-</span>
+                    <span className="text-white/60">{proj.desc}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
           </div>
