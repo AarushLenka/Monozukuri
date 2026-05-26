@@ -3,8 +3,8 @@ import React from 'react';
 export default function Ribbon3D() {
   const text = "AARUSH LENKA  •  MOTION GRAPHICS DESIGNER  •  EX-MG HEAD, ISTE-VIT  •  ".repeat(2);
   const chars = text.split('');
-  const radius = 650; // Larger radius to wrap around the whole gallery
-  const charWidth = 26; // Slightly larger than calculated to ensure overlap and a solid black ribbon
+  const radius = 350; // Larger radius to wrap around the whole gallery
+  const charWidth = 27; // Slightly larger than calculated to ensure overlap and a solid black ribbon
 
   return (
     <>

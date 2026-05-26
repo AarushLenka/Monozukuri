@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import RaspberryPiCanvas from './RaspberryPi';
 import AnimatedConnector from './components/AnimatedConnector';
 import ESP32Canvas from './ESP32';
@@ -17,11 +17,40 @@ const PROJECTS_DATA = [
   { id: '06', title: 'EXTENDING ABILITIES', desc: 'RESTORING ABILITIES', top: '52%', left: '52%', w: '180px', h: '100px', numPos: 'bottom-0 -left-[22px]' },
 ];
 
+const generateAMPaths = () => {
+  const amPts = [];
+  const envLeftPts = [];
+  const envRightPts = [];
+  
+  for (let y = 0; y <= 610; y += 2) {
+    const t = y / 610;
+    const env = 60 + 40 * Math.sin(t * Math.PI * 5); 
+    const carrier = Math.sin(t * Math.PI * 70);
+    const x = env * carrier;
+    amPts.push(`${x.toFixed(1)},${y}`);
+    
+    if (y % 6 === 0) {
+      envLeftPts.push(`${(-env).toFixed(1)},${y}`);
+      envRightPts.push(`${env.toFixed(1)},${y}`);
+    }
+  }
+  
+  return {
+    wave: `M ${amPts.join(' L ')}`,
+    envLeft: `M ${envLeftPts.join(' L ')}`,
+    envRight: `M ${envRightPts.join(' L ')}`,
+  };
+};
+
+const AM_PATHS = generateAMPaths();
+
 export default function App() {
   const [time, setTime] = useState('00:43 AM');
   const [scale, setScale] = useState(typeof window !== 'undefined' ? window.innerWidth / 1440 : 1);
   const [outerHeight, setOuterHeight] = useState('auto');
+  const [creativeMousePos, setCreativeMousePos] = useState({ x: 0, y: 0 });
   const wrapperRef = React.useRef(null);
+  const creativeSectionRef = useRef(null);
 
   const spikyPoints = React.useMemo(() => {
     return Array.from({ length: 32 }).map((_, i) => {
@@ -31,7 +60,13 @@ export default function App() {
     }).join(' ');
   }, []);
 
-  const sigilPath = "M 250,95 L 276,189 L 309,243 L 275,280 L 250,318 M 250,95 L 223,189 L 190,243 L 224,280 L 250,318 M 250,171 L 359,212 L 405,272 L 301,329 L 250,393 M 250,171 L 140,212 L 94,272 L 198,329 L 250,393 M 250,184 L 359,269 L 401,344 L 326,371 L 250,433 M 250,184 L 140,269 L 98,344 L 173,371 L 250,433 M 250,146 L 276,176 L 278,221 L 324,269 L 250,342 M 250,146 L 223,176 L 221,221 L 175,269 L 250,342 M 250,124 L 386,152 L 441,183 L 293,210 L 250,262 M 250,124 L 113,152 L 58,183 L 206,210 L 250,262 M 250,176 L 311,247 L 383,280 L 326,361 L 250,389 M 250,176 L 188,247 L 116,280 L 173,361 L 250,389";
+  const handleCreativeMouseMove = (e) => {
+    if (!creativeSectionRef.current) return;
+    const rect = creativeSectionRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setCreativeMousePos({ x, y });
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -67,7 +102,6 @@ export default function App() {
   return (
     <div className="w-full bg-[#4a4a4a]" style={{ minHeight: '100vh', height: outerHeight !== 'auto' ? Math.max(outerHeight, typeof window !== 'undefined' ? window.innerHeight : 0) : '100vh', overflow: 'hidden' }}>
 
-      {/* ═══════ GLOBAL BACKGROUND (Fixed to window, properly scaled) ═══════ */}
       <div
         className="fixed top-0 left-0 origin-top-left pointer-events-none z-0"
         style={{ width: '1440px', height: 'calc(100vh / var(--scale))', transform: `scale(${scale})` }}
@@ -81,7 +115,6 @@ export default function App() {
         <div className="absolute inset-0 opacity-[0.15] mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
       </div>
 
-      {/* ═══════ SCROLLABLE CONTENT ═══════ */}
       <div
         ref={wrapperRef}
         className="origin-top-left relative z-[2] text-[#111] font-body selection:bg-black selection:text-white"
@@ -91,7 +124,6 @@ export default function App() {
         }}
       >
 
-        {/* ═══════ GLOBAL GRID ═══════ */}
         <div className="absolute inset-0 pointer-events-none z-[1]">
           {GRID_CONFIG.VERTICAL_POSITIONS.map((pos) => (
             <div key={pos} className="absolute top-0 bottom-0 w-[1px] -translate-x-1/2 bg-white/20 fixed-line" style={{ left: pos }} />
@@ -104,11 +136,9 @@ export default function App() {
           ))}
         </div>
 
-        {/* ═══════ HERO SECTION ═══════ */}
         <div className="relative w-full overflow-hidden z-[2]" style={{ height: 'var(--logical-vh)' }}>
           <div className="relative w-full h-full z-10 pointer-events-none">
 
-            {/* Header */}
             <header className="absolute top-2 left-6 right-6 flex justify-between items-start pointer-events-auto">
               <div className="text-sm font-medium tracking-widest absolute left-0 top-0">MONOZUKURI</div>
               <div className="absolute left-1/2 -translate-x-1/2 top-0 flex flex-col items-center">
@@ -126,43 +156,36 @@ export default function App() {
               </div>
             </header>
 
-            {/* Big Title */}
             <div className="absolute top-[12%] left-6 w-[500px] h-[148px] flex flex-col justify-center">
               <h1 className="text-[66px] leading-[0.84] font-normal tracking-tight text-black whitespace-nowrap" style={{ fontFamily: '"Neue Haas Grotesk Text Pro 55 Roman", "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, sans-serif' }}>
                 REFINEMENT<br />IS ENDLESS.
               </h1>
             </div>
 
-            {/* Subtext 1 (Left) */}
             <div id="text-deep-roots" className="absolute top-[41%] left-[16%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
               FROM DEEP ROOTS,<br />CREATIVITY DRAWS ITS<br />STRENGTH
             </div>
 
-            {/* Subtext 3 (Top Right) */}
             <div id="text-imagination" className="absolute top-[21%] left-[58%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
               WHERE IMAGINATION<br />BRANCHES INTO A<br />LANDSCAPE OF<br />ENDLESS DIVERSITY
             </div>
 
-            {/* Animated Connectors */}
             {CONNECTOR_CONFIG.map((c) => (
               <AnimatedConnector key={c.id} startId={c.id} gap={c.gap} startAlign={c.startAlign} pts={c.pts} />
             ))}
 
             <CoreThreadsPanel />
 
-            {/* Floating Island Centerpiece */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] pointer-events-auto z-20">
               <div className="relative w-[600px] h-[650px] flex items-center justify-center pointer-events-auto">
                 <RaspberryPiCanvas />
               </div>
             </div>
 
-            {/* Subtext 2 (Foundation) */}
             <div id="text-foundation" className="absolute top-[87%] left-[55%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
               FOUNDATION<br />DESIGNED FOR<br />GROWTH
             </div>
 
-            {/* Tag Card (MONOZUKURI) */}
             <div id="card-monozukuri"
               className="absolute top-[32%] right-[8%] bg-[#e5e5e5] pointer-events-auto"
               style={{
@@ -192,7 +215,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Info Card */}
             <div className="absolute bottom-8 right-8 w-[286px] pointer-events-auto">
               <div className="relative w-[286px] h-[168px]">
                 <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[10px] uppercase font-mono font-bold tracking-widest leading-none">
@@ -215,11 +237,9 @@ export default function App() {
           </div>
         </div>
 
-        {/* ═══════ SECTION 2 — ABOUT / PHILOSOPHY ═══════ */}
         <div id="about-section" className="relative w-full overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
           <div className="relative w-full h-full z-10 pointer-events-none">
 
-            {/* Technical Line Art Background Underneath ESP32 */}
             <div className="absolute top-[-20px] left-[-20px] w-[770px] h-[780px] pointer-events-none z-10 opacity-50 text-white mix-blend-screen">
               <svg viewBox="0 0 1000 1000" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
                 <defs>
@@ -228,24 +248,20 @@ export default function App() {
                   </marker>
                 </defs>
 
-                {/* Main Grid Lines */}
                 <line x1="0" y1="400" x2="1000" y2="400" />
                 <line x1="400" y1="0" x2="400" y2="1000" />
                 <line x1="750" y1="0" x2="750" y2="1000" />
                 <line x1="0" y1="750" x2="1000" y2="750" />
 
-                {/* Angle Lines */}
                 <line x1="400" y1="400" x2="950" y2="150" strokeDasharray="4 4" />
                 <line x1="400" y1="400" x2="100" y2="850" strokeDasharray="2 6" />
 
-                {/* Protractor Circles */}
                 <circle cx="400" cy="400" r="120" />
                 <circle cx="400" cy="400" r="180" />
                 <circle cx="400" cy="400" r="280" />
                 <circle cx="400" cy="400" r="320" strokeDasharray="6 6" />
                 <circle cx="400" cy="400" r="350" />
 
-                {/* Tick Marks & Numbers */}
                 <g className="font-mono text-[10px] uppercase">
                   {Array.from({ length: 72 }).map((_, i) => {
                     const angle = i * 5;
@@ -263,7 +279,6 @@ export default function App() {
                   })}
                 </g>
 
-                {/* Nodes and Crosshairs */}
                 <g transform="translate(750 250)">
                   <rect x="-12" y="-12" width="24" height="24" fill="none" />
                   <line x1="-6" y1="0" x2="6" y2="0" />
@@ -279,10 +294,8 @@ export default function App() {
                   <circle cx="0" cy="0" r="4" fill="currentColor" stroke="none" />
                 </g>
 
-                {/* Curved Arrows */}
                 <path d="M 150,600 A 350,350 0 0,0 600,900" strokeDasharray="5 5" markerEnd="url(#arrow)" />
 
-                {/* Globe wireframe at bottom left */}
                 <g transform="translate(250 1000)">
                   <path d="M -180 0 A 180 180 0 0 1 180 0" />
                   <path d="M -180 0 A 180 70 0 0 1 180 0" />
@@ -294,12 +307,10 @@ export default function App() {
               </svg>
             </div>
 
-            {/* ESP32 Model: Top-left */}
             <div className="absolute top-[20px] left-[2px] w-[540px] h-[620px] bg-transparent overflow-hidden z-20 pointer-events-auto">
               <ESP32Canvas />
             </div>
 
-            {/* ESP32 Info Card */}
             <div className="absolute top-[10%] left-[1%] bg-[#e5e5e5] pointer-events-auto z-30"
               style={{
                 width: '220px',
@@ -311,9 +322,7 @@ export default function App() {
               </svg>
               <div className="relative z-10 px-3 py-2">
                 <div className="flex justify-between items-start">
-                  {/* Zigzag Pattern */}
                   <ZigzagPattern squareSize={10} gap={10} color="black" />
-                  {/* Spiky Ball */}
                   <svg viewBox="0 0 100 100" width="20" height="20" className="animate-spiky-spin -mt-0.5">
                     <polygon points={spikyPoints} fill="black" />
                   </svg>
@@ -334,9 +343,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Large Typography Block */}
             <div className="absolute top-[15%] left-[39%] z-20 max-w-[750px] select-none pointer-events-auto">
-              {/* Floating Robot */}
               <img src="/robot.png" alt="Robot" className="absolute right-[-17%] bottom-[24%] h-[301px] w-auto object-contain pointer-events-none" />
 
               <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight">
@@ -357,29 +364,83 @@ export default function App() {
           </div>
         </div>
 
-        {/* ═══════ SECTION 3 — PROJECTS ═══════ */}
         <div id="projects-section" className="relative w-full overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
           <div className="relative w-full h-full z-10 pointer-events-none">
 
-            {/* Header */}
-            <div className="absolute top-[8%] left-0 w-full flex flex-col items-center justify-center pointer-events-auto">
+            <div className="absolute top-[8%] left-0 w-full flex flex-col items-center justify-center pointer-events-auto z-10">
               <h2 className="text-[72px] font-body leading-none tracking-tight text-black">
                 Some Projects I have worked on
               </h2>
             </div>
+            {/* Background Technical Lineart */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-20 text-white mix-blend-screen">
+              <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
+                <defs>
+                  <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4">
+                    <circle cx="5" cy="5" r="5" fill="currentColor" stroke="none" />
+                  </marker>
+                </defs>
 
-            {/* Project Images */}
+                {/* Base Grid */}
+                <line x1="0" y1="450" x2="1440" y2="450" strokeDasharray="4 8" />
+                <line x1="720" y1="0" x2="720" y2="900" strokeDasharray="4 8" />
+                <line x1="0" y1="225" x2="1440" y2="225" strokeDasharray="1 10" opacity="0.5" />
+                <line x1="0" y1="675" x2="1440" y2="675" strokeDasharray="1 10" opacity="0.5" />
+                <line x1="360" y1="0" x2="360" y2="900" strokeDasharray="1 10" opacity="0.5" />
+                <line x1="1080" y1="0" x2="1080" y2="900" strokeDasharray="1 10" opacity="0.5" />
+
+                {/* Central Motif */}
+                <g transform="translate(720, 450)">
+                  <circle r="110" strokeDasharray="2 6" />
+                  <circle r="150" />
+                  <circle r="210" strokeDasharray="1 4" opacity="0.5" />
+                  <circle r="270" strokeDasharray="10 20" />
+                  <circle r="360" />
+
+                  {/* Angle Ticks */}
+                  {Array.from({ length: 36 }).map((_, i) => {
+                    const angle = i * 10;
+                    return (
+                      <g key={i} transform={`rotate(${angle})`}>
+                        <line x1="0" y1="140" x2="0" y2="160" />
+                        {i % 3 === 0 && (
+                          <text x="0" y="130" textAnchor="middle" fontSize="10" fontFamily="monospace" fill="currentColor" stroke="none" opacity="0.7">
+                            {angle}°
+                          </text>
+                        )}
+                      </g>
+                    );
+                  })}
+                </g>
+
+                {/* Target Corners */}
+                <path d="M 100 100 L 150 100 M 100 100 L 100 150" strokeWidth="2" />
+                <path d="M 1340 100 L 1290 100 M 1340 100 L 1340 150" strokeWidth="2" />
+                <path d="M 100 800 L 150 800 M 100 800 L 100 750" strokeWidth="2" />
+                <path d="M 1340 800 L 1290 800 M 1340 800 L 1340 750" strokeWidth="2" />
+
+                <circle cx="100" cy="100" r="4" fill="currentColor" stroke="none" />
+                <circle cx="1340" cy="100" r="4" fill="currentColor" stroke="none" />
+                <circle cx="100" cy="800" r="4" fill="currentColor" stroke="none" />
+                <circle cx="1340" cy="800" r="4" fill="currentColor" stroke="none" />
+
+                {/* Decorative Tech Lines */}
+                <path d="M 200 450 L 300 350 L 500 350" markerStart="url(#dot)" strokeDasharray="5 5" />
+                <path d="M 1240 450 L 1140 550 L 940 550" markerStart="url(#dot)" strokeDasharray="5 5" />
+
+                <text x="310" y="340" fontSize="12" fontFamily="monospace" fill="currentColor" stroke="none" opacity="0.7">SECTOR-7G</text>
+                <text x="1130" y="540" textAnchor="end" fontSize="12" fontFamily="monospace" fill="currentColor" stroke="none" opacity="0.7">SYS.RADIAL</text>
+              </svg>
+            </div>
             {PROJECTS_DATA.map((proj) => (
               <div
                 key={proj.id}
                 className="absolute pointer-events-auto group cursor-pointer"
                 style={{ top: proj.top, left: proj.left, width: proj.w, height: proj.h }}
               >
-                {/* Number */}
                 <div className={`absolute font-mono text-[10px] font-bold text-black ${proj.numPos}`}>
                   {proj.id}.
                 </div>
-                {/* Image Placeholder */}
                 <div className="w-full h-full bg-[#1e1e1e] border border-white/10 flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105 group-hover:bg-[#111]">
                   <img
                     src={`https://placehold.co/400x400/222/aaa?text=Project+${proj.id}`}
@@ -390,13 +451,9 @@ export default function App() {
               </div>
             ))}
 
-            {/* Project Info Card (Added to the right of project 6) */}
-            {/* Project Info Card (Added to the right of project 6) */}
             <div className="absolute top-[41%] left-[82%] pointer-events-auto z-30" style={{ width: '220px', height: '120px' }}>
 
-              {/* Pilot Image Overlapping Bottom Left */}
               <div className="absolute top-[100px] right-[190px] w-60 z-40 pointer-events-auto shadow-2xl bg-white border border-black p-[6px]">
-                {/* Close Button */}
                 <button className="absolute -top-1.5 -right-1.5 w-1 h-1 bg-white border border-black flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer">
                   <svg width="6" height="6" viewBox="0 0 14 14" fill="none" stroke="black" strokeWidth="2">
                     <path d="M1 1L13 13M1 13L13 1" />
@@ -409,7 +466,6 @@ export default function App() {
                 />
               </div>
 
-              {/* Card Container with Clip Path */}
               <div className="absolute inset-0 bg-[#e5e5e5]"
                 style={{
                   clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px))'
@@ -419,9 +475,7 @@ export default function App() {
                 </svg>
                 <div className="relative z-10 px-3 py-2">
                   <div className="flex justify-between items-start">
-                    {/* Zigzag Pattern */}
                     <ZigzagPattern squareSize={10} gap={10} color="black" />
-                    {/* Spiky Ball */}
                     <svg viewBox="0 0 100 100" width="20" height="20" className="animate-spiky-spin -mt-0.5">
                       <polygon points={spikyPoints} fill="black" />
                     </svg>
@@ -441,8 +495,6 @@ export default function App() {
               </div>
             </div>
 
-
-            {/* Footer List */}
             <div className="absolute bottom-[5%] left-0 w-full flex justify-center pointer-events-auto">
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-1 w-max">
                 {PROJECTS_DATA.map((proj) => (
@@ -458,21 +510,129 @@ export default function App() {
           </div>
         </div>
 
-        {/* ═══════ SECTION 4 — CREATIVE WORK ═══════ */}
-        <div id="creative-work-section" className="relative w-full overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
+        <div
+          id="creative-work-section"
+          ref={creativeSectionRef}
+          onMouseMove={handleCreativeMouseMove}
+          onMouseLeave={() => setCreativeMousePos({ x: 0, y: 0 })}
+          className="relative w-full overflow-hidden z-[2] -mt-[2px]"
+          style={{ height: 'var(--logical-vh)', perspective: '1500px' }}
+        >
           <div className="relative w-full h-full z-10 pointer-events-none flex flex-col items-center justify-center">
 
-            <CreativeRibbon />
+            {/* Background Technical Lineart: Fibonacci Spiral */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-[0.25] text-white mix-blend-screen">
+              <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
+                <g transform="translate(12, 220)">
+                  {/* Fibonacci Squares */}
+                  <g strokeDasharray="2 4" opacity="1.4">
+                    <rect x="0" y="0" width="610" height="610" />
+                    <rect x="610" y="0" width="377" height="377" />
+                    <rect x="754" y="377" width="233" height="233" />
+                    <rect x="610" y="466" width="144" height="144" />
+                    <rect x="610" y="377" width="89" height="89" />
+                    <rect x="699" y="377" width="55" height="55" />
+                    <rect x="720" y="432" width="34" height="34" />
+                    <rect x="699" y="445" width="21" height="21" />
+                    <rect x="699" y="432" width="13" height="13" />
+                  </g>
 
-            {/* Header */}
+                  {/* Golden Spiral */}
+                  <path d="
+                    M 0 610 
+                    A 610 610 0 0 1 610 0
+                    A 377 377 0 0 1 987 377
+                    A 233 233 0 0 1 754 610
+                    A 144 144 0 0 1 610 466
+                    A 89 89 0 0 1 699 377
+                    A 55 55 0 0 1 754 432
+                    A 34 34 0 0 1 720 466
+                    A 21 21 0 0 1 699 445
+                    A 13 13 0 0 1 712 432
+                  " strokeWidth="2" />
+
+                  {/* Technical Lines & Text */}
+                  <line x1="0" y1="0" x2="987" y2="610" strokeDasharray="1 6" opacity="1.3" />
+                  <line x1="0" y1="610" x2="987" y2="0" strokeDasharray="1 6" opacity="1.3" />
+
+                  <circle cx="610" cy="610" r="4" fill="currentColor" />
+                  <circle cx="610" cy="377" r="4" fill="currentColor" />
+                  <circle cx="754" cy="377" r="4" fill="currentColor" />
+                  <circle cx="754" cy="466" r="4" fill="currentColor" />
+                  <circle cx="699" cy="466" r="4" fill="currentColor" />
+                  <circle cx="699" cy="432" r="4" fill="currentColor" />
+
+                  {/* Dimensions */}
+                  <g fontFamily="monospace" fontSize="10" opacity="0.7">
+                    <text x="305" y="600" textAnchor="middle">R=610</text>
+                    <text x="798" y="10" textAnchor="middle">R=377</text>
+                    <text x="870" y="493" textAnchor="middle">R=233</text>
+                    <text x="590" y="538" textAnchor="end">R=144</text>
+                    <text x="987" y="-10" textAnchor="end">PHI = 1.61803398875</text>
+                    <text x="0" y="-10" textAnchor="start">FIBONACCI.SEQUENCE</text>
+                  </g>
+
+                  {/* Decorative Crosses at main junctions */}
+                  <path d="M 610 0 L 610 10 M 605 5 L 615 5" />
+                  <path d="M 987 377 L 977 377 M 982 372 L 982 382" />
+                  <path d="M 754 610 L 754 600 M 749 605 L 759 605" />
+
+                </g>
+
+                {/* Vertical AM Wave to the right */}
+                <g transform="translate(1320, 220)">
+                  {/* Grid / Axis */}
+                  <line x1="0" y1="0" x2="0" y2="610" strokeDasharray="4 4" opacity="0.8" />
+                  
+                  {/* Ticks */}
+                  {Array.from({ length: 13 }).map((_, i) => {
+                    const y = i * 50;
+                    return (
+                      <g key={i}>
+                        <line x1="-8" y1={y} x2="8" y2={y} opacity="0.6" />
+                        {i % 2 === 0 && (
+                          <text x="12" y={y + 3} fontFamily="monospace" fontSize="8" fill="currentColor" stroke="none" opacity="0.6">
+                            {(y / 100).toFixed(1)}V
+                          </text>
+                        )}
+                      </g>
+                    );
+                  })}
+
+                  {/* Envelope lines */}
+                  <path d={AM_PATHS.envLeft} strokeDasharray="2 4" opacity="0.9" />
+                  <path d={AM_PATHS.envRight} strokeDasharray="2 4" opacity="0.9" />
+
+                  {/* Modulated Wave */}
+                  <path d={AM_PATHS.wave} strokeWidth="1.2" />
+
+                  {/* Accents / Text */}
+                  <g fontFamily="monospace" fontSize="9" opacity="0.7">
+                    <text x="-95" y="0" textAnchor="end">s(t) = Ac[1 + m*cos(2πfmt)]cos(2πfct)</text>
+                    <text x="-95" y="15" textAnchor="end">m = 0.57 (MOD.INDEX)</text>
+                    <text x="-95" y="30" textAnchor="end">fc = 200 kHz</text>
+                    <text x="-95" y="45" textAnchor="end">fm = 8.5 kHz</text>
+                    
+                    <text x="-200" y="570" textAnchor="start">SIGNAL.AM.MODULATED</text>
+                    <text x="-200" y="585" textAnchor="start">ARCTIC MONKEYS</text>
+                  </g>
+
+                  {/* Crosshairs at bounds */}
+                  <path d="M -15 0 L 15 0 M 0 -15 L 0 15" opacity="0.5" />
+                  <path d="M -15 610 L 15 610 M 0 595 L 0 625" opacity="0.5" />
+                </g>
+              </svg>
+            </div>
+
+            <CreativeRibbon mousePos={creativeMousePos} />
+
             <div className="absolute top-[8%] left-0 w-full flex flex-col items-center justify-center pointer-events-auto z-10">
               <h2 className="text-[72px] font-body leading-none tracking-tight text-black">
                 Creative Work
               </h2>
             </div>
 
-            {/* Accordion Gallery Component */}
-            <CreativeWorkGallery />
+            <CreativeWorkGallery mousePos={creativeMousePos} />
 
           </div>
         </div>
