@@ -9,9 +9,10 @@ const RibbonMesh = ({ renderSide }) => {
   // Create the canvas texture exactly like the reference
   const texture = useMemo(() => {
     const buzzwords = [
-      'AARUSH LENKA',
+      'CREATIVE VISION',
       'MOTION GRAPHICS DESIGNER',
-      'EX-MG HEAD, ISTE-VIT',
+      '3D DABBLER',
+      'POST-PRODUCTION',
     ];
 
     const canvas = document.createElement('canvas');
@@ -21,8 +22,8 @@ const RibbonMesh = ({ renderSide }) => {
     
     // Font settings
     let font = '900 70px Inter, sans-serif';
-    let pad = [0, 60, 0, 60];
-    let gap = 60;
+    let pad = [0, 60, 0, 60]; // Left and right padding for the black badges
+    let gap = 25; // Transparent gap between badges
     let boxh = 120;
 
     ctx.font = font;
@@ -38,15 +39,18 @@ const RibbonMesh = ({ renderSide }) => {
 
     const y = (canvas.height - boxh) / 2;
     
-    // Draw solid BLACK ribbon background
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Clear canvas to ensure transparent gaps
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const drawWords = (startX) => {
       let x = startX;
       buzzwords.forEach((word, i) => {
         const boxw = widths[i];
   
+        // Draw solid BLACK badge for the word
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(x, 0, boxw - gap, canvas.height);
+
         // Draw white text
         ctx.fillStyle = '#FFFFFF';
         ctx.textBaseline = 'middle';
@@ -84,9 +88,7 @@ const RibbonMesh = ({ renderSide }) => {
       // Calculate angle around cylinder
       float angle = atan(pos.z, pos.x);
       
-      // Wavy displacement - vastly reduced wobble
-      float wave = sin(angle * 2.0 + uTime * 0.8) * 0.2;
-      pos.y += wave;
+      pos.y += sin(angle * 3.0 - uTime * 1.5) * 0.35;
       
       gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
     }
@@ -95,9 +97,14 @@ const RibbonMesh = ({ renderSide }) => {
   // Fragment Shader
   const fragmentShader = `
     uniform sampler2D uTex;
+    uniform float uTime;
     varying vec2 vUv;
     void main() {
-      vec4 color = texture2D(uTex, vUv);
+      // Scroll the texture continuously instead of rotating the mesh!
+      vec2 uv = vUv;
+      uv.x = fract(uv.x - uTime * 0.01);
+      
+      vec4 color = texture2D(uTex, uv);
       gl_FragColor = color;
     }
   `;
@@ -106,15 +113,11 @@ const RibbonMesh = ({ renderSide }) => {
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
     }
-    if (meshRef.current) {
-      // Slowly rotate the ribbon
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.15;
-    }
   });
 
   return (
-    // Diagonal/Vertical tilt: rotate Z significantly
-    <mesh ref={meshRef} rotation={[0.1, 0, 20]} scale={[0.45, 0.45, 0.45]}>
+    // Diagonal/Vertical tilt
+    <mesh ref={meshRef} position={[0, -1, 0]} rotation={[0.4, 0, 70]} scale={[0.5, 0.4, 0.3]}>
       {/* 256 radial segments for smooth waves */}
       <cylinderGeometry args={[12, 12, 1.5, 256, 1, true]} />
       <shaderMaterial 
@@ -129,20 +132,28 @@ const RibbonMesh = ({ renderSide }) => {
   );
 };
 
-export default function CreativeRibbon() {
+export default function CreativeRibbon({ mousePos = { x: 0, y: 0 } }) {
+  const transform = `rotateY(${mousePos.x * 0.02}deg) rotateX(${-mousePos.y * 0.02}deg)`;
+
   return (
     <>
       {/* Back layer (Behind the gallery) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
-        <Canvas camera={{ position: [0, 0, 30], fov: 25 }}>
+      <div 
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 transition-transform duration-[400ms] ease-out"
+        style={{ transform, transformStyle: 'preserve-3d' }}
+      >
+        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }}>
           <ambientLight intensity={1} />
           <RibbonMesh renderSide="back" />
         </Canvas>
       </div>
 
       {/* Front layer (In front of the gallery) */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-20">
-        <Canvas camera={{ position: [0, 0, 30], fov: 25 }}>
+      <div 
+        className="absolute inset-0 w-full h-full pointer-events-none z-20 transition-transform duration-[400ms] ease-out"
+        style={{ transform, transformStyle: 'preserve-3d' }}
+      >
+        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }}>
           <ambientLight intensity={1} />
           <RibbonMesh renderSide="front" />
         </Canvas>

@@ -1,30 +1,17 @@
 import React, { useState, useRef } from 'react';
 
-export default function CreativeWorkGallery() {
+export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
   const [hoveredIndex, setHoveredIndex] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef(null);
 
-  const REELS = Array.from({ length: 12 }).map((_, i) => i + 1);
+  const REELS = Array.from({ length: 20 }).map((_, i) => i + 1);
   const n = REELS.length;
 
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    setMousePos({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setMousePos({ x: 0, y: 0 });
-  };
-
   return (
-    <div 
+    <div
       ref={containerRef}
       className="relative pointer-events-auto mt-12"
-      style={{ 
+      style={{
         perspective: '1500px',
         height: 'calc(var(--logical-vh) * 0.55)',
         '--active-w': 'calc(var(--logical-vh) * 0.55 * 0.5625)',
@@ -32,10 +19,8 @@ export default function CreativeWorkGallery() {
         '--inactive-w': '30px',
         width: `calc(var(--active-w) + ${n - 1} * (var(--inactive-w) + var(--gap)))`
       }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
     >
-      <div 
+      <div
         className="relative w-full h-full transition-transform duration-[400ms] ease-out"
         style={{
           transform: `rotateY(${mousePos.x * 0.02}deg) rotateX(${-mousePos.y * 0.02}deg)`,
@@ -49,7 +34,7 @@ export default function CreativeWorkGallery() {
             : `calc(${index - 1} * (var(--inactive-w) + var(--gap)) + var(--active-w) + var(--gap))`;
 
           return (
-            <div 
+            <div
               key={`creative-${reel}`}
               onMouseEnter={() => setHoveredIndex(index)}
               className="absolute top-0 h-full transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden bg-[#1e1e1e] cursor-pointer border border-black/10"
@@ -58,8 +43,8 @@ export default function CreativeWorkGallery() {
                 width: isActive ? 'var(--active-w)' : 'var(--inactive-w)',
               }}
             >
-              <img 
-                src={`https://placehold.co/1080x1920/222/888?text=Reel+${reel}`} 
+              <img
+                src={`https://placehold.co/1080x1920/222/888?text=Reel+${reel}`}
                 alt={`Reel ${reel}`}
                 className={`absolute inset-0 w-full h-full object-cover transition-all duration-[800ms] ${isActive ? 'grayscale-0 opacity-100 mix-blend-normal' : 'grayscale opacity-40 mix-blend-luminosity'}`}
               />
@@ -71,7 +56,7 @@ export default function CreativeWorkGallery() {
         })}
 
         {/* Floating White Outline (without corners) */}
-        <div 
+        <div
           className="absolute transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none z-10"
           style={{
             top: '-4px',
@@ -89,7 +74,6 @@ export default function CreativeWorkGallery() {
           {/* Right Line */}
           <div className="absolute right-0 top-[16px] bottom-[16px] w-[2px] bg-white"></div>
         </div>
-
       </div>
     </div>
   );
