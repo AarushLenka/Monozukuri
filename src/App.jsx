@@ -44,6 +44,64 @@ const generateAMPaths = () => {
 
 const AM_PATHS = generateAMPaths();
 
+const generateCityPaths = () => {
+  let outline = 'M 0 900 ';
+  let windows = '';
+  let accents = '';
+  const stars = [];
+  
+  let x = 0;
+  
+  let seed = 42;
+  const rand = () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+
+  for (let i = 0; i < 50; i++) {
+    stars.push({
+      cx: rand() * 1440,
+      cy: rand() * 400,
+      r: rand() * 1.5,
+      opacity: rand() * 0.5 + 0.2
+    });
+  }
+
+  while (x < 1440) {
+    const w = 40 + rand() * 80;
+    const h = 150 + rand() * 450;
+    const y = 900 - h;
+    
+    outline += `L ${x} 900 L ${x} ${y} L ${x + w} ${y} L ${x + w} 900 `;
+    
+    const cols = Math.floor(w / 12);
+    const rows = Math.floor(h / 15);
+    
+    for (let c = 1; c < cols; c++) {
+      for (let r = 1; r < rows - 1; r++) {
+        if (rand() > 0.3) {
+          const wx = x + c * 12;
+          const wy = y + r * 15;
+          windows += `M ${wx} ${wy} l 5 0 l 0 8 l -5 0 Z `;
+        }
+      }
+    }
+    
+    if (rand() > 0.6) {
+      const antH = 20 + rand() * 80;
+      const antX = x + w / 2;
+      accents += `M ${antX} ${y} L ${antX} ${y - antH} `;
+    }
+
+    x += w;
+  }
+  
+  outline += `Z`;
+  return { outline, windows, accents, stars };
+};
+
+const CITY_PATHS = generateCityPaths();
+
 export default function App() {
   const [time, setTime] = useState('00:43 AM');
   const [scale, setScale] = useState(typeof window !== 'undefined' ? window.innerWidth / 1440 : 1);
@@ -634,6 +692,26 @@ export default function App() {
 
             <CreativeWorkGallery mousePos={creativeMousePos} />
 
+          </div>
+        </div>
+
+        <div id="city-section" className="relative w-full bg-black overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
+          <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+            <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
+              {/* Background Stars / Technical accents */}
+              {CITY_PATHS.stars.map((star, i) => (
+                <circle key={i} cx={star.cx} cy={star.cy} r={star.r} fill="white" stroke="none" opacity={star.opacity} />
+              ))}
+              
+              {/* Skyline Outline */}
+              <path d={CITY_PATHS.outline} stroke="white" strokeWidth="1.5" fill="black" />
+              
+              {/* Detailed Windows */}
+              <path d={CITY_PATHS.windows} stroke="none" fill="white" opacity="0.8" />
+              
+              {/* Antennas / Accents */}
+              <path d={CITY_PATHS.accents} stroke="white" strokeWidth="1" opacity="0.6" />
+            </svg>
           </div>
         </div>
 
