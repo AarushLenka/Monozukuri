@@ -6,6 +6,8 @@ import GridMarker from './components/GridMarker';
 import CoreThreadsPanel from './components/CoreThreadsPanel';
 import { CONNECTOR_CONFIG, GRID_CONFIG } from './config/heroConfig';
 import ZigzagPattern from './components/ZigzagPattern';
+import CreativeWorkGallery from './components/CreativeWorkGallery';
+import CreativeRibbon from './components/CreativeRibbon';
 const PROJECTS_DATA = [
   { id: '01', title: 'META INTERACTION SDK', desc: 'SOFTWARE FOR XR DEVS', top: '22%', left: '26%', w: '160px', h: '160px', numPos: 'bottom-0 -left-[22px]' },
   { id: '02', title: 'META HORIZON OS', desc: 'HUMAN INTERFACE GUIDELINE', top: '26%', left: '46%', w: '120px', h: '180px', numPos: 'bottom-0 -left-[22px]' },
@@ -452,6 +454,25 @@ export default function App() {
                 ))}
               </div>
             </div>
+
+          </div>
+        </div>
+
+        {/* ═══════ SECTION 4 — CREATIVE WORK ═══════ */}
+        <div id="creative-work-section" className="relative w-full overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
+          <div className="relative w-full h-full z-10 pointer-events-none flex flex-col items-center justify-center">
+
+            <CreativeRibbon />
+
+            {/* Header */}
+            <div className="absolute top-[8%] left-0 w-full flex flex-col items-center justify-center pointer-events-auto z-10">
+              <h2 className="text-[72px] font-body leading-none tracking-tight text-black">
+                Creative Work
+              </h2>
+            </div>
+
+            {/* Accordion Gallery Component */}
+            <CreativeWorkGallery />
 
           </div>
         </div>
