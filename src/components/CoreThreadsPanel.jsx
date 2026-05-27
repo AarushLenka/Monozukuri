@@ -6,7 +6,7 @@ import MovingSlashBar from './MovingSlashBar';
 export default function CoreThreadsPanel() {
   return (
     <div className="absolute bottom-8 left-8 w-[322px] pointer-events-auto select-none">
-      <h2 className="mb-[10px] text-[10px] font-mono font-bold uppercase tracking-widest text-black">
+      <h2 className="mb-[10px] text-[10px] font-mono font-bold uppercase tracking-widest text-white">
         [ CORE THREADS OF MY WORK ]
       </h2>
       <div className="flex gap-[14px]">

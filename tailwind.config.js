@@ -58,6 +58,7 @@ export default {
     },
     fontFamily: {
         body: [
+            'Siro',
             'Inter',
             'sans-serif'
         ],
@@ -70,6 +71,7 @@ export default {
             'sans-serif'
         ],
         font3: [
+            'Siro',
             'Inter',
             'sans-serif'
         ]
