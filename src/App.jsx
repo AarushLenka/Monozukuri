@@ -8,6 +8,8 @@ import { CONNECTOR_CONFIG, GRID_CONFIG } from './config/heroConfig';
 import ZigzagPattern from './components/ZigzagPattern';
 import CreativeWorkGallery from './components/CreativeWorkGallery';
 import CreativeRibbon from './components/CreativeRibbon';
+import Loader from './components/Loader';
+
 const PROJECTS_DATA = [
   { id: '01', title: 'META INTERACTION SDK', desc: 'SOFTWARE FOR XR DEVS', top: '22%', left: '26%', w: '160px', h: '160px', numPos: 'bottom-0 -left-[22px]' },
   { id: '02', title: 'META HORIZON OS', desc: 'HUMAN INTERFACE GUIDELINE', top: '26%', left: '46%', w: '120px', h: '180px', numPos: 'bottom-0 -left-[22px]' },
@@ -129,6 +131,8 @@ export default function App() {
   const [scale, setScale] = useState(typeof window !== 'undefined' ? window.innerWidth / 1440 : 1);
   const [outerHeight, setOuterHeight] = useState('auto');
   const [creativeMousePos, setCreativeMousePos] = useState({ x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(true);
+  const [heroVisible, setHeroVisible] = useState(false);
   const wrapperRef = React.useRef(null);
   const creativeSectionRef = useRef(null);
 
@@ -180,20 +184,34 @@ export default function App() {
   }, []);
 
   return (
-    <div className="w-full bg-[#4a4a4a]" style={{ minHeight: '100vh', height: outerHeight !== 'auto' ? Math.max(outerHeight, typeof window !== 'undefined' ? window.innerHeight : 0) : '100vh', overflow: 'hidden' }}>
-
-      <div
-        className="fixed top-0 left-0 origin-top-left pointer-events-none z-0"
-        style={{ width: '1440px', height: 'calc(100vh / var(--scale))', transform: `scale(${scale})` }}
-      >
+    <>
+      {/* Fixed bg — outside all transforms so it's always viewport-fixed */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#3a3a3a]">
         <div className="absolute -top-[10%] -left-[10%] w-[600px] h-[600px] bg-red-700/50 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] blur-[100px] mix-blend-screen"></div>
         <div className="absolute top-[20%] right-[10%] w-[500px] h-[700px] bg-gray-500/40 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-[120px] mix-blend-screen"></div>
         <div className="absolute bottom-[10%] left-[20%] w-[700px] h-[500px] bg-red-500/30 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] blur-[90px] mix-blend-screen"></div>
         <div className="absolute bottom-[-20%] right-[20%] w-[600px] h-[600px] bg-zinc-600/40 rounded-[70%_30%_50%_50%/30%_30%_70%_70%] blur-[110px] mix-blend-screen"></div>
         <div className="absolute top-[40%] left-[40%] w-[400px] h-[400px] bg-rose-700/40 rounded-[50%_50%_30%_70%/50%_50%_70%_30%] blur-[80px] mix-blend-screen"></div>
         <div className="absolute top-[10%] left-[60%] w-[450px] h-[450px] bg-stone-400/20 rounded-[40%_60%_30%_70%/60%_40%_70%_30%] blur-[90px] mix-blend-screen"></div>
-        <div className="absolute inset-0 opacity-[0.15] mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
+        <div className="absolute inset-0 opacity-[0.2] mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
       </div>
+
+      {isLoading && <Loader onLoadingComplete={() => {
+        setHeroVisible(true);
+        setTimeout(() => setIsLoading(false), 400);
+      }} />}
+      <div
+        className="w-full"
+        style={{
+          opacity: heroVisible ? 1 : 0,
+          filter: heroVisible ? 'none' : 'blur(20px) brightness(2)',
+          transform: heroVisible ? 'scale(1)' : 'scale(1.012)',
+          transition: heroVisible ? 'opacity 0.6s cubic-bezier(0.22,1,0.36,1), filter 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1)' : 'none',
+          minHeight: '100vh',
+          height: outerHeight !== 'auto' ? Math.max(outerHeight, typeof window !== 'undefined' ? window.innerHeight : 0) : '100vh',
+          overflow: 'hidden'
+        }}
+      >
 
       <div
         ref={wrapperRef}
@@ -258,7 +276,7 @@ export default function App() {
 
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] pointer-events-auto z-20">
               <div className="relative w-[600px] h-[650px] flex items-center justify-center pointer-events-auto">
-                <RaspberryPiCanvas />
+                <RaspberryPiCanvas isLoading={isLoading} />
               </div>
             </div>
 
@@ -761,5 +779,6 @@ export default function App() {
 
       </div>
     </div>
+    </>
   );
 }

@@ -14,14 +14,12 @@ function RealPiModel(props) {
   return <primitive object={scene} {...props} />;
 }
 
-function PiScene({ onAnimComplete }) {
+function PiScene({ onAnimComplete, isLoading }) {
   const groupRef = useRef();
 
   useEffect(() => {
     if (!groupRef.current) return;
-
-    groupRef.current.rotation.set(0, -Math.PI, 0);
-    groupRef.current.position.set(0, 0, 0);
+    if (isLoading) return;
 
     const ctx = gsap.context(() => {
       gsap.to(groupRef.current.rotation, {
@@ -30,7 +28,7 @@ function PiScene({ onAnimComplete }) {
         z: 0,
         duration: 3.5,
         ease: 'power3.inOut',
-        delay: 0.5,
+        delay: 0.2,
         onComplete: () => {
           if (onAnimComplete) onAnimComplete();
         },
@@ -38,10 +36,10 @@ function PiScene({ onAnimComplete }) {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [isLoading]);
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} rotation={[0, -Math.PI, 0]}>
       <React.Suspense fallback={null}>
         <Center>
           <RealPiModel scale={0.04} />
@@ -52,10 +50,11 @@ function PiScene({ onAnimComplete }) {
   );
 }
 
-export default function RaspberryPiCanvas() {
+export default function RaspberryPiCanvas({ isLoading }) {
   return (
     <Canvas3DBase
       SceneComponent={PiScene}
+      sceneProps={{ isLoading }}
       ambientIntensity={0.6}
       directionalLights={[
         { position: [10, 10, 5], intensity: 1.5 },

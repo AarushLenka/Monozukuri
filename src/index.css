@@ -244,3 +244,31 @@
 .animate-cursor-blink {
   animation: cursor-blink 1s step-end infinite;
 }
+
+/* ── Hero Materialize Reveal ── */
+@keyframes hero-materialize {
+  0% {
+    opacity: 0;
+    filter: blur(24px) brightness(2.5);
+    transform: scale(1.015);
+  }
+  30% {
+    opacity: 0.6;
+    filter: blur(8px) brightness(1.4);
+    transform: scale(1.008);
+  }
+  65% {
+    opacity: 0.9;
+    filter: blur(2px) brightness(1.05);
+    transform: scale(1.002);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px) brightness(1);
+    transform: scale(1);
+  }
+}
+
+.hero-materialize {
+  animation: hero-materialize 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}

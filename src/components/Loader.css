@@ -1,0 +1,34 @@
+@font-face {
+  font-family: 'ndot-57';
+  src: url('/Ndot57-Regular.otf') format('opentype');
+}
+
+:root {
+  --orange-1: #FF9B68;
+  --orange-5: #32190E;
+  --yellow-1: #FFD46A;
+  --red-1: #FF6666;
+  --red-5: #331414;
+  --black-1: #111111;
+  --lime-1: #A6FF66;
+  --white-1: #FFFFFF;
+  --color-1: #888888;
+}
+
+.loader-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.loader-slide p {
+  font-size: 2rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin: 1ch;
+  white-space: nowrap;
+}
+
+.features p {
+  color: var(--color-1);
+}
