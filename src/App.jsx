@@ -737,10 +737,25 @@ export default function App() {
               <path d={CITY_PATHS.front.windows} stroke="none" fill="currentColor" opacity="1" />
             </svg>
           </div>
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-auto z-10">
+          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-auto z-10">
             <h2 className="text-[48px] sm:text-[68px] md:text-[96px] lg:text-[110px] font-normal tracking-tight text-white text-center select-none" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}>
               THAT'S ALL FOR NOW<span className="animate-cursor-blink">_</span>
             </h2>
+            
+            <div className="mt-60 flex flex-col items-center gap-0">
+              <a href="https://github.com/AarushLenka/Monozukuri" target="_blank" rel="noopener noreferrer" className="text-black/80 hover:text-white font-mono text-[10px] tracking-widest uppercase transition-colors underline underline-offset-4">
+                [ CHECK OUT THIS PROJECT ON GITHUB ]
+              </a>
+              
+              <div className="flex flex-col items-center gap-3 mt-4">
+                <span className="text-white/60 font-mono text-[15px] tracking-widest uppercase">REACH OUT TO ME</span>
+                <div className="flex justify-center gap-2 text-[9px] font-mono uppercase tracking-widest">
+                  <a href="https://in.linkedin.com/in/aarush-lenka-11235813fb" target="_blank" rel="noopener noreferrer" className="border border-white px-2 py-0.5 rounded-full text-white hover:bg-white hover:text-black transition-colors">LINKEDIN</a>
+                  <a href="https://github.com/AarushLenka" target="_blank" rel="noopener noreferrer" className="border border-white px-2 py-0.5 rounded-full text-white hover:bg-white hover:text-black transition-colors">GITHUB</a>
+                  <a href="mailto:lenkaaarush@gmail.com" className="border border-white px-2 py-0.5 rounded-full text-white hover:bg-white hover:text-black transition-colors">EMAIL</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
