@@ -21,20 +21,20 @@ const generateAMPaths = () => {
   const amPts = [];
   const envLeftPts = [];
   const envRightPts = [];
-  
+
   for (let y = 0; y <= 610; y += 2) {
     const t = y / 610;
-    const env = 60 + 40 * Math.sin(t * Math.PI * 5); 
+    const env = 60 + 40 * Math.sin(t * Math.PI * 5);
     const carrier = Math.sin(t * Math.PI * 70);
     const x = env * carrier;
     amPts.push(`${x.toFixed(1)},${y}`);
-    
+
     if (y % 6 === 0) {
       envLeftPts.push(`${(-env).toFixed(1)},${y}`);
       envRightPts.push(`${env.toFixed(1)},${y}`);
     }
   }
-  
+
   return {
     wave: `M ${amPts.join(' L ')}`,
     envLeft: `M ${envLeftPts.join(' L ')}`,
@@ -46,65 +46,65 @@ const AM_PATHS = generateAMPaths();
 
 const generateCityPaths = () => {
   const drawLayer = (buildings, doWindows = false) => {
-     let outline = 'M 0 900 ';
-     let x = 0;
-     let windows = '';
-     for (let b of buildings) {
-        if (b.type === "flat") {
-           outline += `L ${x} ${b.h} L ${x + b.w} ${b.h} `;
-        } else if (b.type === "spire") {
-           outline += `L ${x} ${b.h} L ${x + b.w/2 - 2} ${b.h} L ${x + b.w/2} ${b.h - b.spire} L ${x + b.w/2 + 2} ${b.h} L ${x + b.w} ${b.h} `;
-        } else if (b.type === "step") {
-           outline += `L ${x} ${b.h} L ${x + b.w/4} ${b.h} L ${x + b.w/4} ${b.h - b.step} L ${x + 3*b.w/4} ${b.h - b.step} L ${x + 3*b.w/4} ${b.h} L ${x + b.w} ${b.h} `;
+    let outline = 'M 0 900 ';
+    let x = 0;
+    let windows = '';
+    for (let b of buildings) {
+      if (b.type === "flat") {
+        outline += `L ${x} ${b.h} L ${x + b.w} ${b.h} `;
+      } else if (b.type === "spire") {
+        outline += `L ${x} ${b.h} L ${x + b.w / 2 - 2} ${b.h} L ${x + b.w / 2} ${b.h - b.spire} L ${x + b.w / 2 + 2} ${b.h} L ${x + b.w} ${b.h} `;
+      } else if (b.type === "step") {
+        outline += `L ${x} ${b.h} L ${x + b.w / 4} ${b.h} L ${x + b.w / 4} ${b.h - b.step} L ${x + 3 * b.w / 4} ${b.h - b.step} L ${x + 3 * b.w / 4} ${b.h} L ${x + b.w} ${b.h} `;
+      }
+
+      if (doWindows && b.w > 20 && b.h < 850) {
+        let seed = x * b.h;
+        const pseudoRand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+        for (let wy = b.h + 20; wy < 880; wy += 20) {
+          if (pseudoRand() > 0.4) {
+            windows += `M ${x + 8} ${wy} L ${x + b.w - 8} ${wy} `;
+          }
         }
-        
-        if (doWindows && b.w > 20 && b.h < 850) {
-           let seed = x * b.h;
-           const pseudoRand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
-           for (let wy = b.h + 20; wy < 880; wy += 20) {
-               if (pseudoRand() > 0.4) {
-                  windows += `M ${x + 8} ${wy} L ${x + b.w - 8} ${wy} `;
-               }
-           }
-        }
-        x += b.w;
-     }
-     outline += `L 1440 900 Z`;
-     return { outline, windows };
+      }
+      x += b.w;
+    }
+    outline += `L 1440 900 Z`;
+    return { outline, windows };
   };
-  
+
   const front = drawLayer([
-    {w: 50, h: 880, type: 'flat'}, {w: 30, h: 800, type: 'flat'}, {w: 20, h: 850, type: 'flat'},
-    {w: 40, h: 780, type: 'flat'}, {w: 60, h: 720, type: 'step', step: 40}, {w: 30, h: 820, type: 'flat'},
-    {w: 40, h: 650, type: 'step', step: 30}, {w: 20, h: 800, type: 'flat'}, {w: 50, h: 550, type: 'spire', spire: 60},
-    {w: 40, h: 700, type: 'flat'}, {w: 30, h: 600, type: 'flat'}, {w: 30, h: 750, type: 'flat'},
-    {w: 20, h: 820, type: 'flat'}, {w: 80, h: 620, type: 'step', step: 50}, {w: 40, h: 750, type: 'flat'},
-    {w: 20, h: 830, type: 'flat'}, {w: 70, h: 400, type: 'spire', spire: 150}, {w: 30, h: 750, type: 'flat'},
-    {w: 60, h: 650, type: 'step', step: 40}, {w: 40, h: 800, type: 'flat'}, {w: 50, h: 500, type: 'spire', spire: 80},
-    {w: 30, h: 700, type: 'flat'}, {w: 60, h: 620, type: 'flat'}, {w: 40, h: 750, type: 'flat'},
-    {w: 70, h: 450, type: 'step', step: 60}, {w: 30, h: 700, type: 'flat'}, {w: 50, h: 800, type: 'flat'},
-    {w: 40, h: 650, type: 'flat'}, {w: 60, h: 600, type: 'step', step: 40}, {w: 50, h: 750, type: 'flat'},
-    {w: 30, h: 820, type: 'flat'}, {w: 40, h: 780, type: 'flat'}, {w: 50, h: 850, type: 'step', step: 20},
-    {w: 40, h: 880, type: 'flat'}
+    { w: 50, h: 880, type: 'flat' }, { w: 30, h: 800, type: 'flat' }, { w: 20, h: 850, type: 'flat' },
+    { w: 40, h: 780, type: 'flat' }, { w: 60, h: 720, type: 'step', step: 40 }, { w: 30, h: 820, type: 'flat' },
+    { w: 40, h: 650, type: 'step', step: 30 }, { w: 20, h: 800, type: 'flat' }, { w: 50, h: 550, type: 'spire', spire: 60 },
+    { w: 40, h: 700, type: 'flat' }, { w: 30, h: 600, type: 'flat' }, { w: 30, h: 750, type: 'flat' },
+    { w: 20, h: 820, type: 'flat' }, { w: 80, h: 620, type: 'step', step: 50 }, { w: 40, h: 750, type: 'flat' },
+    { w: 20, h: 830, type: 'flat' }, { w: 70, h: 400, type: 'spire', spire: 150 }, { w: 30, h: 750, type: 'flat' },
+    { w: 60, h: 650, type: 'step', step: 40 }, { w: 40, h: 800, type: 'flat' }, { w: 50, h: 500, type: 'spire', spire: 80 },
+    { w: 30, h: 700, type: 'flat' }, { w: 60, h: 620, type: 'flat' }, { w: 40, h: 750, type: 'flat' },
+    { w: 70, h: 450, type: 'step', step: 60 }, { w: 30, h: 700, type: 'flat' }, { w: 50, h: 800, type: 'flat' },
+    { w: 40, h: 650, type: 'flat' }, { w: 60, h: 600, type: 'step', step: 40 }, { w: 50, h: 750, type: 'flat' },
+    { w: 30, h: 820, type: 'flat' }, { w: 40, h: 780, type: 'flat' }, { w: 50, h: 850, type: 'step', step: 20 },
+    { w: 40, h: 880, type: 'flat' }
   ], true);
 
   const mid = drawLayer([
-    {w: 80, h: 800, type: 'flat'}, {w: 50, h: 700, type: 'step', step: 30}, {w: 60, h: 550, type: 'flat'},
-    {w: 40, h: 750, type: 'flat'}, {w: 70, h: 400, type: 'spire', spire: 80}, {w: 50, h: 650, type: 'flat'},
-    {w: 80, h: 480, type: 'step', step: 40}, {w: 60, h: 700, type: 'flat'}, {w: 90, h: 300, type: 'spire', spire: 120},
-    {w: 60, h: 600, type: 'flat'}, {w: 50, h: 450, type: 'step', step: 50}, {w: 80, h: 680, type: 'flat'},
-    {w: 70, h: 350, type: 'spire', spire: 90}, {w: 60, h: 550, type: 'flat'}, {w: 80, h: 420, type: 'step', step: 60},
-    {w: 50, h: 720, type: 'flat'}, {w: 90, h: 320, type: 'spire', spire: 100}, {w: 60, h: 650, type: 'flat'},
-    {w: 70, h: 500, type: 'step', step: 40}, {w: 50, h: 750, type: 'flat'}, {w: 60, h: 600, type: 'flat'},
-    {w: 80, h: 800, type: 'flat'}
+    { w: 80, h: 800, type: 'flat' }, { w: 50, h: 700, type: 'step', step: 30 }, { w: 60, h: 550, type: 'flat' },
+    { w: 40, h: 750, type: 'flat' }, { w: 70, h: 400, type: 'spire', spire: 80 }, { w: 50, h: 650, type: 'flat' },
+    { w: 80, h: 480, type: 'step', step: 40 }, { w: 60, h: 700, type: 'flat' }, { w: 90, h: 300, type: 'spire', spire: 120 },
+    { w: 60, h: 600, type: 'flat' }, { w: 50, h: 450, type: 'step', step: 50 }, { w: 80, h: 680, type: 'flat' },
+    { w: 70, h: 350, type: 'spire', spire: 90 }, { w: 60, h: 550, type: 'flat' }, { w: 80, h: 420, type: 'step', step: 60 },
+    { w: 50, h: 720, type: 'flat' }, { w: 90, h: 320, type: 'spire', spire: 100 }, { w: 60, h: 650, type: 'flat' },
+    { w: 70, h: 500, type: 'step', step: 40 }, { w: 50, h: 750, type: 'flat' }, { w: 60, h: 600, type: 'flat' },
+    { w: 80, h: 800, type: 'flat' }
   ], true);
 
   const back = drawLayer([
-    {w: 120, h: 750, type: 'flat'}, {w: 90, h: 600, type: 'step', step: 50}, {w: 80, h: 450, type: 'flat'},
-    {w: 100, h: 300, type: 'spire', spire: 100}, {w: 110, h: 550, type: 'flat'}, {w: 90, h: 400, type: 'step', step: 60},
-    {w: 120, h: 250, type: 'spire', spire: 150}, {w: 100, h: 500, type: 'flat'}, {w: 90, h: 350, type: 'step', step: 70},
-    {w: 110, h: 600, type: 'flat'}, {w: 100, h: 280, type: 'spire', spire: 110}, {w: 80, h: 480, type: 'flat'},
-    {w: 90, h: 650, type: 'step', step: 40}, {w: 160, h: 750, type: 'flat'}
+    { w: 120, h: 750, type: 'flat' }, { w: 90, h: 600, type: 'step', step: 50 }, { w: 80, h: 450, type: 'flat' },
+    { w: 100, h: 300, type: 'spire', spire: 100 }, { w: 110, h: 550, type: 'flat' }, { w: 90, h: 400, type: 'step', step: 60 },
+    { w: 120, h: 250, type: 'spire', spire: 150 }, { w: 100, h: 500, type: 'flat' }, { w: 90, h: 350, type: 'step', step: 70 },
+    { w: 110, h: 600, type: 'flat' }, { w: 100, h: 280, type: 'spire', spire: 110 }, { w: 80, h: 480, type: 'flat' },
+    { w: 90, h: 650, type: 'step', step: 40 }, { w: 160, h: 750, type: 'flat' }
   ], false);
 
   const stars = [];
@@ -295,22 +295,22 @@ export default function App() {
               </div>
             </div>
 
-            <div className="absolute bottom-8 right-8 w-[286px] pointer-events-auto">
-              <div className="relative w-[286px] h-[168px]">
+            <div className="absolute bottom-8 right-8 w-[290px] pointer-events-auto">
+              <div className="relative w-[290px] h-[190px]">
                 <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[12px] uppercase font-mono font-bold tracking-widest leading-none">
                   ME, I GUESS
                 </div>
                 <div className="absolute inset-0 bg-white" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 28px 100%, 0 calc(100% - 28px))' }} />
-                <svg className="absolute -inset-px pointer-events-none overflow-visible" width="288" height="170" viewBox="0 0 288 170">
-                  <path d="M 1.5,48 L 1.5,1.5 L 146,1.5 M 166,1.5 L 286.5,1.5 L 286.5,168.5 L 29.5,168.5 L 1.5,140.5 L 1.5,112 M 1.5,96 L 1.5,64" fill="none" stroke="black" strokeWidth="1" />
+                <svg className="absolute -inset-px pointer-events-none overflow-visible" width="292" height="192" viewBox="0 0 292 192">
+                  <path d="M 1.5,48 L 1.5,1.5 L 135,1.5 M 155,1.5 L 290.5,1.5 L 290.5,190.5 L 29.5,190.5 L 1.5,162.5 L 1.5,112 M 1.5,96 L 1.5,64" fill="none" stroke="black" strokeWidth="1" />
                 </svg>
                 <p className="absolute inset-0 z-10 px-4 py-4 text-[11px] font-mono font-bold leading-[1.02] text-black flex items-center">
                   Hi! I'm Aarush Lenka, a final-year ECE undergraduate at VIT Vellore specializing in microcontroller firmware and sensor fusion. Parallel to engineering, I serve on the Advisory Board for ISTE VIT, providing strategic oversight to the creative team following my tenure leading the motion graphics division. I specialize in post-production, dynamic asset creation, and visual storytelling.
                 </p>
               </div>
               <div className="flex justify-end gap-2 text-[9px] font-mono uppercase tracking-widest mt-4">
-                <a href="#" className="border border-black px-2 py-0.5 rounded-full hover:bg-black hover:text-white transition-colors">LINKEDIN</a>
-                <a href="#" className="border border-black px-2 py-0.5 rounded-full hover:bg-black hover:text-white transition-colors">GITHUB</a>
+                <a href="https://in.linkedin.com/in/aarush-lenka-11235813fb" target="_blank" rel="noopener noreferrer" className="border border-white px-2 py-0.5 rounded-full text-white hover:bg-white hover:text-black transition-colors">LINKEDIN</a>
+                <a href="https://github.com/AarushLenka" target="_blank" rel="noopener noreferrer" className="border border-white px-2 py-0.5 rounded-full text-white hover:bg-white hover:text-black transition-colors">GITHUB</a>
               </div>
             </div>
 
@@ -320,7 +320,7 @@ export default function App() {
         <div id="about-section" className="relative w-full overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
           <div className="relative w-full h-full z-10 pointer-events-none">
 
-            <div className="absolute top-[-20px] left-[-20px] w-[770px] h-[780px] pointer-events-none z-10 opacity-50 text-white mix-blend-screen">
+            <div className="absolute top-[20px] left-[-20px] w-[770px] h-[780px] pointer-events-none z-10 opacity-50 text-white mix-blend-screen">
               <svg viewBox="0 0 1000 1000" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
                 <defs>
                   <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -663,7 +663,7 @@ export default function App() {
                 <g transform="translate(1320, 220)">
                   {/* Grid / Axis */}
                   <line x1="0" y1="0" x2="0" y2="610" strokeDasharray="4 4" opacity="0.8" />
-                  
+
                   {/* Ticks */}
                   {Array.from({ length: 13 }).map((_, i) => {
                     const y = i * 50;
@@ -692,7 +692,7 @@ export default function App() {
                     <text x="-95" y="15" textAnchor="end">m = 0.57 (MOD.INDEX)</text>
                     <text x="-95" y="30" textAnchor="end">fc = 200 kHz</text>
                     <text x="-95" y="45" textAnchor="end">fm = 8.5 kHz</text>
-                    
+
                     <text x="-200" y="570" textAnchor="start">SIGNAL.AM.MODULATED</text>
                     <text x="-200" y="585" textAnchor="start">ARCTIC MONKEYS</text>
                   </g>
@@ -708,7 +708,7 @@ export default function App() {
 
             <div className="absolute top-[8%] left-0 w-full flex flex-col items-center justify-center pointer-events-auto z-10">
               <h2 className="text-[72px] leading-none tracking-tight text-black" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}>
-                Creative Work
+                Ideas in Motion
               </h2>
             </div>
 
@@ -724,18 +724,23 @@ export default function App() {
               {CITY_PATHS.stars.map((star, i) => (
                 <circle key={i} cx={star.cx} cy={star.cy} r={star.r} fill="currentColor" stroke="none" opacity='8' />
               ))}
-              
+
               {/* Back Layer */}
               <path d={CITY_PATHS.back.outline} stroke="currentColor" strokeWidth="1" opacity="0.5" fill="none" />
-              
+
               {/* Mid Layer */}
               <path d={CITY_PATHS.mid.outline} stroke="currentColor" strokeWidth="1.5" opacity="0.8" fill="none" />
               <path d={CITY_PATHS.mid.windows} stroke="none" fill="currentColor" opacity="0.6" />
-              
+
               {/* Front Layer */}
               <path d={CITY_PATHS.front.outline} stroke="currentColor" strokeWidth="2" opacity="1" fill="none" />
               <path d={CITY_PATHS.front.windows} stroke="none" fill="currentColor" opacity="1" />
             </svg>
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-auto z-10">
+            <h2 className="text-[48px] sm:text-[68px] md:text-[96px] lg:text-[110px] font-normal tracking-tight text-white text-center select-none" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}>
+              THAT'S ALL FOR NOW<span className="animate-cursor-blink">_</span>
+            </h2>
           </div>
         </div>
 

@@ -5,12 +5,12 @@ import MovingSlashBar from './MovingSlashBar';
 
 export default function CoreThreadsPanel() {
   return (
-    <div className="absolute bottom-8 left-8 w-[322px] pointer-events-auto select-none">
+    <div className="absolute bottom-8 left-8 w-max pointer-events-auto select-none">
       <h2 className="mb-[10px] text-[10px] font-mono font-bold uppercase tracking-widest text-white">
         [ CORE THREADS OF MY WORK ]
       </h2>
       <div className="flex gap-[14px]">
-        <div className="relative h-[200px] w-[68px] border border-black/70 bg-transparent">
+        <div className="relative h-[200px] w-[68px] shrink-0 border border-black/70 bg-transparent">
           <div className="absolute inset-x-0 top-0 h-[47px] border-b border-black/70">
             <svg className="absolute inset-0 h-full w-full" viewBox="0 0 68 47" fill="none" preserveAspectRatio="none">
               <g transform="translate(34 23.5) scale(0.82)">
@@ -38,7 +38,7 @@ export default function CoreThreadsPanel() {
                 </div>
                 <MovingSlashBar width={item.barWidth} animDur={item.animDur} animDelay={item.animDelay} />
               </div>
-              <div className="text-[9px] font-mono font-bold uppercase tracking-widest leading-none text-black whitespace-nowrap">
+              <div className="text-[9px] font-mono font-bold uppercase tracking-widest leading-none text-white whitespace-nowrap">
                 {item.title}
               </div>
               <div
