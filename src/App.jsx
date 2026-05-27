@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import RaspberryPiCanvas from './RaspberryPi';
 import AnimatedConnector from './components/AnimatedConnector';
 import ESP32Canvas from './ESP32';
@@ -779,6 +780,7 @@ export default function App() {
 
       </div>
     </div>
+    <SpeedInsights />
     </>
   );
 }
