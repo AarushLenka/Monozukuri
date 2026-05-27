@@ -117,7 +117,7 @@ const RibbonMesh = ({ renderSide }) => {
 
   return (
     // Diagonal/Vertical tilt
-    <mesh ref={meshRef} position={[0, -1, 0]} rotation={[0.4, 0, 70]} scale={[0.5, 0.4, 0.3]}>
+    <mesh ref={meshRef} position={[0, -0.6, 0]} rotation={[0.4, 0, 70]} scale={[0.5, 0.4, 0.3]}>
       {/* 256 radial segments for smooth waves */}
       <cylinderGeometry args={[12, 12, 1.5, 256, 1, true]} />
       <shaderMaterial 
@@ -142,7 +142,7 @@ export default function CreativeRibbon({ mousePos = { x: 0, y: 0 } }) {
         className="absolute inset-0 w-full h-full pointer-events-none z-0 transition-transform duration-[400ms] ease-out"
         style={{ transform, transformStyle: 'preserve-3d' }}
       >
-        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }}>
+        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }}>
           <ambientLight intensity={1} />
           <RibbonMesh renderSide="back" />
         </Canvas>
@@ -153,7 +153,7 @@ export default function CreativeRibbon({ mousePos = { x: 0, y: 0 } }) {
         className="absolute inset-0 w-full h-full pointer-events-none z-20 transition-transform duration-[400ms] ease-out"
         style={{ transform, transformStyle: 'preserve-3d' }}
       >
-        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }}>
+        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }}>
           <ambientLight intensity={1} />
           <RibbonMesh renderSide="front" />
         </Canvas>
