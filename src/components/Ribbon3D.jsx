@@ -35,7 +35,7 @@ export default function Ribbon3D() {
             return (
               <span
                 key={i}
-                className="absolute top-1/2 left-1/2 font-body font-bold text-white text-xl flex items-center justify-center"
+                className="absolute top-1/2 left-1/2 font-serif text-white text-xl flex items-center justify-center"
                 style={{
                   width: `${charWidth}px`,
                   height: '40px', // Ribbon height

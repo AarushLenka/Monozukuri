@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'ndot-57';
+  src: url('/Ndot57-Regular.otf') format('opentype');
+}
+
+
 :root {
   /* Colors — Primary */
   --color-primary: #b5e9ff;

@@ -45,19 +45,71 @@ const generateAMPaths = () => {
 const AM_PATHS = generateAMPaths();
 
 const generateCityPaths = () => {
-  let outline = 'M 0 900 ';
-  let windows = '';
-  let accents = '';
-  const stars = [];
-  
-  let x = 0;
-  
-  let seed = 42;
-  const rand = () => {
-    seed = (seed * 9301 + 49297) % 233280;
-    return seed / 233280;
+  const drawLayer = (buildings, doWindows = false) => {
+     let outline = 'M 0 900 ';
+     let x = 0;
+     let windows = '';
+     for (let b of buildings) {
+        if (b.type === "flat") {
+           outline += `L ${x} ${b.h} L ${x + b.w} ${b.h} `;
+        } else if (b.type === "spire") {
+           outline += `L ${x} ${b.h} L ${x + b.w/2 - 2} ${b.h} L ${x + b.w/2} ${b.h - b.spire} L ${x + b.w/2 + 2} ${b.h} L ${x + b.w} ${b.h} `;
+        } else if (b.type === "step") {
+           outline += `L ${x} ${b.h} L ${x + b.w/4} ${b.h} L ${x + b.w/4} ${b.h - b.step} L ${x + 3*b.w/4} ${b.h - b.step} L ${x + 3*b.w/4} ${b.h} L ${x + b.w} ${b.h} `;
+        }
+        
+        if (doWindows && b.w > 20 && b.h < 850) {
+           let seed = x * b.h;
+           const pseudoRand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+           for (let wy = b.h + 20; wy < 880; wy += 20) {
+               if (pseudoRand() > 0.4) {
+                  windows += `M ${x + 8} ${wy} L ${x + b.w - 8} ${wy} `;
+               }
+           }
+        }
+        x += b.w;
+     }
+     outline += `L 1440 900 Z`;
+     return { outline, windows };
   };
+  
+  const front = drawLayer([
+    {w: 50, h: 880, type: 'flat'}, {w: 30, h: 800, type: 'flat'}, {w: 20, h: 850, type: 'flat'},
+    {w: 40, h: 780, type: 'flat'}, {w: 60, h: 720, type: 'step', step: 40}, {w: 30, h: 820, type: 'flat'},
+    {w: 40, h: 650, type: 'step', step: 30}, {w: 20, h: 800, type: 'flat'}, {w: 50, h: 550, type: 'spire', spire: 60},
+    {w: 40, h: 700, type: 'flat'}, {w: 30, h: 600, type: 'flat'}, {w: 30, h: 750, type: 'flat'},
+    {w: 20, h: 820, type: 'flat'}, {w: 80, h: 620, type: 'step', step: 50}, {w: 40, h: 750, type: 'flat'},
+    {w: 20, h: 830, type: 'flat'}, {w: 70, h: 400, type: 'spire', spire: 150}, {w: 30, h: 750, type: 'flat'},
+    {w: 60, h: 650, type: 'step', step: 40}, {w: 40, h: 800, type: 'flat'}, {w: 50, h: 500, type: 'spire', spire: 80},
+    {w: 30, h: 700, type: 'flat'}, {w: 60, h: 620, type: 'flat'}, {w: 40, h: 750, type: 'flat'},
+    {w: 70, h: 450, type: 'step', step: 60}, {w: 30, h: 700, type: 'flat'}, {w: 50, h: 800, type: 'flat'},
+    {w: 40, h: 650, type: 'flat'}, {w: 60, h: 600, type: 'step', step: 40}, {w: 50, h: 750, type: 'flat'},
+    {w: 30, h: 820, type: 'flat'}, {w: 40, h: 780, type: 'flat'}, {w: 50, h: 850, type: 'step', step: 20},
+    {w: 40, h: 880, type: 'flat'}
+  ], true);
 
+  const mid = drawLayer([
+    {w: 80, h: 800, type: 'flat'}, {w: 50, h: 700, type: 'step', step: 30}, {w: 60, h: 550, type: 'flat'},
+    {w: 40, h: 750, type: 'flat'}, {w: 70, h: 400, type: 'spire', spire: 80}, {w: 50, h: 650, type: 'flat'},
+    {w: 80, h: 480, type: 'step', step: 40}, {w: 60, h: 700, type: 'flat'}, {w: 90, h: 300, type: 'spire', spire: 120},
+    {w: 60, h: 600, type: 'flat'}, {w: 50, h: 450, type: 'step', step: 50}, {w: 80, h: 680, type: 'flat'},
+    {w: 70, h: 350, type: 'spire', spire: 90}, {w: 60, h: 550, type: 'flat'}, {w: 80, h: 420, type: 'step', step: 60},
+    {w: 50, h: 720, type: 'flat'}, {w: 90, h: 320, type: 'spire', spire: 100}, {w: 60, h: 650, type: 'flat'},
+    {w: 70, h: 500, type: 'step', step: 40}, {w: 50, h: 750, type: 'flat'}, {w: 60, h: 600, type: 'flat'},
+    {w: 80, h: 800, type: 'flat'}
+  ], true);
+
+  const back = drawLayer([
+    {w: 120, h: 750, type: 'flat'}, {w: 90, h: 600, type: 'step', step: 50}, {w: 80, h: 450, type: 'flat'},
+    {w: 100, h: 300, type: 'spire', spire: 100}, {w: 110, h: 550, type: 'flat'}, {w: 90, h: 400, type: 'step', step: 60},
+    {w: 120, h: 250, type: 'spire', spire: 150}, {w: 100, h: 500, type: 'flat'}, {w: 90, h: 350, type: 'step', step: 70},
+    {w: 110, h: 600, type: 'flat'}, {w: 100, h: 280, type: 'spire', spire: 110}, {w: 80, h: 480, type: 'flat'},
+    {w: 90, h: 650, type: 'step', step: 40}, {w: 160, h: 750, type: 'flat'}
+  ], false);
+
+  const stars = [];
+  let seed = 42;
+  const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
   for (let i = 0; i < 50; i++) {
     stars.push({
       cx: rand() * 1440,
@@ -67,37 +119,7 @@ const generateCityPaths = () => {
     });
   }
 
-  while (x < 1440) {
-    const w = 40 + rand() * 80;
-    const h = 150 + rand() * 450;
-    const y = 900 - h;
-    
-    outline += `L ${x} 900 L ${x} ${y} L ${x + w} ${y} L ${x + w} 900 `;
-    
-    const cols = Math.floor(w / 12);
-    const rows = Math.floor(h / 15);
-    
-    for (let c = 1; c < cols; c++) {
-      for (let r = 1; r < rows - 1; r++) {
-        if (rand() > 0.3) {
-          const wx = x + c * 12;
-          const wy = y + r * 15;
-          windows += `M ${wx} ${wy} l 5 0 l 0 8 l -5 0 Z `;
-        }
-      }
-    }
-    
-    if (rand() > 0.6) {
-      const antH = 20 + rand() * 80;
-      const antX = x + w / 2;
-      accents += `M ${antX} ${y} L ${antX} ${y - antH} `;
-    }
-
-    x += w;
-  }
-  
-  outline += `Z`;
-  return { outline, windows, accents, stars };
+  return { front, mid, back, stars };
 };
 
 const CITY_PATHS = generateCityPaths();
@@ -201,7 +223,7 @@ export default function App() {
               <div className="text-sm font-medium tracking-widest absolute left-0 top-0">MONOZUKURI</div>
               <div className="absolute left-1/2 -translate-x-1/2 top-0 flex flex-col items-center">
                 <div className="bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase mb-1">
-                  CHANGE REALITY
+                  SAY HELLO
                 </div>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10"></circle>
@@ -215,17 +237,17 @@ export default function App() {
             </header>
 
             <div className="absolute top-[12%] left-6 w-[500px] h-[148px] flex flex-col justify-center">
-              <h1 className="text-[66px] leading-[0.84] font-normal tracking-tight text-black whitespace-nowrap" style={{ fontFamily: '"Neue Haas Grotesk Text Pro 55 Roman", "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, sans-serif' }}>
-                REFINEMENT<br />IS ENDLESS.
+              <h1 className="text-[61px] leading-[0.84] font-normal tracking-tight text-black whitespace-nowrap" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}>
+                LICENSED <br />BEEP-BOOP MECHANIC.
               </h1>
             </div>
 
             <div id="text-deep-roots" className="absolute top-[41%] left-[16%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
-              FROM DEEP ROOTS,<br />CREATIVITY DRAWS ITS<br />STRENGTH
+              EXPERIMENT FIRST<br />EXPLAIN LATER
             </div>
 
             <div id="text-imagination" className="absolute top-[21%] left-[58%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
-              WHERE IMAGINATION<br />BRANCHES INTO A<br />LANDSCAPE OF<br />ENDLESS DIVERSITY
+              PROFESSIONAL <br />"WHY ISN'T THIS WORKING"<br />SPECIALIST
             </div>
 
             {CONNECTOR_CONFIG.map((c) => (
@@ -241,7 +263,7 @@ export default function App() {
             </div>
 
             <div id="text-foundation" className="absolute top-[87%] left-[55%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
-              FOUNDATION<br />DESIGNED FOR<br />GROWTH
+              CREATIVITY <br />WITH A SIDE<br />OF CHAOS
             </div>
 
             <div id="card-monozukuri"
@@ -275,14 +297,14 @@ export default function App() {
 
             <div className="absolute bottom-8 right-8 w-[286px] pointer-events-auto">
               <div className="relative w-[286px] h-[168px]">
-                <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[10px] uppercase font-mono font-bold tracking-widest leading-none">
+                <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[12px] uppercase font-mono font-bold tracking-widest leading-none">
                   ME, I GUESS
                 </div>
                 <div className="absolute inset-0 bg-white" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 28px 100%, 0 calc(100% - 28px))' }} />
                 <svg className="absolute -inset-px pointer-events-none overflow-visible" width="288" height="170" viewBox="0 0 288 170">
                   <path d="M 1.5,48 L 1.5,1.5 L 146,1.5 M 166,1.5 L 286.5,1.5 L 286.5,168.5 L 29.5,168.5 L 1.5,140.5 L 1.5,112 M 1.5,96 L 1.5,64" fill="none" stroke="black" strokeWidth="1" />
                 </svg>
-                <p className="absolute inset-0 z-10 px-4 py-4 text-[9px] font-mono font-bold leading-[1.02] text-black flex items-center">
+                <p className="absolute inset-0 z-10 px-4 py-4 text-[11px] font-mono font-bold leading-[1.02] text-black flex items-center">
                   Hi! I'm Aarush Lenka, a final-year ECE undergraduate at VIT Vellore specializing in microcontroller firmware and sensor fusion. Parallel to engineering, I serve on the Advisory Board for ISTE VIT, providing strategic oversight to the creative team following my tenure leading the motion graphics division. I specialize in post-production, dynamic asset creation, and visual storytelling.
                 </p>
               </div>
@@ -406,7 +428,7 @@ export default function App() {
 
               <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight">
                 I craft{' '}
-                <svg className="inline-block align-middle mx-0 animate-splat-pulse" width="48" height="48" viewBox="0 0 100 100" fill="#499580">
+                <svg className="inline-block align-middle mx-0 animate-splat-pulse" width="48" height="48" viewBox="0 0 100 100" fill="#10e7d9b0">
                   <polygon points="50.00,0.00 59.06,16.19 75.00,6.70 74.75,25.25 93.30,25.00 83.81,40.94 100.00,50.00 83.81,59.06 93.30,75.00 74.75,74.75 75.00,93.30 59.06,83.81 50.00,100.00 40.94,83.81 25.00,93.30 25.25,74.75 6.70,75.00 16.19,59.06 0.00,50.00 16.19,40.94 6.70,25.00 25.25,25.25 25.00,6.70 40.94,16.19" />
                 </svg>
                 {' '}interactive ecosystems that redefine how we experience the digital world.
@@ -426,7 +448,7 @@ export default function App() {
           <div className="relative w-full h-full z-10 pointer-events-none">
 
             <div className="absolute top-[8%] left-0 w-full flex flex-col items-center justify-center pointer-events-auto z-10">
-              <h2 className="text-[72px] font-body leading-none tracking-tight text-black">
+              <h2 className="text-[72px] leading-none tracking-tight text-black" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}>
                 Some Projects I have worked on
               </h2>
             </div>
@@ -685,7 +707,7 @@ export default function App() {
             <CreativeRibbon mousePos={creativeMousePos} />
 
             <div className="absolute top-[8%] left-0 w-full flex flex-col items-center justify-center pointer-events-auto z-10">
-              <h2 className="text-[72px] font-body leading-none tracking-tight text-black">
+              <h2 className="text-[72px] leading-none tracking-tight text-black" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}>
                 Creative Work
               </h2>
             </div>
@@ -695,22 +717,24 @@ export default function App() {
           </div>
         </div>
 
-        <div id="city-section" className="relative w-full bg-black overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
-          <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
+        <div id="city-section" className="relative w-full overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
+          <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-[0.25] text-white mix-blend-screen">
             <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
-              {/* Background Stars / Technical accents */}
+              {/* Stars */}
               {CITY_PATHS.stars.map((star, i) => (
-                <circle key={i} cx={star.cx} cy={star.cy} r={star.r} fill="white" stroke="none" opacity={star.opacity} />
+                <circle key={i} cx={star.cx} cy={star.cy} r={star.r} fill="currentColor" stroke="none" opacity='8' />
               ))}
               
-              {/* Skyline Outline */}
-              <path d={CITY_PATHS.outline} stroke="white" strokeWidth="1.5" fill="black" />
+              {/* Back Layer */}
+              <path d={CITY_PATHS.back.outline} stroke="currentColor" strokeWidth="1" opacity="0.5" fill="none" />
               
-              {/* Detailed Windows */}
-              <path d={CITY_PATHS.windows} stroke="none" fill="white" opacity="0.8" />
+              {/* Mid Layer */}
+              <path d={CITY_PATHS.mid.outline} stroke="currentColor" strokeWidth="1.5" opacity="0.8" fill="none" />
+              <path d={CITY_PATHS.mid.windows} stroke="none" fill="currentColor" opacity="0.6" />
               
-              {/* Antennas / Accents */}
-              <path d={CITY_PATHS.accents} stroke="white" strokeWidth="1" opacity="0.6" />
+              {/* Front Layer */}
+              <path d={CITY_PATHS.front.outline} stroke="currentColor" strokeWidth="2" opacity="1" fill="none" />
+              <path d={CITY_PATHS.front.windows} stroke="none" fill="currentColor" opacity="1" />
             </svg>
           </div>
         </div>

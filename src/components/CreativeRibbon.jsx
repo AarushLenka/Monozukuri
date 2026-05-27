@@ -21,8 +21,8 @@ const RibbonMesh = ({ renderSide }) => {
     const ctx = canvas.getContext('2d');
     
     // Font settings
-    let font = '900 70px Inter, sans-serif';
-    let pad = [0, 60, 0, 60]; // Left and right padding for the black badges
+    let font = '900 70px Siro, Inter, sans-serif';
+    let pad = [0, 15, 0, 15]; // Left and right padding for the black badges
     let gap = 25; // Transparent gap between badges
     let boxh = 120;
 
@@ -31,7 +31,7 @@ const RibbonMesh = ({ renderSide }) => {
     let totalWidth = widths.reduce((acc, val) => acc + val, 0);
 
     const scale = canvas.width / (totalWidth * 2); // repeat twice for seamlessness
-    ctx.font = `900 ${70*scale}px Inter, sans-serif`;
+    ctx.font = `900 ${70*scale}px Siro, Inter, sans-serif`;
     widths = widths.map(w => w * scale);
     pad = pad.map(p => p * scale);
     gap *= scale;
