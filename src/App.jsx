@@ -216,7 +216,7 @@ export default function App() {
 
       <div
         ref={wrapperRef}
-        className="origin-top-left relative z-[2] text-[#111] font-body selection:bg-black selection:text-white"
+        className="origin-top-left relative z-[2] text-[#111] font-body selection:bg-black selection:text-white overflow-hidden"
         style={{
           width: '1440px',
           transform: `scale(${scale})`

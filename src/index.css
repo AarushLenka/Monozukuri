@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @font-face {
+  font-family: 'MotoyaExCedar';
+  src: url('/MotoyaExCedar W8.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'ndot-57';
   src: url('/Ndot57-Regular.otf') format('opentype');
 }
@@ -271,4 +279,16 @@
 
 .hero-materialize {
   animation: hero-materialize 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Reset — prevent browser outline/margin artifacts */
+*, *::before, *::after {
+  outline: none;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #3a3a3a;
 }

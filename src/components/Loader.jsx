@@ -115,14 +115,22 @@ export default function Loader({ onLoadingComplete }) {
       </div>
       
       {/* Minimalist Text Content Layer */}
-      <main className="relative z-10 flex flex-col justify-center items-center select-none">
-        <h1 
-          className="loader-title opacity-0 text-[80px] sm:text-[100px] md:text-[160px] lg:text-[200px] xl:text-[250px] leading-none text-white tracking-[0.1em] mb-2 md:mb-6 text-center whitespace-nowrap" 
-          style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", sans-serif' }}
+      <main className="relative z-10 flex flex-col justify-center items-center select-none px-4 w-full">
+        <h1
+          className="loader-title opacity-0 leading-none text-white text-center w-full whitespace-nowrap overflow-hidden"
+          style={{
+            fontFamily: '"MotoyaExCedar", sans-serif',
+            fontSize: 'clamp(2rem, 13vw, 14rem)',
+            letterSpacing: '0.05em',
+            marginBottom: 'clamp(0.25rem, 1.5vw, 1.5rem)',
+          }}
         >
           ものづくり
         </h1>
-        <p className="loader-subtitle opacity-0 text-[14px] md:text-[18px] text-white/70 font-mono tracking-widest uppercase">
+        <p
+          className="loader-subtitle opacity-0 text-white/70 font-mono uppercase tracking-widest text-center"
+          style={{ fontSize: 'clamp(0.6rem, 1.4vw, 1.1rem)' }}
+        >
           BY AARUSH LENKA
         </p>
       </main>
