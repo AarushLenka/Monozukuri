@@ -187,7 +187,7 @@ export default function App() {
   return (
     <>
       {/* Fixed bg — outside all transforms so it's always viewport-fixed */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden bg-[#3a3a3a]">
+      <div className="fixed top-0 left-0 w-[100vw] h-[100vh] pointer-events-none z-0 overflow-hidden bg-[#3a3a3a]">
         <div className="absolute -top-[10%] -left-[10%] w-[600px] h-[600px] bg-red-700/50 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] blur-[100px] mix-blend-screen"></div>
         <div className="absolute top-[20%] right-[10%] w-[500px] h-[700px] bg-gray-500/40 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-[120px] mix-blend-screen"></div>
         <div className="absolute bottom-[10%] left-[20%] w-[700px] h-[500px] bg-red-500/30 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] blur-[90px] mix-blend-screen"></div>
@@ -442,21 +442,25 @@ export default function App() {
               </div>
             </div>
 
-            <div className="absolute top-[15%] left-[39%] z-20 max-w-[750px] select-none pointer-events-auto">
+            <div className="absolute top-[15%] left-[39%] z-20 w-[750px] select-none pointer-events-auto">
               <img src="/robot.png" alt="Robot" className="absolute right-[-17%] bottom-[24%] h-[301px] w-auto object-contain pointer-events-none" />
 
-              <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight">
+              <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight whitespace-nowrap">
                 I craft{' '}
                 <svg className="inline-block align-middle mx-0 animate-splat-pulse" width="48" height="48" viewBox="0 0 100 100" fill="#10e7d9b0">
                   <polygon points="50.00,0.00 59.06,16.19 75.00,6.70 74.75,25.25 93.30,25.00 83.81,40.94 100.00,50.00 83.81,59.06 93.30,75.00 74.75,74.75 75.00,93.30 59.06,83.81 50.00,100.00 40.94,83.81 25.00,93.30 25.25,74.75 6.70,75.00 16.19,59.06 0.00,50.00 16.19,40.94 6.70,25.00 25.25,25.25 25.00,6.70 40.94,16.19" />
                 </svg>
-                {' '}interactive ecosystems that redefine how we experience the digital world.
+                {' '}interactive ecosystems that<br />
+                redefine how we experience the<br />
+                digital world.
                 <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-0 h-[110px] w-auto object-contain -my-4" />
               </p>
-              <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight mt-3">
-                From generative algorithms to bespoke hardware, my practice <br />
+              <p className="text-white text-[52px] font-serif leading-[1.12] tracking-tight mt-6 whitespace-nowrap">
+                From generative algorithms to<br />
+                bespoke hardware, my practice<br />
                 <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[70px] w-auto object-contain" />
-                sits at the crossroads of art and engineering.
+                sits at the crossroads of art and<br />
+                engineering.
               </p>
             </div>
 
