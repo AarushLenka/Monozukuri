@@ -35,6 +35,8 @@ export default function Canvas3DBase({
       camera={{ position: cameraPosition, fov }}
       className="w-full h-full cursor-grab active:cursor-grabbing"
       resize={{ offsetSize: true }}
+      dpr={[1, 1.5]}
+      gl={{ powerPreference: 'high-performance', antialias: false }}
     >
       <ambientLight intensity={ambientIntensity} />
       {directionalLights.map((light, idx) => (

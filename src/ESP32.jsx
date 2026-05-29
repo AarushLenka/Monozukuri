@@ -60,6 +60,8 @@ export default function ESP32Canvas() {
       camera={{ position: [0, 0, 6], fov: 45 }}
       className="w-full h-full cursor-grab active:cursor-grabbing"
       resize={{ offsetSize: true }}
+      dpr={[1, 1.5]}
+      gl={{ powerPreference: 'high-performance', antialias: false }}
     >
       <ambientLight intensity={0.0} />
       <directionalLight position={[10, 10, 5]} intensity={0.2} />
