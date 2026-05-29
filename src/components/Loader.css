@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'ndot-57';
-  src: url('/Ndot57-Regular.otf') format('opentype');
-}
-
 :root {
   --orange-1: #FF9B68;
   --orange-5: #32190E;
