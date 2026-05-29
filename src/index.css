@@ -292,3 +292,10 @@ html, body {
   overflow-x: hidden;
   background: #3a3a3a;
 }
+
+/* Native custom cursor on desktop sizes only */
+@media (min-width: 768px) {
+  *, html, body, a, button, input, select, textarea {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='black'/%3E%3C/svg%3E") 6 6, auto !important;
+  }
+}

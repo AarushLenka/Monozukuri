@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import RaspberryPiCanvas from './RaspberryPi';
 import AnimatedConnector from './components/AnimatedConnector';
@@ -10,14 +11,15 @@ import ZigzagPattern from './components/ZigzagPattern';
 import CreativeWorkGallery from './components/CreativeWorkGallery';
 import CreativeRibbon from './components/CreativeRibbon';
 import Loader from './components/Loader';
+import ModelCanvas from './components/ModelCanvas';
 
 const PROJECTS_DATA = [
-  { id: '01', title: 'META INTERACTION SDK', desc: 'SOFTWARE FOR XR DEVS', top: '22%', left: '26%', w: '160px', h: '160px', numPos: 'bottom-0 -left-[22px]' },
-  { id: '02', title: 'META HORIZON OS', desc: 'HUMAN INTERFACE GUIDELINE', top: '26%', left: '46%', w: '120px', h: '180px', numPos: 'bottom-0 -left-[22px]' },
-  { id: '03', title: 'META REALITY LABS', desc: 'INPUT & INTERACTION TEAM', top: '22%', left: '68%', w: '200px', h: '120px', numPos: 'bottom-0 -left-[22px]' },
-  { id: '04', title: 'HANDS', desc: 'RESEARCH, EXPLORATIONS AND DESIGN', top: '48%', left: '12%', w: '140px', h: '140px', numPos: 'bottom-0 -left-[22px]' },
-  { id: '05', title: 'AFCA.AG', desc: 'MR & CLOUD COMPUTING SOLUTIONS', top: '55%', left: '32%', w: '150px', h: '150px', numPos: 'bottom-0 -left-[22px]' },
-  { id: '06', title: 'EXTENDING ABILITIES', desc: 'RESTORING ABILITIES', top: '52%', left: '52%', w: '180px', h: '100px', numPos: 'bottom-0 -left-[22px]' },
+  { id: '01', title: 'Neuracc', desc: 'Neural Network MAC Accelerator', top: '22%', left: '26%', w: '160px', h: '160px', numPos: 'bottom-0 -left-[22px]', model: '/Ryzen 7 9850X3D2.glb', bgTransparent: true },
+  { id: '02', title: 'Nexus', desc: 'Home Automation Bot', top: '26%', left: '46%', w: '120px', h: '180px', numPos: 'bottom-0 -left-[22px]', image: '/home automation.png', bgTransparent: true },
+  { id: '03', title: 'Argus', desc: 'PID-Controlled S-400 Air Defense System Simulation', top: '22%', left: '68%', w: '200px', h: '120px', numPos: 'bottom-0 -left-[22px]', image: '/milk-missile-missile.gif' },
+  { id: '04', title: 'Vitalyse', desc: 'Intelligent Remote Patient Care Assistant', top: '48%', left: '12%', w: '140px', h: '140px', numPos: 'bottom-0 -left-[22px]', image: '/image 11.png', bgTransparent: true },
+  { id: '05', title: 'FirmwarePilot', desc: 'AI Agent for Automated Over-the-Air Updates', top: '55%', left: '32%', w: '120px', h: '185px', numPos: 'bottom-0 -left-[22px]', video: '/ota.mp4' },
+  { id: '06', title: 'EXTENDING ABILITIES', desc: 'RESTORING ABILITIES', top: '52%', left: '52%', w: '180px', h: '100px', numPos: 'bottom-0 -left-[22px]', image: '/vlsi3.png' },
 ];
 
 const generateAMPaths = () => {
@@ -49,10 +51,23 @@ const AM_PATHS = generateAMPaths();
 
 const generateCityPaths = () => {
   const drawLayer = (buildings, doWindows = false) => {
+    // Smooth out deep narrow valleys/dips in the skyline
+    let smoothedBuildings = [...buildings];
+    for (let iter = 0; iter < 3; iter++) {
+      for (let i = 1; i < smoothedBuildings.length - 1; i++) {
+        const b = smoothedBuildings[i];
+        const leftH = smoothedBuildings[i - 1].h;
+        const rightH = smoothedBuildings[i + 1].h;
+        if (b.h > leftH && b.h > rightH) {
+          smoothedBuildings[i] = { ...b, h: Math.max(leftH, rightH) };
+        }
+      }
+    }
+
     let outline = 'M 0 900 ';
     let x = 0;
     let windows = '';
-    for (let b of buildings) {
+    for (let b of smoothedBuildings) {
       if (b.type === "flat") {
         outline += `L ${x} ${b.h} L ${x + b.w} ${b.h} `;
       } else if (b.type === "spire") {
@@ -134,8 +149,17 @@ export default function App() {
   const [creativeMousePos, setCreativeMousePos] = useState({ x: 0, y: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [heroVisible, setHeroVisible] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
   const wrapperRef = React.useRef(null);
   const creativeSectionRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedProject(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const spikyPoints = React.useMemo(() => {
     return Array.from({ length: 32 }).map((_, i) => {
@@ -464,6 +488,23 @@ export default function App() {
               </p>
             </div>
 
+            {/* ASCII Art Video Box placed below the robot */}
+            <div className="absolute top-[84%] left-[79%] w-64 z-40 pointer-events-auto shadow-2xl bg-[#e5e5e5] border border-black p-[6px] -translate-x-1/2 -translate-y-1/2">
+              <button className="absolute -top-1.5 -right-1.5 w-1 h-1 bg-white border border-black flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer">
+                <svg width="6" height="6" viewBox="0 0 14 14" fill="none" stroke="black" strokeWidth="2">
+                  <path d="M1 1L13 13M1 13L13 1" />
+                </svg>
+              </button>
+              <video
+                src="/asciiart.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-auto block"
+              />
+            </div>
+
           </div>
         </div>
 
@@ -540,19 +581,40 @@ export default function App() {
                 key={proj.id}
                 className="absolute pointer-events-auto group cursor-pointer"
                 style={{ top: proj.top, left: proj.left, width: proj.w, height: proj.h }}
+                onClick={() => setSelectedProject(proj)}
               >
-                <div className={`absolute font-mono text-[10px] font-bold text-black ${proj.numPos}`}>
+                <div className={`absolute font-mono text-[12px] font-bold text-black ${proj.numPos}`}>
                   {proj.id}.
                 </div>
-                <div className="w-full h-full bg-[#1e1e1e] border border-white/10 flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105 group-hover:bg-[#111]">
-                  <img
-                    src={`https://placehold.co/400x400/222/aaa?text=Project+${proj.id}`}
-                    alt={proj.title}
-                    className="w-full h-full object-cover opacity-80 mix-blend-luminosity"
-                  />
+                <div className={`w-full h-full flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105 ${proj.bgTransparent ? 'bg-transparent group-hover:bg-transparent' : 'bg-[#1e1e1e] group-hover:bg-[#111]'}`}>
+                  {proj.model ? (
+                    <div className="w-full h-full cursor-grab active:cursor-grabbing pointer-events-auto">
+                      <React.Suspense fallback={<div className="w-full h-full bg-[#1e1e1e] animate-pulse" />}>
+                        <ModelCanvas url={proj.model} />
+                      </React.Suspense>
+                    </div>
+                  ) : proj.video ? (
+                    <video
+                      src={proj.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className={`w-full h-full opacity-90 ${proj.objectFit ? `object-${proj.objectFit}` : 'object-cover'}`}
+                    />
+                  ) : (
+                    <img
+                      src={proj.image || `https://placehold.co/400x400/222/aaa?text=Project+${proj.id}`}
+                      alt={proj.title}
+                      className={`w-full h-full opacity-90 ${proj.objectFit ? `object-${proj.objectFit}` : 'object-cover'}`}
+                    />
+                  )}
                 </div>
               </div>
             ))}
+
+            
+
 
             <div className="absolute top-[41%] left-[82%] pointer-events-auto z-30" style={{ width: '220px', height: '120px' }}>
 
@@ -760,17 +822,21 @@ export default function App() {
               <path d={CITY_PATHS.front.windows} stroke="none" fill="currentColor" opacity="1" />
             </svg>
           </div>
-          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-auto z-10">
-            <h2 className="text-[48px] sm:text-[68px] md:text-[96px] lg:text-[110px] font-normal tracking-tight text-white text-center select-none" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}>
-              THAT'S ALL FOR NOW<span className="animate-cursor-blink">_</span>
-            </h2>
+          <div className="absolute inset-0 pointer-events-none z-10">
+            {/* Centered Heading */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h2 className="text-[48px] sm:text-[68px] md:text-[96px] lg:text-[110px] font-normal tracking-tight text-white text-center select-none" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}>
+                THAT'S ALL FOR NOW<span className="animate-cursor-blink">_</span>
+              </h2>
+            </div>
             
-            <div className="mt-60 flex flex-col items-center gap-0">
-              <a href="https://github.com/AarushLenka/Monozukuri" target="_blank" rel="noopener noreferrer" className="text-black/80 hover:text-white font-mono text-[10px] tracking-widest uppercase transition-colors underline underline-offset-4">
+            {/* Footer at the bottom */}
+            <div className="absolute bottom-2 left-0 right-0 flex flex-col items-center gap-0 pointer-events-auto">
+              <a href="https://github.com/AarushLenka/Monozukuri" target="_blank" rel="noopener noreferrer" className="text-black/80 hover:text-white font-mono text-[12px] tracking-widest uppercase transition-colors underline underline-offset-4">
                 [ CHECK OUT THIS PROJECT ON GITHUB ]
               </a>
               
-              <div className="flex flex-col items-center gap-3 mt-4">
+              <div className="flex flex-col items-center gap-2 mt-3">
                 <span className="text-white/60 font-mono text-[15px] tracking-widest uppercase">REACH OUT TO ME</span>
                 <div className="flex justify-center gap-2 text-[9px] font-mono uppercase tracking-widest">
                   <a href="https://in.linkedin.com/in/aarush-lenka-11235813fb" target="_blank" rel="noopener noreferrer" className="border border-white px-2 py-0.5 rounded-full text-white hover:bg-white hover:text-black transition-colors">LINKEDIN</a>
@@ -784,6 +850,70 @@ export default function App() {
 
       </div>
     </div>
+
+    <AnimatePresence>
+      {selectedProject && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-auto cursor-default"
+          onClick={() => setSelectedProject(null)}
+        >
+          {/* Terminal Window */}
+          <motion.div 
+            initial={{ scale: 0.7, opacity: 0, y: 80 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.7, opacity: 0, y: 80 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 220, mass: 1 }}
+            className="w-[85vw] h-[75vh] max-w-5xl rounded-lg bg-[#111111]/80 backdrop-blur-md border border-white/20 flex flex-col overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Content Area */}
+            <div className="p-6 flex-1 overflow-y-auto font-mono text-sm leading-normal selection:bg-white/20">
+              <div className="flex text-white/90">
+                <span>~/Monozukuri&gt;</span>
+              </div>
+              <div className="mt-0 text-white/90">
+                <span className="text-white/50">└─&gt;</span> cat project.txt
+              </div>
+              
+              <div className="mt-6 flex flex-col md:flex-row gap-8">
+                {/* ASCII Art Placeholder */}
+                <div className="w-full md:w-80 shrink-0 border border-dashed border-white/20 bg-white/5 rounded-md p-4 flex items-center justify-center">
+                  <pre className="text-white/30 text-[10px] leading-tight font-mono text-center">
+{`    ___    
+  //   \\\\  
+ //     \\\\ 
+|| ASCII ||
+ \\\\     // 
+  \\\\___//  `}
+                  </pre>
+                </div>
+
+                {/* Project Details */}
+                <div className="space-y-2 flex-1">
+                  <div>
+                    <span className="text-white/50">PROJECT:</span> <span className="text-white/90">{selectedProject.title}</span>
+                  </div>
+                  <div>
+                    <span className="text-white/50">ROLE:</span> <span className="text-white/90">{selectedProject.desc}</span>
+                  </div>
+                  <div className="pt-0">
+                    <span className="text-white/50">DESCRIPTION:</span>
+                    <div className="mt-0 text-white/70 leading-normal">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+
     <SpeedInsights />
     </>
   );
