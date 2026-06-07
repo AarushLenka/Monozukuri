@@ -96,7 +96,7 @@ export default function ProjectsSection({ onProjectSelect }) {
               {proj.model ? (
                 <div className="w-full h-full cursor-grab active:cursor-grabbing pointer-events-auto">
                   <React.Suspense fallback={<div className="w-full h-full bg-[#1e1e1e] animate-pulse" />}>
-                    <ModelCanvas url={proj.model} />
+                    <ModelCanvas url={proj.model} rotation={proj.modelRotation || [0, 0, 0]} scale={proj.modelScale || 1} wireframe={proj.wireframe} />
                   </React.Suspense>
                 </div>
               ) : proj.video ? (

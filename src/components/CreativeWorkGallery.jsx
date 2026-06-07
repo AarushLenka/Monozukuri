@@ -1,10 +1,61 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+
+const HoverVideo = ({ src, isActive }) => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    
+    if (isActive) {
+      videoRef.current.play().catch(e => console.log('Video play prevented:', e));
+    } else {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }, [isActive]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={`/footage/${src}#t=0.001`}
+      loop
+      muted
+      playsInline
+      preload="metadata"
+      className={`absolute inset-0 w-full h-full object-cover transition-all duration-[800ms] ${isActive ? 'grayscale-0 opacity-100 mix-blend-normal' : 'grayscale opacity-40 mix-blend-luminosity'}`}
+    />
+  );
+};
+
+const VIDEO_SOURCES = [
+  "final_1.mp4",
+  "HackRevealthethird.mp4",
+  "15chomuthefifth.mp4",
+  "Domains reel.mp4",
+  "GravitasBTStheninth.mp4",
+  "Mg_head_ki_pehli_dihadi3.mp4",
+  "c++.mp4",
+  "celestia.mp4",
+  "helixmotionposterportrait.mp4",
+  "horizonteaser.mp4",
+  "python.mp4",
+  "quantatheeleventh.mp4",
+  "recapthethird.mp4",
+  "spectra motion poster.mp4",
+  "spectra.mp4",
+  "scroll.mp4"
+];
+
+
 
 export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
   const [hoveredIndex, setHoveredIndex] = useState(0);
   const containerRef = useRef(null);
 
-  const REELS = Array.from({ length: 20 }).map((_, i) => i + 1);
+  const REELS = React.useMemo(() => {
+    return [...VIDEO_SOURCES];
+  }, []);
+
   const n = REELS.length;
 
   return (
@@ -27,7 +78,7 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
           transformStyle: 'preserve-3d'
         }}
       >
-        {REELS.map((reel, index) => {
+        {REELS.map((reelVid, index) => {
           const isActive = hoveredIndex === index;
           const leftStr = index <= hoveredIndex
             ? `calc(${index} * (var(--inactive-w) + var(--gap)))`
@@ -35,22 +86,21 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
 
           return (
             <div
-              key={`creative-${reel}`}
+              key={`creative-${index}`}
               onMouseEnter={() => setHoveredIndex(index)}
-              className="absolute top-0 h-full transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden bg-[#1e1e1e] cursor-pointer border border-black/10"
+              className="absolute top-0 h-full transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden bg-[#1e1e1e] cursor-pointer border border-black/10 flex items-center justify-center"
               style={{
                 left: leftStr,
                 width: isActive ? 'var(--active-w)' : 'var(--inactive-w)',
               }}
             >
-              <img
-                src={`https://placehold.co/1080x1920/222/888?text=Reel+${reel}`}
-                alt={`Reel ${reel}`}
-                className={`absolute inset-0 w-full h-full object-cover transition-all duration-[800ms] ${isActive ? 'grayscale-0 opacity-100 mix-blend-normal' : 'grayscale opacity-40 mix-blend-luminosity'}`}
-              />
-              <div className={`absolute bottom-6 left-6 transition-opacity duration-500 delay-100 ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                <p className="font-mono text-white text-xs uppercase tracking-widest bg-black/50 px-2 py-1">Reel {reel}</p>
-              </div>
+              {reelVid ? (
+                <HoverVideo src={reelVid} isActive={isActive} />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-white/20 font-mono text-xs text-center px-2">
+                  [ EMPTY ]
+                </div>
+              )}
             </div>
           );
         })}
@@ -59,8 +109,8 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
         <div
           className="absolute transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none z-10"
           style={{
-            top: '-4px',
-            height: 'calc(100% + 8px)',
+            top: '0px',
+            height: 'calc(100% + 3px)',
             left: `calc(${hoveredIndex} * (var(--inactive-w) + var(--gap)))`,
             width: `calc(var(--active-w) )`
           }}
