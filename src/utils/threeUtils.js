@@ -1,17 +1,17 @@
 import * as THREE from 'three';
 
-const EDGE_THRESHOLD_DEG = 15;
+const EDGE_THRESHOLD_DEG = 4;
 const WIREFRAME_COLOR = '#ffffff';
 
 /**
- * Adds white edge-line overlays to every mesh in a scene.
+ * Adds edge-line overlays to every mesh in a scene.
  * Skips meshes that already have edge lines to avoid duplicates on hot-reload.
  * Optionally hides the solid mesh surface (wireframe-only mode).
  *
  * @param {THREE.Object3D} scene
- * @param {{ hideSolid?: boolean, transparent?: boolean }} options
+ * @param {{ hideSolid?: boolean, transparent?: boolean, color?: string }} options
  */
-export function addEdgeLines(scene, { hideSolid = false, transparent = false } = {}) {
+export function addEdgeLines(scene, { hideSolid = false, transparent = false, color = WIREFRAME_COLOR } = {}) {
   scene.traverse((child) => {
     if (!child.isMesh || !child.geometry) return;
 
@@ -24,7 +24,7 @@ export function addEdgeLines(scene, { hideSolid = false, transparent = false } =
       const line = new THREE.LineSegments(
         edges,
         new THREE.LineBasicMaterial({
-          color: WIREFRAME_COLOR,
+          color: color,
           transparent,
           opacity: transparent ? 1 : undefined,
         })

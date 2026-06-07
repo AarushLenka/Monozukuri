@@ -31,23 +31,24 @@ export default function ProjectModal({ project, onClose }) {
             {/* Content Area */}
             <div className="p-6 flex-1 overflow-y-auto font-mono text-sm leading-normal selection:bg-white/20">
               <div className="flex text-white/90">
-                <span>~/Monozukuri&gt;</span>
-              </div>
-              <div className="mt-0 text-white/90">
-                <span className="text-white/50">└─&gt;</span> cat project.txt
+                <span><span className="text-white/50">~/Monozukuri&gt;</span> cat {project.title.toLowerCase().replace(/\s+/g, '-')}.txt</span>
               </div>
 
               <div className="mt-6 flex flex-col md:flex-row gap-8">
-                {/* ASCII Art Placeholder */}
-                <div className="w-full md:w-80 shrink-0 border border-dashed border-white/20 bg-white/5 rounded-md p-4 flex items-center justify-center">
-                  <pre className="text-white/30 text-[10px] leading-tight font-mono text-center">
+                {/* Image Placeholder */}
+                <div className="w-full md:w-80 shrink-0 border border-dashed border-white/20 bg-white/5 rounded-md p-4 flex items-center justify-center overflow-hidden">
+                  {project.modalImage ? (
+                    <img src={project.modalImage} alt={project.title} className="w-full h-full object-contain" />
+                  ) : (
+                    <pre className="text-white/30 text-[10px] leading-tight font-mono text-center">
 {`    ___    
   //   \\\\  
  //     \\\\ 
 || ASCII ||
  \\\\     // 
   \\\\___//  `}
-                  </pre>
+                    </pre>
+                  )}
                 </div>
 
                 {/* Project Details */}
@@ -60,8 +61,8 @@ export default function ProjectModal({ project, onClose }) {
                   </div>
                   <div className="pt-0">
                     <span className="text-white/50">DESCRIPTION:</span>
-                    <div className="mt-0 text-white/70 leading-normal">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <div className="mt-0 text-white/70 leading-normal whitespace-pre-wrap">
+                      {project.modalDesc || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
                     </div>
                   </div>
                 </div>
