@@ -103,30 +103,30 @@ export default function AboutSection() {
         </DecorativeCard>
 
         {/* Main copy */}
-        <div className="absolute top-[15%] left-[39%] z-20 w-[750px] select-none pointer-events-auto">
-          <img src="/robot.png" alt="Robot" className="absolute right-[-15%] bottom-[23%] h-[290px] w-auto object-contain hover:scale-105 transition-transform duration-300" data-tooltip="HOLA, ISTE 👋" />
+        <div className="absolute top-[12%] left-[38%] z-20 w-[780px] select-none pointer-events-auto">
+          <img src="/robot.png" alt="Robot" className="absolute right-[-10%] bottom-[20%] h-[290px] w-auto object-contain hover:scale-105 transition-transform duration-300" data-tooltip="HOLA, ISTE 👋" />
 
-          <p className="relative z-10 text-white text-[52px] font-serif leading-[1.12] tracking-tight whitespace-nowrap">
+          <p className="relative z-10 text-white text-[48px] font-serif leading-[1.15] tracking-tight whitespace-nowrap">
             I craft{' '}
-            <svg className="inline-block align-middle mx-0 animate-splat-pulse" width="48" height="48" viewBox="0 0 100 100" fill="#10e7d9b0">
+            <svg className="inline-block align-middle mx-0 animate-splat-pulse" width="44" height="44" viewBox="0 0 100 100" fill="#10e7d9b0">
               <polygon points="50.00,0.00 59.06,16.19 75.00,6.70 74.75,25.25 93.30,25.00 83.81,40.94 100.00,50.00 83.81,59.06 93.30,75.00 74.75,74.75 75.00,93.30 59.06,83.81 50.00,100.00 40.94,83.81 25.00,93.30 25.25,74.75 6.70,75.00 16.19,59.06 0.00,50.00 16.19,40.94 6.70,25.00 25.25,25.25 25.00,6.70 40.94,16.19" />
             </svg>
             {' '}interactive ecosystems that<br />
             redefine how we experience the<br />
             digital world.
-            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-0 h-[110px] w-auto object-contain -my-4 hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
+            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-0 h-[100px] w-auto object-contain -my-4 hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
           </p>
-          <p className="relative z-10 text-white text-[52px] font-serif leading-[1.12] tracking-tight mt-6 whitespace-nowrap">
+          <p className="relative z-10 text-white text-[48px] font-serif leading-[1.15] tracking-tight mt-6 whitespace-nowrap">
             From generative algorithms to<br />
             bespoke hardware, my practice<br />
-            <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[70px] w-auto object-contain" />
+            <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[60px] w-auto object-contain" />
             sits at the crossroads of art and<br />
             engineering.
           </p>
         </div>
 
         {/* ASCII Art Video Box */}
-        <div className="absolute top-[83%] left-[76%] w-64 z-40 pointer-events-auto shadow-2xl bg-[#e5e5e5] border border-black p-[6px] -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute top-[81%] left-[82%] w-[250px] z-40 pointer-events-auto shadow-2xl bg-[#e5e5e5] border border-black p-[6px] -translate-x-1/2 -translate-y-1/2">
           <button className="absolute -top-1.5 -right-1.5 w-1 h-1 bg-white border border-black flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer">
             <svg width="6" height="6" viewBox="0 0 14 14" fill="none" stroke="black" strokeWidth="2">
               <path d="M1 1L13 13M1 13L13 1" />
