@@ -93,7 +93,7 @@ export default function HeroSection({ isLoading, time }) {
         </div>
 
         <div className="absolute bottom-8 right-8 w-[290px] pointer-events-auto">
-          <div className="relative w-[290px] h-[190px]">
+          <div className="relative w-[290px] h-[190px]" data-tooltip="NICE TO MEET YOU!">
             <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[12px] uppercase font-mono font-bold tracking-widest leading-none">
               ME, I GUESS
             </div>

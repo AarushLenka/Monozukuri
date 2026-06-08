@@ -63,7 +63,7 @@ export default function ClickHereCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`fixed top-0 left-0 z-[9999] pointer-events-none transition-opacity duration-300 will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}
+      className={`hidden md:block fixed top-0 left-0 z-[9999] pointer-events-none transition-opacity duration-300 will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}
     >
       <div className="w-[70px] h-[70px] animate-[spin_4s_linear_infinite]">
         <svg viewBox="0 0 100 100" className="w-full h-full text-black font-mono">

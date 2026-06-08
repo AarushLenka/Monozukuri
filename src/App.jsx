@@ -10,6 +10,7 @@ import CreativeWorkSection from './sections/CreativeWorkSection';
 import CitySection from './sections/CitySection';
 import ProjectModal from './sections/ProjectModal';
 import ClickHereCursor from './components/ClickHereCursor';
+import CursorTooltip from './components/CursorTooltip';
 import { GRID_CONFIG } from './config/heroConfig';
 
 export default function App() {
@@ -118,6 +119,7 @@ export default function App() {
 
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       <ClickHereCursor />
+      <CursorTooltip />
 
       <SpeedInsights />
     </>
