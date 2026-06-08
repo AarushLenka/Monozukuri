@@ -144,7 +144,7 @@ export default function ProjectsSection({ onProjectSelect }) {
         </div>
 
         {/* Project index footer */}
-        <div className="absolute bottom-[5%] left-0 w-full flex justify-center pointer-events-auto">
+        <div className="absolute bottom-[8%] left-0 w-full flex justify-center pointer-events-auto">
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-1 w-max">
             {PROJECTS_DATA.map((proj) => (
               <div key={`footer-${proj.id}`} className="font-mono text-[9px] font-bold uppercase tracking-tighter text-white/80 flex items-center">

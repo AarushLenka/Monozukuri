@@ -39,7 +39,7 @@ export default function HeroSection({ isLoading, time }) {
           </h1>
         </div>
 
-        <div id="text-deep-roots" className="absolute top-[39%] left-[16%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
+        <div id="text-deep-roots" className="absolute top-[37%] left-[16%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
           EXPERIMENT FIRST<br />EXPLAIN LATER
         </div>
 

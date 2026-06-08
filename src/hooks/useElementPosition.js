@@ -5,34 +5,48 @@ export function useElementPosition(elementId, startAlign = 'left', gap = 15) {
 
   useEffect(() => {
     if (!elementId) return;
-
     const el = document.getElementById(elementId);
     if (!el) return;
 
-    const updatePos = () => {
-      const rect = el.getBoundingClientRect();
-      const scrollX = window.scrollX || window.pageXOffset;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const scale = window.innerWidth / 1440;
+    let animationFrameId;
+    let lastPos = null;
 
-      setPosition({
-        x: ((startAlign === 'right' ? rect.right : rect.left) + scrollX) / scale,
-        y: (rect.bottom + scrollY) / scale + gap,
-        left: (rect.left + scrollX) / scale,
-        right: (rect.right + scrollX) / scale,
-      });
+    const updatePos = () => {
+      const wrapper = el.closest('.origin-top-left');
+      if (!wrapper) {
+        animationFrameId = requestAnimationFrame(updatePos);
+        return;
+      }
+
+      const rect = el.getBoundingClientRect();
+      const wrapperRect = wrapper.getBoundingClientRect();
+      
+      // Use the actual rendered width of the wrapper to calculate the true scale ratio
+      const scale = wrapperRect.width / 1440;
+
+      const newPos = {
+        x: (startAlign === 'right' ? rect.right - wrapperRect.left : rect.left - wrapperRect.left) / scale,
+        y: (rect.bottom - wrapperRect.top) / scale + gap,
+        left: (rect.left - wrapperRect.left) / scale,
+        right: (rect.right - wrapperRect.left) / scale,
+      };
+
+      if (
+        !lastPos ||
+        Math.abs(lastPos.x - newPos.x) > 0.5 ||
+        Math.abs(lastPos.y - newPos.y) > 0.5
+      ) {
+        lastPos = newPos;
+        setPosition(newPos);
+      }
+
+      animationFrameId = requestAnimationFrame(updatePos);
     };
 
-    const observer = new ResizeObserver(updatePos);
-    observer.observe(el);
-    
-    // Also observe the document body for global layout shifts (like font loads)
-    observer.observe(document.body);
-
-    updatePos();
+    animationFrameId = requestAnimationFrame(updatePos);
 
     return () => {
-      observer.disconnect();
+      cancelAnimationFrame(animationFrameId);
     };
   }, [elementId, startAlign, gap]);
 
