@@ -118,7 +118,7 @@ export default function App() {
       </div>
 
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
-      <ClickHereCursor />
+      <ClickHereCursor isModalOpen={!!selectedProject} />
       <CursorTooltip />
 
       <SpeedInsights />
