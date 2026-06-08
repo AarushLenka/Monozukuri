@@ -21,8 +21,8 @@ export default function AnimatedConnector({ pts, startId, startAlign = 'left', g
   });
 
   const pixelPoints = pts.map((p) => {
-    let px = p.x !== undefined ? (p.x / 100) * windowSize.w : (startPos ? startPos.x : 0);
-    let py = p.y !== undefined ? (p.y / 100) * windowSize.h : (startPos ? startPos.y : 0);
+    let px = p.x !== undefined ? (p.x / 100) * 1440 : (startPos ? startPos.x : 0);
+    let py = p.y !== undefined ? (p.y / 100) * 800 : (startPos ? startPos.y : 0);
 
     if (p.useStartX && startPos) px = startPos.x;
     if (p.useStartY && startPos) py = startPos.y;
@@ -37,8 +37,8 @@ export default function AnimatedConnector({ pts, startId, startAlign = 'left', g
   if (startId && !startPos) return null;
 
   const targetPoint = pts[pts.length - 1];
-  const targetPx = (targetPoint.x / 100) * windowSize.w + (targetPoint.jitterX ? jitter.x : 0);
-  const targetPy = (targetPoint.y / 100) * windowSize.h + (targetPoint.jitterY ? jitter.y : 0);
+  const targetPx = (targetPoint.x / 100) * 1440 + (targetPoint.jitterX ? jitter.x : 0);
+  const targetPy = (targetPoint.y / 100) * 800 + (targetPoint.jitterY ? jitter.y : 0);
 
   return (
     <>
