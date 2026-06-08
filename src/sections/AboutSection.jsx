@@ -104,7 +104,7 @@ export default function AboutSection() {
 
         {/* Main copy */}
         <div className="absolute top-[12%] left-[38%] z-20 w-[780px] select-none pointer-events-auto">
-          <img src="/robot.png" alt="Robot" className="absolute right-[calc(-7%+1px)] bottom-[20%] h-[290px] w-auto object-contain hover:scale-105 transition-transform duration-300" data-tooltip="HOLA, ISTE 👋" />
+          <img src="/robot.png" alt="Robot" className="absolute right-[7%] bottom-[20%] h-[290px] w-auto object-contain hover:scale-105 transition-transform duration-300" data-tooltip="HOLA, ISTE 👋" />
 
           <p className="relative z-10 text-white text-[48px] font-serif leading-[1.15] tracking-tight whitespace-nowrap">
             I craft{' '}
