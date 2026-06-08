@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import BackgroundBlobs from '../components/BackgroundBlobs';
 
@@ -9,6 +9,29 @@ import BackgroundBlobs from '../components/BackgroundBlobs';
  * @param {function}    onClose   Callback to close the modal.
  */
 export default function ProjectModal({ project, onClose }) {
+  useEffect(() => {
+    if (project) {
+      // Push a state to the history so the back button has something to pop
+      window.history.pushState({ modalId: 'projectModal' }, '');
+
+      const handlePopState = () => {
+        // When the back button is pressed, close the modal
+        onClose();
+      };
+
+      window.addEventListener('popstate', handlePopState);
+      
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+        // If the modal was closed via UI (e.g., clicking the backdrop), 
+        // the pushed state is still in history. We need to pop it.
+        if (window.history.state && window.history.state.modalId === 'projectModal') {
+          window.history.back();
+        }
+      };
+    }
+  }, [project, onClose]);
+
   const parseDescription = (text) => {
     if (!text) return [];
     
