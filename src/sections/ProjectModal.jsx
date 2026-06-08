@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import BackgroundBlobs from '../components/BackgroundBlobs';
 
 /**
  * Terminal-style project detail modal.
@@ -59,11 +60,14 @@ export default function ProjectModal({ project, onClose }) {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.7, opacity: 0, y: 80 }}
             transition={{ type: 'spring', damping: 20, stiffness: 220, mass: 1 }}
-            className="w-[95vw] max-w-none max-h-[95vh] rounded-lg bg-[#111111]/80 backdrop-blur-md border border-white/20 flex flex-col shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+            className="w-[95vw] max-w-none max-h-[95vh] rounded-lg bg-[#050505]/95 backdrop-blur-md border-[1.5px] border-white flex flex-col shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden relative"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Embedded Background for Glassmorphism */}
+            <BackgroundBlobs className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-80" />
+
             {/* Content Area */}
-            <div className="p-6 flex-1 overflow-y-auto font-['Monospaceland',_monospace] font-bold not-italic text-sm leading-normal selection:bg-white/20">
+            <div className="relative z-10 p-6 flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] font-['Monospaceland',_monospace] font-bold not-italic text-sm leading-normal selection:bg-white/20">
               <div className="flex text-white/90">
                 <span><span className="text-white/50">~/Monozukuri&gt;</span> cat {project.title.toLowerCase().replace(/\s+/g, '-')}.txt</span>
               </div>

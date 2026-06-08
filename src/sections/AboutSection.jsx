@@ -104,7 +104,7 @@ export default function AboutSection() {
 
         {/* Main copy */}
         <div className="absolute top-[15%] left-[39%] z-20 w-[750px] select-none pointer-events-auto">
-          <img src="/robot.png" alt="Robot" className="absolute right-[-17%] bottom-[24%] h-[301px] w-auto object-contain pointer-events-none" />
+          <img src="/robot.png" alt="Robot" className="absolute right-[-28%] bottom-[12%] h-[260px] w-auto object-contain pointer-events-none" />
 
           <p className="relative z-10 text-white text-[52px] font-serif leading-[1.12] tracking-tight whitespace-nowrap">
             I craft{' '}
@@ -126,7 +126,7 @@ export default function AboutSection() {
         </div>
 
         {/* ASCII Art Video Box */}
-        <div className="absolute top-[84%] left-[79%] w-64 z-40 pointer-events-auto shadow-2xl bg-[#e5e5e5] border border-black p-[6px] -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute top-[88%] left-[86%] w-56 z-40 pointer-events-auto shadow-2xl bg-[#e5e5e5] border border-black p-[6px] -translate-x-1/2 -translate-y-1/2">
           <button className="absolute -top-1.5 -right-1.5 w-1 h-1 bg-white border border-black flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer">
             <svg width="6" height="6" viewBox="0 0 14 14" fill="none" stroke="black" strokeWidth="2">
               <path d="M1 1L13 13M1 13L13 1" />
