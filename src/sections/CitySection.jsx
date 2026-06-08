@@ -33,7 +33,7 @@ export default function CitySection() {
       <div className="absolute inset-0 pointer-events-none z-10">
         {/* Centered Heading */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <h2 className="text-[48px] sm:text-[68px] md:text-[96px] lg:text-[110px] font-normal tracking-tight text-white text-center select-none" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}>
+          <h2 className="text-[48px] sm:text-[68px] md:text-[96px] lg:text-[110px] font-normal tracking-tight text-white text-center select-none pointer-events-auto" style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }} data-tooltip="OR IS IT?">
             THAT'S ALL FOR NOW<span className="animate-cursor-blink">_</span>
           </h2>
         </div>

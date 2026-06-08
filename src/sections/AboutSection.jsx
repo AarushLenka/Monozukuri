@@ -104,7 +104,7 @@ export default function AboutSection() {
 
         {/* Main copy */}
         <div className="absolute top-[15%] left-[39%] z-20 w-[750px] select-none pointer-events-auto">
-          <img src="/robot.png" alt="Robot" className="absolute right-[-15%] bottom-[23%] h-[290px] w-auto object-contain pointer-events-none" />
+          <img src="/robot.png" alt="Robot" className="absolute right-[-15%] bottom-[23%] h-[290px] w-auto object-contain hover:scale-105 transition-transform duration-300" data-tooltip="HOLA, ISTE 👋" />
 
           <p className="relative z-10 text-white text-[52px] font-serif leading-[1.12] tracking-tight whitespace-nowrap">
             I craft{' '}
@@ -114,7 +114,7 @@ export default function AboutSection() {
             {' '}interactive ecosystems that<br />
             redefine how we experience the<br />
             digital world.
-            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-0 h-[110px] w-auto object-contain -my-4" />
+            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-0 h-[110px] w-auto object-contain -my-4 hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
           </p>
           <p className="relative z-10 text-white text-[52px] font-serif leading-[1.12] tracking-tight mt-6 whitespace-nowrap">
             From generative algorithms to<br />
