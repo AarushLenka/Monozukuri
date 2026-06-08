@@ -104,7 +104,6 @@ export default function AboutSection() {
 
         {/* Main copy */}
         <div className="absolute top-[12%] left-[38%] z-20 w-[780px] select-none pointer-events-auto">
-          <img src="/robot.png" alt="Robot" className="absolute right-[7%] bottom-[20%] h-[290px] w-auto object-contain hover:scale-105 transition-transform duration-300" data-tooltip="HOLA, ISTE 👋" />
 
           <p className="relative z-10 text-white text-[48px] font-serif leading-[1.15] tracking-tight whitespace-nowrap">
             I craft{' '}
@@ -118,7 +117,10 @@ export default function AboutSection() {
           </p>
           <p className="relative z-10 text-white text-[48px] font-serif leading-[1.15] tracking-tight mt-6 whitespace-nowrap">
             From generative algorithms to<br />
-            bespoke hardware, my practice<br />
+            bespoke hardware, my <span className="relative inline-block">
+              practice
+              <img src="/robot.png" alt="Robot" className="absolute left-[70%] bottom-[-40%] h-[340px] w-auto max-w-none object-contain hover:scale-105 transition-transform duration-300" data-tooltip="HOLA, ISTE 👋" />
+            </span><br />
             <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[60px] w-auto object-contain" />
             sits at the crossroads of art and<br />
             engineering.
