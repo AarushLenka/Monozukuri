@@ -28,22 +28,22 @@ const HoverVideo = ({ src, isActive }) => {
 };
 
 const VIDEO_SOURCES = [
-  "final_1.mp4",
-  "HackRevealthethird.mp4",
-  "15chomuthefifth.mp4",
-  "Domains reel.mp4",
-  "GravitasBTStheninth.mp4",
-  "Mg_head_ki_pehli_dihadi3.mp4",
-  "c++.mp4",
-  "celestia.mp4",
-  "helixmotionposterportrait.mp4",
-  "horizonteaser.mp4",
-  "python.mp4",
-  "quantatheeleventh.mp4",
-  "recapthethird.mp4",
-  "spectra motion poster.mp4",
-  "spectra.mp4",
-  "scroll.mp4"
+  { src: "final_1.mp4", link: null },
+  { src: "HackRevealthethird.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DFXpC0DPYJd/" },
+  { src: "15chomuthefifth.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DKbTrRCTjMH/" },
+  { src: "Domains reel.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DOFnMOWE7_k/" },
+  { src: "GravitasBTStheninth.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DA2aRz2vDrx/" },
+  { src: "Mg_head_ki_pehli_dihadi3.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DIgTPmETuVi/" },
+  { src: "c++.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/C9rAvNmPrU0/" },
+  { src: "celestia.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DPDbJfyk9dA/" },
+  { src: "helixmotionposterportrait.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DOnMaLXE-YB/" },
+  { src: "horizonteaser.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/C-RvxfEPPlr/" },
+  { src: "python.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/C99Jo71Pc3Q/" },
+  { src: "quantatheeleventh.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DEeJn-ET-kr/" },
+  { src: "recapthethird.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DKJ3VW2NnK-/" },
+  { src: "spectra motion poster.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DOpjPv5kxlx/" },
+  { src: "spectra.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DOxxTjjExgh/" },
+  { src: "scroll.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DOaGmowE3-p/" }
 ];
 
 
@@ -78,8 +78,10 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
           transformStyle: 'preserve-3d'
         }}
       >
-        {REELS.map((reelVid, index) => {
+        {REELS.map((reelItem, index) => {
           const isActive = hoveredIndex === index;
+          const reelVid = reelItem.src;
+          const reelLink = reelItem.link;
           const leftStr = index <= hoveredIndex
             ? `calc(${index} * (var(--inactive-w) + var(--gap)))`
             : `calc(${index - 1} * (var(--inactive-w) + var(--gap)) + var(--active-w) + var(--gap))`;
@@ -87,8 +89,16 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
           return (
             <div
               key={`creative-${index}`}
+              data-cursor={reelLink ? "click-here" : undefined}
               onMouseEnter={() => setHoveredIndex(index)}
-              className="absolute top-0 h-full transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden bg-[#1e1e1e] cursor-pointer border border-black/10 flex items-center justify-center"
+              onClick={() => {
+                if (isActive && reelLink) {
+                  window.open(reelLink, '_blank');
+                } else {
+                  setHoveredIndex(index);
+                }
+              }}
+              className={`absolute top-0 h-full transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden bg-[#1e1e1e] cursor-pointer border border-black/10 flex items-center justify-center ${isActive && reelLink ? 'hover:brightness-110' : ''}`}
               style={{
                 left: leftStr,
                 width: isActive ? 'var(--active-w)' : 'var(--inactive-w)',

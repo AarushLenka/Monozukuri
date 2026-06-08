@@ -39,11 +39,11 @@ export default function HeroSection({ isLoading, time }) {
           </h1>
         </div>
 
-        <div id="text-deep-roots" className="absolute top-[41%] left-[16%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
+        <div id="text-deep-roots" className="absolute top-[39%] left-[16%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
           EXPERIMENT FIRST<br />EXPLAIN LATER
         </div>
 
-        <div id="text-imagination" className="absolute top-[21%] left-[58%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
+        <div id="text-imagination" className="absolute top-[18.7%] left-[58%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
           PROFESSIONAL <br />"WHY ISN'T THIS WORKING"<br />SPECIALIST
         </div>
 
@@ -59,12 +59,12 @@ export default function HeroSection({ isLoading, time }) {
           </div>
         </div>
 
-        <div id="text-foundation" className="absolute top-[87%] left-[55%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
+        <div id="text-foundation" className="absolute top-[85.7%] left-[55.5%] w-max text-[9px] uppercase font-mono tracking-widest leading-relaxed text-black z-20">
           CREATIVITY <br />WITH A SIDE<br />OF CHAOS
         </div>
 
         <div id="card-monozukuri"
-          className="absolute top-[32%] right-[8%] bg-[#e5e5e5] pointer-events-auto"
+          className="absolute top-[29.8%] right-[7.6%] bg-[#e5e5e5] pointer-events-auto"
           style={{
             width: '172px',
             height: '114px',

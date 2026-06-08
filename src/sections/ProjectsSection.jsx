@@ -85,6 +85,7 @@ export default function ProjectsSection({ onProjectSelect }) {
         {PROJECTS_DATA.map((proj) => (
           <div
             key={proj.id}
+            data-cursor="click-here"
             className="absolute pointer-events-auto group cursor-pointer"
             style={{ top: proj.top, left: proj.left, width: proj.w, height: proj.h }}
             onClick={() => onProjectSelect(proj)}
