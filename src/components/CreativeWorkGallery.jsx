@@ -30,6 +30,7 @@ const HoverVideo = ({ src, isActive }) => {
 const VIDEO_SOURCES = [
   { src: "final_1.mp4", link: null },
   { src: "HackRevealthethird.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DFXpC0DPYJd/" },
+  { src: "1A.mp4", link: null },
   { src: "15chomuthefifth.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DKbTrRCTjMH/" },
   { src: "Domains reel.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DOFnMOWE7_k/" },
   { src: "GravitasBTStheninth.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DA2aRz2vDrx/" },
