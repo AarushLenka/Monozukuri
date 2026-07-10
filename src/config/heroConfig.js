@@ -2,10 +2,10 @@ export const THREAD_ITEMS = [
   { id: '01.', tag: 'EMBEDDED SYSTEMS', title: 'MICROCONTROLLERS, SENSOR FUSION', barWidth: 132, animDur: '5s', animDelay: '-0.54s' },
   { id: '02.', tag: 'HARDWARE DESIGN/VLSI', title: 'RTL VERIFication, PHYSICAL DESIGN, CMOS', barWidth: 160, animDur: '5s', animDelay: '-1.18s' },
   { id: '03.', tag: 'AI AUTOMATION', title: 'N8N, LANGCHAIN, MCP', barWidth: 106, animDur: '5s', animDelay: '-2.07s' },
-  { id: '04.', tag: 'IOT', title: 'AWS, AZURE, FIREBASE', barWidth: 138, animDur: '5s', animDelay: '-1.46s' },
-  { id: '05.', tag: 'LANGUAGES', title: ' EMBEDDED C, C++, BASH, PYTHON, JAVA', barWidth: 116, animDur: '5s', animDelay: '-2.41s' },
+  { id: '04.', tag: 'IOT', title: 'AWS IoT CORE, FIREBASE, BLYNKIoT', barWidth: 138, animDur: '5s', animDelay: '-1.46s' },
+  { id: '05.', tag: 'LANGUAGES', title: ' EMBEDDED C/C++, PYTHON, VERILOG, SYSTEMVERILOG', barWidth: 116, animDur: '5s', animDelay: '-2.41s' },
   { id: '06.', tag: 'SYSTEM AND TOOLS', title: 'Linux CLI, Git / GitHub', barWidth: 126, animDur: '5s', animDelay: '-0.89s' },
-  { id: '07.', tag: 'CREATIVE PURSUITS', title: 'AFTER EFFECTS, BLENDER, FIGMA', barWidth: 102, animDur: '5s', animDelay: '-1.73s' },
+  { id: '07.', tag: 'CREATIVE PURSUITS', title: 'AFTER EFFECTS, BLENDER, FIGMA, HEYGEN', barWidth: 102, animDur: '5s', animDelay: '-1.73s' },
 ];
 
 export const PIXEL_CONFIG = {
