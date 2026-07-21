@@ -69,13 +69,13 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
         </div>
 
         {/* Project index footer */}
-        <div className="w-full flex justify-center">
-          <div className="flex flex-col gap-y-1 w-full">
+        <div className="w-full flex justify-center mt-4">
+          <div className="flex flex-col gap-y-4 w-full px-2">
             {PROJECTS_DATA.map((proj) => (
-              <div key={`footer-m-${proj.id}`} className="font-mono text-[8px] font-bold uppercase tracking-tighter text-white/80 flex items-center">
-                <span>{proj.id}. {proj.title}</span>
-                <span className="text-white/50 mx-1">-</span>
-                <span className="text-white/60">{proj.desc}</span>
+              <div key={`footer-m-${proj.id}`} className="font-mono text-[8px] font-bold uppercase tracking-tighter text-white/80 flex items-start w-full">
+                <span className="w-[95px] shrink-0 leading-[1.2]">{proj.id}. {proj.title}</span>
+                <span className="text-white/50 mx-2 shrink-0 leading-[1.2]">-</span>
+                <span className="text-white/60 flex-1 leading-[1.2]">{proj.desc}</span>
               </div>
             ))}
           </div>
