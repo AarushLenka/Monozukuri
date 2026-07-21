@@ -33,7 +33,8 @@ export default function Canvas3DBase({
   return (
     <Canvas
       camera={{ position: cameraPosition, fov }}
-      className="w-full h-full cursor-grab active:cursor-grabbing"
+      className={`w-full h-full ${sceneProps?.isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}
+      style={{ pointerEvents: sceneProps?.isMobile ? 'none' : 'auto' }}
       resize={{ offsetSize: true }}
       dpr={[1, 1.5]}
       gl={{ powerPreference: 'high-performance', antialias: false }}

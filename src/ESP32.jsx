@@ -58,7 +58,8 @@ export default function ESP32Canvas({ isMobile }) {
   return (
     <Canvas
       camera={{ position: [0, 0, 6], fov: 45 }}
-      className="w-full h-full cursor-grab active:cursor-grabbing"
+      className={`w-full h-full ${isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}
+      style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
       resize={{ offsetSize: true }}
       dpr={[1, 1.5]}
       gl={{ powerPreference: 'high-performance', antialias: false }}
