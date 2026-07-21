@@ -11,8 +11,8 @@ export default function CoreThreadsPanel({ isMobile }) {
           [ CORE THREADS OF MY WORK ]
         </h2>
         <div className="flex gap-[10px] w-full max-w-[340px]">
-          <div className="relative h-[180px] w-[56px] shrink-0 border border-black/70 bg-transparent">
-            <div className="absolute inset-x-0 top-0 h-[40px] border-b border-black/70">
+          <div className="relative w-[56px] shrink-0 border border-black/70 bg-transparent flex flex-col">
+            <div className="relative h-[40px] w-full border-b border-black/70 shrink-0">
               <svg className="absolute inset-0 h-full w-full" viewBox="0 0 56 40" fill="none" preserveAspectRatio="none">
                 <g transform="translate(28 20) scale(0.7)">
                   <g className="tesseract-spin" transform="rotate(-18)">
@@ -25,8 +25,10 @@ export default function CoreThreadsPanel({ isMobile }) {
                 </g>
               </svg>
             </div>
-            <div className="absolute inset-x-0 bottom-0 top-[40px]">
-              <PixelField />
+            <div className="relative flex-1 min-h-[40px]">
+              <div className="absolute inset-0">
+                <PixelField />
+              </div>
             </div>
           </div>
 
