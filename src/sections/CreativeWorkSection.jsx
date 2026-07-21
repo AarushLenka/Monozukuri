@@ -6,12 +6,12 @@ import { AM_PATHS } from '../utils/svgGenerators';
 /**
  * Creative Work section — owns its own mouse-tracking state so App stays clean.
  */
-export default function CreativeWorkSection() {
+export default function CreativeWorkSection({ isMobile }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const sectionRef = useRef(null);
 
   const handleMouseMove = (e) => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || isMobile) return;
     const rect = sectionRef.current.getBoundingClientRect();
     setMousePos({
       x: e.clientX - rect.left - rect.width / 2,
@@ -19,6 +19,35 @@ export default function CreativeWorkSection() {
     });
   };
 
+  /* ── Mobile Layout ── */
+  if (isMobile) {
+    return (
+      <div
+        id="creative-work-section"
+        ref={sectionRef}
+        className="relative w-full overflow-hidden z-[2] px-4 py-8"
+        style={{ minHeight: '80vh' }}
+      >
+        <div className="relative w-full z-10 flex flex-col items-center">
+          {/* Title */}
+          <h2
+            className="text-[28px] leading-[1.1] tracking-tight text-black text-center mb-4 z-10"
+            style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}
+          >
+            Ideas in Motion
+          </h2>
+
+          {/* Ribbon + Gallery container */}
+          <div className="relative w-full" style={{ minHeight: '60vh' }}>
+            <CreativeRibbon mousePos={mousePos} />
+            <CreativeWorkGallery mousePos={mousePos} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Desktop Layout (untouched) ── */
   return (
     <div
       id="creative-work-section"

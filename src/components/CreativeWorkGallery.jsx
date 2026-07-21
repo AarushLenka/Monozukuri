@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const HoverVideo = ({ src, isActive }) => {
   const videoRef = useRef(null);
@@ -52,6 +53,7 @@ const VIDEO_SOURCES = [
 export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
   const [hoveredIndex, setHoveredIndex] = useState(0);
   const containerRef = useRef(null);
+  const isMobile = useIsMobile();
 
   const REELS = React.useMemo(() => {
     return [...VIDEO_SOURCES];
@@ -59,6 +61,60 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
 
   const n = REELS.length;
 
+  /* ── Mobile Accordion ── */
+  if (isMobile) {
+    return (
+      <div
+        ref={containerRef}
+        className="relative pointer-events-auto mt-6 w-full px-2"
+        style={{
+          height: '55vh',
+        }}
+      >
+        <div 
+          className="relative w-full h-full flex gap-[8px] overflow-x-auto overflow-y-hidden snap-x snap-mandatory pb-2"
+          style={{ scrollBehavior: 'smooth' }}
+        >
+          {REELS.map((reelItem, index) => {
+            const isActive = hoveredIndex === index;
+            const reelVid = reelItem.src;
+            const reelLink = reelItem.link;
+
+            return (
+              <div
+                key={`creative-m-${index}`}
+                onClick={(e) => {
+                  if (isActive && reelLink) {
+                    window.open(reelLink, '_blank');
+                  } else {
+                    setHoveredIndex(index);
+                    // smoothly scroll this item into view
+                    e.currentTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                  }
+                }}
+                className={`relative h-full transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden bg-[#1e1e1e] cursor-pointer border border-black/10 flex-shrink-0 snap-center ${isActive ? 'w-[60vw]' : 'w-[15vw]'}`}
+              >
+                {reelVid ? (
+                  <HoverVideo src={reelVid} isActive={isActive} />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center text-white/20 font-mono text-xs text-center px-2">
+                    [ EMPTY ]
+                  </div>
+                )}
+                
+                {/* Mobile Active Outline */}
+                <div
+                  className={`absolute inset-0 border-2 border-white pointer-events-none transition-opacity duration-[600ms] ${isActive ? 'opacity-100' : 'opacity-0'}`}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Desktop Layout (untouched) ── */
   return (
     <div
       ref={containerRef}

@@ -10,8 +10,107 @@ import { CONNECTOR_CONFIG } from '../config/heroConfig';
  *
  * @param {boolean} isLoading  True while the Loader is still visible; passed to RaspberryPiCanvas.
  * @param {string}  time       Formatted local time string from App state.
+ * @param {boolean} isMobile   True when viewport ≤ 768px.
  */
-export default function HeroSection({ isLoading, time }) {
+export default function HeroSection({ isLoading, time, isMobile }) {
+
+  /* ── Mobile Layout ── */
+  if (isMobile) {
+    return (
+      <div className="relative w-full z-[2] px-4 pt-3 pb-8">
+        {/* Header */}
+        <header className="flex justify-between items-start mb-6">
+          <div className="text-sm font-medium tracking-widest">MONOZUKURI</div>
+          <div className="text-[10px] uppercase font-mono tracking-widest text-right leading-tight">
+            LOCAL TIME<br />IND {time}
+          </div>
+        </header>
+
+        {/* Title */}
+        <h1
+          className="text-[32px] leading-[0.88] font-normal tracking-tight text-black mb-6"
+          style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}
+        >
+          LICENSED <br />BEEP-BOOP<br />MECHANIC.
+        </h1>
+
+        {/* Monozukuri Card with simplified connector */}
+        <div className="flex flex-col items-center mb-4">
+          {/* Simplified connector line */}
+          <svg width="2" height="40" className="mb-0">
+            <line x1="1" y1="0" x2="1" y2="40" stroke="black" strokeWidth="1" />
+          </svg>
+          {/* Connector endpoint marker */}
+          <div className="w-[14px] h-[14px] border border-black flex items-center justify-center mb-2">
+            <div className="w-[5px] h-[5px] bg-black" />
+          </div>
+
+          {/* Monozukuri card */}
+          <div
+            className="bg-[#e5e5e5] w-[200px]"
+            style={{
+              clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)'
+            }}
+          >
+            <svg className="absolute -inset-px pointer-events-none overflow-visible" width="202" height="130" viewBox="0 0 202 130">
+              <path d="M 1.5,69 L 1.5,1.5 L 180,1.5 M 200.5,20 L 200.5,116 L 188,128.5 L 110,128.5 M 90,128.5 L 1.5,128.5 L 1.5,87"
+                fill="none" stroke="black" strokeWidth="1" />
+            </svg>
+            <div className="relative z-10 pl-[14px] pt-3 pr-3 pb-3 select-none">
+              <div>
+                <div className="bg-[#f0f0f0] px-[3px] -ml-[3px] py-[1px]">
+                  <span className="font-bold text-[14px] tracking-wider text-black leading-none block">MONOZUKURI</span>
+                </div>
+                <div className="font-bold text-[12px] tracking-widest text-black leading-none mt-1.5" style={{ fontFamily: '"Hiragino Kaku Gothic", "Hiragino Sans", "Yu Gothic", sans-serif' }}>
+                  ものづくり
+                </div>
+              </div>
+              <div className="text-[9px] font-mono tracking-widest leading-[1.25] text-black/90 mt-2">
+                MONO (THING)<br />+ ZUKURI (MAKING)
+              </div>
+              <div className="text-[9px] font-mono tracking-widest leading-none text-black whitespace-nowrap mt-2">
+                THE MAKING OF THINGS
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 3D Raspberry Pi Model */}
+        <div className="w-full flex items-center justify-center my-2">
+          <div className="w-[90vw] h-[50vh] flex items-center justify-center">
+            <RaspberryPiCanvas isLoading={isLoading} />
+          </div>
+        </div>
+
+        {/* Social Buttons */}
+        <div className="flex justify-center mb-8">
+          <SocialLinks className="justify-center" />
+        </div>
+
+        {/* Me, I Guess Card */}
+        <div className="w-full max-w-[340px] mx-auto mb-8">
+          <div className="relative w-full" data-tooltip="NICE TO MEET YOU!">
+            <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[12px] uppercase font-mono font-bold tracking-widest leading-none">
+              ME, I GUESS
+            </div>
+            <div className="relative bg-white p-4" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 28px 100%, 0 calc(100% - 28px))' }}>
+              <svg className="absolute -inset-px pointer-events-none overflow-visible" width="100%" height="100%" viewBox="0 0 342 200" preserveAspectRatio="none">
+                <path d="M 1.5,48 L 1.5,1.5 L 320,1.5 M 340,1.5 L 340,198 L 29.5,198 L 1.5,170 L 1.5,112 M 1.5,96 L 1.5,64" fill="none" stroke="black" strokeWidth="1" />
+              </svg>
+              <p className="text-[11px] font-mono font-bold leading-[1.15] text-black">
+                Hi! I'm Aarush Lenka, a final-year ECE undergraduate at VIT Vellore specializing in microcontroller firmware and sensor fusion. Parallel to engineering, I serve on the Advisory Board for ISTE VIT, providing strategic oversight to the creative team following my tenure leading the motion graphics division. I specialize in post-production, dynamic asset creation, and visual storytelling.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Core Threads Panel */}
+        <CoreThreadsPanel isMobile={isMobile} />
+      </div>
+    );
+  }
+
+  /* ── Desktop Layout (untouched) ── */
   return (
     <div className="relative w-full overflow-hidden z-[2]" style={{ height: 'var(--logical-vh)' }}>
       <div className="relative w-full h-full z-10 pointer-events-none">
