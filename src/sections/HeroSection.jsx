@@ -67,6 +67,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
             </div>
           </div>
         </div>
+      </div>
 
         {/* 3D Raspberry Pi Model */}
         <div className="w-full flex items-center justify-center -mt-[60px] pointer-events-none">
