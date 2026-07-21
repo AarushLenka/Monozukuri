@@ -86,7 +86,7 @@ export default function AboutSection({ isMobile }) {
             {' '}interactive ecosystems that
             redefine how we experience the
             digital world.
-            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-1 h-[45px] -my-[15px] w-auto object-contain hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
+            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-1 h-[55px] -my-[20px] w-auto object-contain hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
           </p>
           <p className="relative z-10 text-white text-[22px] font-serif leading-[1.2] tracking-tight mt-4 pr-[80px]">
             From generative algorithms to
@@ -95,7 +95,7 @@ export default function AboutSection({ isMobile }) {
             sits at the crossroads of art and
             engineering.
           </p>
-          <img src="/robot.png" alt="Robot" className="absolute right-[-50px] bottom-[90px] h-[130px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
+          <img src="/robot.png" alt="Robot" className="absolute right-[-50px] bottom-[90px] h-[160px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
         </div>
 
 
