@@ -8,8 +8,83 @@ import { PROJECTS_DATA } from '../constants/projects';
  * Projects section — third full-height screen.
  *
  * @param {function} onProjectSelect  Callback invoked with the project object when a card is clicked.
+ * @param {boolean}  isMobile         True when viewport ≤ 768px.
  */
-export default function ProjectsSection({ onProjectSelect }) {
+export default function ProjectsSection({ onProjectSelect, isMobile }) {
+
+  /* ── Mobile Layout ── */
+  if (isMobile) {
+    return (
+      <div id="projects-section" className="relative w-full z-[2] px-4 py-8">
+        {/* Title */}
+        <div className="w-full flex flex-col items-center mb-6">
+          <h2
+            className="text-[28px] leading-[1.1] tracking-tight text-black text-center"
+            style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}
+          >
+            Some Projects I have worked on
+          </h2>
+        </div>
+
+        {/* 2-column project grid */}
+        <div className="mb-6" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px' }}>
+          {PROJECTS_DATA.map((proj) => (
+            <div
+              key={proj.id}
+              data-cursor="click-here"
+              className="relative group cursor-pointer"
+              onClick={() => onProjectSelect(proj)}
+            >
+              {/* Project number */}
+              <div className="font-mono text-[11px] font-bold text-black mb-1 text-center">
+                {proj.id}.
+              </div>
+              {/* Card */}
+              <div className={`w-full aspect-square flex items-center justify-center overflow-hidden transition-transform duration-500 active:scale-95 ${proj.bgTransparent ? 'bg-transparent' : 'bg-[#1e1e1e]'}`}>
+                {proj.model ? (
+                  <div className="w-full h-full cursor-grab active:cursor-grabbing pointer-events-auto">
+                    <React.Suspense fallback={<div className="w-full h-full bg-[#1e1e1e] animate-pulse" />}>
+                      <ModelCanvas url={proj.model} rotation={proj.modelRotation || [0, 0, 0]} scale={proj.modelScale || 1} wireframe={proj.wireframe} wireframeColor={proj.wireframeColor} />
+                    </React.Suspense>
+                  </div>
+                ) : proj.video ? (
+                  <video
+                    src={proj.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className={`w-full h-full opacity-90 ${proj.objectFit ? `object-${proj.objectFit}` : 'object-cover'}`}
+                  />
+                ) : (
+                  <img
+                    src={proj.image || `https://placehold.co/400x400/222/aaa?text=Project+${proj.id}`}
+                    alt={proj.title}
+                    className={`w-full h-full opacity-90 ${proj.objectFit ? `object-${proj.objectFit}` : 'object-cover'}`}
+                  />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Project index footer */}
+        <div className="w-full flex justify-center">
+          <div className="flex flex-col gap-y-1 w-full">
+            {PROJECTS_DATA.map((proj) => (
+              <div key={`footer-m-${proj.id}`} className="font-mono text-[8px] font-bold uppercase tracking-tighter text-white/80 flex items-center">
+                <span>{proj.id}. {proj.title}</span>
+                <span className="text-white/50 mx-1">-</span>
+                <span className="text-white/60">{proj.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* ── Desktop Layout (untouched) ── */
   return (
     <div id="projects-section" className="relative w-full overflow-hidden z-[2] -mt-[2px]" style={{ height: 'var(--logical-vh)' }}>
       <div className="relative w-full h-full z-10 pointer-events-none">
