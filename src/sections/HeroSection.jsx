@@ -35,13 +35,13 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </h1>
 
         {/* Monozukuri Card with simplified connector */}
-        <div className="flex flex-col items-center mb-4">
+        <div className="flex flex-col items-start mb-4 origin-top-left scale-[0.85]">
           {/* Simplified connector line */}
-          <svg width="2" height="40" className="mb-0">
+          <svg width="2" height="40" className="mb-0 ml-[100px]">
             <line x1="1" y1="0" x2="1" y2="40" stroke="black" strokeWidth="1" />
           </svg>
           {/* Connector endpoint marker */}
-          <div className="w-[14px] h-[14px] border border-black flex items-center justify-center mb-2">
+          <div className="w-[14px] h-[14px] border border-black flex items-center justify-center mb-2 ml-[94px]">
             <div className="w-[5px] h-[5px] bg-black" />
           </div>
 
@@ -76,9 +76,9 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </div>
 
         {/* 3D Raspberry Pi Model */}
-        <div className="w-full flex items-center justify-center my-2">
-          <div className="w-[90vw] h-[50vh] flex items-center justify-center">
-            <RaspberryPiCanvas isLoading={isLoading} />
+        <div className="w-full flex items-center justify-center my-2 -mt-4 pointer-events-none">
+          <div className="relative w-[130vw] h-[50vh] flex items-center justify-center -ml-[15vw]">
+            <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
           </div>
         </div>
 
@@ -154,7 +154,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] pointer-events-auto z-20">
           <div className="relative w-[600px] h-[650px] flex items-center justify-center pointer-events-auto">
-            <RaspberryPiCanvas isLoading={isLoading} />
+            <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
           </div>
         </div>
 

@@ -4,17 +4,21 @@ import gsap from 'gsap';
 import Canvas3DBase from './components/Canvas3DBase';
 import { addEdgeLines } from './utils/threeUtils';
 
-function RealPiModel(props) {
+function RealPiModel({ isMobile, ...props }) {
   const { scene } = useGLTF('/raspberrypi5.glb');
 
   useEffect(() => {
-    addEdgeLines(scene, { hideSolid: true });
-  }, [scene]);
+    if (isMobile) {
+      addEdgeLines(scene, { hideSolid: true, opacity: 0.3, color: '#888888', linewidth: 0.5 });
+    } else {
+      addEdgeLines(scene, { hideSolid: true });
+    }
+  }, [scene, isMobile]);
 
   return <primitive object={scene} {...props} />;
 }
 
-function PiScene({ onAnimComplete, isLoading }) {
+function PiScene({ onAnimComplete, isLoading, isMobile }) {
   const groupRef = useRef();
 
   useEffect(() => {
@@ -42,7 +46,7 @@ function PiScene({ onAnimComplete, isLoading }) {
     <group ref={groupRef} rotation={[0, -Math.PI, 0]}>
       <React.Suspense fallback={null}>
         <Center>
-          <RealPiModel scale={0.04} />
+          <RealPiModel scale={0.04} isMobile={isMobile} />
         </Center>
       </React.Suspense>
       <Environment preset="city" />
@@ -50,11 +54,11 @@ function PiScene({ onAnimComplete, isLoading }) {
   );
 }
 
-export default function RaspberryPiCanvas({ isLoading }) {
+export default function RaspberryPiCanvas({ isLoading, isMobile }) {
   return (
     <Canvas3DBase
       SceneComponent={PiScene}
-      sceneProps={{ isLoading }}
+      sceneProps={{ isLoading, isMobile }}
       ambientIntensity={0.6}
       directionalLights={[
         { position: [10, 10, 5], intensity: 1.5 },

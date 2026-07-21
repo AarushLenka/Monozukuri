@@ -32,17 +32,17 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
             <div
               key={proj.id}
               data-cursor="click-here"
-              className="relative group cursor-pointer"
+              className="relative group cursor-pointer flex items-center"
               onClick={() => onProjectSelect(proj)}
             >
               {/* Project number */}
-              <div className="font-mono text-[11px] font-bold text-black mb-1 text-center">
+              <div className="font-mono text-[11px] font-bold text-black mr-2 shrink-0">
                 {proj.id}.
               </div>
               {/* Card */}
-              <div className={`w-full aspect-square flex items-center justify-center overflow-hidden transition-transform duration-500 active:scale-95 ${proj.bgTransparent ? 'bg-transparent' : 'bg-[#1e1e1e]'}`}>
+              <div className={`flex-1 aspect-square flex items-center justify-center overflow-hidden transition-transform duration-500 active:scale-95 ${proj.bgTransparent ? 'bg-transparent' : 'bg-[#1e1e1e]'}`}>
                 {proj.model ? (
-                  <div className="w-full h-full cursor-grab active:cursor-grabbing pointer-events-auto">
+                  <div className="w-full h-full pointer-events-none">
                     <React.Suspense fallback={<div className="w-full h-full bg-[#1e1e1e] animate-pulse" />}>
                       <ModelCanvas url={proj.model} rotation={proj.modelRotation || [0, 0, 0]} scale={proj.modelScale || 1} wireframe={proj.wireframe} wireframeColor={proj.wireframeColor} />
                     </React.Suspense>
