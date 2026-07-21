@@ -15,7 +15,7 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
   /* ── Mobile Layout ── */
   if (isMobile) {
     return (
-      <div id="projects-section" className="relative w-full z-[2] px-4 py-8">
+      <div id="projects-section" className="relative w-full z-[2] px-4 pt-0 pb-8">
         {/* Title */}
         <div className="w-full flex flex-col items-center mb-6">
           <h2

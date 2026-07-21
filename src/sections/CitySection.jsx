@@ -36,22 +36,22 @@ export default function CitySection({ isMobile }) {
         <div className="absolute inset-0 pointer-events-none z-10 flex flex-col items-center justify-center px-4">
           {/* Centered Heading */}
           <h2
-            className="text-[32px] font-normal tracking-tight text-white text-center select-none pointer-events-auto mb-8"
+            className="text-[32px] font-normal tracking-tight text-white text-center select-none pointer-events-auto"
             style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}
             data-tooltip="OR IS IT?"
           >
             THAT'S ALL FOR NOW<span className="animate-cursor-blink">_</span>
           </h2>
+        </div>
 
-          {/* Footer */}
-          <div className="flex flex-col items-center gap-3 pointer-events-auto">
-            <a href="https://github.com/AarushLenka/Monozukuri" target="_blank" rel="noopener noreferrer" className="text-black/80 hover:text-white font-mono text-[11px] tracking-widest uppercase transition-colors underline underline-offset-4 text-center">
-              [ CHECK OUT THIS PROJECT ON GITHUB ]
-            </a>
+        {/* Footer */}
+        <div className="absolute bottom-6 left-0 right-0 flex flex-col items-center gap-3 pointer-events-auto z-10 px-4">
+          <a href="https://github.com/AarushLenka/Monozukuri" target="_blank" rel="noopener noreferrer" className="text-black/80 hover:text-white font-mono text-[11px] tracking-widest uppercase transition-colors underline underline-offset-4 text-center">
+            [ CHECK OUT THIS PROJECT ON GITHUB ]
+          </a>
 
-            <span className="text-white/60 font-mono text-[13px] tracking-widest uppercase mt-2">REACH OUT TO ME</span>
-            <SocialLinks className="justify-center" showEmail />
-          </div>
+          <span className="text-white/60 font-mono text-[13px] tracking-widest uppercase mt-2">REACH OUT TO ME</span>
+          <SocialLinks className="justify-center" showEmail />
         </div>
       </div>
     );
