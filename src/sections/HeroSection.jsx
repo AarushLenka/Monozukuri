@@ -70,14 +70,14 @@ export default function HeroSection({ isLoading, time, isMobile }) {
       </div>
 
         {/* 3D Raspberry Pi Model */}
-        <div className="w-full flex items-center justify-center -mt-[100px] pointer-events-none">
+        <div className="w-full flex items-center justify-center -mt-[50px] pointer-events-none">
           <div className="relative w-[130vw] h-[50vh] shrink-0 flex items-center justify-center">
             <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
           </div>
         </div>
 
         {/* Social Buttons */}
-        <div className="flex justify-center mb-10 -mt-5 relative z-30">
+        <div className="flex justify-center mb-10 mt-[30px] relative z-30">
           <SocialLinks className="justify-center" />
         </div>
 
