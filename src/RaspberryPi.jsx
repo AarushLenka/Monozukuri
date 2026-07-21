@@ -9,7 +9,7 @@ function RealPiModel({ isMobile, ...props }) {
 
   useEffect(() => {
     if (isMobile) {
-      addEdgeLines(scene, { hideSolid: true, opacity: 0.3, color: '#888888', linewidth: 0.5 });
+      addEdgeLines(scene, { hideSolid: true, opacity: 0.3, color: '#ffffff', linewidth: 0.5 });
     } else {
       addEdgeLines(scene, { hideSolid: true });
     }

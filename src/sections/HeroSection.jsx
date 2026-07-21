@@ -34,28 +34,21 @@ export default function HeroSection({ isLoading, time, isMobile }) {
           LICENSED <br />BEEP-BOOP<br />MECHANIC.
         </h1>
 
-        {/* Monozukuri Card with simplified connector */}
-        <div className="flex flex-col items-start mb-4 origin-top-left scale-[0.85]">
-          {/* Simplified connector line */}
-          <svg width="2" height="40" className="mb-0 ml-[100px]">
-            <line x1="1" y1="0" x2="1" y2="40" stroke="black" strokeWidth="1" />
-          </svg>
-          {/* Connector endpoint marker */}
-          <div className="w-[14px] h-[14px] border border-black flex items-center justify-center mb-2 ml-[94px]">
-            <div className="w-[5px] h-[5px] bg-black" />
-          </div>
-
-          {/* Monozukuri card */}
-          <div
-            className="bg-[#e5e5e5] w-[200px]"
-            style={{
-              clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)'
-            }}
-          >
-            <svg className="absolute -inset-px pointer-events-none overflow-visible" width="202" height="130" viewBox="0 0 202 130">
-              <path d="M 1.5,69 L 1.5,1.5 L 180,1.5 M 200.5,20 L 200.5,116 L 188,128.5 L 110,128.5 M 90,128.5 L 1.5,128.5 L 1.5,87"
-                fill="none" stroke="black" strokeWidth="1" />
-            </svg>
+        {/* Monozukuri card */}
+        <div className="flex flex-col items-end mb-0 mt-[-10px] w-full">
+          <div className="origin-top-right scale-[0.85]">
+            <div
+              className="bg-[#e5e5e5] relative"
+              style={{
+                width: '172px',
+                height: '114px',
+                clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)'
+              }}
+            >
+              <svg className="absolute -inset-px pointer-events-none overflow-visible" width="174" height="116" viewBox="0 0 174 116">
+                <path d="M 1.5,69 L 1.5,1.5 L 154,1.5 M 172.5,20 L 172.5,102.5 L 160.5,114.5 L 97,114.5 M 77,114.5 L 1.5,114.5 L 1.5,87"
+                  fill="none" stroke="black" strokeWidth="1" />
+              </svg>
             <div className="relative z-10 pl-[14px] pt-3 pr-3 pb-3 select-none">
               <div>
                 <div className="bg-[#f0f0f0] px-[3px] -ml-[3px] py-[1px]">
@@ -76,8 +69,8 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </div>
 
         {/* 3D Raspberry Pi Model */}
-        <div className="w-full flex items-center justify-center my-2 -mt-4 pointer-events-none">
-          <div className="relative w-[130vw] h-[50vh] flex items-center justify-center -ml-[15vw]">
+        <div className="w-full flex items-center justify-center -mt-[60px] pointer-events-none">
+          <div className="relative w-[130vw] h-[50vh] shrink-0 flex items-center justify-center">
             <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
           </div>
         </div>
@@ -88,19 +81,18 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </div>
 
         {/* Me, I Guess Card */}
-        <div className="w-full max-w-[340px] mx-auto mb-8">
-          <div className="relative w-full" data-tooltip="NICE TO MEET YOU!">
+        <div className="w-[290px] mx-auto mb-8">
+          <div className="relative w-[290px] h-[190px]" data-tooltip="NICE TO MEET YOU!">
             <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[12px] uppercase font-mono font-bold tracking-widest leading-none">
               ME, I GUESS
             </div>
-            <div className="relative bg-white p-4" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 28px 100%, 0 calc(100% - 28px))' }}>
-              <svg className="absolute -inset-px pointer-events-none overflow-visible" width="100%" height="100%" viewBox="0 0 342 200" preserveAspectRatio="none">
-                <path d="M 1.5,48 L 1.5,1.5 L 320,1.5 M 340,1.5 L 340,198 L 29.5,198 L 1.5,170 L 1.5,112 M 1.5,96 L 1.5,64" fill="none" stroke="black" strokeWidth="1" />
-              </svg>
-              <p className="text-[11px] font-mono font-bold leading-[1.15] text-black">
-                Hi! I'm Aarush Lenka, a final-year ECE undergraduate at VIT Vellore specializing in microcontroller firmware and sensor fusion. Parallel to engineering, I serve on the Advisory Board for ISTE VIT, providing strategic oversight to the creative team following my tenure leading the motion graphics division. I specialize in post-production, dynamic asset creation, and visual storytelling.
-              </p>
-            </div>
+            <div className="absolute inset-0 bg-white" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 28px 100%, 0 calc(100% - 28px))' }} />
+            <svg className="absolute -inset-px pointer-events-none overflow-visible" width="292" height="192" viewBox="0 0 292 192">
+              <path d="M 1.5,48 L 1.5,1.5 L 135,1.5 M 155,1.5 L 290.5,1.5 L 290.5,190.5 L 29.5,190.5 L 1.5,162.5 L 1.5,112 M 1.5,96 L 1.5,64" fill="none" stroke="black" strokeWidth="1" />
+            </svg>
+            <p className="absolute inset-0 z-10 px-4 py-4 text-[11px] font-mono font-bold leading-[1.02] text-black flex items-center">
+              Hi! I'm Aarush Lenka, a final-year ECE undergraduate at VIT Vellore specializing in microcontroller firmware and sensor fusion. Parallel to engineering, I serve on the Advisory Board for ISTE VIT, providing strategic oversight to the creative team following my tenure leading the motion graphics division. I specialize in post-production, dynamic asset creation, and visual storytelling.
+            </p>
           </div>
         </div>
 

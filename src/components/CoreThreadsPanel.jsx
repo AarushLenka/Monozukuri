@@ -39,7 +39,7 @@ export default function CoreThreadsPanel({ isMobile }) {
                   </div>
                   <MovingSlashBar width={Math.min(item.barWidth, 80)} animDur={item.animDur} animDelay={item.animDelay} />
                 </div>
-                <div className="text-[8px] font-mono font-bold uppercase tracking-widest leading-none text-white whitespace-nowrap overflow-hidden text-ellipsis">
+                <div className="text-[8px] font-mono font-bold uppercase tracking-widest leading-tight text-white pr-2">
                   {item.title}
                 </div>
                 <div
