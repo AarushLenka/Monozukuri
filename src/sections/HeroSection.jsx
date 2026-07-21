@@ -49,19 +49,19 @@ export default function HeroSection({ isLoading, time, isMobile }) {
                 <path d="M 1.5,69 L 1.5,1.5 L 154,1.5 M 172.5,20 L 172.5,102.5 L 160.5,114.5 L 97,114.5 M 77,114.5 L 1.5,114.5 L 1.5,87"
                   fill="none" stroke="black" strokeWidth="1" />
               </svg>
-            <div className="relative z-10 pl-[14px] pt-3 pr-3 pb-3 select-none">
+            <div className="relative z-10 pl-[14px] pt-2 pr-3 pb-3 select-none">
               <div>
                 <div className="bg-[#f0f0f0] px-[3px] -ml-[3px] py-[1px]">
-                  <span className="font-bold text-[14px] tracking-wider text-black leading-none block">MONOZUKURI</span>
+                  <span className="font-bold text-[13px] tracking-wider text-black leading-none block">MONOZUKURI</span>
                 </div>
-                <div className="font-bold text-[12px] tracking-widest text-black leading-none mt-1.5" style={{ fontFamily: '"Hiragino Kaku Gothic", "Hiragino Sans", "Yu Gothic", sans-serif' }}>
+                <div className="font-bold text-[11px] tracking-widest text-black leading-none mt-1.5" style={{ fontFamily: '"Hiragino Kaku Gothic", "Hiragino Sans", "Yu Gothic", sans-serif' }}>
                   ものづくり
                 </div>
               </div>
-              <div className="text-[9px] font-mono tracking-widest leading-[1.25] text-black/90 mt-2">
+              <div className="text-[8px] font-mono tracking-widest leading-[1.25] text-black/90 mt-1.5">
                 MONO (THING)<br />+ ZUKURI (MAKING)
               </div>
-              <div className="text-[9px] font-mono tracking-widest leading-none text-black whitespace-nowrap mt-2">
+              <div className="text-[8px] font-mono tracking-widest leading-none text-black whitespace-nowrap mt-1.5">
                 THE MAKING OF THINGS
               </div>
             </div>
@@ -77,7 +77,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </div>
 
         {/* Social Buttons */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-10 -mt-10 relative z-30">
           <SocialLinks className="justify-center" />
         </div>
 

@@ -12,7 +12,7 @@ export default function AboutSection({ isMobile }) {
   /* ── Mobile Layout ── */
   if (isMobile) {
     return (
-      <div id="about-section" className="relative w-full z-[2] px-4 py-8">
+      <div id="about-section" className="relative w-full z-[2] px-4 pt-8 pb-2">
         {/* ESP32 canvas with background lineart */}
         <div className="relative w-full flex flex-col items-center mb-6">
           {/* Background lineart — scaled down */}
@@ -69,8 +69,8 @@ export default function AboutSection({ isMobile }) {
           </div>
 
           {/* 3D ESP32 canvas */}
-          <div className="relative w-[130vw] h-[80vw] left-1/2 -translate-x-1/2 bg-transparent overflow-hidden z-20 pointer-events-none flex items-center justify-center scale-[1.15]">
-            <ESP32Canvas />
+          <div className="relative w-[130vw] h-[80vw] shrink-0 bg-transparent overflow-hidden z-20 pointer-events-none flex items-center justify-center scale-[1.15]">
+            <ESP32Canvas isMobile={isMobile} />
           </div>
         </div>
 
@@ -95,7 +95,7 @@ export default function AboutSection({ isMobile }) {
             sits at the crossroads of art and
             engineering.
           </p>
-          <img src="/robot.png" alt="Robot" className="absolute right-0 bottom-4 h-[110px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
+          <img src="/robot.png" alt="Robot" className="absolute right-[-20px] bottom-10 h-[130px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
         </div>
 
 

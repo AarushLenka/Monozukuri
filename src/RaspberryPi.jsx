@@ -68,6 +68,7 @@ export default function RaspberryPiCanvas({ isLoading, isMobile }) {
         maxPolarAngle: Math.PI / 2,
         minPolarAngle: 0,
         autoRotateSpeed: 7.0,
+        enableRotate: !isMobile,
       }}
     />
   );

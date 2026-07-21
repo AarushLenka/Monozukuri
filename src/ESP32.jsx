@@ -51,7 +51,7 @@ function ESPModel({ scrollProgress, ...props }) {
   return <primitive object={scene} {...props} />;
 }
 
-export default function ESP32Canvas() {
+export default function ESP32Canvas({ isMobile }) {
   const scrollProgress = useScrollProgress('about-section');
   const { controlsRef, handleInteractionStart, handleInteractionEnd } = useOrbitSnapBack();
 
@@ -78,7 +78,7 @@ export default function ESP32Canvas() {
         ref={controlsRef}
         enableZoom={false}
         enablePan={false}
-        enableRotate={true}
+        enableRotate={!isMobile}
         onStart={handleInteractionStart}
         onEnd={handleInteractionEnd}
       />
