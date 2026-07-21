@@ -35,7 +35,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </h1>
 
         {/* Monozukuri card */}
-        <div className="flex flex-col items-end mb-0 mt-[-10px] w-full">
+        <div className="flex flex-col items-end mb-0 mt-[-30px] w-full">
           <div className="origin-top-right scale-[0.85]">
             <div
               className="bg-[#e5e5e5] relative"
@@ -70,7 +70,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
       </div>
 
         {/* 3D Raspberry Pi Model */}
-        <div className="w-full flex items-center justify-center -mt-[60px] pointer-events-none">
+        <div className="w-full flex items-center justify-center -mt-[100px] pointer-events-none">
           <div className="relative w-[130vw] h-[50vh] shrink-0 flex items-center justify-center">
             <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
           </div>

@@ -60,9 +60,10 @@ function Model({ url, initialRotation, scale = 1, wireframe = false, wireframeCo
   );
 }
 
-export default function ModelCanvas({ url, rotation = [0, 0, 0], scale = 1, wireframe = false, wireframeColor = '#ffffff' }) {
+export default function ModelCanvas({ url, rotation = [0, 0, 0], scale = 1, wireframe = false, wireframeColor = '#ffffff', isMobile }) {
   return (
     <Canvas
+      style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
       resize={{ offsetSize: true }}
       camera={{ position: [0, 0, 16], fov: 45 }}
       dpr={[1, 1.5]}

@@ -44,7 +44,7 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
                 {proj.model ? (
                   <div className="w-full h-full pointer-events-none">
                     <React.Suspense fallback={<div className="w-full h-full bg-[#1e1e1e] animate-pulse" />}>
-                      <ModelCanvas url={proj.model} rotation={proj.modelRotation || [0, 0, 0]} scale={proj.modelScale || 1} wireframe={proj.wireframe} wireframeColor={proj.wireframeColor} />
+                      <ModelCanvas url={proj.model} rotation={proj.modelRotation || [0, 0, 0]} scale={proj.modelScale || 1} wireframe={proj.wireframe} wireframeColor={proj.wireframeColor} isMobile={isMobile} />
                     </React.Suspense>
                   </div>
                 ) : proj.video ? (
