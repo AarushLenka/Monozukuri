@@ -95,7 +95,7 @@ export default function AboutSection({ isMobile }) {
             sits at the crossroads of art and
             engineering.
           </p>
-          <img src="/robot.png" alt="Robot" className="absolute right-[-20px] bottom-10 h-[130px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
+          <img src="/robot.png" alt="Robot" className="absolute right-[-50px] bottom-[90px] h-[130px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
         </div>
 
 
