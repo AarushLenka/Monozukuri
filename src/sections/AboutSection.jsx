@@ -69,29 +69,12 @@ export default function AboutSection({ isMobile }) {
           </div>
 
           {/* 3D ESP32 canvas */}
-          <div className="relative w-[85vw] h-[55vw] bg-transparent overflow-hidden z-20">
+          <div className="relative w-[130vw] h-[80vw] left-1/2 -translate-x-1/2 bg-transparent overflow-hidden z-20 pointer-events-none flex items-center justify-center scale-[1.15]">
             <ESP32Canvas />
           </div>
         </div>
 
-        {/* ESP32 info card */}
-        <div className="flex justify-center mb-6">
-          <DecorativeCard
-            className="pointer-events-auto z-30"
-            style={{ width: '220px', height: '120px' }}
-          >
-            <div className="font-mono text-[9px] font-bold uppercase tracking-widest leading-tight text-black">
-              <p>
-                ESP32 SITS AT THE center of how I think about
-              </p>
-              <div className="mt-[3px] flex items-center flex-wrap gap-x-1.5 gap-y-0.5">
-                <span>– Embedded</span>
-                <span className="border border-black rounded-[6px] px-1.5 py-[1px] leading-none mt-[1px]">Design</span>
-                <span></span>
-              </div>
-            </div>
-          </DecorativeCard>
-        </div>
+
 
         {/* Main copy */}
         <div className="z-20 w-full select-none mb-6">
@@ -103,15 +86,15 @@ export default function AboutSection({ isMobile }) {
             {' '}interactive ecosystems that
             redefine how we experience the
             digital world.
-            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-1 h-[50px] w-auto object-contain hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
+            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-1 h-[45px] -my-[15px] w-auto object-contain hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
           </p>
           <p className="relative z-10 text-white text-[22px] font-serif leading-[1.2] tracking-tight mt-4">
             From generative algorithms to
             bespoke hardware, my <span className="relative inline-block">
               practice
-              <img src="/robot.png" alt="Robot" className="inline-block align-middle ml-1 h-[70px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
+              <img src="/robot.png" alt="Robot" className="inline-block align-middle ml-1 h-[60px] -my-[20px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
             </span>
-            <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[35px] w-auto object-contain" />
+            <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[35px] -my-[10px] w-auto object-contain" />
             sits at the crossroads of art and
             engineering.
           </p>
