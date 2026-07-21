@@ -77,7 +77,7 @@ export default function AboutSection({ isMobile }) {
 
 
         {/* Main copy */}
-        <div className="z-20 w-full select-none mb-6">
+        <div className="z-20 w-full select-none mb-6 relative pb-10">
           <p className="relative z-10 text-white text-[22px] font-serif leading-[1.2] tracking-tight">
             I craft{' '}
             <svg className="inline-block align-middle mx-0 animate-splat-pulse" width="28" height="28" viewBox="0 0 100 100" fill="#10e7d9b0">
@@ -88,29 +88,17 @@ export default function AboutSection({ isMobile }) {
             digital world.
             <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-1 h-[45px] -my-[15px] w-auto object-contain hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
           </p>
-          <p className="relative z-10 text-white text-[22px] font-serif leading-[1.2] tracking-tight mt-4">
+          <p className="relative z-10 text-white text-[22px] font-serif leading-[1.2] tracking-tight mt-4 pr-[80px]">
             From generative algorithms to
-            bespoke hardware, my <span className="relative inline-block">
-              practice
-              <img src="/robot.png" alt="Robot" className="inline-block align-middle ml-1 h-[60px] -my-[20px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
-            </span>
+            bespoke hardware, my <span className="relative inline-block">practice</span>
             <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[35px] -my-[10px] w-auto object-contain" />
             sits at the crossroads of art and
             engineering.
           </p>
+          <img src="/robot.png" alt="Robot" className="absolute right-0 bottom-4 h-[110px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
         </div>
 
-        {/* ASCII Art Video Box */}
-        <div className="w-[70vw] mx-auto z-40 shadow-2xl bg-[#e5e5e5] border border-black p-[6px] mt-[120px]">
-          <video
-            src="/asciiart.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-auto block"
-          />
-        </div>
+
       </div>
     );
   }
