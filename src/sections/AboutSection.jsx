@@ -91,7 +91,7 @@ export default function AboutSection({ isMobile }) {
           <p className="relative z-10 text-white text-[22px] font-serif leading-[1.2] tracking-tight mt-4 pr-[80px]">
             From generative algorithms to
             bespoke hardware, my <span className="relative inline-block">practice</span>
-            <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[35px] -my-[10px] w-auto object-contain" />
+            <img src="/rose.png" alt="Rose" className="inline-block align-middle ml-1 mr-0.5 h-[35px] -my-[14px] w-auto object-contain" />
             sits at the crossroads of art and
             engineering.
           </p>
