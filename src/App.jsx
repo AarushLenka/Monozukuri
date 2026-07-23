@@ -119,6 +119,18 @@ export default function App() {
             </div>
           )}
 
+          {/* Mobile grid overlay — 4 columns, rows tile to fill full page height */}
+          {isMobile && (
+            <div
+              className="absolute inset-0 pointer-events-none z-[1]"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right, rgba(255,255,255,0.20) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.20) 1px, transparent 1px)',
+                backgroundSize: '25% 100px',
+              }}
+            />
+          )}
+
           <HeroSection time={time} isLoading={isLoading} isMobile={isMobile} />
           <AboutSection isMobile={isMobile} />
           <ProjectsSection onProjectSelect={setSelectedProject} isMobile={isMobile} />
