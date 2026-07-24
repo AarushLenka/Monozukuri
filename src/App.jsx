@@ -119,16 +119,26 @@ export default function App() {
             </div>
           )}
 
-          {/* Mobile grid overlay — 4 columns, rows tile to fill full page height */}
+          {/* Mobile grid overlay — 3 columns, rows tile to fill full page height */}
           {isMobile && (
-            <div
-              className="absolute inset-0 pointer-events-none z-[1]"
-              style={{
-                backgroundImage:
-                  'linear-gradient(to right, rgba(255,255,255,0.20) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.20) 1px, transparent 1px)',
-                backgroundSize: '25% 100px',
-              }}
-            />
+            <>
+              <div
+                className="absolute inset-0 pointer-events-none z-[1] overflow-hidden"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(to right, rgba(255,255,255,0.20) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.20) 1px, transparent 1px)',
+                  backgroundSize: '33.333% 100px',
+                }}
+              />
+              {/* Intersection crosshair markers at each vertical × horizontal line crossing */}
+              <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
+                {['33.333%', '66.666%'].flatMap((left) =>
+                  Array.from({ length: 120 }, (_, i) => i * 100).map((top) => (
+                    <GridMarker key={`${left}-${top}`} style={{ left, top: `${top}px` }} />
+                  ))
+                )}
+              </div>
+            </>
           )}
 
           <HeroSection time={time} isLoading={isLoading} isMobile={isMobile} />
