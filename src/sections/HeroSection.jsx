@@ -10,8 +10,100 @@ import { CONNECTOR_CONFIG } from '../config/heroConfig';
  *
  * @param {boolean} isLoading  True while the Loader is still visible; passed to RaspberryPiCanvas.
  * @param {string}  time       Formatted local time string from App state.
+ * @param {boolean} isMobile   True when viewport ≤ 768px.
  */
-export default function HeroSection({ isLoading, time }) {
+export default function HeroSection({ isLoading, time, isMobile }) {
+
+  /* ── Mobile Layout ── */
+  if (isMobile) {
+    return (
+      <div className="relative w-full z-[2] px-4 pt-3 pb-8">
+        {/* Header */}
+        <header className="flex justify-between items-start mb-6">
+          <div className="text-sm font-medium tracking-widest">MONOZUKURI</div>
+          <div className="text-[10px] uppercase font-mono tracking-widest text-right leading-tight">
+            LOCAL TIME<br />IND {time}
+          </div>
+        </header>
+
+        {/* Title */}
+        <h1
+          className="text-[32px] leading-[0.88] font-normal tracking-tight text-black mb-6"
+          style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}
+        >
+          LICENSED <br />BEEP-BOOP<br />MECHANIC.
+        </h1>
+
+        {/* Monozukuri card */}
+        <div className="flex flex-col items-end mb-0 mt-[-30px] w-full">
+          <div className="origin-top-right scale-[0.85]">
+            <div
+              className="bg-[#e5e5e5] relative"
+              style={{
+                width: '172px',
+                height: '114px',
+                clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)'
+              }}
+            >
+              <svg className="absolute -inset-px pointer-events-none overflow-visible" width="174" height="116" viewBox="0 0 174 116">
+                <path d="M 1.5,69 L 1.5,1.5 L 154,1.5 M 172.5,20 L 172.5,102.5 L 160.5,114.5 L 97,114.5 M 77,114.5 L 1.5,114.5 L 1.5,87"
+                  fill="none" stroke="black" strokeWidth="1" />
+              </svg>
+            <div className="relative z-10 pl-[14px] pt-2 pr-3 pb-3 select-none">
+              <div>
+                <div className="bg-[#f0f0f0] px-[3px] -ml-[3px] py-[1px]">
+                  <span className="font-bold text-[13px] tracking-wider text-black leading-none block">MONOZUKURI</span>
+                </div>
+                <div className="font-bold text-[11px] tracking-widest text-black leading-none mt-1.5" style={{ fontFamily: '"Hiragino Kaku Gothic", "Hiragino Sans", "Yu Gothic", sans-serif' }}>
+                  ものづくり
+                </div>
+              </div>
+              <div className="text-[8px] font-mono tracking-widest leading-[1.25] text-black/90 mt-1.5">
+                MONO (THING)<br />+ ZUKURI (MAKING)
+              </div>
+              <div className="text-[8px] font-mono tracking-widest leading-none text-black whitespace-nowrap mt-1.5">
+                THE MAKING OF THINGS
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        {/* 3D Raspberry Pi Model */}
+        <div className="w-full flex items-center justify-center -mt-[50px] pointer-events-none">
+          <div className="relative w-[130vw] h-[50vh] shrink-0 flex items-center justify-center">
+            <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
+          </div>
+        </div>
+
+        {/* Social Buttons */}
+        <div className="flex justify-center mb-10 -mt-[20px] relative z-30">
+          <SocialLinks className="justify-center" />
+        </div>
+
+        {/* Me, I Guess Card */}
+        <div className="w-[290px] mx-auto mb-8">
+          <div className="relative w-[290px] h-[190px]" data-tooltip="NICE TO MEET YOU!">
+            <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[12px] uppercase font-mono font-bold tracking-widest leading-none">
+              ME, I GUESS
+            </div>
+            <div className="absolute inset-0 bg-white" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 28px 100%, 0 calc(100% - 28px))' }} />
+            <svg className="absolute -inset-px pointer-events-none overflow-visible" width="292" height="192" viewBox="0 0 292 192">
+              <path d="M 1.5,48 L 1.5,1.5 L 135,1.5 M 155,1.5 L 290.5,1.5 L 290.5,190.5 L 29.5,190.5 L 1.5,162.5 L 1.5,112 M 1.5,96 L 1.5,64" fill="none" stroke="black" strokeWidth="1" />
+            </svg>
+            <p className="absolute inset-0 z-10 px-4 py-4 text-[11px] font-mono font-bold leading-[1.02] text-black flex items-center">
+              Hi! I'm Aarush Lenka, a final-year ECE undergraduate at VIT Vellore specializing in microcontroller firmware and sensor fusion. Parallel to engineering, I serve on the Advisory Board for ISTE VIT, providing strategic oversight to the creative team following my tenure leading the motion graphics division. I specialize in post-production, dynamic asset creation, and visual storytelling.
+            </p>
+          </div>
+        </div>
+
+        {/* Core Threads Panel */}
+        <CoreThreadsPanel isMobile={isMobile} />
+      </div>
+    );
+  }
+
+  /* ── Desktop Layout (untouched) ── */
   return (
     <div className="relative w-full overflow-hidden z-[2]" style={{ height: 'var(--logical-vh)' }}>
       <div className="relative w-full h-full z-10 pointer-events-none">
@@ -55,7 +147,7 @@ export default function HeroSection({ isLoading, time }) {
 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] pointer-events-auto z-20">
           <div className="relative w-[600px] h-[650px] flex items-center justify-center pointer-events-auto">
-            <RaspberryPiCanvas isLoading={isLoading} />
+            <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
           </div>
         </div>
 

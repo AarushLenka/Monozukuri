@@ -51,14 +51,15 @@ function ESPModel({ scrollProgress, ...props }) {
   return <primitive object={scene} {...props} />;
 }
 
-export default function ESP32Canvas() {
+export default function ESP32Canvas({ isMobile }) {
   const scrollProgress = useScrollProgress('about-section');
   const { controlsRef, handleInteractionStart, handleInteractionEnd } = useOrbitSnapBack();
 
   return (
     <Canvas
       camera={{ position: [0, 0, 6], fov: 45 }}
-      className="w-full h-full cursor-grab active:cursor-grabbing"
+      className={`w-full h-full ${isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}
+      style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
       resize={{ offsetSize: true }}
       dpr={[1, 1.5]}
       gl={{ powerPreference: 'high-performance', antialias: false }}
@@ -78,7 +79,7 @@ export default function ESP32Canvas() {
         ref={controlsRef}
         enableZoom={false}
         enablePan={false}
-        enableRotate={true}
+        enableRotate={!isMobile}
         onStart={handleInteractionStart}
         onEnd={handleInteractionEnd}
       />
