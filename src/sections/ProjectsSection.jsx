@@ -121,7 +121,7 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
               </div>
 
               {/* Name + description below image */}
-              <div className="font-mono text-[8px] font-bold uppercase tracking-tighter text-white/80 mt-2 leading-[1.2] w-full">
+              <div className="font-mono text-[7px] font-bold uppercase tracking-tighter text-white/80 mt-2 leading-[1.2] w-full">
                 {proj.title}
                 <span className="text-white/50 mx-1">-</span>
                 <span className="text-white/60">{proj.desc}</span>
