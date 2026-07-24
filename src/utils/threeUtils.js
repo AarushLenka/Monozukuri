@@ -9,9 +9,9 @@ const WIREFRAME_COLOR = '#ffffff';
  * Optionally hides the solid mesh surface (wireframe-only mode).
  *
  * @param {THREE.Object3D} scene
- * @param {{ hideSolid?: boolean, transparent?: boolean, color?: string }} options
+ * @param {{ hideSolid?: boolean, transparent?: boolean, color?: string, opacity?: number, linewidth?: number }} options
  */
-export function addEdgeLines(scene, { hideSolid = false, transparent = false, color = WIREFRAME_COLOR } = {}) {
+export function addEdgeLines(scene, { hideSolid = false, transparent = false, color = WIREFRAME_COLOR, opacity = 1, linewidth = 1 } = {}) {
   scene.traverse((child) => {
     if (!child.isMesh || !child.geometry) return;
 
@@ -25,8 +25,9 @@ export function addEdgeLines(scene, { hideSolid = false, transparent = false, co
         edges,
         new THREE.LineBasicMaterial({
           color: color,
-          transparent,
-          opacity: transparent ? 1 : undefined,
+          transparent: transparent || opacity < 1,
+          opacity: opacity,
+          linewidth: linewidth,
         })
       );
       line.userData.isWireframeOutline = true;

@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const RibbonMesh = ({ renderSide }) => {
   const meshRef = useRef();
@@ -133,16 +134,19 @@ const RibbonMesh = ({ renderSide }) => {
 };
 
 export default function CreativeRibbon({ mousePos = { x: 0, y: 0 } }) {
-  const transform = `rotateY(${mousePos.x * 0.02}deg) rotateX(${-mousePos.y * 0.02}deg)`;
+  const isMobile = useIsMobile();
+  const transform = isMobile
+    ? 'none'
+    : `rotateY(${mousePos.x * 0.02}deg) rotateX(${-mousePos.y * 0.02}deg)`;
 
   return (
     <>
       {/* Back layer (Behind the gallery) */}
       <div 
-        className="absolute inset-0 w-full h-full pointer-events-none z-0 transition-transform duration-[400ms] ease-out"
+        className={`absolute inset-0 w-full h-full pointer-events-none z-0 transition-transform duration-[400ms] ease-out ${isMobile ? 'opacity-60' : ''}`}
         style={{ transform, transformStyle: 'preserve-3d' }}
       >
-        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }}>
+        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }} dpr={isMobile ? [1, 1] : [1, 2]}>
           <ambientLight intensity={1} />
           <RibbonMesh renderSide="back" />
         </Canvas>
@@ -150,10 +154,10 @@ export default function CreativeRibbon({ mousePos = { x: 0, y: 0 } }) {
 
       {/* Front layer (In front of the gallery) */}
       <div 
-        className="absolute inset-0 w-full h-full pointer-events-none z-20 transition-transform duration-[400ms] ease-out"
+        className={`absolute inset-0 w-full h-full pointer-events-none z-20 transition-transform duration-[400ms] ease-out ${isMobile ? 'opacity-60' : ''}`}
         style={{ transform, transformStyle: 'preserve-3d' }}
       >
-        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }}>
+        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }} dpr={isMobile ? [1, 1] : [1, 2]}>
           <ambientLight intensity={1} />
           <RibbonMesh renderSide="front" />
         </Canvas>
