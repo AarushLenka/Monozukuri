@@ -1,5 +1,5 @@
 import React from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, invalidate } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF, Center } from '@react-three/drei';
 import { useOrbitSnapBack } from './hooks/useOrbitSnapBack';
 import { useScrollProgress } from './hooks/useScrollProgress';
@@ -7,12 +7,14 @@ import { useSceneMeshes } from './hooks/useSceneMeshes';
 import { addEdgeLines, setMeshOpacity } from './utils/threeUtils';
 
 function ESPModel({ scrollProgress, ...props }) {
-  const { scene } = useGLTF('/esp32.glb');
+  // useMeshopt=true wires EXT_meshopt_compression decoding; useDraco left at default.
+  const { scene } = useGLTF('/esp32.glb', undefined, true);
   const meshesRef = useSceneMeshes(scene, () => {
     addEdgeLines(scene, { transparent: true });
   });
 
   useFrame(() => {
+    invalidate();
     const meshes = meshesRef.current;
     if (!meshes.length) return;
 
@@ -57,6 +59,7 @@ export default function ESP32Canvas({ isMobile }) {
 
   return (
     <Canvas
+      frameloop="demand"
       camera={{ position: [0, 0, 6], fov: 45 }}
       className={`w-full h-full ${isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}
       style={{ pointerEvents: isMobile ? 'none' : 'auto' }}

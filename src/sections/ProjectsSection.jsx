@@ -1,5 +1,5 @@
-import React from 'react';
-import ModelCanvas from '../components/ModelCanvas';
+import React, { lazy } from 'react';
+const ModelCanvas = lazy(() => import('../components/ModelCanvas'));
 import DecorativeCard from '../components/DecorativeCard';
 import ZigzagPattern from '../components/ZigzagPattern';
 import { PROJECTS_DATA } from '../constants/projects';
@@ -108,6 +108,8 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
                       loop
                       muted
                       playsInline
+                      preload="none"
+                      loading="lazy"
                       className={`w-full h-full opacity-90 ${proj.objectFit ? `object-${proj.objectFit}` : 'object-cover'}`}
                     />
                   ) : (
@@ -231,6 +233,8 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
                   loop
                   muted
                   playsInline
+                  preload="none"
+                  loading="lazy"
                   className={`w-full h-full opacity-90 ${proj.objectFit ? `object-${proj.objectFit}` : 'object-cover'}`}
                 />
               ) : (
@@ -252,7 +256,7 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
                 <path d="M1 1L13 13M1 13L13 1" />
               </svg>
             </button>
-            <img src="/pilot.png" alt="Pilot" className="w-full h-auto block" />
+            <img src="/pilot.webp" alt="Pilot" className="w-full h-auto block" />
           </div>
 
           <DecorativeCard className="absolute inset-0">

@@ -22,7 +22,8 @@ const HoverVideo = ({ src, isActive }) => {
       loop
       muted
       playsInline
-      preload="metadata"
+      preload="none"
+      loading="lazy"
       className={`absolute inset-0 w-full h-full object-cover transition-all duration-[800ms] ${isActive ? 'grayscale-0 opacity-100 mix-blend-normal' : 'grayscale opacity-40 mix-blend-luminosity'}`}
     />
   );
