@@ -119,21 +119,21 @@ export default function App() {
             </div>
           )}
 
-          {/* Mobile grid overlay — 3 columns, rows tile to fill full page height */}
+          {/* Mobile grid overlay — 3 columns, very faint, 2x row height */}
           {isMobile && (
             <>
               <div
                 className="absolute inset-0 pointer-events-none z-[1] overflow-hidden"
                 style={{
                   backgroundImage:
-                    'linear-gradient(to right, rgba(255,255,255,0.20) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.20) 1px, transparent 1px)',
-                  backgroundSize: '33.333% 100px',
+                    'linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px)',
+                  backgroundSize: '33.333% 200px',
                 }}
               />
-              {/* Intersection crosshair markers at each vertical × horizontal line crossing */}
-              <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden">
+              {/* Intersection crosshair markers at each vertical × horizontal line crossing (faint) */}
+              <div className="absolute inset-0 pointer-events-none z-[1] overflow-hidden opacity-30">
                 {['33.333%', '66.666%'].flatMap((left) =>
-                  Array.from({ length: 120 }, (_, i) => i * 100).map((top) => (
+                  Array.from({ length: 60 }, (_, i) => i * 200).map((top) => (
                     <GridMarker key={`${left}-${top}`} style={{ left, top: `${top}px` }} />
                   ))
                 )}
