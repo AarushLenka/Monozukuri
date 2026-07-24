@@ -86,16 +86,16 @@ export default function AboutSection({ isMobile }) {
             {' '}interactive ecosystems that
             redefine how we experience the
             digital world.
-            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-1 h-[55px] -my-[20px] w-auto object-contain hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
+            <img src="/jojo_arrow.webp" alt="Arrow" className="inline-block align-middle ml-1 h-[55px] -my-[20px] w-auto object-contain hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
           </p>
           <p className="relative z-10 text-white text-[22px] font-serif leading-[1.2] tracking-tight mt-4 pr-[80px]">
             From generative algorithms to
             bespoke hardware, my <span className="relative inline-block">practice</span>
-            <img src="/rose.png" alt="Rose" className="inline-block align-middle ml-1 mr-0.5 h-[35px] -my-[14px] w-auto object-contain" />
+            <img src="/rose.webp" alt="Rose" className="inline-block align-middle ml-1 mr-0.5 h-[35px] -my-[14px] w-auto object-contain" />
             sits at the crossroads of art and
             engineering.
           </p>
-          <img src="/robot.png" alt="Robot" className="absolute right-[-50px] bottom-[90px] h-[160px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
+          <img src="/robot.webp" alt="Robot" className="absolute right-[-50px] bottom-[90px] h-[160px] w-auto max-w-none object-contain" data-tooltip="HOLA, ISTE 👋" />
         </div>
 
 
@@ -209,15 +209,15 @@ export default function AboutSection({ isMobile }) {
             {' '}interactive ecosystems that<br />
             redefine how we experience the<br />
             digital world.
-            <img src="/jojo_arrow.png" alt="Arrow" className="inline-block align-middle ml-0 h-[100px] w-auto object-contain -my-4 hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
+            <img src="/jojo_arrow.webp" alt="Arrow" className="inline-block align-middle ml-0 h-[100px] w-auto object-contain -my-4 hover:opacity-90 transition-opacity" data-tooltip="I, AARUSH LENKA, HAVE A DREAM" />
           </p>
           <p className="relative z-10 text-white text-[48px] font-serif leading-[1.15] tracking-tight mt-6 whitespace-nowrap">
             From generative algorithms to<br />
             bespoke hardware, my <span className="relative inline-block">
               practice
-              <img src="/robot.png" alt="Robot" className="absolute left-[70%] bottom-[-40%] h-[340px] w-auto max-w-none object-contain hover:scale-105 transition-transform duration-300" data-tooltip="HOLA, ISTE 👋" />
+              <img src="/robot.webp" alt="Robot" className="absolute left-[70%] bottom-[-40%] h-[340px] w-auto max-w-none object-contain hover:scale-105 transition-transform duration-300" data-tooltip="HOLA, ISTE 👋" />
             </span><br />
-            <img src="/rose.png" alt="Rose" className="inline-block align-middle mx-1 h-[60px] w-auto object-contain" />
+            <img src="/rose.webp" alt="Rose" className="inline-block align-middle mx-1 h-[60px] w-auto object-contain" />
             sits at the crossroads of art and<br />
             engineering.
           </p>
@@ -236,6 +236,8 @@ export default function AboutSection({ isMobile }) {
             loop
             muted
             playsInline
+            preload="none"
+            loading="lazy"
             className="w-full h-auto block"
           />
         </div>

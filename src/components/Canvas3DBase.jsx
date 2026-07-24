@@ -32,6 +32,7 @@ export default function Canvas3DBase({
 
   return (
     <Canvas
+      frameloop="demand"
       camera={{ position: cameraPosition, fov }}
       className={`w-full h-full ${sceneProps?.isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}
       style={{ pointerEvents: sceneProps?.isMobile ? 'none' : 'auto' }}

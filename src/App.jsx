@@ -1,18 +1,22 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, lazy, Suspense } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import BackgroundBlobs from './components/BackgroundBlobs';
 import GridMarker from './components/GridMarker';
 import Loader from './components/Loader';
 import HeroSection from './sections/HeroSection';
-import AboutSection from './sections/AboutSection';
-import ProjectsSection from './sections/ProjectsSection';
-import CreativeWorkSection from './sections/CreativeWorkSection';
-import CitySection from './sections/CitySection';
-import ProjectModal from './sections/ProjectModal';
-import ClickHereCursor from './components/ClickHereCursor';
-import CursorTooltip from './components/CursorTooltip';
-import { GRID_CONFIG } from './config/heroConfig';
 import { useIsMobile } from './hooks/useIsMobile';
+import { GRID_CONFIG } from './config/heroConfig';
+
+// Below-the-fold sections — lazy-split so Three.js/gsap/framer-motion/animejs
+// only load on demand once the user actually approaches that section,
+// keeping the critical path to first paint tiny (hero only).
+const AboutSection = lazy(() => import('./sections/AboutSection'));
+const ProjectsSection = lazy(() => import('./sections/ProjectsSection'));
+const CreativeWorkSection = lazy(() => import('./sections/CreativeWorkSection'));
+const CitySection = lazy(() => import('./sections/CitySection'));
+const ProjectModal = lazy(() => import('./sections/ProjectModal'));
+const ClickHereCursor = lazy(() => import('./components/ClickHereCursor'));
+const CursorTooltip = lazy(() => import('./components/CursorTooltip'));
 
 export default function App() {
   const [time, setTime] = useState('00:43 AM');
@@ -142,17 +146,31 @@ export default function App() {
           )}
 
           <HeroSection time={time} isLoading={isLoading} isMobile={isMobile} />
-          <AboutSection isMobile={isMobile} />
-          <ProjectsSection onProjectSelect={setSelectedProject} isMobile={isMobile} />
-          <CreativeWorkSection isMobile={isMobile} />
-          <CitySection isMobile={isMobile} />
+          <Suspense fallback={null}>
+            <AboutSection isMobile={isMobile} />
+          </Suspense>
+          <Suspense fallback={null}>
+            <ProjectsSection onProjectSelect={setSelectedProject} isMobile={isMobile} />
+          </Suspense>
+          <Suspense fallback={null}>
+            <CreativeWorkSection isMobile={isMobile} />
+          </Suspense>
+          <Suspense fallback={null}>
+            <CitySection isMobile={isMobile} />
+          </Suspense>
         </div>
       </div>
 
-      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      <Suspense fallback={null}>
+        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      </Suspense>
       {/* Hide ClickHereCursor and CursorTooltip on mobile */}
-      {!isMobile && <ClickHereCursor isModalOpen={!!selectedProject} />}
-      {!isMobile && <CursorTooltip />}
+      {!isMobile && (
+        <Suspense fallback={null}>
+          <ClickHereCursor isModalOpen={!!selectedProject} />
+          <CursorTooltip />
+        </Suspense>
+      )}
 
       <SpeedInsights />
     </>

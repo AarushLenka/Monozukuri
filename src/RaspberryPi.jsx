@@ -1,11 +1,13 @@
 import React, { useRef, useEffect } from 'react';
 import { Environment, useGLTF, Center } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
 import gsap from 'gsap';
 import Canvas3DBase from './components/Canvas3DBase';
 import { addEdgeLines } from './utils/threeUtils';
 
 function RealPiModel({ isMobile, ...props }) {
-  const { scene } = useGLTF('/raspberrypi5.glb');
+  // useMeshopt=true wires EXT_meshopt_compression decoding; useDraco left at default.
+  const { scene } = useGLTF('/raspberrypi5.glb', undefined, true);
 
   useEffect(() => {
     if (isMobile) {
@@ -20,13 +22,14 @@ function RealPiModel({ isMobile, ...props }) {
 
 function PiScene({ onAnimComplete, isLoading, isMobile }) {
   const groupRef = useRef();
+  const { invalidate } = useThree();
 
   useEffect(() => {
     if (!groupRef.current) return;
     if (isLoading) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(groupRef.current.rotation, {
+      const tween = gsap.to(groupRef.current.rotation, {
         x: Math.PI / 4,
         y: -Math.PI / 6,
         z: 0,
@@ -35,8 +38,10 @@ function PiScene({ onAnimComplete, isLoading, isMobile }) {
         delay: 0.2,
         onComplete: () => {
           if (onAnimComplete) onAnimComplete();
+          invalidate();
         },
       });
+      tween.eventCallback('onUpdate', invalidate);
     });
 
     return () => ctx.revert();

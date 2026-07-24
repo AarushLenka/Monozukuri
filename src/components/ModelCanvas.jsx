@@ -2,10 +2,11 @@ import React, { useRef, useMemo, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { addEdgeLines } from '../utils/threeUtils';
-import * as THREE from 'three';
+import { Box3, Vector3 } from 'three';
 
 function Model({ url, initialRotation, scale = 1, wireframe = false, wireframeColor = '#ffffff' }) {
-  const { scene } = useGLTF(url);
+  // useMeshopt=true wires EXT_meshopt_compression decoding; useDraco left at default.
+  const { scene } = useGLTF(url, undefined, true);
   const outerGroupRef = useRef();
   const innerGroupRef = useRef();
 
@@ -32,8 +33,8 @@ function Model({ url, initialRotation, scale = 1, wireframe = false, wireframeCo
       innerGroupRef.current.updateMatrixWorld(true);
 
       // 2. Measure bounds
-      const box = new THREE.Box3().setFromObject(innerGroupRef.current);
-      const size = box.getSize(new THREE.Vector3());
+      const box = new Box3().setFromObject(innerGroupRef.current);
+      const size = box.getSize(new Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
 
       // 3. Apply normalization scale
@@ -44,8 +45,8 @@ function Model({ url, initialRotation, scale = 1, wireframe = false, wireframeCo
       
       // 4. Center it perfectly
       innerGroupRef.current.updateMatrixWorld(true);
-      const newBox = new THREE.Box3().setFromObject(innerGroupRef.current);
-      const center = newBox.getCenter(new THREE.Vector3());
+      const newBox = new Box3().setFromObject(innerGroupRef.current);
+      const center = newBox.getCenter(new Vector3());
       
       innerGroupRef.current.position.sub(center);
     }
@@ -63,6 +64,7 @@ function Model({ url, initialRotation, scale = 1, wireframe = false, wireframeCo
 export default function ModelCanvas({ url, rotation = [0, 0, 0], scale = 1, wireframe = false, wireframeColor = '#ffffff', isMobile }) {
   return (
     <Canvas
+      frameloop="demand"
       style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
       resize={{ offsetSize: true }}
       camera={{ position: [0, 0, 16], fov: 45 }}

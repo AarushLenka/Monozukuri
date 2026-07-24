@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import AnimatedConnector from '../components/AnimatedConnector';
 import CoreThreadsPanel from '../components/CoreThreadsPanel';
-import RaspberryPiCanvas from '../RaspberryPi';
+const RaspberryPiCanvas = lazy(() => import('../RaspberryPi'));
 import SocialLinks from '../components/SocialLinks';
 import { CONNECTOR_CONFIG } from '../config/heroConfig';
+import { useGLTF } from '@react-three/drei';
+
+useGLTF.preload('/raspberrypi5.glb');
 
 /**
  * The landing hero section (first visible screen).
@@ -72,7 +75,9 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         {/* 3D Raspberry Pi Model */}
         <div className="w-full flex items-center justify-center -mt-[50px] pointer-events-none">
           <div className="relative w-[130vw] h-[50vh] shrink-0 flex items-center justify-center">
-            <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
+            <Suspense fallback={null}>
+              <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
+            </Suspense>
           </div>
         </div>
 
@@ -147,7 +152,9 @@ export default function HeroSection({ isLoading, time, isMobile }) {
 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] pointer-events-auto z-20">
           <div className="relative w-[600px] h-[650px] flex items-center justify-center pointer-events-auto">
-            <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
+            <Suspense fallback={null}>
+              <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
+            </Suspense>
           </div>
         </div>
 
