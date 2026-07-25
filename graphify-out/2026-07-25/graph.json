@@ -53,7 +53,6 @@
       "_origin": "ast",
       "id": "eslint_config",
       "community": 9,
-      "community_name": "ESLint Config",
       "norm_label": "eslint.config.js"
     },
     {
@@ -64,7 +63,6 @@
       "_origin": "ast",
       "id": "package",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "package.json"
     },
     {
@@ -75,7 +73,6 @@
       "_origin": "ast",
       "id": "package_name",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "name"
     },
     {
@@ -86,7 +83,6 @@
       "_origin": "ast",
       "id": "package_private",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "private"
     },
     {
@@ -97,7 +93,6 @@
       "_origin": "ast",
       "id": "package_version",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "version"
     },
     {
@@ -108,7 +103,6 @@
       "_origin": "ast",
       "id": "package_type",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "type"
     },
     {
@@ -119,7 +113,6 @@
       "_origin": "ast",
       "id": "package_scripts",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "scripts"
     },
     {
@@ -130,7 +123,6 @@
       "_origin": "ast",
       "id": "package_scripts_dev",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "dev"
     },
     {
@@ -141,7 +133,6 @@
       "_origin": "ast",
       "id": "package_scripts_build",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "build"
     },
     {
@@ -152,7 +143,6 @@
       "_origin": "ast",
       "id": "package_scripts_lint",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "lint"
     },
     {
@@ -163,7 +153,6 @@
       "_origin": "ast",
       "id": "package_scripts_preview",
       "community": 7,
-      "community_name": "Package Manifest",
       "norm_label": "preview"
     },
     {
@@ -174,7 +163,6 @@
       "_origin": "ast",
       "id": "package_dependencies",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "dependencies"
     },
     {
@@ -185,7 +173,6 @@
       "_origin": "ast",
       "id": "package_dependencies_react_three_drei",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "@react-three/drei"
     },
     {
@@ -196,7 +183,6 @@
       "_origin": "ast",
       "id": "react_three_drei",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "@react-three/drei"
     },
     {
@@ -207,7 +193,6 @@
       "_origin": "ast",
       "id": "package_dependencies_react_three_fiber",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "@react-three/fiber"
     },
     {
@@ -218,7 +203,6 @@
       "_origin": "ast",
       "id": "react_three_fiber",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "@react-three/fiber"
     },
     {
@@ -229,7 +213,6 @@
       "_origin": "ast",
       "id": "package_dependencies_vercel_analytics",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "@vercel/analytics"
     },
     {
@@ -240,7 +223,6 @@
       "_origin": "ast",
       "id": "vercel_analytics",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "@vercel/analytics"
     },
     {
@@ -251,7 +233,6 @@
       "_origin": "ast",
       "id": "package_dependencies_vercel_speed_insights",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "@vercel/speed-insights"
     },
     {
@@ -262,7 +243,6 @@
       "_origin": "ast",
       "id": "vercel_speed_insights",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "@vercel/speed-insights"
     },
     {
@@ -273,7 +253,6 @@
       "_origin": "ast",
       "id": "package_dependencies_animejs",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "animejs"
     },
     {
@@ -284,7 +263,6 @@
       "_origin": "ast",
       "id": "animejs",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "animejs"
     },
     {
@@ -295,7 +273,6 @@
       "_origin": "ast",
       "id": "package_dependencies_framer_motion",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "framer-motion"
     },
     {
@@ -306,7 +283,6 @@
       "_origin": "ast",
       "id": "framer_motion",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "framer-motion"
     },
     {
@@ -317,7 +293,6 @@
       "_origin": "ast",
       "id": "package_dependencies_gsap",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "gsap"
     },
     {
@@ -328,7 +303,6 @@
       "_origin": "ast",
       "id": "gsap",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "gsap"
     },
     {
@@ -339,7 +313,6 @@
       "_origin": "ast",
       "id": "package_dependencies_puppeteer",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "puppeteer"
     },
     {
@@ -350,7 +323,6 @@
       "_origin": "ast",
       "id": "puppeteer",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "puppeteer"
     },
     {
@@ -360,8 +332,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "package_dependencies_react",
-      "community": 4,
-      "community_name": "Runtime Deps",
+      "community": 3,
       "norm_label": "react"
     },
     {
@@ -371,8 +342,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "react",
-      "community": 4,
-      "community_name": "Runtime Deps",
+      "community": 3,
       "norm_label": "react"
     },
     {
@@ -383,7 +353,6 @@
       "_origin": "ast",
       "id": "package_dependencies_react_dom",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "react-dom"
     },
     {
@@ -394,7 +363,6 @@
       "_origin": "ast",
       "id": "react_dom",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "react-dom"
     },
     {
@@ -405,7 +373,6 @@
       "_origin": "ast",
       "id": "package_dependencies_three",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "three"
     },
     {
@@ -416,7 +383,6 @@
       "_origin": "ast",
       "id": "three",
       "community": 4,
-      "community_name": "Runtime Deps",
       "norm_label": "three"
     },
     {
@@ -427,7 +393,6 @@
       "_origin": "ast",
       "id": "package_devdependencies",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "devdependencies"
     },
     {
@@ -438,7 +403,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_eslint_js",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "@eslint/js"
     },
     {
@@ -449,7 +413,6 @@
       "_origin": "ast",
       "id": "eslint_js",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "@eslint/js"
     },
     {
@@ -460,7 +423,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_types_react",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "@types/react"
     },
     {
@@ -471,7 +433,6 @@
       "_origin": "ast",
       "id": "types_react",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "@types/react"
     },
     {
@@ -482,7 +443,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_types_react_dom",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "@types/react-dom"
     },
     {
@@ -493,7 +453,6 @@
       "_origin": "ast",
       "id": "types_react_dom",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "@types/react-dom"
     },
     {
@@ -504,7 +463,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_vitejs_plugin_react",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "@vitejs/plugin-react"
     },
     {
@@ -515,7 +473,6 @@
       "_origin": "ast",
       "id": "vitejs_plugin_react",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "@vitejs/plugin-react"
     },
     {
@@ -526,7 +483,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_autoprefixer",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "autoprefixer"
     },
     {
@@ -537,7 +493,6 @@
       "_origin": "ast",
       "id": "autoprefixer",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "autoprefixer"
     },
     {
@@ -548,7 +503,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_eslint",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "eslint"
     },
     {
@@ -559,7 +513,6 @@
       "_origin": "ast",
       "id": "eslint",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "eslint"
     },
     {
@@ -570,7 +523,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_eslint_plugin_react_hooks",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "eslint-plugin-react-hooks"
     },
     {
@@ -581,7 +533,6 @@
       "_origin": "ast",
       "id": "eslint_plugin_react_hooks",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "eslint-plugin-react-hooks"
     },
     {
@@ -592,7 +543,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_eslint_plugin_react_refresh",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "eslint-plugin-react-refresh"
     },
     {
@@ -603,7 +553,6 @@
       "_origin": "ast",
       "id": "eslint_plugin_react_refresh",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "eslint-plugin-react-refresh"
     },
     {
@@ -614,7 +563,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_globals",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "globals"
     },
     {
@@ -625,7 +573,6 @@
       "_origin": "ast",
       "id": "globals",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "globals"
     },
     {
@@ -636,7 +583,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_lucide_react",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "lucide-react"
     },
     {
@@ -647,7 +593,6 @@
       "_origin": "ast",
       "id": "lucide_react",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "lucide-react"
     },
     {
@@ -658,7 +603,6 @@
       "_origin": "ast",
       "id": "package_devdependencies_postcss",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "postcss"
     },
     {
@@ -669,118 +613,47 @@
       "_origin": "ast",
       "id": "postcss",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "postcss"
     },
     {
-      "label": "rollup-plugin-visualizer",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L37",
-      "_origin": "ast",
-      "id": "package_devdependencies_rollup_plugin_visualizer",
-      "community": 1,
-      "community_name": "Dev Tooling",
-      "norm_label": "rollup-plugin-visualizer"
-    },
-    {
-      "label": "rollup-plugin-visualizer",
-      "file_type": "concept",
-      "source_file": "package.json",
-      "source_location": "L37",
-      "_origin": "ast",
-      "id": "rollup_plugin_visualizer",
-      "community": 1,
-      "community_name": "Dev Tooling",
-      "norm_label": "rollup-plugin-visualizer"
-    },
-    {
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L38",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "package_devdependencies_tailwindcss",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "tailwindcss"
     },
     {
       "label": "tailwindcss",
       "file_type": "concept",
       "source_file": "package.json",
-      "source_location": "L38",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "tailwindcss",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "tailwindcss"
     },
     {
       "label": "vite",
       "file_type": "code",
       "source_file": "package.json",
-      "source_location": "L39",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "package_devdependencies_vite",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "vite"
     },
     {
       "label": "vite",
       "file_type": "concept",
       "source_file": "package.json",
-      "source_location": "L39",
+      "source_location": "L38",
       "_origin": "ast",
       "id": "vite",
       "community": 1,
-      "community_name": "Dev Tooling",
       "norm_label": "vite"
-    },
-    {
-      "label": "vite-bundle-visualizer",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L40",
-      "_origin": "ast",
-      "id": "package_devdependencies_vite_bundle_visualizer",
-      "community": 1,
-      "community_name": "Dev Tooling",
-      "norm_label": "vite-bundle-visualizer"
-    },
-    {
-      "label": "vite-bundle-visualizer",
-      "file_type": "concept",
-      "source_file": "package.json",
-      "source_location": "L40",
-      "_origin": "ast",
-      "id": "vite_bundle_visualizer",
-      "community": 1,
-      "community_name": "Dev Tooling",
-      "norm_label": "vite-bundle-visualizer"
-    },
-    {
-      "label": "vite-plugin-compression",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L41",
-      "_origin": "ast",
-      "id": "package_devdependencies_vite_plugin_compression",
-      "community": 1,
-      "community_name": "Dev Tooling",
-      "norm_label": "vite-plugin-compression"
-    },
-    {
-      "label": "vite-plugin-compression",
-      "file_type": "concept",
-      "source_file": "package.json",
-      "source_location": "L41",
-      "_origin": "ast",
-      "id": "vite_plugin_compression",
-      "community": 1,
-      "community_name": "Dev Tooling",
-      "norm_label": "vite-plugin-compression"
     },
     {
       "label": "postcss.config.js",
@@ -790,7 +663,6 @@
       "_origin": "ast",
       "id": "postcss_config",
       "community": 11,
-      "community_name": "PostCSS Config",
       "norm_label": "postcss.config.js"
     },
     {
@@ -801,95 +673,16 @@
       "_origin": "ast",
       "id": "src_app",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "app.jsx"
-    },
-    {
-      "label": "AboutSection",
-      "file_type": "code",
-      "source_file": "src/App.jsx",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "src_app_aboutsection",
-      "community": 5,
-      "community_name": "App Shell",
-      "norm_label": "aboutsection"
-    },
-    {
-      "label": "ProjectsSection",
-      "file_type": "code",
-      "source_file": "src/App.jsx",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "src_app_projectssection",
-      "community": 5,
-      "community_name": "App Shell",
-      "norm_label": "projectssection"
-    },
-    {
-      "label": "CreativeWorkSection",
-      "file_type": "code",
-      "source_file": "src/App.jsx",
-      "source_location": "L15",
-      "_origin": "ast",
-      "id": "src_app_creativeworksection",
-      "community": 5,
-      "community_name": "App Shell",
-      "norm_label": "creativeworksection"
-    },
-    {
-      "label": "CitySection",
-      "file_type": "code",
-      "source_file": "src/App.jsx",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "src_app_citysection",
-      "community": 5,
-      "community_name": "App Shell",
-      "norm_label": "citysection"
-    },
-    {
-      "label": "ProjectModal",
-      "file_type": "code",
-      "source_file": "src/App.jsx",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "src_app_projectmodal",
-      "community": 5,
-      "community_name": "App Shell",
-      "norm_label": "projectmodal"
-    },
-    {
-      "label": "ClickHereCursor",
-      "file_type": "code",
-      "source_file": "src/App.jsx",
-      "source_location": "L18",
-      "_origin": "ast",
-      "id": "src_app_clickherecursor",
-      "community": 5,
-      "community_name": "App Shell",
-      "norm_label": "clickherecursor"
-    },
-    {
-      "label": "CursorTooltip",
-      "file_type": "code",
-      "source_file": "src/App.jsx",
-      "source_location": "L19",
-      "_origin": "ast",
-      "id": "src_app_cursortooltip",
-      "community": 5,
-      "community_name": "App Shell",
-      "norm_label": "cursortooltip"
     },
     {
       "label": "App()",
       "file_type": "code",
       "source_file": "src/App.jsx",
-      "source_location": "L21",
+      "source_location": "L17",
       "_origin": "ast",
       "id": "src_app_app",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "app()"
     },
     {
@@ -900,7 +693,6 @@
       "_origin": "ast",
       "id": "src_esp32",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "esp32.jsx"
     },
     {
@@ -911,18 +703,16 @@
       "_origin": "ast",
       "id": "src_esp32_espmodel",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "espmodel()"
     },
     {
       "label": "ESP32Canvas()",
       "file_type": "code",
       "source_file": "src/ESP32.jsx",
-      "source_location": "L56",
+      "source_location": "L54",
       "_origin": "ast",
       "id": "src_esp32_esp32canvas",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "esp32canvas()"
     },
     {
@@ -933,40 +723,36 @@
       "_origin": "ast",
       "id": "src_raspberrypi",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "raspberrypi.jsx"
     },
     {
       "label": "RealPiModel()",
       "file_type": "code",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L8",
+      "source_location": "L7",
       "_origin": "ast",
       "id": "src_raspberrypi_realpimodel",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "realpimodel()"
     },
     {
       "label": "PiScene()",
       "file_type": "code",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L23",
+      "source_location": "L21",
       "_origin": "ast",
       "id": "src_raspberrypi_piscene",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "piscene()"
     },
     {
       "label": "RaspberryPiCanvas()",
       "file_type": "code",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L62",
+      "source_location": "L57",
       "_origin": "ast",
       "id": "src_raspberrypi_raspberrypicanvas",
-      "community": 0,
-      "community_name": "3D Rendering",
+      "community": 2,
       "norm_label": "raspberrypicanvas()"
     },
     {
@@ -976,8 +762,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_animatedconnector",
-      "community": 19,
-      "community_name": "AnimatedConnector.jsx",
+      "community": 2,
       "norm_label": "animatedconnector.jsx"
     },
     {
@@ -987,8 +772,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_components_animatedconnector_animatedconnector",
-      "community": 19,
-      "community_name": "AnimatedConnector.jsx",
+      "community": 2,
       "norm_label": "animatedconnector()"
     },
     {
@@ -999,7 +783,6 @@
       "_origin": "ast",
       "id": "src_components_backgroundblobs",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "backgroundblobs.jsx"
     },
     {
@@ -1010,7 +793,6 @@
       "_origin": "ast",
       "id": "src_components_backgroundblobs_backgroundblobs",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "backgroundblobs()"
     },
     {
@@ -1021,7 +803,6 @@
       "_origin": "ast",
       "id": "src_components_canvas3dbase",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "canvas3dbase.jsx"
     },
     {
@@ -1032,7 +813,6 @@
       "_origin": "ast",
       "id": "src_components_canvas3dbase_canvas3dbase",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "canvas3dbase()"
     },
     {
@@ -1042,8 +822,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_clickherecursor",
-      "community": 21,
-      "community_name": "ClickHereCursor.jsx",
+      "community": 5,
       "norm_label": "clickherecursor.jsx"
     },
     {
@@ -1053,8 +832,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "src_components_clickherecursor_clickherecursor",
-      "community": 21,
-      "community_name": "ClickHereCursor.jsx",
+      "community": 5,
       "norm_label": "clickherecursor()"
     },
     {
@@ -1065,7 +843,6 @@
       "_origin": "ast",
       "id": "src_components_corethreadspanel",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "corethreadspanel.jsx"
     },
     {
@@ -1076,7 +853,6 @@
       "_origin": "ast",
       "id": "src_components_corethreadspanel_corethreadspanel",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "corethreadspanel()"
     },
     {
@@ -1087,7 +863,6 @@
       "_origin": "ast",
       "id": "src_components_creativeribbon",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "creativeribbon.jsx"
     },
     {
@@ -1098,7 +873,6 @@
       "_origin": "ast",
       "id": "src_components_creativeribbon_ribbonmesh",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "ribbonmesh()"
     },
     {
@@ -1109,7 +883,6 @@
       "_origin": "ast",
       "id": "src_components_creativeribbon_creativeribbon",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "creativeribbon()"
     },
     {
@@ -1120,7 +893,6 @@
       "_origin": "ast",
       "id": "src_components_creativeworkgallery",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "creativeworkgallery.jsx"
     },
     {
@@ -1131,29 +903,26 @@
       "_origin": "ast",
       "id": "src_components_creativeworkgallery_hovervideo",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "hovervideo()"
     },
     {
       "label": "VIDEO_SOURCES",
       "file_type": "code",
       "source_file": "src/components/CreativeWorkGallery.jsx",
-      "source_location": "L32",
+      "source_location": "L31",
       "_origin": "ast",
       "id": "src_components_creativeworkgallery_video_sources",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "video_sources"
     },
     {
       "label": "CreativeWorkGallery()",
       "file_type": "code",
       "source_file": "src/components/CreativeWorkGallery.jsx",
-      "source_location": "L54",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "src_components_creativeworkgallery_creativeworkgallery",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "creativeworkgallery()"
     },
     {
@@ -1163,8 +932,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_cursortooltip",
-      "community": 22,
-      "community_name": "CursorTooltip.jsx",
+      "community": 5,
       "norm_label": "cursortooltip.jsx"
     },
     {
@@ -1174,8 +942,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "src_components_cursortooltip_cursortooltip",
-      "community": 22,
-      "community_name": "CursorTooltip.jsx",
+      "community": 5,
       "norm_label": "cursortooltip()"
     },
     {
@@ -1186,7 +953,6 @@
       "_origin": "ast",
       "id": "src_components_decorativecard",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "decorativecard.jsx"
     },
     {
@@ -1197,7 +963,6 @@
       "_origin": "ast",
       "id": "src_components_decorativecard_spiky_points",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "spiky_points"
     },
     {
@@ -1208,7 +973,6 @@
       "_origin": "ast",
       "id": "src_components_decorativecard_decorativecard",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "decorativecard()"
     },
     {
@@ -1219,7 +983,6 @@
       "_origin": "ast",
       "id": "src_components_gridmarker",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "gridmarker.jsx"
     },
     {
@@ -1230,7 +993,6 @@
       "_origin": "ast",
       "id": "src_components_gridmarker_gridmarker",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "gridmarker()"
     },
     {
@@ -1241,7 +1003,6 @@
       "_origin": "ast",
       "id": "src_components_loader",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "loader.jsx"
     },
     {
@@ -1252,7 +1013,6 @@
       "_origin": "ast",
       "id": "src_components_loader_loader",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "loader()"
     },
     {
@@ -1263,7 +1023,6 @@
       "_origin": "ast",
       "id": "src_components_modelcanvas",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "modelcanvas.jsx"
     },
     {
@@ -1274,18 +1033,16 @@
       "_origin": "ast",
       "id": "src_components_modelcanvas_model",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "model()"
     },
     {
       "label": "ModelCanvas()",
       "file_type": "code",
       "source_file": "src/components/ModelCanvas.jsx",
-      "source_location": "L64",
+      "source_location": "L63",
       "_origin": "ast",
       "id": "src_components_modelcanvas_modelcanvas",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "modelcanvas()"
     },
     {
@@ -1296,7 +1053,6 @@
       "_origin": "ast",
       "id": "src_components_movingslashbar",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "movingslashbar.jsx"
     },
     {
@@ -1307,7 +1063,6 @@
       "_origin": "ast",
       "id": "src_components_movingslashbar_movingslashbar",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "movingslashbar()"
     },
     {
@@ -1318,7 +1073,6 @@
       "_origin": "ast",
       "id": "src_components_pixelfield",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "pixelfield.jsx"
     },
     {
@@ -1329,7 +1083,6 @@
       "_origin": "ast",
       "id": "src_components_pixelfield_pixelfield",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "pixelfield()"
     },
     {
@@ -1340,7 +1093,6 @@
       "_origin": "ast",
       "id": "src_components_ribbon3d",
       "community": 8,
-      "community_name": "Ribbon3D",
       "norm_label": "ribbon3d.jsx"
     },
     {
@@ -1351,7 +1103,6 @@
       "_origin": "ast",
       "id": "src_components_ribbon3d_ribbon3d",
       "community": 8,
-      "community_name": "Ribbon3D",
       "norm_label": "ribbon3d()"
     },
     {
@@ -1361,8 +1112,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_sociallinks",
-      "community": 2,
-      "community_name": "Hero UI Layout",
+      "community": 3,
       "norm_label": "sociallinks.jsx"
     },
     {
@@ -1372,8 +1122,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "src_components_sociallinks_sociallinks",
-      "community": 2,
-      "community_name": "Hero UI Layout",
+      "community": 3,
       "norm_label": "sociallinks()"
     },
     {
@@ -1384,7 +1133,6 @@
       "_origin": "ast",
       "id": "src_components_zigzagpattern",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "zigzagpattern.jsx"
     },
     {
@@ -1395,7 +1143,6 @@
       "_origin": "ast",
       "id": "src_components_zigzagpattern_zigzagpattern",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "zigzagpattern()"
     },
     {
@@ -1406,7 +1153,6 @@
       "_origin": "ast",
       "id": "src_config_heroconfig",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "heroconfig.js"
     },
     {
@@ -1417,7 +1163,6 @@
       "_origin": "ast",
       "id": "src_config_heroconfig_thread_items",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "thread_items"
     },
     {
@@ -1428,7 +1173,6 @@
       "_origin": "ast",
       "id": "src_config_heroconfig_pixel_config",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "pixel_config"
     },
     {
@@ -1439,7 +1183,6 @@
       "_origin": "ast",
       "id": "src_config_heroconfig_vpos",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "vpos"
     },
     {
@@ -1450,7 +1193,6 @@
       "_origin": "ast",
       "id": "src_config_heroconfig_hpos",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "hpos"
     },
     {
@@ -1461,7 +1203,6 @@
       "_origin": "ast",
       "id": "src_config_heroconfig_markers",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "markers"
     },
     {
@@ -1471,8 +1212,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "src_config_heroconfig_grid_config",
-      "community": 2,
-      "community_name": "Hero UI Layout",
+      "community": 5,
       "norm_label": "grid_config"
     },
     {
@@ -1483,7 +1223,6 @@
       "_origin": "ast",
       "id": "src_config_heroconfig_connector_config",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "connector_config"
     },
     {
@@ -1494,7 +1233,6 @@
       "_origin": "ast",
       "id": "src_constants_projects",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "projects.js"
     },
     {
@@ -1505,7 +1243,6 @@
       "_origin": "ast",
       "id": "src_constants_projects_projects_data",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "projects_data"
     },
     {
@@ -1515,8 +1252,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_hooks_useelementposition",
-      "community": 19,
-      "community_name": "AnimatedConnector.jsx",
+      "community": 2,
       "norm_label": "useelementposition.js"
     },
     {
@@ -1526,8 +1262,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "src_hooks_useelementposition_useelementposition",
-      "community": 19,
-      "community_name": "AnimatedConnector.jsx",
+      "community": 2,
       "norm_label": "useelementposition()"
     },
     {
@@ -1538,7 +1273,6 @@
       "_origin": "ast",
       "id": "src_hooks_useismobile",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "useismobile.js"
     },
     {
@@ -1549,7 +1283,6 @@
       "_origin": "ast",
       "id": "src_hooks_useismobile_useismobile",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "useismobile()"
     },
     {
@@ -1560,7 +1293,6 @@
       "_origin": "ast",
       "id": "src_hooks_useorbitsnapback",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "useorbitsnapback.js"
     },
     {
@@ -1571,7 +1303,6 @@
       "_origin": "ast",
       "id": "src_hooks_useorbitsnapback_useorbitsnapback",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "useorbitsnapback()"
     },
     {
@@ -1582,7 +1313,6 @@
       "_origin": "ast",
       "id": "src_hooks_usescenemeshes",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "usescenemeshes.js"
     },
     {
@@ -1593,7 +1323,6 @@
       "_origin": "ast",
       "id": "src_hooks_usescenemeshes_usescenemeshes",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "usescenemeshes()"
     },
     {
@@ -1604,7 +1333,6 @@
       "_origin": "ast",
       "id": "src_hooks_usescrollprogress",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "usescrollprogress.js"
     },
     {
@@ -1615,7 +1343,6 @@
       "_origin": "ast",
       "id": "src_hooks_usescrollprogress_usescrollprogress",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "usescrollprogress()"
     },
     {
@@ -1625,8 +1352,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_hooks_usewindowsize",
-      "community": 19,
-      "community_name": "AnimatedConnector.jsx",
+      "community": 2,
       "norm_label": "usewindowsize.js"
     },
     {
@@ -1636,8 +1362,7 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "src_hooks_usewindowsize_usewindowsize",
-      "community": 19,
-      "community_name": "AnimatedConnector.jsx",
+      "community": 2,
       "norm_label": "usewindowsize()"
     },
     {
@@ -1648,7 +1373,6 @@
       "_origin": "ast",
       "id": "src_main",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "main.jsx"
     },
     {
@@ -1659,7 +1383,6 @@
       "_origin": "ast",
       "id": "src_sections_aboutsection",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "aboutsection.jsx"
     },
     {
@@ -1669,8 +1392,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_sections_aboutsection_aboutsection",
-      "community": 6,
-      "community_name": "Content Pages",
+      "community": 0,
       "norm_label": "aboutsection()"
     },
     {
@@ -1681,7 +1403,6 @@
       "_origin": "ast",
       "id": "src_sections_citysection",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "citysection.jsx"
     },
     {
@@ -1692,7 +1413,6 @@
       "_origin": "ast",
       "id": "src_sections_citysection_citysection",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "citysection()"
     },
     {
@@ -1703,7 +1423,6 @@
       "_origin": "ast",
       "id": "src_sections_creativeworksection",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "creativeworksection.jsx"
     },
     {
@@ -1714,7 +1433,6 @@
       "_origin": "ast",
       "id": "src_sections_creativeworksection_creativeworksection",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "creativeworksection()"
     },
     {
@@ -1725,29 +1443,16 @@
       "_origin": "ast",
       "id": "src_sections_herosection",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "herosection.jsx"
-    },
-    {
-      "label": "RaspberryPiCanvas",
-      "file_type": "code",
-      "source_file": "src/sections/HeroSection.jsx",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "src_sections_herosection_raspberrypicanvas",
-      "community": 2,
-      "community_name": "Hero UI Layout",
-      "norm_label": "raspberrypicanvas"
     },
     {
       "label": "HeroSection()",
       "file_type": "code",
       "source_file": "src/sections/HeroSection.jsx",
-      "source_location": "L18",
+      "source_location": "L15",
       "_origin": "ast",
       "id": "src_sections_herosection_herosection",
       "community": 2,
-      "community_name": "Hero UI Layout",
       "norm_label": "herosection()"
     },
     {
@@ -1758,7 +1463,6 @@
       "_origin": "ast",
       "id": "src_sections_projectmodal",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "projectmodal.jsx"
     },
     {
@@ -1769,7 +1473,6 @@
       "_origin": "ast",
       "id": "src_sections_projectmodal_projectmodal",
       "community": 5,
-      "community_name": "App Shell",
       "norm_label": "projectmodal()"
     },
     {
@@ -1780,19 +1483,7 @@
       "_origin": "ast",
       "id": "src_sections_projectssection",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "projectssection.jsx"
-    },
-    {
-      "label": "ModelCanvas",
-      "file_type": "code",
-      "source_file": "src/sections/ProjectsSection.jsx",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "src_sections_projectssection_modelcanvas",
-      "community": 6,
-      "community_name": "Content Pages",
-      "norm_label": "modelcanvas"
     },
     {
       "label": "ProjectsSection()",
@@ -1802,7 +1493,6 @@
       "_origin": "ast",
       "id": "src_sections_projectssection_projectssection",
       "community": 6,
-      "community_name": "Content Pages",
       "norm_label": "projectssection()"
     },
     {
@@ -1813,7 +1503,6 @@
       "_origin": "ast",
       "id": "src_utils_svggenerators",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "svggenerators.js"
     },
     {
@@ -1824,7 +1513,6 @@
       "_origin": "ast",
       "id": "src_utils_svggenerators_generateampaths",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "generateampaths()"
     },
     {
@@ -1835,7 +1523,6 @@
       "_origin": "ast",
       "id": "src_utils_svggenerators_generatecitypaths",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "generatecitypaths()"
     },
     {
@@ -1846,7 +1533,6 @@
       "_origin": "ast",
       "id": "src_utils_svggenerators_am_paths",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "am_paths"
     },
     {
@@ -1857,7 +1543,6 @@
       "_origin": "ast",
       "id": "src_utils_svggenerators_city_paths",
       "community": 3,
-      "community_name": "React UI Components",
       "norm_label": "city_paths"
     },
     {
@@ -1868,7 +1553,6 @@
       "_origin": "ast",
       "id": "src_utils_threeutils",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "threeutils.js"
     },
     {
@@ -1879,7 +1563,6 @@
       "_origin": "ast",
       "id": "src_utils_threeutils_addedgelines",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "addedgelines()"
     },
     {
@@ -1890,7 +1573,6 @@
       "_origin": "ast",
       "id": "src_utils_threeutils_applytomaterials",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "applytomaterials()"
     },
     {
@@ -1901,7 +1583,6 @@
       "_origin": "ast",
       "id": "src_utils_threeutils_setmeshopacity",
       "community": 0,
-      "community_name": "3D Rendering",
       "norm_label": "setmeshopacity()"
     },
     {
@@ -1912,63 +1593,7 @@
       "_origin": "ast",
       "id": "tailwind_config",
       "community": 16,
-      "community_name": "Tailwind Config",
       "norm_label": "tailwind.config.js"
-    },
-    {
-      "label": "vercel.json",
-      "file_type": "code",
-      "source_file": "vercel.json",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "vercel",
-      "community": 20,
-      "community_name": "vercel.json",
-      "norm_label": "vercel.json"
-    },
-    {
-      "label": "framework",
-      "file_type": "code",
-      "source_file": "vercel.json",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "vercel_framework",
-      "community": 20,
-      "community_name": "vercel.json",
-      "norm_label": "framework"
-    },
-    {
-      "label": "buildCommand",
-      "file_type": "code",
-      "source_file": "vercel.json",
-      "source_location": "L3",
-      "_origin": "ast",
-      "id": "vercel_buildcommand",
-      "community": 20,
-      "community_name": "vercel.json",
-      "norm_label": "buildcommand"
-    },
-    {
-      "label": "outputDirectory",
-      "file_type": "code",
-      "source_file": "vercel.json",
-      "source_location": "L4",
-      "_origin": "ast",
-      "id": "vercel_outputdirectory",
-      "community": 20,
-      "community_name": "vercel.json",
-      "norm_label": "outputdirectory"
-    },
-    {
-      "label": "headers",
-      "file_type": "code",
-      "source_file": "vercel.json",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "vercel_headers",
-      "community": 20,
-      "community_name": "vercel.json",
-      "norm_label": "headers"
     },
     {
       "label": "vite.config.js",
@@ -1978,173 +1603,7 @@
       "_origin": "ast",
       "id": "vite_config",
       "community": 17,
-      "community_name": "Vite Config",
       "norm_label": "vite.config.js"
-    },
-    {
-      "label": "manualChunks()",
-      "file_type": "code",
-      "source_file": "vite.config.js",
-      "source_location": "L24",
-      "_origin": "ast",
-      "id": "vite_config_manualchunks",
-      "community": 17,
-      "community_name": "Vite Config",
-      "norm_label": "manualchunks()"
-    },
-    {
-      "label": "README.md",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "readme",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "readme.md"
-    },
-    {
-      "label": "Monozukuri \u2014 Personal Portfolio",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "readme_monozukuri_personal_portfolio",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "monozukuri \u2014 personal portfolio"
-    },
-    {
-      "label": "Tech Stack",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "readme_tech_stack",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "tech stack"
-    },
-    {
-      "label": "Project Structure",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L21",
-      "_origin": "ast",
-      "id": "readme_project_structure",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "project structure"
-    },
-    {
-      "label": "Getting Started",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L58",
-      "_origin": "ast",
-      "id": "readme_getting_started",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "getting started"
-    },
-    {
-      "label": "3D Models",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L78",
-      "_origin": "ast",
-      "id": "readme_3d_models",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "3d models"
-    },
-    {
-      "label": "Fonts",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L91",
-      "_origin": "ast",
-      "id": "readme_fonts",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "fonts"
-    },
-    {
-      "label": "Key Patterns",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L104",
-      "_origin": "ast",
-      "id": "readme_key_patterns",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "key patterns"
-    },
-    {
-      "label": "Scroll Progress",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L106",
-      "_origin": "ast",
-      "id": "readme_scroll_progress",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "scroll progress"
-    },
-    {
-      "label": "Orbit Snap-Back",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L109",
-      "_origin": "ast",
-      "id": "readme_orbit_snap_back",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "orbit snap-back"
-    },
-    {
-      "label": "Edge Line Rendering",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L112",
-      "_origin": "ast",
-      "id": "readme_edge_line_rendering",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "edge line rendering"
-    },
-    {
-      "label": "Loader Sequence",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L115",
-      "_origin": "ast",
-      "id": "readme_loader_sequence",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "loader sequence"
-    },
-    {
-      "label": "Configuration",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L123",
-      "_origin": "ast",
-      "id": "readme_configuration",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "configuration"
-    },
-    {
-      "label": "Deployment",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L134",
-      "_origin": "ast",
-      "id": "readme_deployment",
-      "community": 18,
-      "community_name": "Monozukuri \u2014 Personal Portfolio",
-      "norm_label": "deployment"
     },
     {
       "label": "Monozukuri Personal Portfolio",
@@ -2155,10 +1614,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 12,
-      "norm_label": "monozukuri personal portfolio",
       "id": "readme_md_monozukuri",
-      "community_name": "Readme (monozukuri)"
+      "community": 12,
+      "norm_label": "monozukuri personal portfolio"
     },
     {
       "label": "React 19 Framework",
@@ -2169,10 +1627,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
-      "norm_label": "react 19 framework",
       "id": "readme_md_react",
-      "community_name": "Readme (react)"
+      "community": 13,
+      "norm_label": "react 19 framework"
     },
     {
       "label": "Three.js 3D Rendering",
@@ -2183,10 +1640,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
-      "norm_label": "three.js 3d rendering",
       "id": "readme_md_three_js",
-      "community_name": "Three.js 3D Rendering"
+      "community": 6,
+      "norm_label": "three.js 3d rendering"
     },
     {
       "label": "Tailwind CSS Styling",
@@ -2197,10 +1653,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
-      "norm_label": "tailwind css styling",
       "id": "readme_md_tailwind_css",
-      "community_name": "Readme (tailwind)"
+      "community": 14,
+      "norm_label": "tailwind css styling"
     },
     {
       "label": "Vite Build Tool",
@@ -2211,10 +1666,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
-      "norm_label": "vite build tool",
       "id": "readme_md_vite",
-      "community_name": "Readme (vite)"
+      "community": 15,
+      "norm_label": "vite build tool"
     },
     {
       "label": "GSAP Animation Library",
@@ -2225,10 +1679,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 25,
-      "norm_label": "gsap animation library",
       "id": "readme_md_gsap",
-      "community_name": "GSAP Animation Library"
+      "community": 0,
+      "norm_label": "gsap animation library"
     },
     {
       "label": "Scramble-Text Loader Animation",
@@ -2239,10 +1692,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 26,
-      "norm_label": "scramble-text loader animation",
       "id": "readme_md_scramble_text_loader",
-      "community_name": "Scramble-Text Loader Animation"
+      "community": 5,
+      "norm_label": "scramble-text loader animation"
     },
     {
       "label": "Scroll-Driven Animation",
@@ -2253,10 +1705,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "norm_label": "scroll-driven animation",
       "id": "readme_md_scroll_driven_animation",
-      "community_name": "Scroll-Driven Animation"
+      "community": 0,
+      "norm_label": "scroll-driven animation"
     },
     {
       "label": "HTML Entry Point",
@@ -2267,10 +1718,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
-      "norm_label": "html entry point",
       "id": "index_html",
-      "community_name": "HTML Entry"
+      "community": 10,
+      "norm_label": "html entry point"
     },
     {
       "label": "React Application Entry Point",
@@ -2281,10 +1731,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 33,
-      "norm_label": "react application entry point",
       "id": "src_main_jsx",
-      "community_name": "React Application Entry Point"
+      "community": 5,
+      "norm_label": "react application entry point"
     },
     {
       "label": "Scroll Progress Tracking Hook",
@@ -2295,10 +1744,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
-      "norm_label": "scroll progress tracking hook",
       "id": "src_hooks_usoscrollprogress_usescrollprogress",
-      "community_name": "Scroll Progress Tracking Hook"
+      "community": 0,
+      "norm_label": "scroll progress tracking hook"
     },
     {
       "label": "Three.js Scene Mesh Setup Hook",
@@ -2309,10 +1757,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 31,
-      "norm_label": "three.js scene mesh setup hook",
       "id": "src_hooks_usescememeshes_usescenemeshes",
-      "community_name": "Three.js Scene Mesh Setup Hook"
+      "community": 0,
+      "norm_label": "three.js scene mesh setup hook"
     },
     {
       "label": "DOM Element Position Tracking Hook",
@@ -2323,10 +1770,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 30,
-      "norm_label": "dom element position tracking hook",
       "id": "src_hooks_useelementposition_Useelementposition",
-      "community_name": "DOM Element Position Tracking Hook"
+      "community": 2,
+      "norm_label": "dom element position tracking hook"
     },
     {
       "label": "Projects Section",
@@ -2337,10 +1783,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 34,
-      "norm_label": "projects section",
       "id": "src_sections_projects_section_projectsection",
-      "community_name": "Projects Section"
+      "community": 6,
+      "norm_label": "projects section"
     },
     {
       "label": "Global CSS with Design Tokens",
@@ -2351,10 +1796,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 23,
-      "norm_label": "global css with design tokens",
       "id": "src_index_css",
-      "community_name": "Global CSS with Design Tokens"
+      "community": 5,
+      "norm_label": "global css with design tokens"
     },
     {
       "label": "Technical Design Aesthetic",
@@ -2365,10 +1809,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 23,
-      "norm_label": "technical design aesthetic",
       "id": "technical_design_aesthetic",
-      "community_name": "Global CSS with Design Tokens"
+      "community": 5,
+      "norm_label": "technical design aesthetic"
     },
     {
       "label": "Scroll-Driven Disassembly Effect",
@@ -2379,10 +1822,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 29,
-      "norm_label": "scroll-driven disassembly effect",
       "id": "scroll_driven_disassembly_effect",
-      "community_name": "Scroll-Driven Disassembly Effect"
+      "community": 0,
+      "norm_label": "scroll-driven disassembly effect"
     },
     {
       "label": "Wireframe Edge Overlay Rendering",
@@ -2393,10 +1835,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 35,
-      "norm_label": "wireframe edge overlay rendering",
       "id": "wireframe_edge_overlay_rendering",
-      "community_name": "Wireframe Edge Overlay Rendering"
+      "community": 0,
+      "norm_label": "wireframe edge overlay rendering"
     },
     {
       "label": "Hero Materialize Reveal Animation",
@@ -2407,10 +1848,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
-      "norm_label": "hero materialize reveal animation",
       "id": "hero_materialize_reveal",
-      "community_name": "Hero Materialize Reveal Animation"
+      "community": 5,
+      "norm_label": "hero materialize reveal animation"
     }
   ],
   "links": [
@@ -2739,7 +2179,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/CreativeWorkGallery.jsx",
-      "source_location": "L59",
+      "source_location": "L58",
       "weight": 1.0,
       "source": "src_components_creativeworkgallery_creativeworkgallery",
       "target": "package_dependencies_react"
@@ -2853,16 +2293,6 @@
       "source_location": "L37",
       "weight": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_rollup_plugin_visualizer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L38",
-      "weight": 1.0,
-      "source": "package_devdependencies",
       "target": "package_devdependencies_tailwindcss",
       "confidence_score": 1.0
     },
@@ -2890,30 +2320,10 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "package.json",
-      "source_location": "L39",
+      "source_location": "L38",
       "weight": 1.0,
       "source": "package_devdependencies",
       "target": "package_devdependencies_vite",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L40",
-      "weight": 1.0,
-      "source": "package_devdependencies",
-      "target": "package_devdependencies_vite_bundle_visualizer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L41",
-      "weight": 1.0,
-      "source": "package_devdependencies",
-      "target": "package_devdependencies_vite_plugin_compression",
       "confidence_score": 1.0
     },
     {
@@ -3054,8 +2464,8 @@
       "source_location": "L37",
       "weight": 1.0,
       "context": "import",
-      "source": "package_devdependencies_rollup_plugin_visualizer",
-      "target": "rollup_plugin_visualizer",
+      "source": "package_devdependencies_tailwindcss",
+      "target": "tailwindcss",
       "confidence_score": 1.0
     },
     {
@@ -3065,101 +2475,8 @@
       "source_location": "L38",
       "weight": 1.0,
       "context": "import",
-      "source": "package_devdependencies_tailwindcss",
-      "target": "tailwindcss",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L39",
-      "weight": 1.0,
-      "context": "import",
       "source": "package_devdependencies_vite",
       "target": "vite",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L40",
-      "weight": 1.0,
-      "context": "import",
-      "source": "package_devdependencies_vite_bundle_visualizer",
-      "target": "vite_bundle_visualizer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "confidence": "EXTRACTED",
-      "source_file": "package.json",
-      "source_location": "L41",
-      "weight": 1.0,
-      "context": "import",
-      "source": "package_devdependencies_vite_plugin_compression",
-      "target": "vite_plugin_compression",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App.jsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "source": "src_app",
-      "target": "src_app_aboutsection",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App.jsx",
-      "source_location": "L21",
-      "weight": 1.0,
-      "source": "src_app",
-      "target": "src_app_app",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App.jsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "source": "src_app",
-      "target": "src_app_citysection",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App.jsx",
-      "source_location": "L18",
-      "weight": 1.0,
-      "source": "src_app",
-      "target": "src_app_clickherecursor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App.jsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "source": "src_app",
-      "target": "src_app_creativeworksection",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App.jsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "source": "src_app",
-      "target": "src_app_cursortooltip",
       "confidence_score": 1.0
     },
     {
@@ -3169,17 +2486,7 @@
       "source_location": "L17",
       "weight": 1.0,
       "source": "src_app",
-      "target": "src_app_projectmodal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App.jsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "src_app",
-      "target": "src_app_projectssection",
+      "target": "src_app_app",
       "confidence_score": 1.0
     },
     {
@@ -3202,6 +2509,50 @@
       "weight": 1.0,
       "source": "src_app",
       "target": "src_components_backgroundblobs_backgroundblobs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_components_clickherecursor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_components_clickherecursor_clickherecursor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_components_cursortooltip",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_components_cursortooltip_cursortooltip",
       "confidence_score": 1.0
     },
     {
@@ -3253,7 +2604,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/App.jsx",
-      "source_location": "L8",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "src_app",
       "target": "src_config_heroconfig",
@@ -3264,7 +2615,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/App.jsx",
-      "source_location": "L8",
+      "source_location": "L14",
       "weight": 1.0,
       "source": "src_app",
       "target": "src_config_heroconfig_grid_config",
@@ -3275,7 +2626,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/App.jsx",
-      "source_location": "L7",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "src_app",
       "target": "src_hooks_useismobile",
@@ -3286,10 +2637,76 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/App.jsx",
-      "source_location": "L7",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "src_app",
       "target": "src_hooks_useismobile_useismobile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_aboutsection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_aboutsection_aboutsection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_citysection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_citysection_citysection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_creativeworksection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_creativeworksection_creativeworksection",
       "confidence_score": 1.0
     },
     {
@@ -3318,6 +2735,50 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_projectmodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_projectmodal_projectmodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_projectssection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "src_app",
+      "target": "src_sections_projectssection_projectssection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/main.jsx",
       "source_location": "L4",
       "weight": 1.0,
@@ -3327,14 +2788,84 @@
     },
     {
       "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "src_components_gridmarker_gridmarker"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "src_components_loader_loader"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "src_config_heroconfig_grid_config"
+    },
+    {
+      "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/App.jsx",
-      "source_location": "L29",
+      "source_location": "L25",
       "weight": 1.0,
       "source": "src_app_app",
       "target": "src_hooks_useismobile_useismobile"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "src_sections_aboutsection_aboutsection"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "src_sections_herosection_herosection"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "src_sections_projects_section_projectsection"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/App.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_app_app",
+      "target": "technical_design_aesthetic"
     },
     {
       "relation": "imports",
@@ -3348,10 +2879,20 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/main.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_main_jsx",
+      "target": "src_app_app"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/ESP32.jsx",
-      "source_location": "L56",
+      "source_location": "L54",
       "weight": 1.0,
       "source": "src_esp32",
       "target": "src_esp32_esp32canvas",
@@ -3478,11 +3019,31 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ESP32.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_esp32_espmodel",
+      "target": "scroll_driven_disassembly_effect"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ESP32.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_esp32_espmodel",
+      "target": "src_hooks_usescememeshes_usescenemeshes"
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/ESP32.jsx",
-      "source_location": "L12",
+      "source_location": "L11",
       "weight": 1.0,
       "source": "src_esp32_espmodel",
       "target": "src_hooks_usescenemeshes_usescenemeshes",
@@ -3493,22 +3054,22 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/ESP32.jsx",
-      "source_location": "L13",
+      "source_location": null,
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_esp32_espmodel",
-      "target": "src_utils_threeutils_addedgelines",
-      "confidence_score": 1.0
+      "target": "src_utils_threeutils_addedgelines"
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/ESP32.jsx",
-      "source_location": "L37",
+      "source_location": null,
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_esp32_espmodel",
-      "target": "src_utils_threeutils_setmeshopacity",
-      "confidence_score": 1.0
+      "target": "src_utils_threeutils_setmeshopacity"
     },
     {
       "relation": "calls",
@@ -3516,7 +3077,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/ESP32.jsx",
-      "source_location": "L58",
+      "source_location": null,
       "weight": 1.0,
       "source": "src_esp32_esp32canvas",
       "target": "src_hooks_useorbitsnapback_useorbitsnapback"
@@ -3527,10 +3088,20 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/ESP32.jsx",
-      "source_location": "L57",
+      "source_location": "L55",
       "weight": 1.0,
       "source": "src_esp32_esp32canvas",
       "target": "src_hooks_usescrollprogress_usescrollprogress"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/ESP32.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_esp32_esp32canvas",
+      "target": "src_hooks_usoscrollprogress_usescrollprogress"
     },
     {
       "relation": "imports",
@@ -3544,11 +3115,21 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/sections/AboutSection.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_sections_aboutsection_aboutsection",
+      "target": "src_esp32_esp32canvas"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L5",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "src_raspberrypi",
       "target": "src_components_canvas3dbase",
@@ -3559,7 +3140,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L5",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "src_raspberrypi",
       "target": "src_components_canvas3dbase_canvas3dbase",
@@ -3569,7 +3150,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L23",
+      "source_location": "L21",
       "weight": 1.0,
       "source": "src_raspberrypi",
       "target": "src_raspberrypi_piscene",
@@ -3579,7 +3160,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L62",
+      "source_location": "L57",
       "weight": 1.0,
       "source": "src_raspberrypi",
       "target": "src_raspberrypi_raspberrypicanvas",
@@ -3589,7 +3170,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L8",
+      "source_location": "L7",
       "weight": 1.0,
       "source": "src_raspberrypi",
       "target": "src_raspberrypi_realpimodel",
@@ -3600,7 +3181,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L6",
+      "source_location": "L5",
       "weight": 1.0,
       "source": "src_raspberrypi",
       "target": "src_utils_threeutils",
@@ -3611,22 +3192,104 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L6",
+      "source_location": "L5",
       "weight": 1.0,
       "source": "src_raspberrypi",
       "target": "src_utils_threeutils_addedgelines",
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/sections/HeroSection.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_sections_herosection",
+      "target": "src_raspberrypi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/RaspberryPi.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_raspberrypi_piscene",
+      "target": "src_raspberrypi_realpimodel"
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/RaspberryPi.jsx",
-      "source_location": "L14",
+      "source_location": null,
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_raspberrypi_realpimodel",
-      "target": "src_utils_threeutils_addedgelines",
+      "target": "src_utils_threeutils_addedgelines"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/RaspberryPi.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_raspberrypi_piscene",
+      "target": "hero_materialize_reveal"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/RaspberryPi.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_raspberrypi_piscene",
+      "target": "readme_md_scroll_driven_animation"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "src/components/AnimatedConnector.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_components_animatedconnector_animatedconnector",
+      "target": "src_raspberrypi_raspberrypicanvas"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/RaspberryPi.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_raspberrypi_raspberrypicanvas",
+      "target": "src_components_canvas3dbase_canvas3dbase"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/sections/HeroSection.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_sections_herosection",
+      "target": "src_raspberrypi_raspberrypicanvas",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/sections/HeroSection.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_sections_herosection_herosection",
+      "target": "src_raspberrypi_raspberrypicanvas"
     },
     {
       "relation": "contains",
@@ -3694,6 +3357,26 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "src/components/AnimatedConnector.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_components_animatedconnector_animatedconnector",
+      "target": "hero_materialize_reveal"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/AnimatedConnector.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_components_animatedconnector_animatedconnector",
+      "target": "src_hooks_useelementposition_Useelementposition"
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -3710,7 +3393,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/AnimatedConnector.jsx",
-      "source_location": "L10",
+      "source_location": null,
       "weight": 1.0,
       "source": "src_components_animatedconnector_animatedconnector",
       "target": "src_hooks_usewindowsize_usewindowsize"
@@ -3725,6 +3408,16 @@
       "source": "src_sections_herosection",
       "target": "src_components_animatedconnector_animatedconnector",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/sections/HeroSection.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_sections_herosection_herosection",
+      "target": "src_components_animatedconnector_animatedconnector"
     },
     {
       "relation": "contains",
@@ -3818,7 +3511,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/Canvas3DBase.jsx",
-      "source_location": "L20",
+      "source_location": null,
       "weight": 1.0,
       "source": "src_components_canvas3dbase_canvas3dbase",
       "target": "src_hooks_useorbitsnapback_useorbitsnapback"
@@ -3921,6 +3614,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/CoreThreadsPanel.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_components_corethreadspanel_corethreadspanel",
+      "target": "src_config_heroconfig_thread_items"
+    },
+    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -3930,6 +3633,16 @@
       "source": "src_sections_herosection",
       "target": "src_components_corethreadspanel_corethreadspanel",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/sections/HeroSection.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_sections_herosection_herosection",
+      "target": "src_components_corethreadspanel_corethreadspanel"
     },
     {
       "relation": "contains",
@@ -4010,7 +3723,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/CreativeWorkGallery.jsx",
-      "source_location": "L54",
+      "source_location": "L53",
       "weight": 1.0,
       "source": "src_components_creativeworkgallery",
       "target": "src_components_creativeworkgallery_creativeworkgallery",
@@ -4030,7 +3743,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/CreativeWorkGallery.jsx",
-      "source_location": "L32",
+      "source_location": "L31",
       "weight": 1.0,
       "source": "src_components_creativeworkgallery",
       "target": "src_components_creativeworkgallery_video_sources",
@@ -4075,7 +3788,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/CreativeWorkGallery.jsx",
-      "source_location": "L57",
+      "source_location": "L56",
       "weight": 1.0,
       "source": "src_components_creativeworkgallery_creativeworkgallery",
       "target": "src_hooks_useismobile_useismobile"
@@ -4198,6 +3911,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "src/components/GridMarker.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_components_gridmarker_gridmarker",
+      "target": "hero_materialize_reveal"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/Loader.jsx",
@@ -4206,6 +3929,26 @@
       "source": "src_components_loader",
       "target": "src_components_loader_loader",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/Loader.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_components_loader_loader",
+      "target": "readme_md_scramble_text_loader"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/Loader.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_components_loader_loader",
+      "target": "src_sections_herosection_herosection"
     },
     {
       "relation": "contains",
@@ -4221,7 +3964,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ModelCanvas.jsx",
-      "source_location": "L64",
+      "source_location": "L63",
       "weight": 1.0,
       "source": "src_components_modelcanvas",
       "target": "src_components_modelcanvas_modelcanvas",
@@ -4250,14 +3993,36 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/sections/ProjectsSection.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_sections_projectssection",
+      "target": "src_components_modelcanvas",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ModelCanvas.jsx",
-      "source_location": "L23",
+      "source_location": "L22",
       "weight": 1.0,
       "source": "src_components_modelcanvas_model",
       "target": "src_utils_threeutils_addedgelines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/sections/ProjectsSection.jsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_sections_projectssection",
+      "target": "src_components_modelcanvas_modelcanvas",
       "confidence_score": 1.0
     },
     {
@@ -4513,6 +4278,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/sections/HeroSection.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_sections_herosection_herosection",
+      "target": "src_config_heroconfig_connector_config"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/constants/projects.js",
@@ -4532,6 +4307,26 @@
       "source": "src_sections_projectssection",
       "target": "src_constants_projects",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/constants/projects.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_constants_projects_projects_data",
+      "target": "readme_md_three_js"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/sections/ProjectsSection.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_sections_projects_section_projectsection",
+      "target": "src_constants_projects_projects_data"
     },
     {
       "relation": "imports",
@@ -4575,6 +4370,26 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/hooks/useOrbitSnapBack.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_hooks_useorbitsnapback_useorbitsnapback",
+      "target": "readme_md_gsap"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "src/hooks/useOrbitSnapBack.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_hooks_useorbitsnapback_useorbitsnapback",
+      "target": "src_hooks_usoscrollprogress_usescrollprogress"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/hooks/useSceneMeshes.js",
@@ -4613,6 +4428,26 @@
       "source": "src_sections_aboutsection",
       "target": "src_sections_aboutsection_aboutsection",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/sections/AboutSection.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_sections_aboutsection_aboutsection",
+      "target": "scroll_driven_disassembly_effect"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/sections/AboutSection.jsx",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_sections_aboutsection_aboutsection",
+      "target": "wireframe_edge_overlay_rendering"
     },
     {
       "relation": "contains",
@@ -4682,21 +4517,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/sections/HeroSection.jsx",
-      "source_location": "L18",
+      "source_location": "L15",
       "weight": 1.0,
       "source": "src_sections_herosection",
       "target": "src_sections_herosection_herosection",
       "confidence_score": 1.0
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
       "source_file": "src/sections/HeroSection.jsx",
-      "source_location": "L4",
+      "source_location": null,
       "weight": 1.0,
-      "source": "src_sections_herosection",
-      "target": "src_sections_herosection_raspberrypicanvas",
-      "confidence_score": 1.0
+      "source": "src_sections_herosection_herosection",
+      "target": "wireframe_edge_overlay_rendering"
     },
     {
       "relation": "contains",
@@ -4706,16 +4541,6 @@
       "weight": 1.0,
       "source": "src_sections_projectmodal",
       "target": "src_sections_projectmodal_projectmodal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/sections/ProjectsSection.jsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "src_sections_projectssection",
-      "target": "src_sections_projectssection_modelcanvas",
       "confidence_score": 1.0
     },
     {
@@ -4799,6 +4624,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/utils/threeUtils.js",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_utils_threeutils_addedgelines",
+      "target": "src_utils_threeutils_setmeshopacity"
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -4810,184 +4645,14 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "contains",
+      "relation": "rationale_for",
       "confidence": "EXTRACTED",
-      "source_file": "vercel.json",
-      "source_location": "L3",
+      "confidence_score": 1.0,
+      "source_file": "src/ESP32.jsx",
+      "source_location": null,
       "weight": 1.0,
-      "source": "vercel",
-      "target": "vercel_buildcommand",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "vercel.json",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "vercel",
-      "target": "vercel_framework",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "vercel.json",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "vercel",
-      "target": "vercel_headers",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "vercel.json",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "vercel",
-      "target": "vercel_outputdirectory",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "vite.config.js",
-      "source_location": "L24",
-      "weight": 1.0,
-      "source": "vite_config",
-      "target": "vite_config_manualchunks",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "readme",
-      "target": "readme_monozukuri_personal_portfolio",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L78",
-      "weight": 1.0,
-      "source": "readme_monozukuri_personal_portfolio",
-      "target": "readme_3d_models",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L123",
-      "weight": 1.0,
-      "source": "readme_monozukuri_personal_portfolio",
-      "target": "readme_configuration",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L134",
-      "weight": 1.0,
-      "source": "readme_monozukuri_personal_portfolio",
-      "target": "readme_deployment",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L91",
-      "weight": 1.0,
-      "source": "readme_monozukuri_personal_portfolio",
-      "target": "readme_fonts",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L58",
-      "weight": 1.0,
-      "source": "readme_monozukuri_personal_portfolio",
-      "target": "readme_getting_started",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L104",
-      "weight": 1.0,
-      "source": "readme_monozukuri_personal_portfolio",
-      "target": "readme_key_patterns",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L21",
-      "weight": 1.0,
-      "source": "readme_monozukuri_personal_portfolio",
-      "target": "readme_project_structure",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "readme_monozukuri_personal_portfolio",
-      "target": "readme_tech_stack",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L112",
-      "weight": 1.0,
-      "source": "readme_key_patterns",
-      "target": "readme_edge_line_rendering",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L115",
-      "weight": 1.0,
-      "source": "readme_key_patterns",
-      "target": "readme_loader_sequence",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L109",
-      "weight": 1.0,
-      "source": "readme_key_patterns",
-      "target": "readme_orbit_snap_back",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L106",
-      "weight": 1.0,
-      "source": "readme_key_patterns",
-      "target": "readme_scroll_progress",
-      "confidence_score": 1.0
+      "source": "src_hooks_usoscrollprogress_usescrollprogress",
+      "target": "scroll_driven_disassembly_effect"
     },
     {
       "relation": "rationale_for",
@@ -5041,5 +4706,5 @@
       "source_file": "src/components/AnimatedConnector.jsx"
     }
   ],
-  "built_at_commit": "4f5f6ff9ac8b99f91de5e973f02c6ee7b9e6e3f3"
+  "built_at_commit": "54ff7711e6a45e8b5482d75346baf1ff8b872aa8"
 }

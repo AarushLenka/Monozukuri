@@ -1,12 +1,10 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import AnimatedConnector from '../components/AnimatedConnector';
 import CoreThreadsPanel from '../components/CoreThreadsPanel';
-const RaspberryPiCanvas = lazy(() => import('../RaspberryPi'));
+const loadRaspberryPi = () => import('../RaspberryPi');
+const RaspberryPiCanvas = lazy(loadRaspberryPi);
 import SocialLinks from '../components/SocialLinks';
 import { CONNECTOR_CONFIG } from '../config/heroConfig';
-import { useGLTF } from '@react-three/drei';
-
-useGLTF.preload('/raspberrypi5.glb');
 
 /**
  * The landing hero section (first visible screen).
@@ -16,6 +14,15 @@ useGLTF.preload('/raspberrypi5.glb');
  * @param {boolean} isMobile   True when viewport ≤ 768px.
  */
 export default function HeroSection({ isLoading, time, isMobile }) {
+
+  useEffect(() => {
+    // Let the first paint and loader animation win the connection, then fetch
+    // the hero's heavy R3F chunk/model while the visitor is reading the intro.
+    const idle = window.requestIdleCallback || ((callback) => window.setTimeout(callback, 500));
+    const cancelIdle = window.cancelIdleCallback || window.clearTimeout;
+    const handle = idle(() => loadRaspberryPi());
+    return () => cancelIdle(handle);
+  }, []);
 
   /* ── Mobile Layout ── */
   if (isMobile) {

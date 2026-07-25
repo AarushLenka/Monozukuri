@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Environment, useGLTF, Center } from '@react-three/drei';
+import { useGLTF, Center } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
 import gsap from 'gsap';
 import Canvas3DBase from './components/Canvas3DBase';
@@ -45,7 +45,7 @@ function PiScene({ onAnimComplete, isLoading, isMobile }) {
     });
 
     return () => ctx.revert();
-  }, [isLoading]);
+  }, [invalidate, isLoading, onAnimComplete]);
 
   return (
     <group ref={groupRef} rotation={[0, -Math.PI, 0]}>
@@ -54,7 +54,6 @@ function PiScene({ onAnimComplete, isLoading, isMobile }) {
           <RealPiModel scale={0.04} isMobile={isMobile} />
         </Center>
       </React.Suspense>
-      <Environment preset="city" />
     </group>
   );
 }
