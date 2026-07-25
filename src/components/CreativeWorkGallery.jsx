@@ -8,6 +8,7 @@ const HoverVideo = ({ src, isActive }) => {
     if (!videoRef.current) return;
     
     if (isActive) {
+      videoRef.current.load();
       videoRef.current.play().catch(e => console.log('Video play prevented:', e));
     } else {
       videoRef.current.pause();
@@ -18,7 +19,7 @@ const HoverVideo = ({ src, isActive }) => {
   return (
     <video
       ref={videoRef}
-      src={`/footage/${src}#t=0.001`}
+      src={isActive ? `/footage-optimized/${src}#t=0.001` : undefined}
       loop
       muted
       playsInline

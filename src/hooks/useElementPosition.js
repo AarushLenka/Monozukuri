@@ -8,15 +8,13 @@ export function useElementPosition(elementId, startAlign = 'left', gap = 15) {
     const el = document.getElementById(elementId);
     if (!el) return;
 
-    let animationFrameId;
+    let animationFrameId = 0;
     let lastPos = null;
 
     const updatePos = () => {
+      animationFrameId = 0;
       const wrapper = el.closest('.origin-top-left');
-      if (!wrapper) {
-        animationFrameId = requestAnimationFrame(updatePos);
-        return;
-      }
+      if (!wrapper) return;
 
       const rect = el.getBoundingClientRect();
       const wrapperRect = wrapper.getBoundingClientRect();
@@ -40,13 +38,23 @@ export function useElementPosition(elementId, startAlign = 'left', gap = 15) {
         setPosition(newPos);
       }
 
-      animationFrameId = requestAnimationFrame(updatePos);
     };
 
-    animationFrameId = requestAnimationFrame(updatePos);
+    const scheduleUpdate = () => {
+      if (!animationFrameId) animationFrameId = requestAnimationFrame(updatePos);
+    };
+
+    const wrapper = el.closest('.origin-top-left');
+    const resizeObserver = new ResizeObserver(scheduleUpdate);
+    resizeObserver.observe(el);
+    if (wrapper) resizeObserver.observe(wrapper);
+    window.addEventListener('resize', scheduleUpdate, { passive: true });
+    scheduleUpdate();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', scheduleUpdate);
     };
   }, [elementId, startAlign, gap]);
 

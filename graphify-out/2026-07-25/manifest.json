@@ -1,8 +1,8 @@
 {
   ".claude/settings.local.json": {
-    "mtime": 1784913791.9570143,
-    "ast_hash": "7763110982782b7f8c4548f551fa4a67",
-    "semantic_hash": ""
+    "mtime": 1784892080.6981812,
+    "ast_hash": "a2ce6a76988e73f0a83392049caf4ba5",
+    "semantic_hash": "a2ce6a76988e73f0a83392049caf4ba5"
   },
   "eslint.config.js": {
     "mtime": 1779112810.9392078,
@@ -10,9 +10,9 @@
     "semantic_hash": "3aa4b57d7f08181d86bde52a4dcb7f22"
   },
   "package.json": {
-    "mtime": 1784914502.6786358,
-    "ast_hash": "dd314693f7c4bf9db38496ab4f606859",
-    "semantic_hash": ""
+    "mtime": 1779952232.8743815,
+    "ast_hash": "2043a76fbe7f552ffedcc95253d06941",
+    "semantic_hash": "2043a76fbe7f552ffedcc95253d06941"
   },
   "postcss.config.js": {
     "mtime": 1779112825.8548176,
@@ -20,19 +20,19 @@
     "semantic_hash": "ef3ba2a81ba19f8ea5ddf625521e96f0"
   },
   "src/App.jsx": {
-    "mtime": 1784920785.7208874,
-    "ast_hash": "aa994355955b8dd939ffb35919740d01",
-    "semantic_hash": ""
+    "mtime": 1784869548.3639305,
+    "ast_hash": "e7221fe7ff433eb1686b47bb11ff1061",
+    "semantic_hash": "e7221fe7ff433eb1686b47bb11ff1061"
   },
   "src/ESP32.jsx": {
-    "mtime": 1784912517.0721054,
-    "ast_hash": "cd3d2c378a63ddc3f83a13fefc20fb73",
-    "semantic_hash": ""
+    "mtime": 1784869548.3639305,
+    "ast_hash": "51bd1491e219bf88ef01713659cb36b0",
+    "semantic_hash": "51bd1491e219bf88ef01713659cb36b0"
   },
   "src/RaspberryPi.jsx": {
-    "mtime": 1784912517.0941055,
-    "ast_hash": "c92cdb9c72a5c2d3149c50b3ef2d913d",
-    "semantic_hash": ""
+    "mtime": 1784869548.3649304,
+    "ast_hash": "47abf9f4c066bb28afc34f35c134ff08",
+    "semantic_hash": "47abf9f4c066bb28afc34f35c134ff08"
   },
   "src/components/AnimatedConnector.jsx": {
     "mtime": 1780933477.8300672,
@@ -45,9 +45,9 @@
     "semantic_hash": "b6950b1b76d2671dceea2ebfc1f2ce5e"
   },
   "src/components/Canvas3DBase.jsx": {
-    "mtime": 1784894227.8784175,
-    "ast_hash": "732bcb77afa63b839e74f41478aeb3ce",
-    "semantic_hash": ""
+    "mtime": 1784869548.3649304,
+    "ast_hash": "b7c2e96db3a9ad95fb4bcddae562a736",
+    "semantic_hash": "b7c2e96db3a9ad95fb4bcddae562a736"
   },
   "src/components/ClickHereCursor.jsx": {
     "mtime": 1780927628.6915638,
@@ -65,9 +65,9 @@
     "semantic_hash": "a784eed17d5ad684e2bcb029916f6dfa"
   },
   "src/components/CreativeWorkGallery.jsx": {
-    "mtime": 1784911844.7355716,
-    "ast_hash": "c003735389da96ea825a269c30fbd7ad",
-    "semantic_hash": ""
+    "mtime": 1784869548.3649304,
+    "ast_hash": "2c3bd50ea756909b5638f5093204767e",
+    "semantic_hash": "2c3bd50ea756909b5638f5093204767e"
   },
   "src/components/CursorTooltip.jsx": {
     "mtime": 1780937582.1575491,
@@ -90,9 +90,9 @@
     "semantic_hash": "fea272eda19ede705cd4a85b440c2e62"
   },
   "src/components/ModelCanvas.jsx": {
-    "mtime": 1784912517.1081057,
-    "ast_hash": "1a84efe29a5693cebef2298acc0dba9a",
-    "semantic_hash": ""
+    "mtime": 1784869548.3649304,
+    "ast_hash": "6381223982b3879524c0f864cc2a9ede",
+    "semantic_hash": "6381223982b3879524c0f864cc2a9ede"
   },
   "src/components/MovingSlashBar.jsx": {
     "mtime": 1779435105.0650482,
@@ -125,9 +125,9 @@
     "semantic_hash": "3b67a189569e7aecf922c8b8d247defa"
   },
   "src/constants/projects.js": {
-    "mtime": 1784919803.9434662,
-    "ast_hash": "b12d13bec7289636a12630dd6f1d1e0a",
-    "semantic_hash": ""
+    "mtime": 1780904848.0799046,
+    "ast_hash": "d8ecbea31c53f52eb222bb15afb1733b",
+    "semantic_hash": "d8ecbea31c53f52eb222bb15afb1733b"
   },
   "src/hooks/useElementPosition.js": {
     "mtime": 1780933493.2833362,
@@ -165,9 +165,9 @@
     "semantic_hash": "a069b9cb15aee6e522e9c21f110535b4"
   },
   "src/sections/AboutSection.jsx": {
-    "mtime": 1784919816.6654975,
-    "ast_hash": "f17c6375152afa42549660a040b05e06",
-    "semantic_hash": ""
+    "mtime": 1784869548.3649304,
+    "ast_hash": "102d48ab12931d1d0b077b4b74ba2192",
+    "semantic_hash": "102d48ab12931d1d0b077b4b74ba2192"
   },
   "src/sections/CitySection.jsx": {
     "mtime": 1784869548.3649304,
@@ -180,9 +180,9 @@
     "semantic_hash": "fd3d4b4ac192defdfffba39b8cf0453e"
   },
   "src/sections/HeroSection.jsx": {
-    "mtime": 1784920805.395936,
-    "ast_hash": "120980b3f8031b136d9078e8f4f36deb",
-    "semantic_hash": ""
+    "mtime": 1784869548.3659303,
+    "ast_hash": "4599bc443652525d5ba30dfa75574925",
+    "semantic_hash": "4599bc443652525d5ba30dfa75574925"
   },
   "src/sections/ProjectModal.jsx": {
     "mtime": 1780927628.6915638,
@@ -190,9 +190,9 @@
     "semantic_hash": "1ae2416e6ac2c1c0ca6914452ba1a5b2"
   },
   "src/sections/ProjectsSection.jsx": {
-    "mtime": 1784919816.6744976,
-    "ast_hash": "c06c363f5f5d3fd063b1f00f011af36e",
-    "semantic_hash": ""
+    "mtime": 1784869548.3659303,
+    "ast_hash": "ca77e49abf93500dcd1455e105f58ffa",
+    "semantic_hash": "ca77e49abf93500dcd1455e105f58ffa"
   },
   "src/utils/svgGenerators.js": {
     "mtime": 1780066051.7957108,
@@ -200,9 +200,9 @@
     "semantic_hash": "b4e686c360c1a0647ae0ad90ccdb2fa2"
   },
   "src/utils/threeUtils.js": {
-    "mtime": 1784916128.8314023,
-    "ast_hash": "050ab25def043d87dcdf2e9967e8491d",
-    "semantic_hash": ""
+    "mtime": 1784869548.3659303,
+    "ast_hash": "bbd7a182827c92e022d5dc24c76251c9",
+    "semantic_hash": "bbd7a182827c92e022d5dc24c76251c9"
   },
   "tailwind.config.js": {
     "mtime": 1779866982.8672698,
@@ -210,9 +210,9 @@
     "semantic_hash": "d3cbe6c36199ed37b3f64b54b596812b"
   },
   "vite.config.js": {
-    "mtime": 1784914830.7863846,
-    "ast_hash": "6e96d289a413fe6a60900247394d139a",
-    "semantic_hash": ""
+    "mtime": 1779112810.941282,
+    "ast_hash": "88439104b3c207f17d33ef3160e3b080",
+    "semantic_hash": "88439104b3c207f17d33ef3160e3b080"
   },
   "README.md": {
     "mtime": 1779978330.9625456,
@@ -220,9 +220,19 @@
     "semantic_hash": "0c8a62a6566b359e268d523225dd8286"
   },
   "index.html": {
-    "mtime": 1784917948.1158893,
-    "ast_hash": "8e9d279a5aad6988be38acf7296b81bb",
-    "semantic_hash": ""
+    "mtime": 1780067312.098744,
+    "ast_hash": "9cd902308a63e02c4b6ab129f23d61c2",
+    "semantic_hash": "9cd902308a63e02c4b6ab129f23d61c2"
+  },
+  "public/bot.png": {
+    "mtime": 1780844145.153038,
+    "ast_hash": "aee685b5e4c52a7e417426727ac01ed3",
+    "semantic_hash": "aee685b5e4c52a7e417426727ac01ed3"
+  },
+  "public/crowdshield.png": {
+    "mtime": 1780895991.326411,
+    "ast_hash": "4abac63c75576906968facd9c9121e9c",
+    "semantic_hash": "4abac63c75576906968facd9c9121e9c"
   },
   "public/favicon.png": {
     "mtime": 1780067461.7898195,
@@ -234,10 +244,65 @@
     "ast_hash": "7e840862161341271697daa99a40d76b",
     "semantic_hash": "7e840862161341271697daa99a40d76b"
   },
+  "public/home automation.png": {
+    "mtime": 1780067855.3423615,
+    "ast_hash": "d50ad1c786e6838fca99d830ca2ff38f",
+    "semantic_hash": "d50ad1c786e6838fca99d830ca2ff38f"
+  },
   "public/icons.svg": {
     "mtime": 1779112810.9400063,
     "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
     "semantic_hash": "3b4fcfcf393eca4d264dca4a4663bc37"
+  },
+  "public/jojo_arrow.png": {
+    "mtime": 1779514133.7411623,
+    "ast_hash": "4579f3736964665525a9bf4771af80fb",
+    "semantic_hash": "4579f3736964665525a9bf4771af80fb"
+  },
+  "public/milk-missile-missile.gif": {
+    "mtime": 1780031785.282036,
+    "ast_hash": "1133f512b7f8e45f5e6cf51181a4f9e6",
+    "semantic_hash": "1133f512b7f8e45f5e6cf51181a4f9e6"
+  },
+  "public/neuracc.png": {
+    "mtime": 1780895158.4249778,
+    "ast_hash": "77948ae6fc54cd7ecf0de2036cea4d8b",
+    "semantic_hash": "77948ae6fc54cd7ecf0de2036cea4d8b"
+  },
+  "public/nexus.png": {
+    "mtime": 1780904418.9502273,
+    "ast_hash": "71dd28d8cea7f515d2d540ea8c49510b",
+    "semantic_hash": "71dd28d8cea7f515d2d540ea8c49510b"
+  },
+  "public/otain.png": {
+    "mtime": 1780901968.472629,
+    "ast_hash": "c389b11beeb65e5b70beccbf392b18ff",
+    "semantic_hash": "c389b11beeb65e5b70beccbf392b18ff"
+  },
+  "public/pilot.png": {
+    "mtime": 1779634099.20571,
+    "ast_hash": "b875b2d097e39282d377ad5d7e17b0d3",
+    "semantic_hash": "b875b2d097e39282d377ad5d7e17b0d3"
+  },
+  "public/robot.png": {
+    "mtime": 1779516966.3687885,
+    "ast_hash": "e586a168738eecde2429f7efda94df3c",
+    "semantic_hash": "e586a168738eecde2429f7efda94df3c"
+  },
+  "public/rose.png": {
+    "mtime": 1779514833.9824378,
+    "ast_hash": "69076dc6289b434a762f97d21483486d",
+    "semantic_hash": "69076dc6289b434a762f97d21483486d"
+  },
+  "public/s400.png": {
+    "mtime": 1780901398.4953568,
+    "ast_hash": "a6293a7eb056b9a00e11b9a9d9235e7a",
+    "semantic_hash": "a6293a7eb056b9a00e11b9a9d9235e7a"
+  },
+  "public/vital.png": {
+    "mtime": 1780904230.4018056,
+    "ast_hash": "543339e06e34adf2bc4f4569810669bc",
+    "semantic_hash": "543339e06e34adf2bc4f4569810669bc"
   },
   "src/assets/hero.png": {
     "mtime": 1779112810.940732,
@@ -353,80 +418,5 @@
     "mtime": 1780066677.5742614,
     "ast_hash": "75f6e9e2c4870c40bcdc1eb9d6f0630a",
     "semantic_hash": "75f6e9e2c4870c40bcdc1eb9d6f0630a"
-  },
-  "vercel.json": {
-    "mtime": 1784916008.9091067,
-    "ast_hash": "52f07a8525a580b0f3d2a9980873f4aa",
-    "semantic_hash": ""
-  },
-  "stats.html": {
-    "mtime": 1784920822.6589787,
-    "ast_hash": "32d328944f84948bed5bfaa036a1b3e7",
-    "semantic_hash": ""
-  },
-  "public/bot.webp": {
-    "mtime": 1784919477.05766,
-    "ast_hash": "6ec0969544a26dd41e4bf7183ae1d54f",
-    "semantic_hash": ""
-  },
-  "public/crowdshield.webp": {
-    "mtime": 1784919476.0626576,
-    "ast_hash": "a7e9bb64f1ed4c35daeccab6fef533cf",
-    "semantic_hash": ""
-  },
-  "public/home automation.webp": {
-    "mtime": 1784919477.1496603,
-    "ast_hash": "82280004e1045d0886f21a25de603912",
-    "semantic_hash": ""
-  },
-  "public/jojo_arrow.webp": {
-    "mtime": 1784919477.00966,
-    "ast_hash": "9bc8f23d2d91fa921b18809ec416cde4",
-    "semantic_hash": ""
-  },
-  "public/milk-missile-missile.webp": {
-    "mtime": 1784919524.478777,
-    "ast_hash": "f05ff36696151815eb61f2cb39b1cc19",
-    "semantic_hash": ""
-  },
-  "public/neuracc.webp": {
-    "mtime": 1784919476.4436586,
-    "ast_hash": "ff8857b94dfa33c1f4dfb6a6ba215fca",
-    "semantic_hash": ""
-  },
-  "public/nexus.webp": {
-    "mtime": 1784919475.398656,
-    "ast_hash": "8d88d0280ebc3f98b3ef14237233dfd2",
-    "semantic_hash": ""
-  },
-  "public/otain.webp": {
-    "mtime": 1784919476.7606592,
-    "ast_hash": "4a864a478e95d3107c00f06844f7261d",
-    "semantic_hash": ""
-  },
-  "public/pilot.webp": {
-    "mtime": 1784919476.286658,
-    "ast_hash": "bcabe9b9a1f0684fc6be7bdc402ac910",
-    "semantic_hash": ""
-  },
-  "public/robot.webp": {
-    "mtime": 1784919475.029655,
-    "ast_hash": "193348ee05466cd80e7d6fbae738ae96",
-    "semantic_hash": ""
-  },
-  "public/rose.webp": {
-    "mtime": 1784919476.195658,
-    "ast_hash": "aad3a58166ba85630d64f096f211c3e6",
-    "semantic_hash": ""
-  },
-  "public/s400.webp": {
-    "mtime": 1784919476.610659,
-    "ast_hash": "034d9fd46edb24a1492d9872c44e9694",
-    "semantic_hash": ""
-  },
-  "public/vital.webp": {
-    "mtime": 1784919475.795657,
-    "ast_hash": "a4903a0ca1684dc56dfca203f9130c1b",
-    "semantic_hash": ""
   }
 }

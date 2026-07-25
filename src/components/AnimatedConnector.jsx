@@ -1,24 +1,20 @@
-import React, { useState, useRef } from 'react';
-import { useAnimationFrame } from 'framer-motion';
-import { useWindowSize } from '../hooks/useWindowSize';
+import { useState, useEffect } from 'react';
 import { useElementPosition } from '../hooks/useElementPosition';
 
 export default function AnimatedConnector({ pts, startId, startAlign = 'left', gap = 15 }) {
   const [jitter, setJitter] = useState({ x: 0, y: 0 });
-  const lastUpdateRef = useRef(0);
-
-  const windowSize = useWindowSize();
   const startPos = useElementPosition(startId, startAlign, gap);
 
-  useAnimationFrame((t) => {
-    if (t - lastUpdateRef.current > 50 + Math.random() * 300) {
-      lastUpdateRef.current = t;
+  useEffect(() => {
+    const interval = window.setInterval(() => {
       setJitter({
         x: (Math.random() - 0.5) * 20,
         y: (Math.random() - 0.5) * 20,
       });
-    }
-  });
+    }, 280);
+
+    return () => window.clearInterval(interval);
+  }, []);
 
   const pixelPoints = pts.map((p) => {
     let px = p.x !== undefined ? (p.x / 100) * 1440 : (startPos ? startPos.x : 0);

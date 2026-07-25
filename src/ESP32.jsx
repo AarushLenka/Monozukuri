@@ -1,6 +1,6 @@
 import React from 'react';
-import { Canvas, useFrame, invalidate } from '@react-three/fiber';
-import { Environment, OrbitControls, useGLTF, Center } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, useGLTF, Center } from '@react-three/drei';
 import { useOrbitSnapBack } from './hooks/useOrbitSnapBack';
 import { useScrollProgress } from './hooks/useScrollProgress';
 import { useSceneMeshes } from './hooks/useSceneMeshes';
@@ -14,7 +14,6 @@ function ESPModel({ scrollProgress, ...props }) {
   });
 
   useFrame(() => {
-    invalidate();
     const meshes = meshesRef.current;
     if (!meshes.length) return;
 
@@ -77,7 +76,6 @@ export default function ESP32Canvas({ isMobile }) {
           </Center>
         </group>
       </React.Suspense>
-      <Environment preset="city" environmentIntensity={0.3} intensity={0.4} />
       <OrbitControls
         ref={controlsRef}
         enableZoom={false}

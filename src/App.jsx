@@ -7,16 +7,57 @@ import HeroSection from './sections/HeroSection';
 import { useIsMobile } from './hooks/useIsMobile';
 import { GRID_CONFIG } from './config/heroConfig';
 
-// Below-the-fold sections — lazy-split so Three.js/gsap/framer-motion/animejs
-// only load on demand once the user actually approaches that section,
-// keeping the critical path to first paint tiny (hero only).
-const AboutSection = lazy(() => import('./sections/AboutSection'));
-const ProjectsSection = lazy(() => import('./sections/ProjectsSection'));
-const CreativeWorkSection = lazy(() => import('./sections/CreativeWorkSection'));
-const CitySection = lazy(() => import('./sections/CitySection'));
+// Keep below-the-fold code split, and do not even start the import until the
+// section is close to the viewport. Rendering a lazy component immediately
+// still downloads its chunk on the first paint.
+const loadAboutSection = () => import('./sections/AboutSection');
+const loadProjectsSection = () => import('./sections/ProjectsSection');
+const loadCreativeWorkSection = () => import('./sections/CreativeWorkSection');
+const loadCitySection = () => import('./sections/CitySection');
 const ProjectModal = lazy(() => import('./sections/ProjectModal'));
 const ClickHereCursor = lazy(() => import('./components/ClickHereCursor'));
 const CursorTooltip = lazy(() => import('./components/CursorTooltip'));
+
+function DeferredSection({ load, isMobile, minHeight = '100vh', sectionProps = {}, children }) {
+  const sectionRef = useRef(null);
+  const [Section, setSection] = useState(null);
+
+  useEffect(() => {
+    if (Section || !sectionRef.current) return undefined;
+
+    const loadSection = () => {
+      load().then((module) => setSection(() => module.default));
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      loadSection();
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      loadSection();
+    }, { rootMargin: '400px 0px' });
+
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [Section, load]);
+
+  return (
+    <div
+      ref={sectionRef}
+      className="relative"
+      style={{ minHeight: isMobile ? minHeight : 'var(--logical-vh)', contentVisibility: 'auto' }}
+    >
+      {Section ? (
+        <Suspense fallback={children || null}>
+          <Section isMobile={isMobile} {...sectionProps} />
+        </Suspense>
+      ) : children || null}
+    </div>
+  );
+}
 
 export default function App() {
   const [time, setTime] = useState('00:43 AM');
@@ -146,24 +187,18 @@ export default function App() {
           )}
 
           <HeroSection time={time} isLoading={isLoading} isMobile={isMobile} />
-          <Suspense fallback={null}>
-            <AboutSection isMobile={isMobile} />
-          </Suspense>
-          <Suspense fallback={null}>
-            <ProjectsSection onProjectSelect={setSelectedProject} isMobile={isMobile} />
-          </Suspense>
-          <Suspense fallback={null}>
-            <CreativeWorkSection isMobile={isMobile} />
-          </Suspense>
-          <Suspense fallback={null}>
-            <CitySection isMobile={isMobile} />
-          </Suspense>
+          <DeferredSection load={loadAboutSection} isMobile={isMobile} minHeight="100vh" />
+          <DeferredSection load={loadProjectsSection} isMobile={isMobile} minHeight="100vh" sectionProps={{ onProjectSelect: setSelectedProject }} />
+          <DeferredSection load={loadCreativeWorkSection} isMobile={isMobile} minHeight="80vh" />
+          <DeferredSection load={loadCitySection} isMobile={isMobile} minHeight="100vh" />
         </div>
       </div>
 
-      <Suspense fallback={null}>
-        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
-      </Suspense>
+      {selectedProject && (
+        <Suspense fallback={null}>
+          <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+        </Suspense>
+      )}
       {/* Hide ClickHereCursor and CursorTooltip on mobile */}
       {!isMobile && (
         <Suspense fallback={null}>
