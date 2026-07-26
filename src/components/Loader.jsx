@@ -94,7 +94,7 @@ export default function Loader({ onLoadingComplete }) {
           key={index}
           className="leading-none text-white text-center w-full whitespace-nowrap overflow-hidden select-none"
           style={{
-            fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", "Noto Sans Bengali", "Noto Sans Tamil", "Noto Sans Malayalam", "Noto Sans Kannada", "Noto Sans Telugu", "Nirmala UI", "Mukta", "Mangal", "Kohinoor Devanagari", "Kohinoor Bangla", "Kohinoor Telugu", "Kohinoor Tamil", "Kohinoor Malayalam", "Lohit Devanagari", "Lohit Bengali", "Lohit Tamil", "Lohit Telugu", "Lohit Kannada", "Lohit Malayalam", "Vrinda", "Gautami", "Tunga", "Kartika", "AnjaliOldLipi", sans-serif',
+            fontFamily: '"Space Grotesk", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", "Noto Sans Bengali", "Noto Sans Tamil", "Noto Sans Malayalam", "Noto Sans Kannada", "Noto Sans Telugu", "Nirmala UI", "Mukta", "Mangal", "Kohinoor Devanagari", "Kohinoor Bangla", "Kohinoor Telugu", "Kohinoor Tamil", "Kohinoor Malayalam", "Lohit Devanagari", "Lohit Bengali", "Lohit Tamil", "Lohit Telugu", "Lohit Kannada", "Lohit Malayalam", "Vrinda", "Gautami", "Tunga", "Kartika", "AnjaliOldLipi", sans-serif',
             fontSize: 'clamp(3rem, 11vw, 10rem)',
             fontWeight: 700,
             letterSpacing: '0.02em',
