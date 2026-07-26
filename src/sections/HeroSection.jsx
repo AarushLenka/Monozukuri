@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import AnimatedConnector from '../components/AnimatedConnector';
 import CoreThreadsPanel from '../components/CoreThreadsPanel';
-import RaspberryPiCanvas from '../RaspberryPi';
+const loadRaspberryPi = () => import('../RaspberryPi');
+const RaspberryPiCanvas = lazy(loadRaspberryPi);
 import SocialLinks from '../components/SocialLinks';
 import { CONNECTOR_CONFIG } from '../config/heroConfig';
 
@@ -13,6 +14,15 @@ import { CONNECTOR_CONFIG } from '../config/heroConfig';
  * @param {boolean} isMobile   True when viewport ≤ 768px.
  */
 export default function HeroSection({ isLoading, time, isMobile }) {
+
+  useEffect(() => {
+    // Let the first paint and loader animation win the connection, then fetch
+    // the hero's heavy R3F chunk/model while the visitor is reading the intro.
+    const idle = window.requestIdleCallback || ((callback) => window.setTimeout(callback, 500));
+    const cancelIdle = window.cancelIdleCallback || window.clearTimeout;
+    const handle = idle(() => loadRaspberryPi());
+    return () => cancelIdle(handle);
+  }, []);
 
   /* ── Mobile Layout ── */
   if (isMobile) {
@@ -72,12 +82,14 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         {/* 3D Raspberry Pi Model */}
         <div className="w-full flex items-center justify-center -mt-[50px] pointer-events-none">
           <div className="relative w-[130vw] h-[50vh] shrink-0 flex items-center justify-center">
-            <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
+            <Suspense fallback={null}>
+              <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
+            </Suspense>
           </div>
         </div>
 
         {/* Social Buttons */}
-        <div className="flex justify-center mb-10 -mt-[20px] relative z-30">
+        <div className="flex justify-center mb-10 -mt-[30px] relative z-30">
           <SocialLinks className="justify-center" />
         </div>
 
@@ -147,7 +159,9 @@ export default function HeroSection({ isLoading, time, isMobile }) {
 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] pointer-events-auto z-20">
           <div className="relative w-[600px] h-[650px] flex items-center justify-center pointer-events-auto">
-            <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
+            <Suspense fallback={null}>
+              <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
+            </Suspense>
           </div>
         </div>
 

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, OrbitControls, useGLTF, Center } from '@react-three/drei';
+import { OrbitControls, useGLTF, Center } from '@react-three/drei';
 import { useOrbitSnapBack } from './hooks/useOrbitSnapBack';
 import { useScrollProgress } from './hooks/useScrollProgress';
 import { useSceneMeshes } from './hooks/useSceneMeshes';
 import { addEdgeLines, setMeshOpacity } from './utils/threeUtils';
 
 function ESPModel({ scrollProgress, ...props }) {
-  const { scene } = useGLTF('/esp32.glb');
+  // useMeshopt=true wires EXT_meshopt_compression decoding; useDraco left at default.
+  const { scene } = useGLTF('/esp32.glb', undefined, true);
   const meshesRef = useSceneMeshes(scene, () => {
     addEdgeLines(scene, { transparent: true });
   });
@@ -16,8 +17,8 @@ function ESPModel({ scrollProgress, ...props }) {
     const meshes = meshesRef.current;
     if (!meshes.length) return;
 
-    const maxSpread = 0.0025;
-    const spread = maxSpread * (1 - scrollProgress) * 0.5;
+    const maxSpread = 0.05;
+    const spread = maxSpread * (1 - scrollProgress);
 
     // Solid mesh starts at low opacity and ramps up to fully opaque on scroll
     const BASE_OPACITY = 0.08;
@@ -57,6 +58,7 @@ export default function ESP32Canvas({ isMobile }) {
 
   return (
     <Canvas
+      frameloop="always"
       camera={{ position: [0, 0, 6], fov: 45 }}
       className={`w-full h-full ${isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}
       style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
@@ -74,7 +76,6 @@ export default function ESP32Canvas({ isMobile }) {
           </Center>
         </group>
       </React.Suspense>
-      <Environment preset="city" environmentIntensity={0.3} intensity={0.4} />
       <OrbitControls
         ref={controlsRef}
         enableZoom={false}
@@ -86,3 +87,5 @@ export default function ESP32Canvas({ isMobile }) {
     </Canvas>
   );
 }
+
+useGLTF.preload('/esp32.glb', undefined, true);

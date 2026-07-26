@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { EdgesGeometry, LineSegments, LineBasicMaterial } from 'three';
 
 const EDGE_THRESHOLD_DEG = 4;
 const WIREFRAME_COLOR = '#ffffff';
@@ -20,10 +20,10 @@ export function addEdgeLines(scene, { hideSolid = false, transparent = false, co
     );
 
     if (!alreadyAdded) {
-      const edges = new THREE.EdgesGeometry(child.geometry, EDGE_THRESHOLD_DEG);
-      const line = new THREE.LineSegments(
+      const edges = new EdgesGeometry(child.geometry, EDGE_THRESHOLD_DEG);
+      const line = new LineSegments(
         edges,
-        new THREE.LineBasicMaterial({
+        new LineBasicMaterial({
           color: color,
           transparent: transparent || opacity < 1,
           opacity: opacity,

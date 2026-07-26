@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import { useOrbitSnapBack } from '../hooks/useOrbitSnapBack';
 
 export default function Canvas3DBase({
@@ -12,7 +12,6 @@ export default function Canvas3DBase({
     { position: [10, 10, 5], intensity: 1.5 },
     { position: [-10, -10, -5], intensity: 0.5 },
   ],
-  environmentPreset = 'city',
   orbitProps = {},
   sceneProps = {},
 }) {
@@ -20,6 +19,7 @@ export default function Canvas3DBase({
   const { controlsRef, handleInteractionStart, handleInteractionEnd } = useOrbitSnapBack(
     () => setAutoRotate(true)
   );
+  const handleSceneAnimationComplete = useCallback(() => setAutoRotate(true), []);
 
   const handleDragStart = () => {
     handleInteractionStart();
@@ -32,6 +32,7 @@ export default function Canvas3DBase({
 
   return (
     <Canvas
+      frameloop="demand"
       camera={{ position: cameraPosition, fov }}
       className={`w-full h-full ${sceneProps?.isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}
       style={{ pointerEvents: sceneProps?.isMobile ? 'none' : 'auto' }}
@@ -44,7 +45,7 @@ export default function Canvas3DBase({
         <directionalLight key={idx} position={light.position} intensity={light.intensity} />
       ))}
       <SceneComponent
-        onAnimComplete={() => setAutoRotate(true)}
+        onAnimComplete={handleSceneAnimationComplete}
         autoRotate={autoRotate}
         setAutoRotate={setAutoRotate}
         {...sceneProps}
@@ -59,7 +60,6 @@ export default function Canvas3DBase({
         onEnd={handleDragEnd}
         {...orbitProps}
       />
-      <Environment preset={environmentPreset} />
     </Canvas>
   );
 }

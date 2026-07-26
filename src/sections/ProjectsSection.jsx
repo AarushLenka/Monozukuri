@@ -1,8 +1,39 @@
-import React from 'react';
-import ModelCanvas from '../components/ModelCanvas';
+import React, { lazy } from 'react';
+const ModelCanvas = lazy(() => import('../components/ModelCanvas'));
 import DecorativeCard from '../components/DecorativeCard';
-import ZigzagPattern from '../components/ZigzagPattern';
 import { PROJECTS_DATA } from '../constants/projects';
+
+function ViewportVideo({ src, className }) {
+  const videoRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return undefined;
+
+    const start = () => {
+      if (!video.src) {
+        video.src = src;
+        video.load();
+      }
+      video.play().catch(() => {});
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      start();
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      start();
+    }, { rootMargin: '2500px' });
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [src]);
+
+  return <video ref={videoRef} loop muted playsInline preload="none" className={className} />;
+}
 
 /**
  * Projects section — third full-height screen.
@@ -102,12 +133,8 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
                       </React.Suspense>
                     </div>
                   ) : proj.video ? (
-                    <video
+                    <ViewportVideo
                       src={proj.video}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
                       className={`w-full h-full opacity-90 ${proj.objectFit ? `object-${proj.objectFit}` : 'object-cover'}`}
                     />
                   ) : (
@@ -225,12 +252,8 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
                   </React.Suspense>
                 </div>
               ) : proj.video ? (
-                <video
+                <ViewportVideo
                   src={proj.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
                   className={`w-full h-full opacity-90 ${proj.objectFit ? `object-${proj.objectFit}` : 'object-cover'}`}
                 />
               ) : (
@@ -252,7 +275,7 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
                 <path d="M1 1L13 13M1 13L13 1" />
               </svg>
             </button>
-            <img src="/pilot.png" alt="Pilot" className="w-full h-auto block" />
+            <img src="/pilot.webp" alt="Pilot" className="w-full h-auto block" />
           </div>
 
           <DecorativeCard className="absolute inset-0">

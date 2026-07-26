@@ -1,18 +1,75 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, lazy, Suspense } from 'react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import BackgroundBlobs from './components/BackgroundBlobs';
 import GridMarker from './components/GridMarker';
 import Loader from './components/Loader';
 import HeroSection from './sections/HeroSection';
-import AboutSection from './sections/AboutSection';
-import ProjectsSection from './sections/ProjectsSection';
-import CreativeWorkSection from './sections/CreativeWorkSection';
-import CitySection from './sections/CitySection';
-import ProjectModal from './sections/ProjectModal';
-import ClickHereCursor from './components/ClickHereCursor';
-import CursorTooltip from './components/CursorTooltip';
-import { GRID_CONFIG } from './config/heroConfig';
 import { useIsMobile } from './hooks/useIsMobile';
+import { GRID_CONFIG } from './config/heroConfig';
+
+// Keep below-the-fold code split, and do not even start the import until the
+// section is close to the viewport. Rendering a lazy component immediately
+// still downloads its chunk on the first paint.
+const loadAboutSection = () => import('./sections/AboutSection');
+const loadProjectsSection = () => import('./sections/ProjectsSection');
+const loadCreativeWorkSection = () => import('./sections/CreativeWorkSection');
+const loadCitySection = () => import('./sections/CitySection');
+const ProjectModal = lazy(() => import('./sections/ProjectModal'));
+const ClickHereCursor = lazy(() => import('./components/ClickHereCursor'));
+const CursorTooltip = lazy(() => import('./components/CursorTooltip'));
+
+// Preload all section bundles directly after initial Javascript evaluation
+// so zero network delays occur during mobile scroll while the Loader is active.
+if (typeof window !== 'undefined') {
+  setTimeout(() => {
+    loadAboutSection();
+    loadProjectsSection();
+    loadCreativeWorkSection();
+    loadCitySection();
+  }, 100);
+}
+
+function DeferredSection({ load, isMobile, minHeight = '100vh', sectionProps = {}, children }) {
+  const sectionRef = useRef(null);
+  const [Section, setSection] = useState(null);
+
+  useEffect(() => {
+    if (Section || !sectionRef.current) return undefined;
+
+    const loadSection = () => {
+      load().then((module) => setSection(() => module.default));
+    };
+
+    if (!('IntersectionObserver' in window) || isMobile) {
+      // On mobile, mount eagerly once JS module is fetched so scroll never hits an empty or delayed DOM
+      loadSection();
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      loadSection();
+    }, { rootMargin: '2500px 0px' });
+
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [Section, load, isMobile]);
+
+  return (
+    <div
+      ref={sectionRef}
+      className="relative"
+      style={{ minHeight: isMobile ? minHeight : 'var(--logical-vh)' }}
+    >
+      {Section ? (
+        <Suspense fallback={children || null}>
+          <Section isMobile={isMobile} {...sectionProps} />
+        </Suspense>
+      ) : children || null}
+    </div>
+  );
+}
 
 export default function App() {
   const [time, setTime] = useState('00:43 AM');
@@ -142,17 +199,25 @@ export default function App() {
           )}
 
           <HeroSection time={time} isLoading={isLoading} isMobile={isMobile} />
-          <AboutSection isMobile={isMobile} />
-          <ProjectsSection onProjectSelect={setSelectedProject} isMobile={isMobile} />
-          <CreativeWorkSection isMobile={isMobile} />
-          <CitySection isMobile={isMobile} />
+          <DeferredSection load={loadAboutSection} isMobile={isMobile} minHeight="100vh" />
+          <DeferredSection load={loadProjectsSection} isMobile={isMobile} minHeight="100vh" sectionProps={{ onProjectSelect: setSelectedProject }} />
+          <DeferredSection load={loadCreativeWorkSection} isMobile={isMobile} minHeight="80vh" />
+          <DeferredSection load={loadCitySection} isMobile={isMobile} minHeight="100vh" />
         </div>
       </div>
 
-      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      {selectedProject && (
+        <Suspense fallback={null}>
+          <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+        </Suspense>
+      )}
       {/* Hide ClickHereCursor and CursorTooltip on mobile */}
-      {!isMobile && <ClickHereCursor isModalOpen={!!selectedProject} />}
-      {!isMobile && <CursorTooltip />}
+      {!isMobile && (
+        <Suspense fallback={null}>
+          <ClickHereCursor isModalOpen={!!selectedProject} />
+          <CursorTooltip />
+        </Suspense>
+      )}
 
       <SpeedInsights />
     </>
