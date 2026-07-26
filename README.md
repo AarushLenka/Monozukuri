@@ -95,7 +95,7 @@ Custom fonts go in `public/`:
 | File | Family name | Used for |
 |---|---|---|
 | `Ndot57-Regular.otf` | `ndot-57` | Headings, hero title |
-| `MotoyaExCedar W8.woff2` | `MotoyaExCedar` | Loader Japanese text |
+| `Recoleta-Medium.woff2` | `Recoleta` | Loader English greeting text |
 
 Both are registered via `@font-face` in `src/index.css`.
 
