@@ -17,8 +17,8 @@ function ESPModel({ scrollProgress, ...props }) {
     const meshes = meshesRef.current;
     if (!meshes.length) return;
 
-    const maxSpread = 0.0025;
-    const spread = maxSpread * (1 - scrollProgress) * 0.5;
+    const maxSpread = 0.05;
+    const spread = maxSpread * (1 - scrollProgress);
 
     // Solid mesh starts at low opacity and ramps up to fully opaque on scroll
     const BASE_OPACITY = 0.08;
@@ -58,7 +58,7 @@ export default function ESP32Canvas({ isMobile }) {
 
   return (
     <Canvas
-      frameloop="demand"
+      frameloop="always"
       camera={{ position: [0, 0, 6], fov: 45 }}
       className={`w-full h-full ${isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}
       style={{ pointerEvents: isMobile ? 'none' : 'auto' }}
@@ -87,3 +87,5 @@ export default function ESP32Canvas({ isMobile }) {
     </Canvas>
   );
 }
+
+useGLTF.preload('/esp32.glb', undefined, true);

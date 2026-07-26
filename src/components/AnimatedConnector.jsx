@@ -11,7 +11,7 @@ export default function AnimatedConnector({ pts, startId, startAlign = 'left', g
         x: (Math.random() - 0.5) * 20,
         y: (Math.random() - 0.5) * 20,
       });
-    }, 280);
+    }, 90);
 
     return () => window.clearInterval(interval);
   }, []);
