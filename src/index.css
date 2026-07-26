@@ -46,31 +46,26 @@
 @keyframes loader-word-cycle {
   0% {
     opacity: 0;
-    transform: translateY(22px);
-    filter: blur(8px);
+    transform: translate3d(0, 24px, 0);
   }
-  30%, 70% {
+  20%, 80% {
     opacity: 1;
-    transform: translateY(0px);
-    filter: blur(0px);
+    transform: translate3d(0, 0px, 0);
   }
   100% {
     opacity: 0;
-    transform: translateY(-22px);
-    filter: blur(8px);
+    transform: translate3d(0, -24px, 0);
   }
 }
 
 @keyframes loader-word-final {
   0% {
     opacity: 0;
-    transform: translateY(22px);
-    filter: blur(8px);
+    transform: translate3d(0, 28px, 0);
   }
   100% {
     opacity: 1;
-    transform: translateY(0px);
-    filter: blur(0px);
+    transform: translate3d(0, 0px, 0);
   }
 }
 
