@@ -1,30 +1,29 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useIsMobile } from '../hooks/useIsMobile';
 
-const HoverVideo = ({ src, isActive }) => {
+const ReelVideo = ({ src, isActive, sectionInView }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    if (!videoRef.current) return;
-    
+    const video = videoRef.current;
+    if (!video || !sectionInView) return;
+
     if (isActive) {
-      videoRef.current.load();
-      videoRef.current.play().catch(e => console.log('Video play prevented:', e));
+      video.play().catch(e => console.log('Video play prevented:', e));
     } else {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
+      video.pause();
+      video.currentTime = 0.001;
     }
-  }, [isActive]);
+  }, [isActive, sectionInView]);
 
   return (
     <video
       ref={videoRef}
-      src={isActive ? `/footage-optimized/${src}#t=0.001` : undefined}
+      src={sectionInView ? `/footage-optimized/${src}#t=0.001` : undefined}
       loop
       muted
       playsInline
-      preload="none"
-      loading="lazy"
+      preload={sectionInView ? "metadata" : "none"}
       className={`absolute inset-0 w-full h-full object-cover transition-all duration-[800ms] ${isActive ? 'grayscale-0 opacity-100 mix-blend-normal' : 'grayscale opacity-40 mix-blend-luminosity'}`}
     />
   );
@@ -50,12 +49,31 @@ const VIDEO_SOURCES = [
   { src: "scroll.mp4", link: "https://www.instagram.com/iste_vit_vellore/reel/DOaGmowE3-p/" }
 ];
 
-
-
 export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
   const [hoveredIndex, setHoveredIndex] = useState(0);
+  const [sectionInView, setSectionInView] = useState(false);
   const containerRef = useRef(null);
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    if (!('IntersectionObserver' in window)) {
+      setSectionInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setSectionInView(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '200px' });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const REELS = React.useMemo(() => {
     return [...VIDEO_SOURCES];
@@ -97,7 +115,7 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
                 className={`relative h-full transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden bg-[#1e1e1e] cursor-pointer border border-black/10 flex-shrink-0 snap-center ${isActive ? 'w-[60vw]' : 'w-[15vw]'}`}
               >
                 {reelVid ? (
-                  <HoverVideo src={reelVid} isActive={isActive} />
+                  <ReelVideo src={reelVid} isActive={isActive} sectionInView={sectionInView} />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center text-white/20 font-mono text-xs text-center px-2">
                     [ EMPTY ]
@@ -164,7 +182,7 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
               }}
             >
               {reelVid ? (
-                <HoverVideo src={reelVid} isActive={isActive} />
+                <ReelVideo src={reelVid} isActive={isActive} sectionInView={sectionInView} />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-white/20 font-mono text-xs text-center px-2">
                   [ EMPTY ]
