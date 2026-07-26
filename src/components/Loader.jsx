@@ -33,8 +33,12 @@ const PRELOAD_IMAGES = [
   '/s400.webp',
   '/vital.webp',
   '/ota.jpg',
-  '/neurac.png'
+  '/otain.webp',
+  '/neurac.png',
+  '/neuracc.webp'
 ];
+
+const isLatinScript = (text) => /^[a-zA-Z]+$/.test(text);
 
 export default function Loader({ onLoadingComplete }) {
   const [index, setIndex] = useState(0);
@@ -81,6 +85,9 @@ export default function Loader({ onLoadingComplete }) {
     };
   }, []);
 
+  const currentWord = GREETINGS[index];
+  const useRecoleta = isLatinScript(currentWord);
+
   return (
     <div ref={containerRef} className="loader-container fixed inset-0 flex justify-center items-center overflow-hidden z-[9999]">
       <BackgroundBlobs
@@ -88,14 +95,16 @@ export default function Loader({ onLoadingComplete }) {
         noiseOpacity={0.15}
       />
       
-      {/* Dynamic Multilingual Greeting Layer */}
-      <main className="relative z-10 flex flex-col justify-center items-center select-none px-4 w-full">
+      {/* Dynamic Multilingual Greeting Layer with expanded vertical padding for mobile */}
+      <main className="relative z-10 flex flex-col justify-center items-center select-none px-4 w-full min-h-[45vh] md:min-h-[320px]">
         <h1
           key={index}
-          className="leading-none text-white text-center w-full whitespace-nowrap overflow-hidden select-none"
+          className="text-white text-center w-full whitespace-nowrap select-none py-8 md:py-4 leading-normal"
           style={{
-            fontFamily: "'Recoleta', system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Noto Sans Devanagari\", \"Noto Sans Bengali\", \"Noto Sans Tamil\", \"Noto Sans Malayalam\", \"Noto Sans Kannada\", \"Noto Sans Telugu\", \"Nirmala UI\", \"Mukta\", \"Mangal\", \"Kohinoor Devanagari\", \"Kohinoor Bangla\", \"Kohinoor Telugu\", \"Kohinoor Tamil\", \"Kohinoor Malayalam\", \"Lohit Devanagari\", \"Lohit Bengali\", \"Lohit Tamil\", \"Lohit Telugu\", \"Lohit Kannada\", \"Lohit Malayalam\", \"Vrinda\", \"Gautami\", \"Tunga\", \"Kartika\", \"AnjaliOldLipi\", sans-serif",
-            fontSize: 'clamp(3rem, 11vw, 10rem)',
+            fontFamily: useRecoleta
+              ? "'Recoleta', system-ui, -apple-system, sans-serif"
+              : 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", "Noto Sans Bengali", "Noto Sans Tamil", "Noto Sans Malayalam", "Noto Sans Kannada", "Noto Sans Telugu", "Nirmala UI", "Mukta", "Mangal", "Kohinoor Devanagari", "Kohinoor Bangla", "Kohinoor Telugu", "Kohinoor Tamil", "Kohinoor Malayalam", "Lohit Devanagari", "Lohit Bengali", "Lohit Tamil", "Lohit Telugu", "Lohit Kannada", "Lohit Malayalam", "Vrinda", "Gautami", "Tunga", "Kartika", "AnjaliOldLipi", sans-serif',
+            fontSize: 'clamp(3.2rem, 11vw, 10rem)',
             fontWeight: 700,
             letterSpacing: '0.02em',
             animation: index < GREETINGS.length - 1
@@ -103,7 +112,7 @@ export default function Loader({ onLoadingComplete }) {
               : 'loader-word-final 600ms linear forwards',
           }}
         >
-          {GREETINGS[index]}
+          {currentWord}
         </h1>
       </main>
     </div>

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import BackgroundBlobs from '../components/BackgroundBlobs';
 
 /**
  * Terminal-style project detail modal.
@@ -73,21 +72,21 @@ export default function ProjectModal({ project, onClose }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-auto cursor-default"
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-auto cursor-default bg-black/60"
           onClick={onClose}
         >
           {/* Terminal Window */}
           <motion.div
-            initial={{ scale: 0.7, opacity: 0, y: 80 }}
+            initial={{ scale: 0.85, opacity: 0, y: 30 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.7, opacity: 0, y: 80 }}
-            transition={{ type: 'spring', damping: 20, stiffness: 220, mass: 1 }}
-            className="w-[95vw] max-w-none max-h-[95vh] rounded-lg bg-[#050505]/95 backdrop-blur-md border-[1.5px] border-white flex flex-col shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden relative"
+            exit={{ scale: 0.85, opacity: 0, y: 30 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 320, mass: 0.8 }}
+            className="w-[95vw] max-w-none max-h-[95vh] rounded-lg bg-[#080808] border-[1.5px] border-white flex flex-col shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden relative"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Embedded Background for Glassmorphism */}
-            <BackgroundBlobs className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-80" />
+            {/* Lightweight High-Performance Gradient instead of expensive heavy blur blobs */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none z-0 bg-gradient-to-br from-[#1a1a1b] via-[#0d0d0d] to-[#050505] opacity-90" />
 
             {/* Content Area */}
             <div className="relative z-10 p-6 flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] font-['Monospaceland',_monospace] font-bold not-italic text-sm leading-normal selection:bg-white/20">
@@ -96,12 +95,12 @@ export default function ProjectModal({ project, onClose }) {
               </div>
 
               <div className="mt-6 flex flex-col md:flex-row gap-4">
-                {/* Image Placeholder */}
-                <div className="w-full md:w-[50%] shrink-0 flex items-center justify-center">
+                {/* Image / ASCII Area */}
+                <div className="w-full md:w-[50%] shrink-0 flex items-center justify-center min-h-[160px]">
                   {project.modalImage ? (
-                    <img src={project.modalImage} alt={project.title} className="w-full h-auto object-contain" />
+                    <img src={project.modalImage} alt={project.title} decoding="async" loading="eager" className="w-full h-auto object-contain transition-opacity duration-300" />
                   ) : (
-                    <pre className="text-white/30 text-[10px] leading-tight font-mono text-center">
+                    <pre className="text-white/50 text-xs md:text-sm leading-tight font-mono text-center py-8">
 {`    ___    
   //   \\\\  
  //     \\\\ 
