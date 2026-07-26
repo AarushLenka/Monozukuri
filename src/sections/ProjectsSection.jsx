@@ -27,7 +27,7 @@ function ViewportVideo({ src, className }) {
       if (!entry.isIntersecting) return;
       observer.disconnect();
       start();
-    }, { rootMargin: '100px' });
+    }, { rootMargin: '2500px' });
     observer.observe(video);
     return () => observer.disconnect();
   }, [src]);

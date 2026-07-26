@@ -69,7 +69,7 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
         setSectionInView(true);
         observer.disconnect();
       }
-    }, { rootMargin: '200px' });
+    }, { rootMargin: '2500px' });
 
     observer.observe(el);
     return () => observer.disconnect();
