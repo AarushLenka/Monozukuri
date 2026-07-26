@@ -18,6 +18,17 @@ const ProjectModal = lazy(() => import('./sections/ProjectModal'));
 const ClickHereCursor = lazy(() => import('./components/ClickHereCursor'));
 const CursorTooltip = lazy(() => import('./components/CursorTooltip'));
 
+// Preload all section bundles directly after initial Javascript evaluation
+// so zero network delays occur during mobile scroll while the Loader is active.
+if (typeof window !== 'undefined') {
+  setTimeout(() => {
+    loadAboutSection();
+    loadProjectsSection();
+    loadCreativeWorkSection();
+    loadCitySection();
+  }, 100);
+}
+
 function DeferredSection({ load, isMobile, minHeight = '100vh', sectionProps = {}, children }) {
   const sectionRef = useRef(null);
   const [Section, setSection] = useState(null);
@@ -29,7 +40,8 @@ function DeferredSection({ load, isMobile, minHeight = '100vh', sectionProps = {
       load().then((module) => setSection(() => module.default));
     };
 
-    if (!('IntersectionObserver' in window)) {
+    if (!('IntersectionObserver' in window) || isMobile) {
+      // On mobile, mount eagerly once JS module is fetched so scroll never hits an empty or delayed DOM
       loadSection();
       return undefined;
     }
@@ -38,17 +50,17 @@ function DeferredSection({ load, isMobile, minHeight = '100vh', sectionProps = {
       if (!entry.isIntersecting) return;
       observer.disconnect();
       loadSection();
-    }, { rootMargin: '400px 0px' });
+    }, { rootMargin: '2500px 0px' });
 
     observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, [Section, load]);
+  }, [Section, load, isMobile]);
 
   return (
     <div
       ref={sectionRef}
       className="relative"
-      style={{ minHeight: isMobile ? minHeight : 'var(--logical-vh)', contentVisibility: 'auto' }}
+      style={{ minHeight: isMobile ? minHeight : 'var(--logical-vh)' }}
     >
       {Section ? (
         <Suspense fallback={children || null}>
