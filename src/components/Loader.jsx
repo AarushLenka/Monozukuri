@@ -90,6 +90,11 @@ export default function Loader({ onLoadingComplete }) {
 
   return (
     <div ref={containerRef} className="loader-container fixed inset-0 flex justify-center items-center overflow-hidden z-[9999]">
+      {/* Hidden Font Warm-Up Container: Instantaneously instantiates & shapes all script glyphs in memory so animations never stall on font switches */}
+      <div className="fixed -top-96 left-0 opacity-0 pointer-events-none select-none -z-50 whitespace-pre font-bold" aria-hidden="true" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", "Noto Sans Bengali", "Noto Sans Tamil", "Noto Sans Malayalam", "Noto Sans Kannada", "Noto Sans Telugu", sans-serif' }}>
+        {GREETINGS.join(' ')}
+      </div>
+
       <BackgroundBlobs
         className="absolute inset-0 z-0 bg-[#4a4a4a] overflow-hidden loader-bg-container pointer-events-none"
         noiseOpacity={0.15}
@@ -107,6 +112,7 @@ export default function Loader({ onLoadingComplete }) {
             fontSize: 'clamp(3.2rem, 11vw, 10rem)',
             fontWeight: 700,
             letterSpacing: '0.02em',
+            willChange: 'transform, opacity',
             animation: index < GREETINGS.length - 1
               ? 'loader-word-cycle 180ms linear forwards'
               : 'loader-word-final 600ms linear forwards',

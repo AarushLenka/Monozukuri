@@ -89,7 +89,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </div>
 
         {/* Social Buttons */}
-        <div className="flex justify-center mb-10 -mt-[20px] relative z-30">
+        <div className="flex justify-center mb-10 -mt-[30px] relative z-30">
           <SocialLinks className="justify-center" />
         </div>
 
