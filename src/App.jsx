@@ -29,32 +29,63 @@ if (typeof window !== 'undefined') {
   }, 100);
 }
 
-function DeferredSection({ load, isMobile, minHeight = '100vh', sectionProps = {}, children }) {
+// How far below the fold a section may be and still be mounted. Kept under one
+// section's collapsed height (800px) so the sections do not all mount at once:
+// while unmounted each placeholder is exactly 800px tall, so a larger margin
+// (the 2500px this used to use) put every section inside the window and spun up
+// all four WebGL contexts on the first frame.
+const MOUNT_MARGIN = 600;
+
+function DeferredSection({ load, isMobile, active, minHeight = '100vh', sectionProps = {}, children }) {
   const sectionRef = useRef(null);
   const [Section, setSection] = useState(null);
 
   useEffect(() => {
-    if (Section || !sectionRef.current) return undefined;
+    // Nothing below the hero mounts until the loader has handed over. Four
+    // canvases initialising while the loader animates is what starved the
+    // hero model and stuttered the greeting animation.
+    if (!active || Section || !sectionRef.current) return undefined;
 
-    const loadSection = () => {
+    // Gate *mounting* on proximity to the viewport so we never spin up every
+    // section's WebGL canvas at once.
+    //
+    // This deliberately measures getBoundingClientRect instead of using an
+    // IntersectionObserver: the desktop wrapper is `overflow:hidden`, and
+    // IntersectionObserver factors in ancestor clipping, so while the wrapper
+    // was still clipped to 100vh (before ResizeObserver measured its real
+    // height) the lower sections were reported as non-intersecting and the
+    // observer never fired again — the page would randomly render without its
+    // Projects/City sections. getBoundingClientRect ignores ancestor clipping,
+    // so the same check cannot get stranded.
+    let cancelled = false;
+    let frame = 0;
+
+    const check = () => {
+      frame = 0;
+      const el = sectionRef.current;
+      if (cancelled || !el) return;
+      if (el.getBoundingClientRect().top > window.innerHeight + MOUNT_MARGIN) return;
+      cancelled = true;
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
       load().then((module) => setSection(() => module.default));
     };
 
-    if (!('IntersectionObserver' in window) || isMobile) {
-      // On mobile, mount eagerly once JS module is fetched so scroll never hits an empty or delayed DOM
-      loadSection();
-      return undefined;
-    }
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(check);
+    };
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      observer.disconnect();
-      loadSection();
-    }, { rootMargin: '2500px 0px' });
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    check();
 
-    observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, [Section, load, isMobile]);
+    return () => {
+      cancelled = true;
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
+  }, [active, Section, load]);
 
   return (
     <div
@@ -127,8 +158,14 @@ export default function App() {
 
   return (
     <>
-      {/* Viewport-fixed background — outside all transforms */}
-      <BackgroundBlobs className="fixed top-0 left-0 w-[100vw] h-[100vh] pointer-events-none z-0 overflow-hidden bg-[#3a3a3a]" />
+      {/* Viewport-fixed background — outside all transforms.
+          Skipped while the Loader is up: the loader paints its own opaque
+          copy at z-9999, so these six blurred blobs are fully occluded yet
+          still cost a blur rasterisation every frame — which is what made
+          the loader animation stutter. */}
+      {heroVisible && (
+        <BackgroundBlobs className="fixed top-0 left-0 w-[100vw] h-[100vh] pointer-events-none z-0 overflow-hidden bg-[#3a3a3a]" />
+      )}
 
       {isLoading && (
         <Loader onLoadingComplete={() => {
@@ -199,10 +236,10 @@ export default function App() {
           )}
 
           <HeroSection time={time} isLoading={isLoading} isMobile={isMobile} />
-          <DeferredSection load={loadAboutSection} isMobile={isMobile} minHeight="100vh" />
-          <DeferredSection load={loadProjectsSection} isMobile={isMobile} minHeight="100vh" sectionProps={{ onProjectSelect: setSelectedProject }} />
-          <DeferredSection load={loadCreativeWorkSection} isMobile={isMobile} minHeight="80vh" />
-          <DeferredSection load={loadCitySection} isMobile={isMobile} minHeight="100vh" />
+          <DeferredSection load={loadAboutSection} isMobile={isMobile} active={heroVisible} minHeight="100vh" />
+          <DeferredSection load={loadProjectsSection} isMobile={isMobile} active={heroVisible} minHeight="100vh" sectionProps={{ onProjectSelect: setSelectedProject }} />
+          <DeferredSection load={loadCreativeWorkSection} isMobile={isMobile} active={heroVisible} minHeight="80vh" />
+          <DeferredSection load={loadCitySection} isMobile={isMobile} active={heroVisible} minHeight="100vh" />
         </div>
       </div>
 
