@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 /**
  * Terminal-style project detail modal.
@@ -65,24 +64,16 @@ export default function ProjectModal({ project, onClose }) {
     return sections;
   };
 
+  if (!project) return null;
+
   return (
-    <AnimatePresence>
-      {project && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center pointer-events-auto cursor-default bg-black/60"
-          onClick={onClose}
-        >
+    <div
+      className="modal-backdrop-in fixed inset-0 z-[100] flex items-center justify-center pointer-events-auto cursor-default bg-black/60"
+      onClick={onClose}
+    >
           {/* Terminal Window */}
-          <motion.div
-            initial={{ scale: 0.85, opacity: 0, y: 30 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.85, opacity: 0, y: 30 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 320, mass: 0.8 }}
-            className="w-[95vw] max-w-none max-h-[95vh] rounded-lg bg-[#080808] border-[1.5px] border-white flex flex-col shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden relative"
+          <div
+            className="modal-window-in w-[95vw] max-w-none max-h-[95vh] rounded-lg bg-[#080808] border-[1.5px] border-white flex flex-col shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Lightweight High-Performance Gradient instead of expensive heavy blur blobs */}
@@ -133,9 +124,7 @@ export default function ProjectModal({ project, onClose }) {
                 </div>
               </div>
             </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </div>
+    </div>
   );
 }
