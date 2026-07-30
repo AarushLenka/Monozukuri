@@ -2,6 +2,7 @@ import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useIsMobile } from '../hooks/useIsMobile';
+import { useInViewport } from '../hooks/useInViewport';
 
 const RibbonMesh = ({ renderSide }) => {
   const meshRef = useRef();
@@ -110,9 +111,17 @@ const RibbonMesh = ({ renderSide }) => {
     }
   `;
 
-  useFrame((state) => {
+  // Accumulate our own clock from the per-frame delta rather than reading
+  // state.clock.elapsedTime: the canvas parks its frameloop when scrolled out
+  // of view, and R3F zeroes clock.elapsedTime whenever the frameloop changes,
+  // which would snap the ribbon back to its starting phase. Accumulating means
+  // it resumes exactly where it paused. Delta is clamped so the first frame
+  // after a long pause cannot jump the wave.
+  const timeRef = useRef(0);
+  useFrame((_state, delta) => {
+    timeRef.current += Math.min(delta, 1 / 30);
     if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+      materialRef.current.uniforms.uTime.value = timeRef.current;
     }
   });
 
@@ -135,6 +144,14 @@ const RibbonMesh = ({ renderSide }) => {
 
 export default function CreativeRibbon({ mousePos = { x: 0, y: 0 } }) {
   const isMobile = useIsMobile();
+  const backRef = useRef(null);
+  const frontRef = useRef(null);
+  // Two 256-segment cylinders with 4096px textures animating forever, even
+  // scrolled far offscreen. Parking the loop when out of view is invisible
+  // (nothing on screen to redraw) and frees the GPU/main thread for the rest
+  // of the page.
+  const backVisible = useInViewport(backRef);
+  const frontVisible = useInViewport(frontRef);
   const transform = isMobile
     ? 'none'
     : `rotateY(${mousePos.x * 0.02}deg) rotateX(${-mousePos.y * 0.02}deg)`;
@@ -142,22 +159,24 @@ export default function CreativeRibbon({ mousePos = { x: 0, y: 0 } }) {
   return (
     <>
       {/* Back layer (Behind the gallery) */}
-      <div 
+      <div
+        ref={backRef}
         className={`absolute inset-0 w-full h-full pointer-events-none z-0 transition-transform duration-[400ms] ease-out ${isMobile ? 'opacity-60' : ''}`}
         style={{ transform, transformStyle: 'preserve-3d' }}
       >
-        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }} dpr={isMobile ? [1, 1] : [1, 2]}>
+        <Canvas frameloop={backVisible ? 'always' : 'never'} style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }} dpr={isMobile ? [1, 1] : [1, 2]}>
           <ambientLight intensity={1} />
           <RibbonMesh renderSide="back" />
         </Canvas>
       </div>
 
       {/* Front layer (In front of the gallery) */}
-      <div 
+      <div
+        ref={frontRef}
         className={`absolute inset-0 w-full h-full pointer-events-none z-20 transition-transform duration-[400ms] ease-out ${isMobile ? 'opacity-60' : ''}`}
         style={{ transform, transformStyle: 'preserve-3d' }}
       >
-        <Canvas style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }} dpr={isMobile ? [1, 1] : [1, 2]}>
+        <Canvas frameloop={frontVisible ? 'always' : 'never'} style={{ pointerEvents: 'none' }} camera={{ position: [0, 0, 30], fov: 25 }} resize={{ offsetSize: true }} dpr={isMobile ? [1, 1] : [1, 2]}>
           <ambientLight intensity={1} />
           <RibbonMesh renderSide="front" />
         </Canvas>
