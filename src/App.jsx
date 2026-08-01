@@ -87,11 +87,14 @@ function DeferredSection({ load, isMobile, active, minHeight = '100vh', sectionP
     };
   }, [active, Section, load]);
 
+  // Mobile: minHeight only reserves space for the *unmounted* placeholder.
+  // Keeping it after mount padded short sections (Projects renders ~660px) out
+  // to a full 100vh box, which is where the gaps between sections came from.
   return (
     <div
       ref={sectionRef}
       className="relative"
-      style={{ minHeight: isMobile ? minHeight : 'var(--logical-vh)' }}
+      style={{ minHeight: isMobile ? (Section ? undefined : minHeight) : 'var(--logical-vh)' }}
     >
       {Section ? (
         <Suspense fallback={children || null}>
