@@ -1,7 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useOrbitSnapBack } from '../hooks/useOrbitSnapBack';
+import { useInViewport } from '../hooks/useInViewport';
 
 export default function Canvas3DBase({
   SceneComponent,
@@ -20,6 +21,12 @@ export default function Canvas3DBase({
     () => setAutoRotate(true)
   );
   const handleSceneAnimationComplete = useCallback(() => setAutoRotate(true), []);
+  const wrapperRef = useRef(null);
+  // frameloop="demand" is not enough on its own: autoRotate makes OrbitControls
+  // invalidate on every frame, so the canvas renders forever once spinning —
+  // including while scrolled far out of view. Parking it while offscreen is
+  // invisible and frees the GPU/main thread.
+  const inViewport = useInViewport(wrapperRef);
 
   const handleDragStart = () => {
     handleInteractionStart();
@@ -31,8 +38,9 @@ export default function Canvas3DBase({
   };
 
   return (
+    <div ref={wrapperRef} className="w-full h-full">
     <Canvas
-      frameloop="demand"
+      frameloop={inViewport ? 'demand' : 'never'}
       camera={{ position: cameraPosition, fov }}
       className={`w-full h-full ${sceneProps?.isMobile ? '' : 'cursor-grab active:cursor-grabbing'}`}
       style={{ pointerEvents: sceneProps?.isMobile ? 'none' : 'auto' }}
@@ -61,5 +69,6 @@ export default function Canvas3DBase({
         {...orbitProps}
       />
     </Canvas>
+    </div>
   );
 }

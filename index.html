@@ -7,6 +7,11 @@
     <title>Monozukuri</title>
     <link rel="preload" href="/Ndot57-Regular.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="/Recoleta-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Hero model: start downloading before the JS bundle even parses, so it
+         is cached by the time the 3.5s loader dismisses. The about-section
+         model (esp32) is fetched from the Loader instead, to keep it from
+         competing with this one for bandwidth. -->
+    <link rel="preload" href="/raspberrypi5.glb" as="fetch">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Kannada:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Tamil:wght@700&family=Noto+Sans+Telugu:wght@700&display=swap" rel="stylesheet">

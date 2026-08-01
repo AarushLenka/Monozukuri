@@ -16,12 +16,11 @@ import { CONNECTOR_CONFIG } from '../config/heroConfig';
 export default function HeroSection({ isLoading, time, isMobile }) {
 
   useEffect(() => {
-    // Let the first paint and loader animation win the connection, then fetch
-    // the hero's heavy R3F chunk/model while the visitor is reading the intro.
-    const idle = window.requestIdleCallback || ((callback) => window.setTimeout(callback, 500));
-    const cancelIdle = window.cancelIdleCallback || window.clearTimeout;
-    const handle = idle(() => loadRaspberryPi());
-    return () => cancelIdle(handle);
+    // Fetch the hero's R3F chunk immediately. It is ~880 kB and is needed the
+    // moment the 3.5s loader dismisses, so it must download *during* the
+    // loader. requestIdleCallback was too late — idle time is scarce while the
+    // loader animates, so the model showed up seconds after the reveal.
+    loadRaspberryPi();
   }, []);
 
   /* ── Mobile Layout ── */

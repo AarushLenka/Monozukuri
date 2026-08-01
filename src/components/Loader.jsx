@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from 'react';
-import { useGLTF } from '@react-three/drei';
 import BackgroundBlobs from './BackgroundBlobs';
 
 const GREETINGS = [
@@ -38,6 +37,12 @@ const PRELOAD_IMAGES = [
   '/neuracc.webp'
 ];
 
+// Warm the HTTP cache for the about-section model (the hero one is a <link
+// rel=preload> in index.html). Plain fetch keeps the loader chunk free of
+// three.js — importing drei here dragged the entire three + fiber +
+// GLTFLoader graph into the entry bundle and blocked first paint.
+const PRELOAD_MODELS = ['/esp32.glb'];
+
 const isLatinScript = (text) => /^[a-zA-Z]+$/.test(text);
 
 export default function Loader({ onLoadingComplete }) {
@@ -50,37 +55,44 @@ export default function Loader({ onLoadingComplete }) {
   }, [onLoadingComplete]);
 
   useEffect(() => {
-    // Background asset preloading while loader is active
-    try {
-      useGLTF.preload('/raspberrypi5.glb');
-      useGLTF.preload('/esp32.glb');
-      PRELOAD_IMAGES.forEach((src) => {
-        const img = new Image();
-        img.src = src;
-      });
-    } catch (e) {
-      console.warn('Background preload error:', e);
-    }
+    // Background asset preloading while loader is active. Models go first at
+    // high priority — they are needed the instant the loader dismisses, and
+    // previously lost the bandwidth race to ~2.4 MB of modal images.
+    PRELOAD_MODELS.forEach((src) => {
+      fetch(src, { priority: 'high' }).catch(() => {});
+    });
+    PRELOAD_IMAGES.forEach((src) => {
+      const img = new Image();
+      img.fetchPriority = 'low';
+      img.src = src;
+    });
 
-    // Step through language greetings every 180ms (0.18s) for pronounced, smooth easing
-    const interval = window.setInterval(() => {
-      setIndex((prev) => {
-        if (prev < GREETINGS.length - 1) {
-          return prev + 1;
-        }
-        return prev;
-      });
-    }, 180);
+    // Step through language greetings every 180ms (0.18s) for pronounced, smooth easing.
+    // Derive the index from elapsed wall-clock time on each frame rather than
+    // counting setInterval ticks: the greeting's CSS animation is also 180ms and
+    // ends at opacity 0, so a single late tick left the word invisible and
+    // flashed a blank frame. A timestamp-derived index cannot drift — a slow
+    // frame skips ahead instead of falling behind.
+    const start = performance.now();
+    let shown = 0;
+    let frame = requestAnimationFrame(function step(now) {
+      const next = Math.min(Math.floor((now - start) / 180), GREETINGS.length - 1);
+      if (next > shown) {
+        shown = next;
+        setIndex(next);
+      }
+      if (next < GREETINGS.length - 1) frame = requestAnimationFrame(step);
+    });
 
     // Dismiss loader around 3.5s (after final greeting settles gracefully)
     const timer = window.setTimeout(() => {
-      window.clearInterval(interval);
+      cancelAnimationFrame(frame);
       if (containerRef.current) containerRef.current.classList.add('loader-complete');
       window.setTimeout(() => onLoadingCompleteRef.current(), 220);
     }, 3500);
 
     return () => {
-      window.clearInterval(interval);
+      cancelAnimationFrame(frame);
       window.clearTimeout(timer);
     };
   }, []);
@@ -123,13 +135,5 @@ export default function Loader({ onLoadingComplete }) {
       </main>
     </div>
   );
-}
-
-// Preload models at module execution time for instant caching
-try {
-  useGLTF.preload('/raspberrypi5.glb');
-  useGLTF.preload('/esp32.glb');
-} catch (e) {
-  // Silent fallback if preloading outside canvas throws in SSR/tests
 }
 
