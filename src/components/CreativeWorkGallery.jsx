@@ -3,27 +3,37 @@ import { useIsMobile } from '../hooks/useIsMobile';
 
 const ReelVideo = ({ src, isActive, sectionInView }) => {
   const videoRef = useRef(null);
+  // Only fetch a reel once it has actually been opened — 17 concurrent video
+  // downloads is what the poster frames exist to avoid. The poster (a
+  // pre-greyscaled first frame) stands in until then.
+  const [loadVideo, setLoadVideo] = useState(false);
+  const base = `/footage-optimized/${encodeURIComponent(src.replace(/\.mp4$/, ''))}`;
+
+  useEffect(() => {
+    if (isActive && sectionInView) setLoadVideo(true);
+  }, [isActive, sectionInView]);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !sectionInView) return;
+    if (!video || !loadVideo) return;
 
-    if (isActive) {
+    if (isActive && sectionInView) {
       video.play().catch(e => console.log('Video play prevented:', e));
     } else {
       video.pause();
-      video.currentTime = 0.001;
+      if (!isActive) video.currentTime = 0;
     }
-  }, [isActive, sectionInView]);
+  }, [isActive, sectionInView, loadVideo]);
 
   return (
     <video
       ref={videoRef}
-      src={sectionInView ? `/footage-optimized/${src}#t=0.001` : undefined}
+      src={loadVideo ? `${base}.mp4` : undefined}
+      poster={sectionInView ? `${base}.webp` : undefined}
       loop
       muted
       playsInline
-      preload={sectionInView ? "metadata" : "none"}
+      preload="none"
       className={`absolute inset-0 w-full h-full object-cover transition-all duration-[800ms] ${isActive ? 'grayscale-0 opacity-100 mix-blend-normal' : 'grayscale opacity-40 mix-blend-luminosity'}`}
     />
   );
@@ -64,12 +74,11 @@ export default function CreativeWorkGallery({ mousePos = { x: 0, y: 0 } }) {
       return;
     }
 
+    // Live (not one-shot): the first reel autoplays once the gallery is on
+    // screen and pauses again when it leaves, so nothing decodes offscreen.
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setSectionInView(true);
-        observer.disconnect();
-      }
-    }, { rootMargin: '2500px' });
+      setSectionInView(entry.isIntersecting);
+    }, { rootMargin: '200px' });
 
     observer.observe(el);
     return () => observer.disconnect();
