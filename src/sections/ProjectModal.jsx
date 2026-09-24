@@ -79,7 +79,7 @@ export default function ProjectModal({ project, onClose }) {
 
   return (
     <div
-      className="modal-backdrop-in fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/80"
+      className="modal-backdrop-in fixed inset-0 z-[100] flex items-center justify-center p-[12px] sm:p-[24px] bg-black/80"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -87,50 +87,52 @@ export default function ProjectModal({ project, onClose }) {
     >
       {/* Terminal Window */}
       <div
-        className="modal-window-in w-full max-w-3xl md:max-w-4xl h-[85svh] max-h-[95vh] md:h-[560px] md:max-h-none rounded-2xl border border-white/20 bg-[#0b0b0b] flex flex-col shadow-[0_30px_90px_rgba(0,0,0,0.9)] overflow-hidden font-['Monospaceland',_monospace] font-bold not-italic text-sm leading-normal selection:bg-white/20"
+        className="modal-window-in w-full max-w-[906px] md:max-w-[1162px] h-[calc(85svh+80px)] max-h-[95vh] md:h-[640px] md:max-h-none rounded-2xl border border-white/25 bg-[#0b0b0b]/80 backdrop-blur-2xl backdrop-saturate-150 flex flex-col shadow-[0_30px_90px_rgba(0,0,0,0.9)] overflow-hidden font-['Monospaceland',_monospace] font-bold not-italic text-sm leading-normal selection:bg-white/20"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Terminal Title Bar */}
-        <div className="shrink-0 flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/[0.04] select-none">
-          <div className="flex items-center gap-2 min-w-0">
+        {/* Terminal Title Bar — 30px. NOTE: arbitrary values are mandatory
+            here — this project's tailwind.config overrides the spacing scale,
+            so h-5 renders 48px and h-2 renders 29px. */}
+        <div className="relative z-20 shrink-0 flex items-center justify-between px-[10px] h-[30px] border-b border-white/10 bg-white/[0.04] select-none">
+          <div className="flex items-center gap-[6px] min-w-0">
             <button
               onClick={onClose}
-              className="h-3 w-3 rounded-full bg-[#ff5f56] hover:opacity-80 transition-opacity flex items-center justify-center group shrink-0"
+              className="group relative flex h-[8px] w-[8px] items-center justify-center shrink-0"
               title="Close (Esc)"
               aria-label="Close"
             >
-              <svg width="8" height="8" viewBox="0 0 14 14" fill="none" stroke="black" strokeWidth="2" className="opacity-0 group-hover:opacity-100">
-                <path d="M1 1L13 13M1 13L13 1" />
-              </svg>
+              {/* Invisible expanded hit area — does not affect layout spacing */}
+              <span className="absolute -inset-[4px]" />
+              <span className="flex h-[8px] w-[8px] items-center justify-center rounded-full bg-[#ff5f56]">
+                <svg width="5" height="5" viewBox="0 0 14 14" fill="none" stroke="black" strokeWidth="3" className="opacity-0 group-hover:opacity-100">
+                  <path d="M1 1L13 13M1 13L13 1" />
+                </svg>
+              </span>
             </button>
-            <span className="h-3 w-3 rounded-full bg-[#ffbd2e] shrink-0" title="Minimize/Expand" />
-            <span className="h-3 w-3 rounded-full bg-[#27c93f] shrink-0" title="Maximize" />
+            <span className="h-[8px] w-[8px] rounded-full bg-[#ffbd2e] shrink-0" />
+            <span className="h-[8px] w-[8px] rounded-full bg-[#27c93f] shrink-0" />
 
-            <span className="ml-3 text-xs text-white/90 flex items-center gap-1.5 font-bold min-w-0">
-              <svg className="text-[#bef264] shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="4 17 10 11 4 5" />
-                <line x1="12" y1="19" x2="20" y2="19" />
-              </svg>
-              <span className="truncate">guest@monozukuri:~</span>
+            <span className="ml-[4px] text-[8px] leading-none text-white/60 truncate">
+              guest@monozukuri:~
             </span>
           </div>
 
-          <span className="text-[0.68rem] text-white/35 hidden sm:inline shrink-0">
-            [ESC to close]
+          <span className="text-[8px] leading-none text-white/35 hidden sm:inline shrink-0">
+            [esc to close]
           </span>
         </div>
 
         {/* Terminal Scrollable Output Area */}
-        <div className="relative z-10 flex-1 p-4 sm:p-5 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] text-xs sm:text-sm leading-relaxed space-y-3">
+        <div className="relative z-10 flex-1 p-[16px] sm:p-[20px] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] text-[10px] sm:text-xs leading-relaxed space-y-[10px]">
           {/* Shell command line */}
           <div className="whitespace-pre-wrap break-words">
             <span className="text-[#bef264]">guest@monozukuri:~$ </span>
             <span className="text-white/90">cat {fileSlug}.txt</span>
           </div>
 
-          <div className="mt-2 flex flex-col md:flex-row gap-4 md:gap-6">
+          <div className="mt-[10px] flex flex-col md:flex-row gap-[16px] md:gap-[24px]">
             {/* Image / ASCII Area */}
-            <div className="w-full md:w-[50%] shrink-0 flex items-center justify-center min-h-[140px]">
+            <div className="w-full md:w-[45%] shrink-0 flex items-center justify-center min-h-[140px]">
               {project.modalImage ? (
                 <img
                   src={project.modalImage}
@@ -140,13 +142,13 @@ export default function ProjectModal({ project, onClose }) {
                   className="w-auto h-auto max-w-full max-h-[38svh] md:max-h-[440px] object-contain"
                 />
               ) : (
-                <pre className="text-white/40 text-xs md:text-sm leading-tight text-center py-8">{ASCII_FALLBACK}</pre>
+                <pre className="text-white/40 text-[10px] md:text-xs leading-tight text-center py-[24px]">{ASCII_FALLBACK}</pre>
               )}
             </div>
 
             {/* Project Details */}
-            <div className="flex-1 min-w-0 flex flex-col justify-start space-y-2">
-              <div className="flex flex-col space-y-2 shrink-0">
+            <div className="flex-1 min-w-0 flex flex-col justify-start space-y-[8px]">
+              <div className="flex flex-col space-y-[8px] shrink-0">
                 <div className="break-words">
                   <span className="text-white/40">PROJECT:</span> <span className="text-white/90">{project.title}</span>
                 </div>
@@ -167,14 +169,15 @@ export default function ProjectModal({ project, onClose }) {
           </div>
         </div>
 
-        {/* Status Bar */}
-        <div className="shrink-0 px-4 py-2.5 border-t border-white/10 bg-white/[0.03] flex items-center justify-between select-none">
-          <span className="flex items-center gap-1.5 text-[0.65rem] text-white/35 uppercase tracking-wider">
-            <span className="text-[#bef264] normal-case">guest@monozukuri:~$</span>
-            <span className="inline-block w-[7px] h-[12px] bg-[#bef264] animate-cursor-blink" />
+        {/* Status Bar — 30px per spec */}
+        <div className="shrink-0 px-[12px] h-[30px] border-t border-white/10 bg-white/[0.03] flex items-center justify-between gap-[12px] select-none">
+          <span className="flex items-center gap-[6px] text-[10px] text-white/35 tracking-wider min-w-0">
+            <span className="text-[#bef264] shrink-0">guest@monozukuri:~$</span>
+            <span className="inline-block w-[6px] h-[11px] bg-[#bef264] animate-cursor-blink shrink-0" />
           </span>
-          <span className="text-[0.65rem] text-white/35 uppercase tracking-wider hidden sm:inline truncate">
-            {fileSlug}.txt — read-only
+          <span className="flex items-center gap-[12px] text-[10px] text-white/35 tracking-wider min-w-0">
+            <span className="hidden sm:inline shrink-0">[esc to close]</span>
+            <span className="truncate">{fileSlug}.txt</span>
           </span>
         </div>
       </div>
