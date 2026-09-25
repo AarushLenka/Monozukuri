@@ -1,10 +1,11 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import AnimatedConnector from '../components/AnimatedConnector';
 import CoreThreadsPanel from '../components/CoreThreadsPanel';
 const loadRaspberryPi = () => import('../RaspberryPi');
 const RaspberryPiCanvas = lazy(loadRaspberryPi);
 import SocialLinks from '../components/SocialLinks';
 import { CONNECTOR_CONFIG } from '../config/heroConfig';
+import { scrollToSection } from '../utils/scrollToSection';
 
 /**
  * The landing hero section (first visible screen).
@@ -14,6 +15,15 @@ import { CONNECTOR_CONFIG } from '../config/heroConfig';
  * @param {boolean} isMobile   True when viewport ≤ 768px.
  */
 export default function HeroSection({ isLoading, time, isMobile }) {
+  // SAY HELLO collapses into the two side-choice buttons once greeted.
+  const [helloExpanded, setHelloExpanded] = useState(false);
+
+  // Choosing a side collapses the CTA back to SAY HELLO and glides to the
+  // section. Collapse first so the buttons unmount instantly on click.
+  const chooseSide = (id) => {
+    setHelloExpanded(false);
+    scrollToSection(id);
+  };
 
   useEffect(() => {
     // Fetch the hero's R3F chunk immediately. It is ~880 kB and is needed the
@@ -92,6 +102,38 @@ export default function HeroSection({ isLoading, time, isMobile }) {
           <SocialLinks className="justify-center" />
         </div>
 
+        {/* Say-hello CTA: idles with an attention-seeking nudge; expands into
+            the two side choices, which smooth-scroll to their sections. */}
+        <div className="w-full flex justify-center relative z-30 pb-4">
+          {!helloExpanded ? (
+            <button
+              type="button"
+              onClick={() => setHelloExpanded(true)}
+              className="hello-cta bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase mb-1 active:scale-95 transition-transform"
+            >
+              <span className="hello-cta-flicker">SAY HELLO</span>
+            </button>
+          ) : (
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => chooseSide('section-creative')}
+                className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+              >
+                TO MY CREATIVE SIDE
+              </button>
+              <button
+                type="button"
+                onClick={() => chooseSide('section-projects')}
+                className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+                style={{ animationDelay: '90ms' }}
+              >
+                TO MY TECHNICAL SIDE
+              </button>
+            </div>
+          )}
+        </div>
+
         {/* Me, I Guess Card */}
         <div className="w-[290px] mx-auto mb-8">
           <div className="relative w-[290px] h-[190px]" data-tooltip="NICE TO MEET YOU!">
@@ -122,9 +164,33 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         <header className="absolute top-2 left-6 right-6 flex justify-between items-start pointer-events-auto">
           <div className="text-sm font-medium tracking-widest absolute left-0 top-0">MONOZUKURI</div>
           <div className="absolute left-1/2 -translate-x-1/2 top-0 flex flex-col items-center">
-            <div className="bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase mb-1">
-              SAY HELLO
-            </div>
+            {!helloExpanded ? (
+              <button
+                type="button"
+                onClick={() => setHelloExpanded(true)}
+                className="hello-cta bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase mb-1 active:scale-95 transition-transform"
+              >
+                <span className="hello-cta-flicker">SAY HELLO</span>
+              </button>
+            ) : (
+              <div className="flex items-center gap-1.5 mb-1">
+                <button
+                  type="button"
+                  onClick={() => chooseSide('section-creative')}
+                  className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+                >
+                  TO MY CREATIVE SIDE
+                </button>
+                <button
+                  type="button"
+                  onClick={() => chooseSide('section-projects')}
+                  className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+                  style={{ animationDelay: '90ms' }}
+                >
+                  TO MY TECHNICAL SIDE
+                </button>
+              </div>
+            )}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="2" y1="12" x2="22" y2="12"></line>

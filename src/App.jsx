@@ -36,7 +36,7 @@ if (typeof window !== 'undefined') {
 // all four WebGL contexts on the first frame.
 const MOUNT_MARGIN = 600;
 
-function DeferredSection({ load, isMobile, active, minHeight = '100vh', sectionProps = {}, children }) {
+function DeferredSection({ load, isMobile, active, minHeight = '100vh', sectionProps = {}, id, children }) {
   const sectionRef = useRef(null);
   const [Section, setSection] = useState(null);
 
@@ -92,6 +92,7 @@ function DeferredSection({ load, isMobile, active, minHeight = '100vh', sectionP
   // to a full 100vh box, which is where the gaps between sections came from.
   return (
     <div
+      id={id}
       ref={sectionRef}
       className="relative"
       style={{ minHeight: isMobile ? (Section ? undefined : minHeight) : 'var(--logical-vh)' }}
@@ -240,8 +241,8 @@ export default function App() {
 
           <HeroSection time={time} isLoading={isLoading} isMobile={isMobile} />
           <DeferredSection load={loadAboutSection} isMobile={isMobile} active={heroVisible} minHeight="100vh" />
-          <DeferredSection load={loadProjectsSection} isMobile={isMobile} active={heroVisible} minHeight="100vh" sectionProps={{ onProjectSelect: setSelectedProject }} />
-          <DeferredSection load={loadCreativeWorkSection} isMobile={isMobile} active={heroVisible} minHeight="80vh" />
+          <DeferredSection load={loadProjectsSection} isMobile={isMobile} active={heroVisible} minHeight="100vh" sectionProps={{ onProjectSelect: setSelectedProject }} id="section-projects" />
+          <DeferredSection load={loadCreativeWorkSection} isMobile={isMobile} active={heroVisible} minHeight="80vh" id="section-creative" />
           <DeferredSection load={loadCitySection} isMobile={isMobile} active={heroVisible} minHeight="100vh" />
         </div>
       </div>
