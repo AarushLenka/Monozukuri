@@ -43,9 +43,9 @@ export default function AboutSection({ isMobile }) {
   /* ── Mobile Layout ── */
   if (isMobile) {
     return (
-      <div id="about-section" className="relative w-full z-[2] px-4 pt-8 pb-2">
+      <div id="about-section" className="relative w-full z-[2] px-4 pt-0 pb-0">
         {/* ESP32 canvas with background lineart */}
-        <div className="relative w-full flex flex-col items-center mb-6">
+        <div className="relative w-full flex flex-col items-center mb-2">
           {/* Background lineart — scaled down */}
           <div className="absolute top-[-10px] left-[-30px] w-[110%] h-[110%] pointer-events-none z-10 opacity-30 text-white mix-blend-screen">
             <svg viewBox="0 0 1000 1000" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
@@ -108,7 +108,7 @@ export default function AboutSection({ isMobile }) {
 
 
         {/* Main copy */}
-        <div className="z-20 w-full select-none mb-6 relative pb-10">
+        <div className="z-20 w-full select-none mb-0 relative pb-4">
           <p className="relative z-10 text-white text-[22px] font-serif leading-[1.2] tracking-tight">
             I craft{' '}
             <svg className="inline-block align-middle mx-0 animate-splat-pulse" width="28" height="28" viewBox="0 0 100 100" fill="#10e7d9b0">

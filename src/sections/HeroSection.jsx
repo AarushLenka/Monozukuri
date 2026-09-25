@@ -36,7 +36,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
   /* ── Mobile Layout ── */
   if (isMobile) {
     return (
-      <div className="relative w-full z-[2] px-4 pt-3 pb-8">
+      <div className="relative w-full z-[2] px-4 pt-3 pb-2">
         {/* Header */}
         <header className="flex justify-between items-start mb-3">
           <div className="text-sm font-medium tracking-widest">MONOZUKURI</div>
@@ -49,7 +49,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
             idles with an attention-seeking nudge; expands into the two side
             choices, which smooth-scroll to their sections. Side buttons drop
             to 9px with forced two-line labels so both share the same height. */}
-        <div className="w-full flex justify-center relative z-30 mb-6">
+        <div className="w-full flex justify-center relative z-30 mb-3">
           {!helloExpanded ? (
             <button
               type="button"
@@ -132,12 +132,12 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </div>
 
         {/* Social Buttons */}
-        <div className="flex justify-center mb-10 -mt-[30px] relative z-30">
+        <div className="flex justify-center mb-2 -mt-[10px] relative z-30">
           <SocialLinks className="justify-center" />
         </div>
 
         {/* Me, I Guess Card */}
-        <div className="w-[290px] mx-auto mb-8">
+        <div className="w-[290px] mx-auto mb-1">
           <div className="relative w-[290px] h-[190px]" data-tooltip="NICE TO MEET YOU!">
             <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[12px] uppercase font-mono font-bold tracking-widest leading-none">
               ME, I GUESS
