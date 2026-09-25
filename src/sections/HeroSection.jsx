@@ -38,12 +38,46 @@ export default function HeroSection({ isLoading, time, isMobile }) {
     return (
       <div className="relative w-full z-[2] px-4 pt-3 pb-8">
         {/* Header */}
-        <header className="flex justify-between items-start mb-6">
+        <header className="flex justify-between items-start mb-3">
           <div className="text-sm font-medium tracking-widest">MONOZUKURI</div>
           <div className="text-[10px] uppercase font-mono tracking-widest text-right leading-tight">
             LOCAL TIME<br />IND {time}
           </div>
         </header>
+
+        {/* Say-hello CTA pinned to the top, mirroring the desktop header CTA:
+            idles with an attention-seeking nudge; expands into the two side
+            choices, which smooth-scroll to their sections. Side buttons drop
+            to 9px with forced two-line labels so both share the same height. */}
+        <div className="w-full flex justify-center relative z-30 mb-6">
+          {!helloExpanded ? (
+            <button
+              type="button"
+              onClick={() => setHelloExpanded(true)}
+              className="hello-cta bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase mb-1 active:scale-95 transition-transform"
+            >
+              <span className="hello-cta-flicker">SAY HELLO</span>
+            </button>
+          ) : (
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => chooseSide('section-creative')}
+                className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+              >
+                TO MY<br />CREATIVE SIDE
+              </button>
+              <button
+                type="button"
+                onClick={() => chooseSide('section-projects')}
+                className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+                style={{ animationDelay: '90ms' }}
+              >
+                TO MY<br />TECHNICAL SIDE
+              </button>
+            </div>
+          )}
+        </div>
 
         {/* Title */}
         <h1
@@ -100,38 +134,6 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         {/* Social Buttons */}
         <div className="flex justify-center mb-10 -mt-[30px] relative z-30">
           <SocialLinks className="justify-center" />
-        </div>
-
-        {/* Say-hello CTA: idles with an attention-seeking nudge; expands into
-            the two side choices, which smooth-scroll to their sections. */}
-        <div className="w-full flex justify-center relative z-30 pb-4">
-          {!helloExpanded ? (
-            <button
-              type="button"
-              onClick={() => setHelloExpanded(true)}
-              className="hello-cta bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase mb-1 active:scale-95 transition-transform"
-            >
-              <span className="hello-cta-flicker">SAY HELLO</span>
-            </button>
-          ) : (
-            <div className="flex items-center gap-1.5">
-              <button
-                type="button"
-                onClick={() => chooseSide('section-creative')}
-                className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
-              >
-                TO MY CREATIVE SIDE
-              </button>
-              <button
-                type="button"
-                onClick={() => chooseSide('section-projects')}
-                className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
-                style={{ animationDelay: '90ms' }}
-              >
-                TO MY TECHNICAL SIDE
-              </button>
-            </div>
-          )}
         </div>
 
         {/* Me, I Guess Card */}
