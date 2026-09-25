@@ -123,7 +123,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
       </div>
 
         {/* 3D Raspberry Pi Model */}
-        <div className="w-full flex items-center justify-center -mt-[60px] pointer-events-none">
+        <div className="w-full flex items-center justify-center -mt-[80px] pointer-events-none">
           <div className="relative w-[130vw] h-[50vh] shrink-0 flex items-center justify-center">
             <Suspense fallback={null}>
               <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
@@ -132,7 +132,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </div>
 
         {/* Social Buttons */}
-        <div className="flex justify-center mb-2 -mt-[10px] relative z-30">
+        <div className="flex justify-center mb-2 -mt-[30px] relative z-30">
           <SocialLinks className="justify-center" />
         </div>
 
