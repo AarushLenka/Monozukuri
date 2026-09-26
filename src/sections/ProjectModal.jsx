@@ -150,16 +150,16 @@ export default function ProjectModal({ project, onClose }) {
             <div className="flex-1 min-w-0 flex flex-col justify-start space-y-[8px]">
               <div className="flex flex-col space-y-[8px] shrink-0">
                 <div className="break-words">
-                  <span className="text-white/40">PROJECT:</span> <span className="text-white/90">{project.title}</span>
+                  <span className="text-[#bef264]">PROJECT:</span> <span className="text-white/90">{project.title}</span>
                 </div>
                 <div className="break-words">
-                  <span className="text-white/40">ROLE:</span> <span className="text-white/90">{project.desc}</span>
+                  <span className="text-[#bef264]">ROLE:</span> <span className="text-white/90">{project.desc}</span>
                 </div>
               </div>
 
               {parseDescription(project.modalDesc || "Lorem ipsum dolor sit amet, consectetur adipiscing elit.").map((section, idx) => (
                 <div key={idx} className="shrink-0">
-                  <span className="text-white/40 block">{section.title}:</span>
+                  <span className="text-[#bef264] block">{section.title}:</span>
                   <div className="text-white/70 leading-normal whitespace-pre-wrap break-words">
                     {section.content}
                   </div>
@@ -176,7 +176,20 @@ export default function ProjectModal({ project, onClose }) {
             <span className="inline-block w-[6px] h-[11px] bg-[#bef264] animate-cursor-blink shrink-0" />
           </span>
           <span className="flex items-center gap-[12px] text-[10px] text-white/35 tracking-wider min-w-0">
-            <span className="hidden sm:inline shrink-0">[esc to close]</span>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mr-[8px] flex items-center gap-[5px] shrink-0 text-white/50 hover:text-[#bef264] transition-colors"
+                title={`View ${project.title} on GitHub (opens in new tab)`}
+              >
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+                </svg>
+                <span className="tracking-wider">GitHub</span>
+              </a>
+            )}
             <span className="truncate">{fileSlug}.txt</span>
           </span>
         </div>
