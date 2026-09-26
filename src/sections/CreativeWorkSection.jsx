@@ -25,8 +25,8 @@ export default function CreativeWorkSection({ isMobile }) {
       <div
         id="creative-work-section"
         ref={sectionRef}
-        className="relative w-full overflow-hidden z-[2] px-4 py-8"
-        style={{ minHeight: '80vh' }}
+        className="relative w-full overflow-hidden z-[2] px-4 pt-2 pb-4"
+        style={{ minHeight: 'auto' }}
       >
         {/* Background Technical Lineart: Fibonacci Spiral (mobile) */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-[0.25] text-white mix-blend-screen">
@@ -111,7 +111,7 @@ export default function CreativeWorkSection({ isMobile }) {
           </h2>
 
           {/* Ribbon + Gallery container */}
-          <div className="relative w-full" style={{ minHeight: '60vh' }}>
+          <div className="relative w-full">
             <CreativeRibbon mousePos={mousePos} />
             <CreativeWorkGallery mousePos={mousePos} />
           </div>

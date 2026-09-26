@@ -1,10 +1,11 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import AnimatedConnector from '../components/AnimatedConnector';
 import CoreThreadsPanel from '../components/CoreThreadsPanel';
 const loadRaspberryPi = () => import('../RaspberryPi');
 const RaspberryPiCanvas = lazy(loadRaspberryPi);
 import SocialLinks from '../components/SocialLinks';
 import { CONNECTOR_CONFIG } from '../config/heroConfig';
+import { scrollToSection } from '../utils/scrollToSection';
 
 /**
  * The landing hero section (first visible screen).
@@ -14,6 +15,15 @@ import { CONNECTOR_CONFIG } from '../config/heroConfig';
  * @param {boolean} isMobile   True when viewport ≤ 768px.
  */
 export default function HeroSection({ isLoading, time, isMobile }) {
+  // SAY HELLO collapses into the two side-choice buttons once greeted.
+  const [helloExpanded, setHelloExpanded] = useState(false);
+
+  // Choosing a side collapses the CTA back to SAY HELLO and glides to the
+  // section. Collapse first so the buttons unmount instantly on click.
+  const chooseSide = (id) => {
+    setHelloExpanded(false);
+    scrollToSection(id);
+  };
 
   useEffect(() => {
     // Fetch the hero's R3F chunk immediately. It is ~880 kB and is needed the
@@ -26,25 +36,59 @@ export default function HeroSection({ isLoading, time, isMobile }) {
   /* ── Mobile Layout ── */
   if (isMobile) {
     return (
-      <div className="relative w-full z-[2] px-4 pt-3 pb-8">
+      <div className="relative w-full z-[2] px-4 pt-3 pb-2">
         {/* Header */}
-        <header className="flex justify-between items-start mb-6">
+        <header className="flex justify-between items-start mb-3">
           <div className="text-sm font-medium tracking-widest">MONOZUKURI</div>
           <div className="text-[10px] uppercase font-mono tracking-widest text-right leading-tight">
             LOCAL TIME<br />IND {time}
           </div>
         </header>
 
+        {/* Say-hello CTA pinned to the top, mirroring the desktop header CTA:
+            idles with an attention-seeking nudge; expands into the two side
+            choices, which smooth-scroll to their sections. Side buttons drop
+            to 9px with forced two-line labels so both share the same height. */}
+        <div className="w-full flex justify-center relative z-30 mb-3">
+          {!helloExpanded ? (
+            <button
+              type="button"
+              onClick={() => setHelloExpanded(true)}
+              className="hello-cta bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase mb-1 active:scale-95 transition-transform"
+            >
+              <span className="hello-cta-flicker">SAY HELLO</span>
+            </button>
+          ) : (
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => chooseSide('section-creative')}
+                className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+              >
+                TO MY<br />CREATIVE SIDE
+              </button>
+              <button
+                type="button"
+                onClick={() => chooseSide('section-projects')}
+                className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+                style={{ animationDelay: '90ms' }}
+              >
+                TO MY<br />TECHNICAL SIDE
+              </button>
+            </div>
+          )}
+        </div>
+
         {/* Title */}
         <h1
-          className="text-[32px] leading-[0.88] font-normal tracking-tight text-black mb-6"
+          className="text-[32px] leading-[0.88] font-normal tracking-tight text-black mb-6 -mt-[5px]"
           style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}
         >
           LICENSED <br />BEEP-BOOP<br />MECHANIC.
         </h1>
 
         {/* Monozukuri card */}
-        <div className="flex flex-col items-end mb-0 mt-[-30px] w-full">
+        <div className="flex flex-col items-end mb-0 mt-[-35px] w-full">
           <div className="origin-top-right scale-[0.85]">
             <div
               className="bg-[#e5e5e5] relative"
@@ -79,7 +123,7 @@ export default function HeroSection({ isLoading, time, isMobile }) {
       </div>
 
         {/* 3D Raspberry Pi Model */}
-        <div className="w-full flex items-center justify-center -mt-[50px] pointer-events-none">
+        <div className="w-full flex items-center justify-center -mt-[80px] pointer-events-none">
           <div className="relative w-[130vw] h-[50vh] shrink-0 flex items-center justify-center">
             <Suspense fallback={null}>
               <RaspberryPiCanvas isLoading={isLoading} isMobile={isMobile} />
@@ -88,12 +132,12 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         </div>
 
         {/* Social Buttons */}
-        <div className="flex justify-center mb-10 -mt-[30px] relative z-30">
+        <div className="flex justify-center mb-2 -mt-[30px] relative z-30">
           <SocialLinks className="justify-center" />
         </div>
 
         {/* Me, I Guess Card */}
-        <div className="w-[290px] mx-auto mb-8">
+        <div className="w-[290px] mx-auto mb-1">
           <div className="relative w-[290px] h-[190px]" data-tooltip="NICE TO MEET YOU!">
             <div className="absolute -top-[18px] left-0 z-20 bg-black px-1.5 py-[2px] text-white text-[12px] uppercase font-mono font-bold tracking-widest leading-none">
               ME, I GUESS
@@ -122,9 +166,33 @@ export default function HeroSection({ isLoading, time, isMobile }) {
         <header className="absolute top-2 left-6 right-6 flex justify-between items-start pointer-events-auto">
           <div className="text-sm font-medium tracking-widest absolute left-0 top-0">MONOZUKURI</div>
           <div className="absolute left-1/2 -translate-x-1/2 top-0 flex flex-col items-center">
-            <div className="bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase mb-1">
-              SAY HELLO
-            </div>
+            {!helloExpanded ? (
+              <button
+                type="button"
+                onClick={() => setHelloExpanded(true)}
+                className="hello-cta bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase mb-1 active:scale-95 transition-transform"
+              >
+                <span className="hello-cta-flicker">SAY HELLO</span>
+              </button>
+            ) : (
+              <div className="flex items-center gap-1.5 mb-1">
+                <button
+                  type="button"
+                  onClick={() => chooseSide('section-creative')}
+                  className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+                >
+                  TO MY CREATIVE SIDE
+                </button>
+                <button
+                  type="button"
+                  onClick={() => chooseSide('section-projects')}
+                  className="cta-reveal-in bg-white border border-black px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase active:scale-95 transition-transform"
+                  style={{ animationDelay: '90ms' }}
+                >
+                  TO MY TECHNICAL SIDE
+                </button>
+              </div>
+            )}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="2" y1="12" x2="22" y2="12"></line>

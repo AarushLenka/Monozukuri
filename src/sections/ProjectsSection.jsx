@@ -46,7 +46,7 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
   /* ── Mobile Layout ── */
   if (isMobile) {
     return (
-      <div id="projects-section" className="relative w-full z-[2] px-4 pt-0 pb-8 overflow-hidden">
+      <div id="projects-section" className="relative w-full z-[2] px-4 pt-0 pb-0 overflow-hidden">
         {/* Background Technical Lineart (mobile) */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-20 text-white mix-blend-screen">
           <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1">
@@ -102,7 +102,7 @@ export default function ProjectsSection({ onProjectSelect, isMobile }) {
         </div>
 
         {/* Title */}
-        <div className="w-full flex flex-col items-center mb-6 relative z-10">
+        <div className="w-full flex flex-col items-center mb-3 relative z-10">
           <h2
             className="text-[28px] leading-[1.1] tracking-tight text-black text-center"
             style={{ fontFamily: '"ndot-57", "Ndot-57", "Ndot57", "DotGothic16", sans-serif' }}

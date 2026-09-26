@@ -378,6 +378,52 @@
   animation: modal-window-in 420ms linear both;
 }
 
+/* ── Hero "SAY HELLO" CTA ──
+   Idle: the chip nudges and flickers so it reads as begging for a click.
+   The burst sits late in the loop (rest → wiggle → rest) so it feels like
+   a fidget, not a metronome. */
+@keyframes hello-nudge {
+  0%, 54%, 78%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+  58% { transform: translateY(-2px) scale(1.07) rotate(-2deg); }
+  62% { transform: translateY(1px) scale(0.95) rotate(2deg); }
+  66% { transform: translateY(-1px) scale(1.03) rotate(-1deg); }
+  70% { transform: translateY(0) scale(1) rotate(0.5deg); }
+  88% { transform: translateY(-1.5px) scale(1.04) rotate(0deg); }
+}
+
+@keyframes hello-flicker {
+  0%, 90%, 94.5%, 100% { opacity: 1; }
+  91.5% { opacity: 0.25; }
+  93% { opacity: 0.75; }
+}
+
+.hello-cta {
+  animation: hello-nudge 3.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hello-cta-flicker {
+  animation: hello-flicker 6s linear infinite;
+}
+
+/* Expanded: the two side-choice buttons pop in, staggered. */
+@keyframes cta-reveal-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.85); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cta-reveal-in {
+  animation: cta-reveal-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hello-cta,
+  .hello-cta-flicker,
+  .cta-reveal-in {
+    animation: none;
+  }
+}
+
 /* Reset — prevent browser outline/margin artifacts */
 *, *::before, *::after {
   outline: none;
@@ -390,9 +436,16 @@ html, body {
   background: #3a3a3a;
 }
 
-/* Native custom cursor on desktop sizes only */
+/* Native custom cursor on desktop sizes only.
+   While the project modal is open, its full-viewport backdrop covers every
+   pixel, so scoping a white variant to it covers the whole screen. */
 @media (min-width: 768px) {
   *, html, body, a, button, input, select, textarea {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='black'/%3E%3C/svg%3E") 6 6, auto !important;
+  }
+
+  .modal-backdrop-in,
+  .modal-backdrop-in * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='white'/%3E%3C/svg%3E") 6 6, auto !important;
   }
 }
